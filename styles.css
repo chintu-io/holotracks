@@ -897,7 +897,7 @@ button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid 
   background:transparent!important;
   box-shadow:none!important;
   mix-blend-mode:normal!important;
-  transform:scale(1.18)!important;
+  transform:scaleX(1.28)!important;
   transform-origin:center bottom!important;
   transition:filter .2s ease,transform .2s ease!important;
 }
@@ -933,7 +933,7 @@ button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid 
   .hero-copy p{font-size:11px;max-width:260px}
   .hero-stats{margin-top:16px;gap:7px}
   .hero-stage{position:absolute;z-index:1;top:0;right:0;bottom:0;left:22%;height:auto;min-height:0;opacity:1}
-  .stage-talent{bottom:37px!important;height:calc(100% - 48px)!important;max-height:none!important;max-width:55%!important;transform:scale(1.12)!important;transform-origin:center bottom!important}
+  .stage-talent{bottom:37px!important;height:calc(100% - 48px)!important;max-height:none!important;max-width:55%!important;transform:scaleX(1.16)!important;transform-origin:center bottom!important}
   .stage-left{left:-2%!important;max-width:52%!important;height:calc(100% - 49px)!important;opacity:.86!important}
   .stage-center{left:18%!important;max-width:58%!important;height:calc(100% - 42px)!important}
   .stage-right{right:12%!important;max-width:52%!important;height:calc(100% - 49px)!important;opacity:.9!important}
