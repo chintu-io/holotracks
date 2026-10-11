@@ -12,6 +12,8 @@ on:
       - 'mobile/**'
       - 'scripts/build-mobile.mjs'
       - 'package.json'
+      - 'index.html'
+      - 'styles.css'
   pull_request:
     paths:
       - '.github/workflows/android-apk.yml'
@@ -19,6 +21,8 @@ on:
       - 'mobile/**'
       - 'scripts/build-mobile.mjs'
       - 'package.json'
+      - 'index.html'
+      - 'styles.css'
 
 permissions:
   contents: read
