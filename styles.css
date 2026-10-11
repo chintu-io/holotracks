@@ -1754,3 +1754,110 @@ button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid 
   .talent-picker-toggle>span:nth-child(2){display:none}
 }
 
+
+
+/* Talent picker card hardening: one bounded portrait frame, no style collisions. */
+.talent-picker-dialog .artist-filters{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  align-content:start;
+  align-items:stretch;
+  gap:10px;
+  max-height:min(54dvh,520px);
+  min-height:120px;
+  overflow-x:hidden;
+  overflow-y:auto;
+  padding:4px 5px 12px;
+}
+.talent-picker-dialog .artist-check{
+  position:relative;
+  display:grid;
+  grid-template-columns:18px 52px minmax(0,1fr) auto;
+  align-items:center;
+  gap:10px;
+  min-width:0;
+  min-height:76px;
+  padding:9px 11px;
+  overflow:hidden;
+  text-align:left;
+}
+.talent-picker-dialog .artist-check input{
+  position:static;
+  inset:auto;
+  display:block;
+  width:16px;
+  height:16px;
+  margin:0;
+  accent-color:var(--pink);
+}
+.talent-picker-dialog .artist-check .artist-avatar-frame{
+  position:relative;
+  display:grid;
+  place-items:center;
+  flex:none;
+  width:52px;
+  height:52px;
+  overflow:hidden;
+  border:1px solid #ffffff18;
+  border-radius:12px;
+  background:radial-gradient(ellipse at 50% 30%,#454066,#252342 68%,#17172d);
+}
+.talent-picker-dialog .artist-check .artist-avatar-frame .artist-avatar{
+  position:absolute;
+  inset:0;
+  display:block;
+  width:100%;
+  max-width:none;
+  height:100%;
+  max-height:none;
+  padding:0;
+  margin:0;
+  object-fit:cover;
+  object-position:center 16%;
+  border:0;
+  border-radius:inherit;
+}
+.talent-picker-dialog .artist-check .artist-avatar-fallback{display:none}
+.talent-picker-dialog .artist-check .artist-avatar-frame.image-unavailable .artist-avatar{display:none}
+.talent-picker-dialog .artist-check .artist-avatar-frame.image-unavailable .artist-avatar-fallback{
+  position:absolute;
+  inset:0;
+  display:grid;
+  place-items:center;
+  color:#c8b5ff;
+  font-size:21px;
+}
+.talent-picker-dialog .artist-check .artist-name{
+  display:-webkit-box;
+  min-width:0;
+  width:auto;
+  min-height:0;
+  overflow:hidden;
+  color:#f0edff;
+  font-size:12px;
+  font-weight:900;
+  line-height:1.4;
+  overflow-wrap:anywhere;
+  white-space:normal;
+  text-overflow:clip;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:2;
+}
+.talent-picker-dialog .artist-check small{
+  justify-self:end;
+  min-width:1.3em;
+  margin:0;
+  color:#a5a9cf;
+  font:10px 'DM Mono',monospace;
+  white-space:nowrap;
+}
+@media(max-width:900px){
+  .talent-picker-dialog .artist-filters{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+}
+@media(max-width:560px){
+  .talent-picker-shell{gap:10px;padding:14px 11px 11px}
+  .talent-picker-dialog .artist-filters{grid-template-columns:minmax(0,1fr);gap:7px;max-height:58dvh}
+  .talent-picker-dialog .artist-check{grid-template-columns:18px 46px minmax(0,1fr) auto;min-height:64px;gap:8px;padding:7px 8px}
+  .talent-picker-dialog .artist-check .artist-avatar-frame{width:46px;height:46px;border-radius:10px}
+  .talent-picker-dialog .artist-check .artist-name{font-size:11px}
+}
