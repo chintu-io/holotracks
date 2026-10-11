@@ -10,29 +10,424 @@ const HOLODEX_SEARCH_URL = 'https://holodex.net/api/v2/search/videoSearch';
 const PAGE_SIZE = 50;
 const MAX_SONGS = 25000;
 const API_TIMEOUT_MS = 30000;
-function requireEnv(name) { const v=process.env[name]?.trim(); if(!v) throw new Error(`Missing required environment variable: ${name}`); return v; }
-function delay(ms) { return new Promise(resolve=>setTimeout(resolve,ms)); }
-async function fetchJson(url, options={}, label='API request') {
-  for(let attempt=1;attempt<=4;attempt++){
-    const controller=new AbortController();const timer=setTimeout(()=>controller.abort(),API_TIMEOUT_MS);
-    try{const response=await fetch(url,{...options,signal:controller.signal});const text=await response.text();let data;try{data=text?JSON.parse(text):null;}catch{throw new Error(`${label} returned non-JSON HTTP ${response.status}: ${text.slice(0,180)}`);}if(!response.ok){const e=new Error(`${label} failed (HTTP ${response.status}): ${String(data?.message||data?.error?.message||data?.error||`HTTP ${response.status}`).slice(0,350)}`);e.status=response.status;throw e;}return data;}
-    catch(e){const retryable=e.name==='AbortError'||e.status===429||(e.status>=500&&e.status<=599);if(!retryable||attempt===4){if(e.name==='AbortError')throw new Error(`${label} timed out after ${API_TIMEOUT_MS/1000} seconds`);throw e;}const wait=Math.min(8000,750*2**(attempt-1));console.warn(`${label} attempt ${attempt}/4 failed; retrying after ${wait} ms.`);await delay(wait);}finally{clearTimeout(timer);}
-  }throw new Error(`${label} failed after retries`);
+const PAGE_DELAY_FULL_MS = 500;
+const PAGE_DELAY_INCREMENTAL_MS = 250;
+
+function requireEnv(name) {
+  const value = process.env[name]?.trim();
+  if (!value) throw new Error('Missing required environment variable: ' + name);
+  return value;
 }
-function firstString(...v){return v.find(x=>typeof x==='string'&&x.trim())?.trim()||'';}
-function firstDate(...v){for(const x of v)if(typeof x==='string'&&Number.isFinite(Date.parse(x)))return new Date(x).toISOString();return '';}
-function safeCount(...v){for(const x of v)if(x!==null&&x!==undefined&&x!==''&&Number.isFinite(Number(x))&&Number(x)>=0)return Math.floor(Number(x));return null;}
-function generic(name){return /hololive|holo\s*live|hololive production|cover corp|ホロライブ|ホロスターズ|holo\*?stars|hololive music/i.test(name||'');}
-function cleanName(n){return String(n||'').replace(/\s*(?:Ch\.|Channel)\s*.*$/i,'').replace(/\s*[-|｜].*$/,'').replace(/\s+/g,' ').trim();}
-export function normalizeRecord(item){if(!item||typeof item!=='object')return null;const id=typeof item.id==='string'?item.id.trim():'';if(!/^[\w-]{11}$/.test(id)||['live','upcoming','missing'].includes(String(item.status||'').toLowerCase()))return null;const c=item.channel&&typeof item.channel==='object'?item.channel:{};const en=firstString(c.english_name,c.englishName);const raw=firstString(c.name,en);const artistName=cleanName(en||raw);const channelName=firstString(en,raw,'Unknown channel');const artist=artistName&&!generic(artistName)?artistName:(channelName&&!generic(channelName)?channelName:'Hololive Official');return{id,title:firstString(item.title,id),artist,artists:[artist],channelName,channelId:firstString(c.id,item.channel_id),releaseDate:firstDate(item.available_at,item.published_at,item.start_actual,item.start_scheduled),publishedAt:firstDate(item.published_at),viewCount:safeCount(item.view_count,item.viewCount,item.views,item.statistics?.viewCount),duration:safeCount(item.duration)||null,source:'Holodex'};}
-function normMatch(v){return String(v||'').normalize('NFKC').toLocaleLowerCase().replace(/[\s·・•_\-‐‑–—|｜()[\]{}「」『』【】<>《》]+/g,' ').trim();}
-function japaneseAliases(v){return[...new Set(String(v||'').match(/[\p{Script=Han}\p{Script=Hiragana}\p{Script=Katakana}ー]{2,}/gu)||[])].filter(a=>!/ホロライブ|ホロスターズ|公式|チャンネル|生放送|配信|歌ってみた|オリジナル曲/.test(a));}
-function addAlias(roster,artist,alias){const a=String(artist||'').trim(),raw=String(alias||'').trim();if(!a||!raw||generic(a))return;const n=normMatch(raw);if(n.length<2||generic(raw))return;if(!roster.has(a))roster.set(a,new Set());roster.get(a).add(n);}
-export function assignArtistCredits(rawItems,songs){const roster=new Map();for(const item of rawItems){const c=item?.channel&&typeof item.channel==='object'?item.channel:{};const en=firstString(c.english_name,c.englishName);const raw=firstString(c.name,en);const canonical=cleanName(en||raw);if(!canonical||generic(canonical))continue;addAlias(roster,canonical,canonical);addAlias(roster,canonical,en);addAlias(roster,canonical,cleanName(raw));for(const a of japaneseAliases(raw))addAlias(roster,canonical,a);}const entries=[...roster.entries()].map(([artist,aliases])=>({artist,aliases:[...aliases].sort((a,b)=>b.length-a.length)})).sort((a,b)=>Math.max(...b.aliases.map(x=>x.length))-Math.max(...a.aliases.map(x=>x.length)));return songs.map(song=>{const t=normMatch(song.title);const found=new Set(song.artist&&!generic(song.artist)?[song.artist]:[]);for(const entry of entries)if(entry.aliases.some(a=>a.length>=3&&t.includes(a)))found.add(entry.artist);if(!found.size)found.add(song.artist||'Hololive Official');const artists=[...found].sort((a,b)=>a.localeCompare(b,undefined,{sensitivity:'base'}));return{...song,artists,artist:artists[0]||song.artist||'Hololive Official'};});}
-export function deduplicateSongs(songs){const byId=new Map();for(const song of songs){if(!song||!/^[\w-]{11}$/.test(song.id||''))continue;const old=byId.get(song.id);if(!old){byId.set(song.id,song);continue;}const od=Date.parse(old.releaseDate||'')||0,nd=Date.parse(song.releaseDate||'')||0;if((!old.title||old.title===old.id)&&song.title)byId.set(song.id,{...old,...song});else if(nd>od)byId.set(song.id,{...old,...song});}return[...byId.values()].sort((a,b)=>(Date.parse(b.releaseDate||'')||0)-(Date.parse(a.releaseDate||'')||0)||a.title.localeCompare(b.title));}
-export async function fetchAllHolodexResults(apiKey){const rawItems=[];const pageStartIds=new Set();let reportedTotal=null,offset=0,pages=0;while(true){if(offset>=MAX_SONGS)throw new Error(`Catalogue exceeded ${MAX_SONGS} results safety guard; existing catalogue was not overwritten.`);pages++;const payload={sort:'newest',target:['stream'],conditions:[],topic:['Original_Song'],org:['Hololive'],paginated:true,offset,limit:PAGE_SIZE};const data=await fetchJson(HOLODEX_SEARCH_URL,{method:'POST',headers:{Accept:'application/json','Content-Type':'application/json','X-APIKEY':apiKey},body:JSON.stringify(payload)},`Holodex catalogue page ${pages}`);if(!data||!Array.isArray(data.items))throw new Error(`Holodex response on page ${pages} did not contain items[].`);const page=data.items;if(page.length&&typeof page[0]?.id==='string'){if(pageStartIds.has(page[0].id))throw new Error(`Holodex repeated a previous page at offset ${offset}; refusing a partial catalogue.`);pageStartIds.add(page[0].id);}if(data.total!==null&&data.total!==undefined&&Number.isFinite(Number(data.total))&&Number(data.total)>=0)reportedTotal=Number(data.total);if(reportedTotal!==null&&reportedTotal>MAX_SONGS)throw new Error(`Holodex reports ${reportedTotal} results, beyond safety guard ${MAX_SONGS}; catalogue not overwritten.`);rawItems.push(...page);console.log(`Fetched page ${pages}: ${page.length} records (${rawItems.length}${reportedTotal===null?'':` / ${reportedTotal}`} raw records).`);offset+=page.length;if(page.length===0||page.length<PAGE_SIZE||(reportedTotal!==null&&offset>=reportedTotal))break;await delay(150);}if(reportedTotal!==null&&rawItems.length<reportedTotal)throw new Error(`Holodex reported ${reportedTotal} records but returned only ${rawItems.length}; refusing to publish incomplete catalogue.`);return{rawItems,reportedTotal,pages};}
-async function fetchYouTubeViewCounts(ids,key){const views=new Map();for(let i=0;i<ids.length;i+=50){const batch=ids.slice(i,i+50);const url=new URL('https://www.googleapis.com/youtube/v3/videos');url.searchParams.set('part','statistics');url.searchParams.set('id',batch.join(','));url.searchParams.set('key',key);const data=await fetchJson(url,{headers:{Accept:'application/json'}},'YouTube public-video statistics');for(const item of data.items||[]){const n=safeCount(item.statistics?.viewCount);if(n!==null)views.set(item.id,n);}if(i+50<ids.length)await delay(100);}return views;}
-export function buildCatalogue(rawItems,{generatedAt=new Date().toISOString(),pages=0,reportedTotal=null}={}){const usable=rawItems.map(normalizeRecord).filter(Boolean);const credited=assignArtistCredits(rawItems,usable);const songs=deduplicateSongs(credited);return{schemaVersion:1,generatedAt,source:'Holodex API v2',query:{org:'Hololive',topic:'Original_Song',target:['stream']},total:songs.length,sourceTotal:reportedTotal,pagesFetched:pages,songs};}
-async function main(){const key=requireEnv('HOLODEX_API_KEY');console.log('Refreshing Hololive Original_Song catalogue from Holodex…');const {rawItems,reportedTotal,pages}=await fetchAllHolodexResults(key);let catalogue=buildCatalogue(rawItems,{pages,reportedTotal});const statsKey=process.env.YOUTUBE_DATA_API_KEY?.trim();if(statsKey){try{const counts=await fetchYouTubeViewCounts(catalogue.songs.map(s=>s.id),statsKey);catalogue.songs=catalogue.songs.map(s=>({...s,viewCount:counts.has(s.id)?counts.get(s.id):s.viewCount}));console.log(`Updated view counts for ${counts.size} videos.`);}catch(e){console.warn(`Popularity refresh failed; preserving any existing view counts: ${e.message}`);try{const old=JSON.parse(fs.readFileSync(OUTPUT_PATH,'utf8'));const previous=new Map((old.songs||[]).map(s=>[s.id,s.viewCount]));catalogue.songs=catalogue.songs.map(s=>({...s,viewCount:s.viewCount??previous.get(s.id)??null}));}catch{}}}else{console.log('YOUTUBE_DATA_API_KEY not set; skipping view-count refresh.');try{const old=JSON.parse(fs.readFileSync(OUTPUT_PATH,'utf8'));const previous=new Map((old.songs||[]).map(s=>[s.id,s.viewCount]));catalogue.songs=catalogue.songs.map(s=>({...s,viewCount:s.viewCount??previous.get(s.id)??null}));}catch{}}
-  if(process.env.DRY_RUN==='1'||process.argv.includes('--dry-run')){console.log(`Dry run complete: ${catalogue.total} unique playable videos across ${pages} pages. No file written.`);return;}const output=JSON.stringify(catalogue,null,2)+'\n';const tmp=OUTPUT_PATH+'.tmp';fs.writeFileSync(tmp,output,'utf8');JSON.parse(fs.readFileSync(tmp,'utf8'));fs.renameSync(tmp,OUTPUT_PATH);console.log(`Published ${catalogue.total} unique playable videos from ${rawItems.length} raw records across ${pages} pages.`);}
-if(process.argv[1]&&import.meta.url===new URL(`file://${path.resolve(process.argv[1])}`).href){main().catch(e=>{console.error('Catalogue refresh failed:',e.stack||e);process.exitCode=1;});}
+function delay(ms) { return new Promise(resolve => setTimeout(resolve, ms)); }
+function retryAfterMs(response) {
+  const header = response.headers.get('retry-after');
+  if (!header) return null;
+  const seconds = Number(header);
+  if (Number.isFinite(seconds) && seconds >= 0) return Math.ceil(seconds * 1000);
+  const date = Date.parse(header);
+  return Number.isFinite(date) ? Math.max(0, date - Date.now()) : null;
+}
+
+async function fetchJson(url, options = {}, label = 'API request') {
+  for (let attempt = 1; attempt <= 4; attempt += 1) {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), API_TIMEOUT_MS);
+    try {
+      const response = await fetch(url, {
+        ...options,
+        signal: controller.signal,
+        headers: { Accept: 'application/json', ...(options.headers || {}) },
+      });
+      const text = await response.text();
+      let data;
+      try {
+        data = text ? JSON.parse(text) : null;
+      } catch {
+        throw new Error(label + ' returned non-JSON HTTP ' + response.status + ': ' + text.slice(0, 180));
+      }
+      if (!response.ok) {
+        const error = new Error(label + ' failed (HTTP ' + response.status + '): ' +
+          String(data?.message || data?.error?.message || data?.error || ('HTTP ' + response.status)).slice(0, 350));
+        error.status = response.status;
+        error.retryAfterMs = retryAfterMs(response);
+        throw error;
+      }
+      return data;
+    } catch (error) {
+      const retryable = error.name === 'AbortError' || error.status === 429 ||
+        (error.status >= 500 && error.status <= 599);
+      if (!retryable || attempt === 4) {
+        if (error.name === 'AbortError') {
+          throw new Error(label + ' timed out after ' + (API_TIMEOUT_MS / 1000) + ' seconds');
+        }
+        throw error;
+      }
+      const waitMs = Number.isFinite(error.retryAfterMs) && error.retryAfterMs !== null
+        ? error.retryAfterMs
+        : Math.min(20000, 700 * 2 ** (attempt - 1) + Math.floor(Math.random() * 250));
+      // Respect a long server-imposed delay instead of quickly retrying into throttling.
+      if (waitMs > 5 * 60 * 1000) {
+        throw new Error(label + ' was rate-limited and requested a ' +
+          Math.ceil(waitMs / 1000) + 's wait. Stopping this run safely; retry later.');
+      }
+      console.warn(label + ' attempt ' + attempt + '/4 failed (HTTP ' +
+        (error.status || 'network') + '); waiting ' + Math.ceil(waitMs / 1000) + 's before retrying.');
+      await delay(waitMs);
+    } finally {
+      clearTimeout(timer);
+    }
+  }
+  throw new Error(label + ' failed after retries');
+}
+
+function firstString(...values) {
+  return values.find(value => typeof value === 'string' && value.trim())?.trim() || '';
+}
+function firstDate(...values) {
+  for (const value of values) {
+    if (typeof value === 'string' && Number.isFinite(Date.parse(value))) return new Date(value).toISOString();
+  }
+  return '';
+}
+function safeCount(...values) {
+  for (const value of values) {
+    if (value !== null && value !== undefined && value !== '' &&
+        Number.isFinite(Number(value)) && Number(value) >= 0) return Math.floor(Number(value));
+  }
+  return null;
+}
+function generic(name) {
+  return /hololive|holo\s*live|hololive production|cover corp|ホロライブ|ホロスターズ|holo\*?stars|hololive music/i.test(name || '');
+}
+function cleanName(name) {
+  return String(name || '').replace(/\s*(?:Ch\.|Channel)\s*.*$/i, '').replace(/\s*[-|｜].*$/, '').replace(/\s+/g, ' ').trim();
+}
+
+export function normalizeRecord(item) {
+  if (!item || typeof item !== 'object') return null;
+  const id = typeof item.id === 'string' ? item.id.trim() : '';
+  if (!/^[\w-]{11}$/.test(id) ||
+      ['live', 'upcoming', 'missing'].includes(String(item.status || '').toLowerCase())) return null;
+  const channel = item.channel && typeof item.channel === 'object' ? item.channel : {};
+  const englishName = firstString(channel.english_name, channel.englishName);
+  const rawName = firstString(channel.name, englishName);
+  const cleanedName = cleanName(englishName || rawName);
+  const channelName = firstString(englishName, rawName, 'Unknown channel');
+  const artist = cleanedName && !generic(cleanedName)
+    ? cleanedName
+    : (channelName && !generic(channelName) ? channelName : 'Hololive Official');
+  return {
+    id,
+    title: firstString(item.title, id),
+    artist,
+    artists: [artist],
+    channelName,
+    channelId: firstString(channel.id, item.channel_id),
+    // Use YouTube's publish date for release ordering; availability is a fallback.
+    releaseDate: firstDate(item.published_at, item.available_at, item.start_actual, item.start_scheduled),
+    publishedAt: firstDate(item.published_at),
+    viewCount: safeCount(item.view_count, item.viewCount, item.views, item.statistics?.viewCount),
+    duration: safeCount(item.duration) || null,
+    source: 'Holodex',
+  };
+}
+
+function normMatch(value) {
+  return String(value || '').normalize('NFKC').toLocaleLowerCase()
+    .replace(/[\s·・•_\-‐‑–—|｜()[\]{}「」『』【】<>《》]+/g, ' ').trim();
+}
+function japaneseAliases(value) {
+  return [...new Set(String(value || '').match(/[\p{Script=Han}\p{Script=Hiragana}\p{Script=Katakana}ー]{2,}/gu) || [])]
+    .filter(alias => !/ホロライブ|ホロスターズ|公式|チャンネル|生放送|配信|歌ってみた|オリジナル曲/.test(alias));
+}
+function addAlias(roster, artist, alias) {
+  const canonical = String(artist || '').trim();
+  const raw = String(alias || '').trim();
+  if (!canonical || !raw || generic(canonical)) return;
+  const normalized = normMatch(raw);
+  if (normalized.length < 2 || generic(raw)) return;
+  if (!roster.has(canonical)) roster.set(canonical, new Set());
+  roster.get(canonical).add(normalized);
+}
+export function assignArtistCredits(rawItems, songs) {
+  const roster = new Map();
+  for (const item of rawItems) {
+    const channel = item?.channel && typeof item.channel === 'object' ? item.channel : {};
+    const englishName = firstString(channel.english_name, channel.englishName);
+    const rawName = firstString(channel.name, englishName);
+    const canonical = cleanName(englishName || rawName);
+    if (!canonical || generic(canonical)) continue;
+    addAlias(roster, canonical, canonical);
+    addAlias(roster, canonical, englishName);
+    addAlias(roster, canonical, cleanName(rawName));
+    for (const alias of japaneseAliases(rawName)) addAlias(roster, canonical, alias);
+  }
+  const entries = [...roster.entries()]
+    .map(([artist, aliases]) => ({ artist, aliases: [...aliases].sort((a, b) => b.length - a.length) }))
+    .sort((a, b) => Math.max(...b.aliases.map(x => x.length)) - Math.max(...a.aliases.map(x => x.length)));
+  return songs.map(song => {
+    const normalizedTitle = normMatch(song.title);
+    const found = new Set(song.artist && !generic(song.artist) ? [song.artist] : []);
+    for (const entry of entries) {
+      if (entry.aliases.some(alias => alias.length >= 3 && normalizedTitle.includes(alias))) found.add(entry.artist);
+    }
+    if (!found.size) found.add(song.artist || 'Hololive Official');
+    const artists = [...found].sort((a, b) => a.localeCompare(b, undefined, { sensitivity: 'base' }));
+    return { ...song, artists, artist: artists[0] || song.artist || 'Hololive Official' };
+  });
+}
+export function deduplicateSongs(songs) {
+  const byId = new Map();
+  for (const song of songs) {
+    if (!song || !/^[\w-]{11}$/.test(song.id || '')) continue;
+    const existing = byId.get(song.id);
+    if (!existing) { byId.set(song.id, song); continue; }
+    const oldDate = Date.parse(existing.releaseDate || '') || 0;
+    const newDate = Date.parse(song.releaseDate || '') || 0;
+    if ((!existing.title || existing.title === existing.id) && song.title) byId.set(song.id, { ...existing, ...song });
+    else if (newDate > oldDate) byId.set(song.id, { ...existing, ...song });
+  }
+  return [...byId.values()].sort((a, b) =>
+    (Date.parse(b.releaseDate || '') || 0) - (Date.parse(a.releaseDate || '') || 0) || a.title.localeCompare(b.title));
+}
+function sourceId(item) {
+  return typeof item?.id === 'string' && /^[\w-]{11}$/.test(item.id.trim()) ? item.id.trim() : '';
+}
+
+/**
+ * Full mode scans every matching page. Incremental mode scans newest-first and
+ * stops when a page contains only IDs already present in the saved catalogue.
+ */
+export async function fetchAllHolodexResults(apiKey, { mode = 'full', knownIds = new Set() } = {}) {
+  if (!['full', 'incremental'].includes(mode)) throw new Error('Unknown refresh mode: ' + mode);
+  const rawItems = [];
+  const pageStartIds = new Set();
+  let reportedTotal = null;
+  let offset = 0;
+  let pages = 0;
+  let stoppedAtKnownPage = false;
+
+  while (true) {
+    if (offset >= MAX_SONGS) {
+      throw new Error('Catalogue exceeded ' + MAX_SONGS + ' results safety guard; existing catalogue was not overwritten.');
+    }
+    pages += 1;
+    const payload = {
+      sort: 'newest', target: ['stream'], conditions: [],
+      topic: ['Original_Song'], org: ['Hololive'],
+      paginated: true, offset, limit: PAGE_SIZE,
+    };
+    const data = await fetchJson(HOLODEX_SEARCH_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'X-APIKEY': apiKey },
+      body: JSON.stringify(payload),
+    }, 'Holodex catalogue page ' + pages);
+
+    if (!data || !Array.isArray(data.items)) {
+      throw new Error('Holodex response on page ' + pages + ' did not contain items[].');
+    }
+    const page = data.items;
+    if (page.length && sourceId(page[0])) {
+      if (pageStartIds.has(sourceId(page[0]))) {
+        throw new Error('Holodex repeated a previous page at offset ' + offset + '; refusing a partial catalogue.');
+      }
+      pageStartIds.add(sourceId(page[0]));
+    }
+    if (data.total !== null && data.total !== undefined &&
+        Number.isFinite(Number(data.total)) && Number(data.total) >= 0) reportedTotal = Number(data.total);
+    if (reportedTotal !== null && reportedTotal > MAX_SONGS) {
+      throw new Error('Holodex reports ' + reportedTotal + ' results, beyond safety guard ' + MAX_SONGS + '; catalogue not overwritten.');
+    }
+
+    rawItems.push(...page);
+    console.log('Fetched page ' + pages + ': ' + page.length + ' records (' + rawItems.length +
+      (reportedTotal === null ? '' : ' / ' + reportedTotal) + ' raw records).');
+    offset += page.length;
+    if (page.length === 0 || page.length < PAGE_SIZE) break;
+
+    if (mode === 'incremental') {
+      const usableIds = page.map(sourceId).filter(Boolean);
+      const hasNewId = usableIds.some(id => !knownIds.has(id));
+      if (usableIds.length > 0 && !hasNewId) {
+        stoppedAtKnownPage = true;
+        console.log('Reached a page of already-known video IDs; stopping incremental scan.');
+        break;
+      }
+    } else if (reportedTotal !== null && offset >= reportedTotal) {
+      break;
+    }
+
+    await delay(mode === 'full' ? PAGE_DELAY_FULL_MS : PAGE_DELAY_INCREMENTAL_MS);
+  }
+
+  if (mode === 'full' && reportedTotal !== null && rawItems.length < reportedTotal) {
+    throw new Error('Holodex reported ' + reportedTotal + ' records but returned only ' + rawItems.length +
+      '; refusing to publish an incomplete catalogue.');
+  }
+  return { rawItems, reportedTotal, pages, stoppedAtKnownPage, complete: mode === 'full' };
+}
+
+async function fetchYouTubeViewCounts(ids, key) {
+  const views = new Map();
+  for (let i = 0; i < ids.length; i += 50) {
+    const batch = ids.slice(i, i + 50);
+    const url = new URL('https://www.googleapis.com/youtube/v3/videos');
+    url.searchParams.set('part', 'statistics');
+    url.searchParams.set('id', batch.join(','));
+    url.searchParams.set('key', key);
+    const data = await fetchJson(url, {}, 'YouTube public-video statistics');
+    for (const item of data.items || []) {
+      const count = safeCount(item.statistics?.viewCount);
+      if (count !== null) views.set(item.id, count);
+    }
+    if (i + 50 < ids.length) await delay(150);
+  }
+  return views;
+}
+
+export function buildCatalogue(rawItems, { generatedAt = new Date().toISOString(), pages = 0, reportedTotal = null } = {}) {
+  const usable = rawItems.map(normalizeRecord).filter(Boolean);
+  const credited = assignArtistCredits(rawItems, usable);
+  const songs = deduplicateSongs(credited);
+  return {
+    schemaVersion: 1,
+    generatedAt,
+    source: 'Holodex API v2',
+    query: { org: 'Hololive', topic: 'Original_Song', target: ['stream'] },
+    total: songs.length,
+    sourceTotal: reportedTotal,
+    pagesFetched: pages,
+    songs,
+  };
+}
+
+function readExistingCatalogue() {
+  try {
+    const parsed = JSON.parse(fs.readFileSync(OUTPUT_PATH, 'utf8'));
+    if (parsed && Array.isArray(parsed.songs)) return parsed;
+  } catch {
+    // Missing/invalid old data is treated as an empty initial import.
+  }
+  return {
+    schemaVersion: 1, generatedAt: null, lastFullReconciledAt: null,
+    source: 'Holodex API v2',
+    query: { org: 'Hololive', topic: 'Original_Song', target: ['stream'] },
+    total: 0, sourceTotal: null, pagesFetched: 0, songs: [],
+  };
+}
+function mergeSongs(existingSongs, incomingSongs, { preserveMissing = true } = {}) {
+  const incomingById = new Map(incomingSongs.map(song => [song.id, song]));
+  const result = [];
+  for (const existing of existingSongs) {
+    const incoming = incomingById.get(existing.id);
+    if (incoming) {
+      result.push({ ...existing, ...incoming, viewCount: incoming.viewCount ?? existing.viewCount ?? null });
+      incomingById.delete(existing.id);
+    } else if (preserveMissing) {
+      // Retain historical entries when a source scan temporarily stops returning them.
+      result.push(existing);
+    }
+  }
+  result.push(...incomingById.values());
+  return deduplicateSongs(result);
+}
+function stableSongs(songs) {
+  return JSON.stringify([...songs].sort((a, b) => a.id.localeCompare(b.id)));
+}
+function modeFromArgs() {
+  if (process.argv.includes('--full')) return 'full';
+  const equalsArg = process.argv.find(value => value.startsWith('--mode='));
+  if (equalsArg) return equalsArg.slice('--mode='.length);
+  const index = process.argv.indexOf('--mode');
+  if (index >= 0 && process.argv[index + 1]) return process.argv[index + 1];
+  return 'incremental';
+}
+
+async function main() {
+  const apiKey = requireEnv('HOLODEX_API_KEY');
+  const mode = modeFromArgs();
+  if (!['incremental', 'full'].includes(mode)) {
+    throw new Error('Invalid mode "' + mode + '". Use --mode=incremental or --mode=full.');
+  }
+
+  const existing = readExistingCatalogue();
+  const oldSongs = existing.songs;
+  const knownIds = new Set(oldSongs.map(song => song.id));
+  const startedAt = new Date().toISOString();
+  console.log('Refreshing Hololive Original_Song catalogue (' + mode + ' mode)…');
+  console.log('Existing catalogue: ' + oldSongs.length + ' songs.');
+
+  const fetched = await fetchAllHolodexResults(apiKey, { mode, knownIds });
+  const scannedCatalogue = buildCatalogue(fetched.rawItems, {
+    generatedAt: startedAt,
+    pages: fetched.pages,
+    reportedTotal: fetched.reportedTotal,
+  });
+
+  let incomingSongs = scannedCatalogue.songs;
+  if (mode === 'incremental') {
+    incomingSongs = incomingSongs.filter(song => !knownIds.has(song.id));
+    console.log('New video IDs found: ' + incomingSongs.length + '.');
+  }
+
+  let mergedSongs = mode === 'full'
+    ? mergeSongs(oldSongs, scannedCatalogue.songs, { preserveMissing: true })
+    : mergeSongs(oldSongs, incomingSongs, { preserveMissing: true });
+
+  const youtubeKey = process.env.YOUTUBE_DATA_API_KEY?.trim();
+  if (youtubeKey) {
+    const idsToRefresh = mode === 'full'
+      ? scannedCatalogue.songs.map(song => song.id)
+      : mergedSongs.filter(song => !knownIds.has(song.id) && song.viewCount === null).map(song => song.id);
+    if (idsToRefresh.length > 0) {
+      try {
+        const freshCounts = await fetchYouTubeViewCounts(idsToRefresh, youtubeKey);
+        mergedSongs = mergedSongs.map(song =>
+          freshCounts.has(song.id) ? { ...song, viewCount: freshCounts.get(song.id) } : song);
+        console.log('Refreshed public view counts for ' + freshCounts.size + ' videos.');
+      } catch (error) {
+        console.warn('YouTube statistics refresh failed; keeping existing counts: ' + error.message);
+      }
+    } else {
+      console.log('No new/missing view counts to fetch; skipping YouTube statistics requests.');
+    }
+  } else {
+    console.log('YOUTUBE_DATA_API_KEY not set; popularity statistics refresh skipped.');
+  }
+
+  const songDataChanged = stableSongs(oldSongs) !== stableSongs(mergedSongs);
+  const generatedAt = songDataChanged || !existing.generatedAt ? startedAt : existing.generatedAt;
+  const catalogue = {
+    schemaVersion: 1,
+    generatedAt,
+    lastFullReconciledAt: mode === 'full' ? startedAt : (existing.lastFullReconciledAt || null),
+    lastMode: mode,
+    source: 'Holodex API v2',
+    query: { org: 'Hololive', topic: 'Original_Song', target: ['stream'] },
+    total: mergedSongs.length,
+    sourceTotal: fetched.reportedTotal ?? existing.sourceTotal ?? null,
+    pagesFetched: mode === 'full' ? fetched.pages : (existing.pagesFetched || fetched.pages),
+    songs: mergedSongs,
+  };
+
+  console.log('Refresh summary: mode=' + mode + '; scanned=' + fetched.rawItems.length +
+    '; pages=' + fetched.pages + '; catalogue=' + catalogue.total + '; changed=' + songDataChanged + '.');
+  if (process.env.DRY_RUN === '1' || process.argv.includes('--dry-run')) {
+    console.log('Dry run complete. No catalogue file written.');
+    return;
+  }
+
+  const output = JSON.stringify(catalogue, null, 2) + '\n';
+  const temp = OUTPUT_PATH + '.tmp';
+  fs.writeFileSync(temp, output, 'utf8');
+  JSON.parse(fs.readFileSync(temp, 'utf8'));
+  fs.renameSync(temp, OUTPUT_PATH);
+  console.log('Catalogue saved: ' + catalogue.total + ' songs; ' + mode + ' refresh completed.');
+}
+
+if (process.argv[1] && import.meta.url === new URL('file://' + path.resolve(process.argv[1])).href) {
+  main().catch(error => {
+    console.error('Catalogue refresh failed:', error.stack || error);
+    process.exitCode = 1;
+  });
+}
