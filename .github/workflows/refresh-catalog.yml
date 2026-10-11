@@ -1,9 +1,16 @@
 name: Refresh Hololive catalogue
 
 on:
+  # Validate and refresh after ingestion/workflow changes, while avoiding a loop
+  # when the workflow itself commits only data/songs.json.
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/**'
+      - 'package.json'
+      - '.github/workflows/refresh-catalog.yml'
   workflow_dispatch:
   schedule:
-    # Full paginated refresh once daily, at 04:23 UTC.
     - cron: '23 4 * * *'
 
 permissions:
@@ -27,6 +34,11 @@ jobs:
         with:
           node-version: '24'
           package-manager-cache: false
+      - name: Run automated tests and syntax checks
+        run: |
+          npm test
+          node --check app.js
+          node --check scripts/update-catalog.mjs
       - name: Refresh complete catalogue from Holodex
         env:
           HOLODEX_API_KEY: ${{ secrets.HOLODEX_API_KEY }}
