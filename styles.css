@@ -3129,3 +3129,28 @@ button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid 
     gap:4px!important;
   }
 }
+
+
+.source-repo-link{
+  display:inline-flex;
+  align-items:center;
+  gap:4px;
+  width:max-content;
+  max-width:100%;
+  color:#b8a5ff;
+  font-weight:800;
+  text-decoration:none;
+  text-underline-offset:3px;
+  transition:color .15s ease;
+}
+.source-repo-link:hover,.source-repo-link:focus-visible{
+  color:#79e8ff;
+  text-decoration:underline;
+}
+@media(max-width:680px){
+  .page-footer .source-repo-link{
+    align-self:flex-start;
+    min-height:32px;
+    padding:7px 0;
+  }
+}
