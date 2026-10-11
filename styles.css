@@ -3760,3 +3760,46 @@ body{
   .song-card-meta,.song-card-meta span:not(.song-kind){font-size:9.5px!important}
   .mini-action{font-size:9.5px!important}
 }
+
+
+/* Collapsed sidebar: give its freed width to the YouTube player, not a wider-feeling banner. */
+@media (min-width:1221px){
+  body.sidebar-collapsed .app-layout{
+    grid-template-columns:76px minmax(0,1fr) minmax(430px,min(36vw,540px))!important;
+    gap:18px!important;
+  }
+  body.sidebar-collapsed .catalogue-column{
+    min-width:0!important;
+    width:100%!important;
+  }
+  body.sidebar-collapsed .hero-card{
+    grid-template-columns:minmax(0,1.1fr) minmax(190px,.65fr)!important;
+  }
+  body.sidebar-collapsed .hero-copy{
+    min-width:0!important;
+    padding-right:8px!important;
+  }
+  body.sidebar-collapsed .hero-stage{
+    min-width:0!important;
+    overflow:hidden!important;
+  }
+  body.sidebar-collapsed .player-column,
+  body.sidebar-collapsed body.player-docked .player-column{
+    min-width:0!important;
+    width:100%!important;
+  }
+  body.sidebar-collapsed .player-column .video-frame-wrap,
+  body.sidebar-collapsed.player-docked .player-column .video-frame-wrap{
+    width:100%!important;
+    max-width:none!important;
+    min-height:0!important;
+    aspect-ratio:16/9!important;
+  }
+}
+@media (min-width:1221px) and (max-width:1500px){
+  body.sidebar-collapsed .app-layout{
+    grid-template-columns:72px minmax(0,1fr) minmax(420px,min(36vw,500px))!important;
+    gap:14px!important;
+    padding-inline:15px!important;
+  }
+}
