@@ -4655,3 +4655,47 @@ body{
     max-width:190px!important;
   }
 }
+
+
+/* Song-card sharing action layout */
+.song-card-actions{
+  display:grid!important;
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  gap:4px!important;
+}
+.song-card-actions .mini-action{
+  min-width:0!important;
+  padding:7px 2px!important;
+  font-size:10.5px!important;
+  letter-spacing:-.12px;
+}
+.song-card-actions .share-action{
+  color:#c8b9ff!important;
+}
+.song-card-actions .share-action:hover,
+.song-card-actions .share-action:focus-visible{
+  border-color:#7462aa!important;
+  background:#282344!important;
+  color:#fff!important;
+}
+@media(max-width:680px){
+  .song-card-actions{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:4px!important;
+    margin-top:8px!important;
+    padding-top:7px!important;
+  }
+  .song-card-actions .mini-action{
+    min-height:31px!important;
+    padding:6px 3px!important;
+    font-size:10px!important;
+    gap:3px!important;
+  }
+}
+@media(max-width:390px){
+  .song-card-actions .mini-action{
+    min-height:29px!important;
+    padding:5px 2px!important;
+    font-size:9.5px!important;
+  }
+}
