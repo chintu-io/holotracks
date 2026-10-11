@@ -5083,3 +5083,36 @@ body{
     min-height:40px!important;
   }
 }
+
+
+/* Song action hierarchy: Play is primary; Share stays neutral. */
+.song-card-actions > .mini-action.share-action,
+.song-card-actions > .mini-action.share-action:hover,
+.song-card-actions > .mini-action.share-action:focus-visible{
+  color:#c0c3e1!important;
+  border-color:#363653!important;
+  background:#17182d!important;
+  box-shadow:none!important;
+}
+.song-card-actions > .mini-action[data-action="play"]{
+  color:#e5e4fa!important;
+  border-color:#55517f!important;
+  background:linear-gradient(135deg,#292744,#20223b)!important;
+}
+.song-card-actions > .mini-action[data-action="play"]:hover,
+.song-card-actions > .mini-action[data-action="play"]:focus-visible{
+  color:#fff!important;
+  border-color:#8d81ca!important;
+  background:linear-gradient(135deg,#3a315e,#282b49)!important;
+}
+@media(max-width:680px){
+  .song-card-actions > .mini-action.share-action{
+    color:#c0c3e1!important;
+    border-color:#363653!important;
+    background:#17182d!important;
+  }
+  .song-card-actions > .mini-action[data-action="play"]{
+    border-color:#55517f!important;
+    background:linear-gradient(135deg,#292744,#20223b)!important;
+  }
+}
