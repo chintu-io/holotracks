@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-11T09:30:39.795Z",
+  "generatedAt": "2026-10-11T13:48:42.119Z",
   "lastFullReconciledAt": "2026-10-11T09:30:39.795Z",
-  "lastMode": "full",
+  "lastMode": "incremental",
   "source": "Holodex API v2",
   "query": {
     "org": "Hololive",
@@ -14,14 +14,30 @@
       "stream"
     ]
   },
-  "total": 6281,
-  "sourceTotal": 6543,
+  "total": 6282,
+  "sourceTotal": 6544,
   "sourceTotalByTopic": {
-    "Original_Song": 3916,
+    "Original_Song": 3917,
     "Music_Cover": 2627
   },
   "pagesFetched": 132,
   "songs": [
+    {
+      "id": "WOZTqdQ6bnE",
+      "title": "RISING 酸 / 博衣こより【 ケンモチヒデフミ 】(Official)",
+      "artist": "Hakui Koyori",
+      "artists": [
+        "Hakui Koyori"
+      ],
+      "channelName": "Hakui Koyori",
+      "channelId": "UC6eWCld0KwmyHFbAqK3V-Rw",
+      "releaseDate": "2026-10-11T12:03:17.000Z",
+      "publishedAt": "2026-10-11T12:03:17.000Z",
+      "viewCount": 14684,
+      "duration": 230,
+      "songType": "original",
+      "source": "Holodex"
+    },
     {
       "id": "NfZnchcKVw0",
       "title": "ノンブレス・オブリージュ - ピノキオピー / Covered by 風真いろは",
