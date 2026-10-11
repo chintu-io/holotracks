@@ -2030,3 +2030,11 @@ button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid 
 @media(prefers-reduced-motion:reduce){
   .talent-marquee-toggle{transition:none}
 }
+
+
+/* Prevent native snap points from cancelling the marquee's tiny animation steps. */
+.talent-strip{
+  scroll-snap-type:none!important;
+  scroll-behavior:auto!important;
+  overflow-x:auto!important;
+}
