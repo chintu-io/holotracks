@@ -83,6 +83,20 @@
       : [item.artist || item.channelName || 'Unknown artist'];
   }
   function songById(id) { return state.songs.find(item => item.id === id); }
+  function deduplicateCatalogue(songs) {
+    const byId = new Map();
+    for (const song of songs) {
+      if (!song || typeof song.id !== 'string' || !song.id.trim()) continue;
+      const existing = byId.get(song.id);
+      if (!existing) {
+        byId.set(song.id, { ...song });
+      } else if (song.songType === 'cover') {
+        // A video tagged as both topics should keep the catalogue's cover label.
+        existing.songType = 'cover';
+      }
+    }
+    return [...byId.values()];
+  }
   function dateValue(item) {
     const value = Date.parse(item.releaseDate || item.publishedAt || item.availableAt || '');
     return Number.isFinite(value) ? value : 0;
@@ -433,7 +447,16 @@
     });
   }
   function renderSongs(append = false) {
-    const visible = state.filtered.slice(0, state.visibleCount);
+    const alreadyRendered = new Set(
+      append
+        ? [...el['song-list'].querySelectorAll('.song-card')].map(card => card.dataset.id)
+        : [],
+    );
+    const visible = state.filtered.slice(0, state.visibleCount).filter(item => {
+      if (!item || !item.id || alreadyRendered.has(item.id)) return false;
+      alreadyRendered.add(item.id);
+      return true;
+    });
     const html = visible.map(item => {
       const artists = artistsOf(item).join(', ');
       const favorite = state.favorites.has(item.id);
@@ -793,8 +816,11 @@
       event.preventDefault();
       state.query = el['search-input'].value;
       applyFilters();
-      const target = document.getElementById('catalogue') || el['song-list'];
+      const target = document.getElementById('music-library') || el['song-list'];
       target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      // Remove the persistent focus-within glow after the search action.
+      el['search-button'].blur();
+      el['search-input'].blur();
     });
     el['artist-search'].addEventListener('input', event => {
       state.artistQuery = event.target.value;
@@ -971,7 +997,7 @@
       if (!response.ok) throw new Error('HTTP ' + response.status);
       const data = await response.json();
       if (!Array.isArray(data.songs)) throw new Error('Catalogue schema is invalid');
-      state.songs = data.songs.filter(item => item && typeof item.id === 'string' && item.id.trim());
+      state.songs = deduplicateCatalogue(data.songs);
       state.artistPortraits = new Map();
       el['source-status'].textContent = state.songs.length
         ? 'Catalogue ready · ' + state.songs.length.toLocaleString() + ' songs'
