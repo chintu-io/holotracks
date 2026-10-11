@@ -33,7 +33,7 @@
     'search-input','artist-search','artist-filters','artist-count','show-all-artists',
     'clear-filters','nav-total','fav-total','hero-song-count','hero-artist-count','hero-updated',
     'source-status','catalogue-title-text','results-count','results-caption','sort-select',
-    'type-all-count','type-original-count','type-cover-count',
+    'type-all-count','type-original-count','type-cover-count','nav-original-total','nav-cover-total',
     'song-list','empty-state','empty-title','empty-copy','empty-reset','load-more','notice',
     'play-all','play-random','favorites-shortcut','mobile-filter-toggle',
     'mobile-player-toggle','sidebar','player-column','player-hide','youtube-player','youtube-fallback',
@@ -335,9 +335,12 @@
     el['hero-song-count'].textContent = state.songs.length.toLocaleString();
     el['hero-artist-count'].textContent = new Set(state.songs.flatMap(artistsOf)).size.toLocaleString();
     const coverCount = state.songs.filter(item => item.songType === 'cover').length;
+    const originalCount = state.songs.length - coverCount;
     el['type-all-count'].textContent = state.songs.length.toLocaleString();
-    el['type-original-count'].textContent = (state.songs.length - coverCount).toLocaleString();
+    el['type-original-count'].textContent = originalCount.toLocaleString();
     el['type-cover-count'].textContent = coverCount.toLocaleString();
+    el['nav-original-total'].textContent = originalCount.toLocaleString();
+    el['nav-cover-total'].textContent = coverCount.toLocaleString();
   }
   function applyFilters() {
     const query = state.query.trim().toLocaleLowerCase();
@@ -392,6 +395,11 @@
     }
     document.querySelectorAll('[data-view]').forEach(button => {
       button.classList.toggle('active', button.dataset.view === state.view);
+    });
+    document.querySelectorAll('[data-sidebar-song-type]').forEach(button => {
+      const active = state.view === 'all' && !state.activePlaylist && button.dataset.sidebarSongType === state.songType;
+      button.classList.toggle('active', active);
+      button.setAttribute('aria-pressed', String(active));
     });
     document.querySelectorAll('[data-song-type]').forEach(button => {
       const active = button.dataset.songType === state.songType;
@@ -726,6 +734,15 @@
     document.querySelectorAll('[data-song-type]').forEach(button => {
       button.addEventListener('click', () => {
         state.songType = button.dataset.songType;
+        applyFilters();
+      });
+    });
+    document.querySelectorAll('[data-sidebar-song-type]').forEach(button => {
+      button.addEventListener('click', () => {
+        state.songType = button.dataset.sidebarSongType;
+        state.view = 'all';
+        state.activePlaylist = null;
+        renderPlaylists();
         applyFilters();
       });
     });
