@@ -33,6 +33,7 @@
     'search-input','artist-search','artist-filters','artist-count','show-all-artists',
     'clear-filters','nav-total','fav-total','hero-song-count','hero-artist-count','hero-updated',
     'source-status','catalogue-title-text','results-count','results-caption','sort-select',
+    'type-all-count','type-original-count','type-cover-count',
     'song-list','empty-state','empty-title','empty-copy','empty-reset','load-more','notice',
     'play-all','play-random','favorites-shortcut','mobile-filter-toggle',
     'mobile-player-toggle','sidebar','player-column','player-hide','youtube-player','youtube-fallback',
@@ -54,7 +55,7 @@
     songs: [], filtered: [], visibleCount: PAGE_SIZE, talents: [], artistPortraits: new Map(),
     selectedArtists: new Set(),
     query: '', artistQuery: '',
-    view: 'all',
+    view: 'all', songType: 'all',
     activePlaylist: null,
     favorites: new Set(readJSON(KEYS.favorites, [])),
     playlists: readJSON(KEYS.playlists, []),
@@ -333,11 +334,17 @@
     el['fav-total'].textContent = state.favorites.size.toLocaleString();
     el['hero-song-count'].textContent = state.songs.length.toLocaleString();
     el['hero-artist-count'].textContent = new Set(state.songs.flatMap(artistsOf)).size.toLocaleString();
+    const coverCount = state.songs.filter(item => item.songType === 'cover').length;
+    el['type-all-count'].textContent = state.songs.length.toLocaleString();
+    el['type-original-count'].textContent = (state.songs.length - coverCount).toLocaleString();
+    el['type-cover-count'].textContent = coverCount.toLocaleString();
   }
   function applyFilters() {
     const query = state.query.trim().toLocaleLowerCase();
     const selectedPlaylist = state.playlists.find(playlist => playlist.id === state.activePlaylist);
     let list = state.songs.filter(item => {
+      const itemType = item.songType === 'cover' ? 'cover' : 'original';
+      if (state.songType !== 'all' && itemType !== state.songType) return false;
       if (state.view === 'favorites' && !state.favorites.has(item.id)) return false;
       if (selectedPlaylist && !selectedPlaylist.songIds.includes(item.id)) return false;
       if (state.selectedArtists.size && !artistsOf(item).some(artist => state.selectedArtists.has(artist))) return false;
@@ -374,11 +381,22 @@
         ? 'Showing the newest indexed songs because no dates fell inside the recent-release window.'
         : 'Videos published in the last ' + FRESH_WINDOW_DAYS + ' days, newest first.';
     } else {
-      el['catalogue-title-text'].textContent = 'All original songs';
-      el['results-caption'].textContent = 'Every indexed Hololive original-song video, ready to explore.';
+      el['catalogue-title-text'].textContent = state.songType === 'cover'
+        ? 'Hololive cover songs'
+        : state.songType === 'original' ? 'Original songs' : 'All music';
+      el['results-caption'].textContent = state.songType === 'cover'
+        ? 'Holodex videos tagged as Music_Cover, ready to explore.'
+        : state.songType === 'original'
+          ? 'Holodex videos tagged as Original_Song, ready to explore.'
+          : 'Original songs and fan-performed covers from across the Hololive universe.';
     }
     document.querySelectorAll('[data-view]').forEach(button => {
       button.classList.toggle('active', button.dataset.view === state.view);
+    });
+    document.querySelectorAll('[data-song-type]').forEach(button => {
+      const active = button.dataset.songType === state.songType;
+      button.classList.toggle('active', active);
+      button.setAttribute('aria-pressed', String(active));
     });
   }
   function renderSongs(append = false) {
@@ -386,6 +404,8 @@
     const html = visible.map(item => {
       const artists = artistsOf(item).join(', ');
       const favorite = state.favorites.has(item.id);
+      const songType = item.songType === 'cover' ? 'cover' : 'original';
+      const songTypeLabel = songType === 'cover' ? 'COVER' : 'ORIGINAL';
       return '<article class="song-card" data-id="' + escapeHTML(item.id) + '">' +
         '<div class="song-art"><img loading="lazy" src="' + thumbnail(item) + '" alt="Thumbnail for ' +
         escapeHTML(titleOf(item)) + '" onerror="this.style.opacity=\'.12\'">' +
@@ -393,8 +413,9 @@
         '" aria-label="Play ' + escapeHTML(titleOf(item)) + '">▶</button></div>' +
         '<div class="song-card-body"><div class="song-title" title="' + escapeHTML(titleOf(item)) + '">' +
         escapeHTML(titleOf(item)) + '</div><div class="song-artist" title="' + escapeHTML(artists) + '">' +
-        escapeHTML(artists) + '</div><div class="song-card-meta"><span>' + dateText(item) +
-        '</span><span>' + formatViews(item.viewCount) + '</span></div><div class="song-card-actions">' +
+        escapeHTML(artists) + '</div><div class="song-card-meta"><span class="song-kind song-kind-' + songType + '">' +
+        songTypeLabel + '</span><span>' + dateText(item) + '</span><span>' + formatViews(item.viewCount) +
+        '</span></div><div class="song-card-actions">' +
         '<button class="mini-action" data-action="play" data-id="' + escapeHTML(item.id) + '">▶ Play</button>' +
         '<button class="mini-action ' + (favorite ? 'is-favorite' : '') + '" data-action="favorite" data-id="' +
         escapeHTML(item.id) + '" aria-label="Toggle favourite">' + (favorite ? '♥' : '♡') + ' Save</button>' +
@@ -648,6 +669,7 @@
     el['catalogue'].scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
   function resetFilters() {
+    state.songType = 'all';
     state.selectedArtists.clear();
     state.query = '';
     state.artistQuery = '';
@@ -700,6 +722,12 @@
   function initEvents() {
     document.querySelectorAll('[data-view]').forEach(button => {
       button.addEventListener('click', () => setView(button.dataset.view));
+    });
+    document.querySelectorAll('[data-song-type]').forEach(button => {
+      button.addEventListener('click', () => {
+        state.songType = button.dataset.songType;
+        applyFilters();
+      });
     });
     el['search-input'].addEventListener('input', event => {
       state.query = event.target.value;
