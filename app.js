@@ -1,7 +1,7 @@
 'use strict';
 
 (() => {
-  const PAGE_SIZE = 30;
+  const PAGE_ROWS = 10;
   const FRESH_WINDOW_DAYS = 180;
   const BANNER_ROTATE_MS = 7000;
   const ARTIST_IMAGES = {
@@ -461,11 +461,18 @@
       button.setAttribute('aria-pressed', String(active));
     });
   }
+  function getPageSize() {
+    const template = window.getComputedStyle(el['song-list']).gridTemplateColumns;
+    const columns = template && template !== 'none' ? template.trim().split(/\\s+/).filter(Boolean).length : 3;
+    return Math.max(1, columns) * PAGE_ROWS;
+  }
+
   function renderSongs() {
-    const totalPages = Math.max(1, Math.ceil(state.filtered.length / PAGE_SIZE));
+    const pageSize = getPageSize();
+    const totalPages = Math.max(1, Math.ceil(state.filtered.length / pageSize));
     state.currentPage = Math.min(Math.max(1, state.currentPage), totalPages);
-    const pageStart = (state.currentPage - 1) * PAGE_SIZE;
-    const visible = state.filtered.slice(pageStart, pageStart + PAGE_SIZE);
+    const pageStart = (state.currentPage - 1) * pageSize;
+    const visible = state.filtered.slice(pageStart, pageStart + pageSize);
     const html = visible.map(item => {
       const artists = artistsOf(item).join(', ');
       const favorite = state.favorites.has(item.id);
@@ -502,7 +509,8 @@
   function renderPagination() {
     const container = el['pagination'];
     const total = state.filtered.length;
-    const totalPages = Math.ceil(total / PAGE_SIZE);
+    const pageSize = getPageSize();
+    const totalPages = Math.ceil(total / pageSize);
     if (!container) return;
     if (totalPages <= 1) {
       container.hidden = true;
@@ -511,8 +519,8 @@
     }
 
     const current = Math.min(Math.max(1, state.currentPage), totalPages);
-    const firstIndex = (current - 1) * PAGE_SIZE + 1;
-    const lastIndex = Math.min(current * PAGE_SIZE, total);
+    const firstIndex = (current - 1) * pageSize + 1;
+    const lastIndex = Math.min(current * pageSize, total);
     const candidates = new Set([1, totalPages]);
     for (let page = Math.max(2, current - 2); page <= Math.min(totalPages - 1, current + 2); page++) {
       candidates.add(page);
@@ -912,6 +920,15 @@
         document.body.classList.remove('filters-open');
       }
     });
+    let lastObservedPageSize = getPageSize();
+    window.addEventListener('resize', () => {
+      const nextPageSize = getPageSize();
+      if (nextPageSize !== lastObservedPageSize) {
+        lastObservedPageSize = nextPageSize;
+        state.currentPage = 1;
+        renderSongs();
+      }
+    });
     el['sort-select'].addEventListener('change', applyFilters);
     el['clear-filters'].addEventListener('click', resetFilters);
     el['empty-reset'].addEventListener('click', resetFilters);
@@ -935,7 +952,7 @@
       const button = event.target.closest('[data-page]');
       if (!button || button.disabled) return;
       const nextPage = Number(button.dataset.page);
-      const totalPages = Math.ceil(state.filtered.length / PAGE_SIZE);
+      const totalPages = Math.ceil(state.filtered.length / getPageSize());
       if (!Number.isInteger(nextPage) || nextPage < 1 || nextPage > totalPages ||
           nextPage === state.currentPage) return;
       state.currentPage = nextPage;
