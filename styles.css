@@ -681,7 +681,7 @@ button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid 
 .talent-image{width:66px;height:70px;border-radius:13px;background:radial-gradient(ellipse at 50% 32%,var(--talent),#141529 80%);overflow:hidden}
 .talent-image img{
   position:absolute;inset:0;width:100%;height:100%;max-width:none;max-height:none;
-  object-fit:cover;object-position:center 6%;transform:none;filter:drop-shadow(0 4px 7px #0005);
+  object-fit:cover;object-position:center top;transform:none;filter:drop-shadow(0 4px 7px #0005);
 }
 .talent-image:after{background:linear-gradient(transparent 68%,#111126cf)}
 .talent-card:hover .talent-image img,.talent-card.selected .talent-image img{transform:scale(1.045)}
