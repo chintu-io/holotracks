@@ -9,8 +9,8 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://hololive.hololivepro.com" crossorigin>
   <link rel="preconnect" href="https://i.ytimg.com" crossorigin>
-  <link rel="stylesheet" href="styles.css?v=20261011-marquee-speed-alignment-1">
-  <script defer src="app.js?v=20261011-marquee-speed-alignment-1"></script>
+  <link rel="stylesheet" href="styles.css?v=20261011-talent-pages-1">
+  <script defer src="app.js?v=20261011-talent-pages-1"></script>
 </head>
 <body>
   <a class="skip-link" href="#catalogue">Skip to music library</a>
@@ -126,7 +126,12 @@
         <div class="section-heading">
           <div><span class="section-kicker">PICK YOUR SOUND</span><h2 id="talents-title">Who's on your <span>playlist?</span></h2><p>Tap a talent to filter the library to their songs.</p></div>
           <div class="talent-section-actions">
-            <button id="talent-strip-toggle" class="talent-marquee-toggle" type="button" aria-controls="talent-strip" aria-label="Pause automatic artist scrolling" title="Pause automatic artist scrolling"><span aria-hidden="true">Ⅱ</span> Pause</button>
+            <div class="talent-page-controls" role="group" aria-label="Official talent pages">
+              <button id="talent-page-shuffle" class="talent-page-shuffle" type="button" aria-label="Shuffle official talent order" title="Shuffle the talent order"><span aria-hidden="true">⤨</span> Shuffle</button>
+              <button id="talent-page-prev" class="talent-page-arrow" type="button" aria-label="Previous 10 talents" title="Previous 10 talents" disabled>‹</button>
+              <span id="talent-page-status" aria-live="polite">—</span>
+              <button id="talent-page-next" class="talent-page-arrow" type="button" aria-label="Next 10 talents" title="Next 10 talents">›</button>
+            </div>
             <button id="browse-all-talents" class="browse-talents-button" type="button">Browse all artists <span aria-hidden="true">↗</span></button>
           </div>
         </div>
