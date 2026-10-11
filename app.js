@@ -225,7 +225,6 @@
   const TALENT_MARQUEE_SPEED = 13; // pixels per second: intentionally calm, not ticker-fast.
   let talentMarqueeFrame = 0;
   let talentMarqueeLastTime = 0;
-  let talentMarqueeLoopStart = null;
   let talentMarqueeUserPaused = !!(window.matchMedia &&
     window.matchMedia('(prefers-reduced-motion: reduce)').matches);
   let talentMarqueeHoverPaused = false;
@@ -272,6 +271,10 @@
       duplicateFragment.appendChild(duplicate);
     }
     strip.appendChild(duplicateFragment);
+    // Start at a known position each visit; native scroll snapping can fight
+    // small animation steps, so the strip's CSS disables snap while marqueeing.
+    strip.scrollLeft = 0;
+    talentMarqueeHoverPaused = strip.matches(':hover');
 
     // Keep a single seamless loop. The clone is hidden from assistive tech and
     // keyboard navigation, but mouse/touch selection still uses normal buttons.
@@ -326,9 +329,11 @@
 
   function renderTalentSpotlight() {
     const palette = ['#3b5993','#7c3b6e','#8d4a36','#704367','#327b99','#3d6d9e','#8c5c32','#75498f','#774337','#a46d36','#69476d','#a84c36'];
-    const featured = state.talents
-      .filter(item => item.name && safeTalentImage(item.image))
-      .sort((a, b) => a.name.localeCompare(b.name, undefined, { sensitivity: 'base' }));
+    // Shuffle the official roster on every page load so the homepage doesn't
+    // always begin with A/B/C names. The duplicate loop uses this same order.
+    const featured = shuffled(
+      state.talents.filter(item => item.name && safeTalentImage(item.image))
+    );
     el['talent-strip'].innerHTML = featured.map((talent, index) =>
       '<button class="talent-card" type="button" data-spotlight-artist="' + escapeHTML(talent.name) +
       '" style="--talent:' + palette[index % palette.length] + '" title="Browse ' + escapeHTML(talent.name) + '">' +
