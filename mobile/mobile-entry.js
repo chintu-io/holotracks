@@ -19,6 +19,27 @@ function httpsWatchUrl(videoId) {
   return 'https://www.youtube.com/watch?v=' + encodeURIComponent(videoId);
 }
 
+async function openOfficialYouTube(videoId) {
+  const appUrl = YOUTUBE_APP_SCHEME + encodeURIComponent(videoId);
+  const webUrl = httpsWatchUrl(videoId);
+
+  try {
+    const appResult = await AppLauncher.openUrl({ url: appUrl });
+    if (appResult?.completed) return;
+  } catch {
+    // The YouTube app may not be installed or may not handle its custom scheme.
+  }
+
+  try {
+    const webResult = await AppLauncher.openUrl({ url: webUrl });
+    if (webResult?.completed) return;
+  } catch {
+    // Fall through to normal browser navigation if the native launcher fails.
+  }
+
+  window.location.assign(webUrl);
+}
+
 let openingYouTube = false;
 
 document.addEventListener('click', async (event) => {
@@ -40,18 +61,7 @@ document.addEventListener('click', async (event) => {
   try {
     // Hand off to the official YouTube app. YouTube Premium background playback
     // remains handled by YouTube itself; the HoloTracks embed stays foreground-only.
-    const result = await AppLauncher.openUrl({
-      url: YOUTUBE_APP_SCHEME + encodeURIComponent(videoId)
-    });
-    if (result?.completed) return;
-
-    await AppLauncher.openUrl({ url: httpsWatchUrl(videoId) });
-  } catch (error) {
-    try {
-      await AppLauncher.openUrl({ url: httpsWatchUrl(videoId) });
-    } catch {
-      window.location.assign(httpsWatchUrl(videoId));
-    }
+    await openOfficialYouTube(videoId);
   } finally {
     openingYouTube = false;
   }
