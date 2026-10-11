@@ -25,6 +25,8 @@
     playlists: 'holotracks:playlists:v1',
     shuffle: 'holotracks:shuffle:v1',
     repeat: 'holotracks:repeat:v1',
+    bannerDeck: 'holotracks:banner-deck:v1',
+    lastBanner: 'holotracks:banner-last:v1',
   };
   const ids = [
     'search-input','artist-search','artist-filters','artist-count','show-all-artists',
@@ -37,7 +39,7 @@
     'player-state','watch-youtube','play-pause','previous-song','next-song','queue-shuffle',
     'queue-repeat','queue-count','queue-list','clear-queue','create-playlist','playlist-list',
     'playlist-select','save-queue','play-selected-playlist','playlist-dialog','playlist-form',
-    'playlist-name','talent-strip',
+    'playlist-name','talent-strip','sort-direction','mobile-mini-player','mobile-mini-thumb','mobile-mini-expand','mobile-mini-title','mobile-mini-artist','mobile-mini-toggle','mobile-mini-next','hero-talent-art',
   ];
   const el = Object.fromEntries(ids.map(id => [id, document.getElementById(id)]));
   const readJSON = (key, fallback) => {
@@ -48,7 +50,7 @@
     catch { showNotice('Browser storage is unavailable; the latest changes may not persist.'); }
   };
   const state = {
-    songs: [], filtered: [], visibleCount: PAGE_SIZE,
+    songs: [], filtered: [], visibleCount: PAGE_SIZE, talents: [], sortDirection: 'desc',
     selectedArtists: new Set(),
     query: '', artistQuery: '',
     view: 'all',
@@ -103,16 +105,138 @@
     return String(value || '').normalize('NFKC').toLocaleLowerCase()
       .replace(/[\s·・•_\-‐‑–—|｜()[\]{}「」『』【】<>《》]+/g, ' ').trim();
   }
+
+  function safeTalentImage(value) {
+    try {
+      const url = new URL(value);
+      return url.origin === 'https://hololive.hololivepro.com' &&
+        url.pathname.includes('/wp-content/uploads/') &&
+        /\.(?:png|webp|jpe?g|avif)$/i.test(url.pathname) ? url.href : '';
+    } catch { return ''; }
+  }
+  function fallbackTalentRoster() {
+    return Object.entries(ARTIST_IMAGES).map(([name, image]) => ({
+      slug: normalized(name).replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''),
+      name, image, profileUrl: 'https://hololive.hololivepro.com/en/talents/',
+    }));
+  }
+  function shuffled(values) {
+    const result = [...values];
+    for (let index = result.length - 1; index > 0; index--) {
+      const swap = Math.floor(Math.random() * (index + 1));
+      [result[index], result[swap]] = [result[swap], result[index]];
+    }
+    return result;
+  }
+  function pickBannerTalents() {
+    const roster = state.talents.filter(item => item.slug && safeTalentImage(item.image));
+    if (roster.length <= 3) return roster.slice(0, 3);
+    const bySlug = new Map(roster.map(item => [item.slug, item]));
+    let deck = readJSON(KEYS.bannerDeck, []);
+    if (!Array.isArray(deck)) deck = [];
+    deck = deck.filter((slug, index) => bySlug.has(slug) && deck.indexOf(slug) === index);
+    if (deck.length < 3) {
+      const alreadyQueued = new Set(deck);
+      deck = [...deck, ...shuffled(roster.filter(item => !alreadyQueued.has(item.slug)).map(item => item.slug))];
+    }
+    const pickedSlugs = deck.splice(0, 3);
+    const previous = readJSON(KEYS.lastBanner, []);
+    if (Array.isArray(previous) &&
+        [...pickedSlugs].sort().join('|') === [...previous].sort().join('|') &&
+        deck.length) {
+      const replacementIndex = deck.findIndex(slug => !pickedSlugs.includes(slug));
+      if (replacementIndex >= 0) {
+        const previousPick = pickedSlugs[2];
+        pickedSlugs[2] = deck[replacementIndex];
+        deck.splice(replacementIndex, 1);
+        deck.push(previousPick);
+      }
+    }
+    saveJSON(KEYS.bannerDeck, deck);
+    saveJSON(KEYS.lastBanner, pickedSlugs);
+    return pickedSlugs.map(slug => bySlug.get(slug)).filter(Boolean);
+  }
+  function renderHeroTalentArt() {
+    const stage = el['hero-talent-art'];
+    if (!stage) return;
+    stage.querySelectorAll('.stage-talent').forEach(image => image.remove());
+    const talents = pickBannerTalents();
+    const slots = ['left', 'center', 'right'];
+    talents.forEach((talent, index) => {
+      const image = document.createElement('img');
+      image.className = 'stage-talent stage-' + slots[index];
+      image.src = safeTalentImage(talent.image);
+      image.alt = talent.name;
+      image.loading = 'eager';
+      image.decoding = 'async';
+      image.onerror = () => { image.style.display = 'none'; };
+      const caption = stage.querySelector('.stage-caption');
+      stage.insertBefore(image, caption || null);
+    });
+  }
+  function renderTalentSpotlight() {
+    const palette = ['#3b5993','#7c3b6e','#8d4a36','#704367','#327b99','#3d6d9e','#8c5c32','#75498f','#774337','#a46d36','#69476d','#a84c36'];
+    const roster = state.talents.filter(item => item.name && safeTalentImage(item.image));
+    el['talent-strip'].innerHTML = roster.map((talent, index) =>
+      '<button class="talent-card" type="button" data-spotlight-artist="' + escapeHTML(talent.name) +
+      '" style="--talent:' + palette[index % palette.length] + '" title="Browse ' + escapeHTML(talent.name) + '">' +
+      '<span class="talent-image"><img src="' + escapeHTML(safeTalentImage(talent.image)) +
+      '" alt="" loading="lazy" decoding="async"><i>' +
+      escapeHTML(talent.name.slice(0, 2).toUpperCase()) + '</i></span><strong>' +
+      escapeHTML(talent.name) + '</strong></button>'
+    ).join('');
+    el['talent-strip'].querySelectorAll('img').forEach(image => {
+      image.addEventListener('error', () => { image.style.display = 'none'; }, { once: true });
+    });
+    renderArtists();
+  }
+  async function loadTalentRoster() {
+    try {
+      const response = await fetch('data/talents.json', { cache: 'no-cache' });
+      if (!response.ok) throw new Error('HTTP ' + response.status);
+      const data = await response.json();
+      const roster = Array.isArray(data.talents) ? data.talents : [];
+      state.talents = roster.filter(item =>
+        item && typeof item.slug === 'string' && typeof item.name === 'string' &&
+        safeTalentImage(item.image)
+      );
+    } catch {
+      state.talents = [];
+    }
+    if (!state.talents.length) state.talents = fallbackTalentRoster();
+    for (const talent of state.talents) ARTIST_IMAGES[talent.name] = talent.image;
+    renderHeroTalentArt();
+    renderTalentSpotlight();
+  }
+
   function sortSongs(items) {
     const mode = el['sort-select'].value;
+    const descending = state.sortDirection === 'desc';
     const list = [...items];
     list.sort((a, b) => {
-      if (mode === 'oldest') return dateValue(a) - dateValue(b);
-      if (mode === 'title') return titleOf(a).localeCompare(titleOf(b));
-      if (mode === 'popular') return (Number(b.viewCount) || -1) - (Number(a.viewCount) || -1);
-      return dateValue(b) - dateValue(a);
+      if (mode === 'title') return descending
+        ? titleOf(b).localeCompare(titleOf(a))
+        : titleOf(a).localeCompare(titleOf(b));
+      if (mode === 'popular') return descending
+        ? (Number(b.viewCount) || -1) - (Number(a.viewCount) || -1)
+        : (Number(a.viewCount) || -1) - (Number(b.viewCount) || -1);
+      return descending ? dateValue(b) - dateValue(a) : dateValue(a) - dateValue(b);
     });
     return list;
+  }
+
+  function updateSortDirectionButton() {
+    const mode = el['sort-select'].value;
+    const descending = state.sortDirection === 'desc';
+    el['sort-direction'].textContent = descending ? '↓' : '↑';
+    const label = mode === 'title'
+      ? (descending ? 'Z to A' : 'A to Z')
+      : mode === 'popular'
+        ? (descending ? 'Most viewed first' : 'Fewest views first')
+        : (descending ? 'Newest first' : 'Oldest first');
+    el['sort-direction'].title = label;
+    el['sort-direction'].setAttribute('aria-label', 'Sort order: ' + label + '. Activate to reverse.');
+    el['sort-direction'].dataset.direction = state.sortDirection;
   }
   function isRecent(item) {
     const date = dateValue(item);
@@ -354,10 +478,18 @@
     el['playing-favorite'].disabled = !item;
     el['playing-favorite'].classList.toggle('is-favorite', !!item && state.favorites.has(item.id));
     el['playing-favorite'].textContent = item && state.favorites.has(item.id) ? '♥' : '♡';
+    el['mobile-mini-player'].hidden = !item;
+    document.body.classList.toggle('has-mobile-player', !!item);
+    el['mobile-mini-title'].textContent = item ? titleOf(item) : 'Nothing playing yet';
+    el['mobile-mini-artist'].textContent = item ? artistsOf(item).join(', ') : 'Choose a song to start listening';
+    if (item) el['mobile-mini-thumb'].src = thumbnail(item);
+    el['mobile-mini-thumb'].hidden = !item;
   }
   function updatePlayerButtons() {
     const hasCurrent = !!state.currentId;
     el['play-pause'].disabled = !hasCurrent;
+    el['mobile-mini-toggle'].disabled = !hasCurrent || !state.playerReady;
+    el['mobile-mini-next'].disabled = !hasCurrent;
     el['previous-song'].disabled = !hasCurrent;
     el['next-song'].disabled = !hasCurrent;
     el['queue-shuffle'].classList.toggle('active', state.shuffle);
@@ -368,9 +500,24 @@
         el['play-pause'].textContent = playing ? 'Ⅱ' : '▶';
         el['play-pause'].setAttribute('aria-label', playing ? 'Pause' : 'Play');
         el['play-pause'].title = playing ? 'Pause' : 'Play';
+        el['mobile-mini-toggle'].textContent = playing ? 'Ⅱ' : '▶';
+        el['mobile-mini-toggle'].setAttribute('aria-label', playing ? 'Pause song' : 'Play song');
       } catch {}
     }
   }
+  function togglePlayback() {
+    if (!state.playerReady || !state.player) return;
+    const playing = state.player.getPlayerState() === window.YT.PlayerState.PLAYING;
+    playing ? state.player.pauseVideo() : state.player.playVideo();
+  }
+
+  function toggleMobilePlayerPanel(force) {
+    const open = typeof force === 'boolean' ? force : !el['player-column'].classList.contains('mobile-open');
+    el['player-column'].classList.toggle('mobile-open', open);
+    document.body.classList.toggle('mobile-player-open', open);
+    el['mobile-player-toggle'].setAttribute('aria-expanded', String(open));
+  }
+
   function loadYouTubeAPI() {
     if (window.YT && window.YT.Player) { createYouTubePlayer(); return; }
     if (document.getElementById('youtube-api-script')) return;
@@ -432,7 +579,9 @@
     state.query = '';
     el['search-input'].value = '';
     el['artist-search'].value = '';
-    el['sort-select'].value = 'newest';
+    el['sort-select'].value = 'date';
+    state.sortDirection = 'desc';
+    updateSortDirectionButton();
     renderArtists();
     renderPlaylists();
     applyFilters();
@@ -449,7 +598,9 @@
     state.activePlaylist = null;
     el['search-input'].value = '';
     el['artist-search'].value = '';
-    el['sort-select'].value = 'newest';
+    el['sort-select'].value = 'date';
+    state.sortDirection = 'desc';
+    updateSortDirectionButton();
     renderArtists();
     renderPlaylists();
     applyFilters();
@@ -463,7 +614,9 @@
     state.activePlaylist = null;
     el['search-input'].value = '';
     el['artist-search'].value = '';
-    el['sort-select'].value = 'newest';
+    el['sort-select'].value = 'date';
+    state.sortDirection = 'desc';
+    updateSortDirectionButton();
     renderArtists();
     renderPlaylists();
     applyFilters();
@@ -515,7 +668,16 @@
         document.body.classList.remove('filters-open');
       }
     });
-    el['sort-select'].addEventListener('change', applyFilters);
+    el['sort-select'].addEventListener('change', () => {
+      state.sortDirection = el['sort-select'].value === 'title' ? 'asc' : 'desc';
+      updateSortDirectionButton();
+      applyFilters();
+    });
+    el['sort-direction'].addEventListener('click', () => {
+      state.sortDirection = state.sortDirection === 'desc' ? 'asc' : 'desc';
+      updateSortDirectionButton();
+      applyFilters();
+    });
     el['clear-filters'].addEventListener('click', resetFilters);
     el['empty-reset'].addEventListener('click', resetFilters);
     el['show-all-artists'].addEventListener('click', () => {
@@ -577,11 +739,10 @@
     });
     el['previous-song'].addEventListener('click', previousSong);
     el['next-song'].addEventListener('click', nextSong);
-    el['play-pause'].addEventListener('click', () => {
-      if (!state.playerReady || !state.player) return;
-      const playing = state.player.getPlayerState() === window.YT.PlayerState.PLAYING;
-      playing ? state.player.pauseVideo() : state.player.playVideo();
-    });
+    el['play-pause'].addEventListener('click', togglePlayback);
+    el['mobile-mini-toggle'].addEventListener('click', togglePlayback);
+    el['mobile-mini-next'].addEventListener('click', nextSong);
+    el['mobile-mini-expand'].addEventListener('click', () => toggleMobilePlayerPanel());
     el['queue-shuffle'].addEventListener('click', () => {
       state.shuffle = !state.shuffle;
       saveJSON(KEYS.shuffle, state.shuffle);
@@ -634,7 +795,16 @@
       document.body.classList.toggle('filters-open');
     });
     el['mobile-player-toggle'].addEventListener('click', () => {
-      el['player-column'].scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (window.matchMedia && window.matchMedia('(max-width: 680px)').matches) {
+        toggleMobilePlayerPanel();
+      } else {
+        el['player-column'].scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+    document.addEventListener('click', event => {
+      if (!document.body.classList.contains('mobile-player-open')) return;
+      if (event.target.closest('#player-column, #mobile-mini-player, #mobile-player-toggle')) return;
+      toggleMobilePlayerPanel(false);
     });
     el['player-hide'].addEventListener('click', () => {
       document.body.classList.toggle('compact-player');
@@ -648,6 +818,8 @@
   }
   async function init() {
     initEvents();
+    updateSortDirectionButton();
+    await loadTalentRoster();
     try {
       const response = await fetch('data/songs.json', { cache: 'no-cache' });
       if (!response.ok) throw new Error('HTTP ' + response.status);
