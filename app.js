@@ -57,6 +57,13 @@
   const LATEST_MIX_PLAYLIST_KIND = 'latest-50-originals-covers';
   const LATEST_MIX_PLAYLIST_NAME = 'Latest 50 Originals & Covers';
 
+  const PLAYBACK_START_TIMEOUT_MS = 18000;
+  const PLAYBACK_BUFFER_TIMEOUT_MS = 35000;
+  const unavailableTrackIds = new Set();
+  let playbackAttemptToken = 0;
+  let playbackStartTimer = null;
+  let lastUnavailableNoticeAt = 0;
+
   const state = {
     songs: [], filtered: [], currentPage: 1, talents: [], artistPortraits: new Map(),
     selectedArtists: new Set(),
@@ -822,12 +829,110 @@
     applyFilters();
     showNotice('Created mixtape "' + clean + '".');
   }
+  function clearPlaybackStartWatchdog() {
+    if (playbackStartTimer !== null) window.clearTimeout(playbackStartTimer);
+    playbackStartTimer = null;
+  }
+
+  function findPlayableTrackAfter(failedId) {
+    const currentIndex = state.queue.indexOf(failedId);
+    if (state.shuffle) {
+      const candidates = state.queue.filter(id => id !== failedId && !unavailableTrackIds.has(id));
+      if (candidates.length) return candidates[Math.floor(Math.random() * candidates.length)];
+      return null;
+    }
+
+    for (let i = currentIndex + 1; i < state.queue.length; i += 1) {
+      if (!unavailableTrackIds.has(state.queue[i])) return state.queue[i];
+    }
+    if (state.repeat) {
+      for (let i = 0; i < Math.max(0, currentIndex); i += 1) {
+        if (!unavailableTrackIds.has(state.queue[i])) return state.queue[i];
+      }
+    }
+    return null;
+  }
+
+  function skipUnavailableTrack(reason) {
+    const failedId = state.currentId;
+    if (!failedId || unavailableTrackIds.has(failedId)) return;
+
+    unavailableTrackIds.add(failedId);
+    clearPlaybackStartWatchdog();
+    playbackAttemptToken += 1;
+
+    const nextId = findPlayableTrackAfter(failedId);
+    if (nextId) {
+      el['player-state'].textContent = 'Unavailable · skipping to next song…';
+      if (Date.now() - lastUnavailableNoticeAt > 6000) {
+        showNotice('A video is unavailable in the embedded player, so HoloTracks skipped to the next queued song.');
+        lastUnavailableNoticeAt = Date.now();
+      }
+      playSong(nextId);
+      return;
+    }
+
+    // Keep the queue visible so the listener can manually retry any skipped track.
+    if (state.playerReady && state.player) state.player.stopVideo();
+    state.currentId = null;
+    el['player-state'].textContent = state.queue.length
+      ? 'No playable songs remain · select a track to retry'
+      : 'Queue finished · add another song';
+    renderQueue();
+    renderPlayerMeta();
+    updatePlayerButtons();
+    showNotice('No playable songs remain in this queue. You can still select a track manually to retry it.');
+  }
+
+  function startPlaybackStartWatchdog(id) {
+    clearPlaybackStartWatchdog();
+    const token = ++playbackAttemptToken;
+    const startedAt = Date.now();
+
+    const inspectPlayer = () => {
+      playbackStartTimer = null;
+      if (token !== playbackAttemptToken || state.currentId !== id || !state.playerReady || !state.player) return;
+
+      let playerState;
+      try { playerState = state.player.getPlayerState(); }
+      catch { return; }
+
+      const playerStates = window.YT && window.YT.PlayerState;
+      if (playerStates &&
+          (playerState === playerStates.UNSTARTED || playerState === playerStates.CUED)) {
+        skipUnavailableTrack('start-timeout');
+        return;
+      }
+
+      if (playerStates && playerState === playerStates.BUFFERING) {
+        if (Date.now() - startedAt >= PLAYBACK_BUFFER_TIMEOUT_MS) {
+          skipUnavailableTrack('buffer-timeout');
+        } else {
+          playbackStartTimer = window.setTimeout(inspectPlayer, 10000);
+        }
+      }
+      // PLAYING/PAUSED/ENDED are expected states; their event handlers clear
+      // the watchdog. Unknown states are not enough evidence to skip a song.
+    };
+
+    playbackStartTimer = window.setTimeout(inspectPlayer, PLAYBACK_START_TIMEOUT_MS);
+  }
+
   function playSong(id, queue = null) {
     if (!songById(id)) return;
+    clearPlaybackStartWatchdog();
+    playbackAttemptToken += 1;
+
     if (queue) {
+      // Starting a new playlist is a new attempt; previously skipped IDs can be retried.
+      unavailableTrackIds.clear();
       state.queue = queue.map(item => typeof item === 'string' ? item : item.id).filter(value => songById(value));
-    } else if (!state.queue.includes(id)) {
-      state.queue = [id, ...state.queue.filter(value => value !== state.currentId)];
+    } else {
+      // Clicking a previously skipped track manually retries that one song.
+      unavailableTrackIds.delete(id);
+      if (!state.queue.includes(id)) {
+        state.queue = [id, ...state.queue.filter(value => value !== state.currentId)];
+      }
     }
     state.currentId = id;
     renderQueue();
@@ -835,6 +940,7 @@
     updatePlayerButtons();
     if (state.playerReady && state.player) {
       state.player.loadVideoById(id);
+      startPlaybackStartWatchdog(id);
     } else {
       state.pendingVideoId = id;
       loadYouTubeAPI();
@@ -857,21 +963,44 @@
     if (!state.queue.length) return;
     const currentIndex = state.queue.indexOf(state.currentId);
     if (state.shuffle) {
-      const candidates = state.queue.filter(id => id !== state.currentId);
-      if (candidates.length) playSong(candidates[Math.floor(Math.random() * candidates.length)]);
-      else if (state.repeat && state.currentId) playSong(state.currentId);
+      const candidates = state.queue.filter(id =>
+        id !== state.currentId && !unavailableTrackIds.has(id)
+      );
+      if (candidates.length) {
+        playSong(candidates[Math.floor(Math.random() * candidates.length)]);
+      } else if (state.repeat && state.currentId && !unavailableTrackIds.has(state.currentId)) {
+        playSong(state.currentId);
+      } else {
+        if (state.playerReady && state.player) state.player.pauseVideo();
+        el['player-state'].textContent = 'Queue finished · no playable songs left';
+        if (el['play-pause']) el['play-pause'].textContent = '▶';
+      }
       return;
     }
-    const nextIndex = currentIndex + 1;
-    if (nextIndex < state.queue.length) {
-      playSong(state.queue[nextIndex]);
-    } else if (state.repeat && state.queue.length) {
-      playSong(state.queue[0]);
-    } else {
-      if (state.playerReady && state.player) state.player.pauseVideo();
-      el['player-state'].textContent = 'Queue finished · add another song';
-      if (el['play-pause']) el['play-pause'].textContent = '▶';
+
+    for (let i = currentIndex + 1; i < state.queue.length; i += 1) {
+      if (!unavailableTrackIds.has(state.queue[i])) {
+        playSong(state.queue[i]);
+        return;
+      }
     }
+    if (state.repeat) {
+      for (let i = 0; i < Math.max(0, currentIndex); i += 1) {
+        if (!unavailableTrackIds.has(state.queue[i])) {
+          playSong(state.queue[i]);
+          return;
+        }
+      }
+      if (currentIndex >= 0 && !unavailableTrackIds.has(state.currentId)) {
+        playSong(state.currentId);
+        return;
+      }
+    }
+
+    clearPlaybackStartWatchdog();
+    if (state.playerReady && state.player) state.player.pauseVideo();
+    el['player-state'].textContent = 'Queue finished · add another song';
+    if (el['play-pause']) el['play-pause'].textContent = '▶';
   }
   function previousSong() {
     if (!state.queue.length) return;
@@ -982,23 +1111,40 @@
       events: {
         onReady: () => {
           state.playerReady = true;
-          if (state.pendingVideoId) state.player.loadVideoById(state.pendingVideoId);
+          if (state.pendingVideoId) {
+            const pendingId = state.pendingVideoId;
+            state.player.loadVideoById(pendingId);
+            state.pendingVideoId = null;
+            startPlaybackStartWatchdog(pendingId);
+          }
           updatePlayerButtons();
         },
         onStateChange: event => {
           if (event.data === window.YT.PlayerState.ENDED) {
+            clearPlaybackStartWatchdog();
             // "Repeat queue" loops the whole queue, not just the current track.
             nextSong();
           } else if (event.data === window.YT.PlayerState.PLAYING) {
+            clearPlaybackStartWatchdog();
             el['player-state'].textContent = 'Playing on YouTube';
           } else if (event.data === window.YT.PlayerState.PAUSED) {
+            clearPlaybackStartWatchdog();
             el['player-state'].textContent = 'Paused';
           } else if (event.data === window.YT.PlayerState.BUFFERING) {
             el['player-state'].textContent = 'Loading your song…';
           }
           updatePlayerButtons();
         },
-        onError: () => {
+        onError: event => {
+          const code = Number(event?.data);
+          // YouTube uses 100 for private/deleted videos and 101/150 when the
+          // owner disallows embedding. These can't play here, so skip them.
+          if ([2, 5, 100, 101, 150].includes(code)) {
+            skipUnavailableTrack('youtube-error-' + code);
+            return;
+          }
+          clearPlaybackStartWatchdog();
+          playbackAttemptToken += 1;
           el['player-state'].textContent = 'Video unavailable';
           showNotice('This video cannot play in the embedded player. Try "Watch on YouTube".');
           updatePlayerButtons();
