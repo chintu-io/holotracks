@@ -1631,3 +1631,66 @@ button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid 
 @media(prefers-reduced-motion:reduce){
   .pagination-button{transition:none}
 }
+
+
+/* Full-height visual talent browser, launched from the global search. */
+.talent-picker-toggle{flex:none;display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:34px;padding:7px 9px;border:1px solid #514875;border-radius:9px;background:linear-gradient(135deg,#282044,#192d42);color:#ded8ff;font-size:11px;font-weight:900;white-space:nowrap;transition:border-color .15s,background .15s}
+.talent-picker-toggle>span:first-child{color:#8ee9ff;font-size:15px}
+.talent-picker-toggle b{display:inline-flex;align-items:center;justify-content:center;min-width:18px;padding:2px 5px;border-radius:6px;background:#373153;color:#d5c4ff;font:10px 'DM Mono',monospace}
+.talent-picker-toggle:hover,.talent-picker-toggle.has-selection{border-color:#ad8cff;background:linear-gradient(135deg,#342450,#1e3a50);color:#fff}
+.talent-picker-toggle.has-selection b{background:#ff74c8;color:#27152e}
+.browse-all-talents{flex:none;display:inline-flex;align-items:center;gap:7px;padding:8px 11px;border:1px solid #45416b;border-radius:10px;background:#191a34;color:#d5c9ff;font-size:11px;font-weight:900}
+.browse-all-talents:hover{border-color:#a18aff;background:#282144;color:#fff}
+.browse-all-talents span{color:var(--cyan);font-size:15px}
+.talent-picker-dialog{width:min(1000px,calc(100vw - 28px));max-width:none;max-height:calc(100dvh - 28px);padding:0;border:1px solid #4b4a78;border-radius:20px;background:linear-gradient(155deg,#191a36,#101122 82%);color:var(--text);box-shadow:0 28px 100px #000c;overflow:hidden}
+.talent-picker-dialog::backdrop{background:#050611bf;backdrop-filter:blur(7px)}
+.talent-picker-shell{display:flex;flex-direction:column;gap:12px;height:min(84vh,820px);height:min(84dvh,820px);max-height:calc(100dvh - 30px);padding:22px}
+.talent-picker-head{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;flex:none}
+.talent-picker-head h2{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin:4px 0;font-size:23px;line-height:1.25;font-weight:900}
+.talent-picker-head p{margin:0;color:#a7accd;font-size:12px}
+.talent-picker-close{flex:none;width:38px;height:38px;display:grid;place-items:center;border:1px solid #3e3e62;border-radius:11px;background:#20213b;color:#d9d8f2;font-size:24px;line-height:1}
+.talent-picker-close:hover{border-color:#ff8acb;color:#fff}
+.talent-picker-search{flex:none;height:48px;margin:0;padding:0 13px;border-radius:12px}
+.talent-picker-search>span{font-size:23px}
+.talent-picker-search input{font-size:14px}
+.talent-picker-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex:none}
+#talent-picker-selected{color:#a9aed1;font-size:11px;font-weight:800}
+.talent-picker-dialog .clear-filters{width:auto;flex:none;margin:0;padding:7px 10px;font-size:10px}
+.talent-picker-dialog .clear-filters span{font-size:13px}
+.talent-picker-dialog .artist-filters{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));align-content:start;gap:10px;flex:1 1 auto;min-height:170px;overflow-y:auto;overflow-x:hidden;padding:4px 5px 12px;scrollbar-width:thin;scrollbar-color:#555582 transparent}
+.talent-picker-dialog .artist-check{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:6px;min-width:0;min-height:145px;padding:12px 7px 9px;border:1px solid #303153;border-radius:13px;background:linear-gradient(155deg,#20213f,#15162b 78%);color:#d7d8f0;text-align:center;transition:border-color .14s,background .14s,transform .14s}
+.talent-picker-dialog .artist-check:hover{border-color:#7772ac;background:linear-gradient(155deg,#2b2a50,#191a32);transform:translateY(-2px)}
+.talent-picker-dialog .artist-check:has(input:checked){border-color:#ff8bce;background:linear-gradient(155deg,#432645,#22203f);box-shadow:inset 0 0 0 1px #ff74c84a}
+.talent-picker-dialog .artist-check input{position:absolute;z-index:3;top:8px;left:8px;width:17px;height:17px;margin:0;accent-color:var(--pink);cursor:pointer}
+.talent-picker-dialog .artist-check .artist-avatar{display:block;width:76px;height:84px;flex:none;object-fit:contain;object-position:center bottom;border:1px solid #ffffff16;border-radius:11px 11px 5px 5px;background:radial-gradient(ellipse at 50% 35%,#48416f 0%,#252342 62%,#17172d 100%)}
+.talent-picker-dialog .artist-check .artist-avatar-fallback{display:grid;place-items:center;color:#bca7ff;font-size:26px}
+.talent-picker-dialog .artist-check .artist-name{display:block;width:100%;min-height:32px;overflow:hidden;text-overflow:ellipsis;white-space:normal;overflow-wrap:anywhere;color:#f1efff;font-size:11px;font-weight:900;line-height:1.35}
+.talent-picker-dialog .artist-check small{margin:0;color:#9fa4ca;font:10px 'DM Mono',monospace}
+.talent-picker-dialog .filter-empty{grid-column:1/-1;padding:20px;text-align:center}
+.talent-picker-dialog .show-all{display:none!important}
+.talent-picker-footer{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-top:11px;border-top:1px solid #303150;flex:none}
+.talent-picker-footer>span{color:#8f94b8;font-size:10px;line-height:1.4}
+.talent-picker-done{flex:none;min-width:95px;padding:10px 17px;border:1px solid #85dff0;border-radius:10px;background:linear-gradient(120deg,#237b9b,#6859ad);color:#fff;font-size:12px;font-weight:900}
+.talent-picker-done:hover{filter:brightness(1.13)}
+@media(max-width:970px) and (min-width:681px){.global-search{gap:6px;padding-inline:9px}.global-search .search-icon{display:none}.talent-picker-toggle{gap:4px;padding:6px 7px;font-size:10px}.talent-picker-toggle b{min-width:17px;font-size:9px}}
+@media(max-width:680px){
+  .talent-picker-toggle{min-height:31px;padding:5px 7px;gap:4px;border-radius:8px;font-size:10px}
+  .talent-picker-toggle>span:first-child{font-size:14px}.talent-picker-toggle b{min-width:16px;padding:2px 4px;font-size:9px}
+  .global-search{gap:6px}.global-search input{min-width:0}.browse-all-talents{padding:7px 8px;font-size:10px}
+  .talent-picker-dialog{width:calc(100vw - 16px);max-height:calc(100dvh - 16px);border-radius:16px}
+  .talent-picker-shell{height:calc(100dvh - 18px);max-height:calc(100dvh - 18px);gap:9px;padding:12px}
+  .talent-picker-head h2{font-size:19px}.talent-picker-head p{font-size:10px;line-height:1.4;max-width:260px}
+  .talent-picker-close{width:33px;height:33px}.talent-picker-search{height:42px;padding:0 10px}.talent-picker-search input{font-size:12px}
+  .talent-picker-toolbar{gap:7px}#talent-picker-selected{font-size:9px;line-height:1.4}
+  .talent-picker-dialog .clear-filters{padding:6px 7px;font-size:9px;white-space:nowrap}
+  .talent-picker-dialog .artist-filters{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;min-height:120px;padding:3px 2px 9px}
+  .talent-picker-dialog .artist-check{gap:5px;min-height:123px;padding:8px 5px 7px;border-radius:11px}
+  .talent-picker-dialog .artist-check input{top:6px;left:6px;width:16px;height:16px}
+  .talent-picker-dialog .artist-check .artist-avatar{width:61px;height:68px;border-radius:9px 9px 4px 4px}
+  .talent-picker-dialog .artist-check .artist-name{font-size:10px;min-height:28px}.talent-picker-dialog .artist-check small{font-size:9px}
+  .talent-picker-footer{gap:8px;padding-top:8px}.talent-picker-footer>span{font-size:9px;max-width:68%}
+  .talent-picker-done{min-width:70px;padding:8px 12px;font-size:11px}
+  .talent-section .section-heading{align-items:center}.talent-strip{gap:6px}.talent-card{flex-basis:67px}
+}
+@media(max-width:390px){.talent-picker-toggle>span:nth-child(2){display:none}.talent-picker-toggle b{padding:2px 4px}.talent-picker-dialog .artist-filters{grid-template-columns:repeat(2,minmax(0,1fr))}.talent-picker-dialog .artist-check{min-height:135px}.talent-picker-dialog .artist-check .artist-avatar{width:72px;height:78px}}
+@media(prefers-reduced-motion:reduce){.talent-picker-toggle,.browse-all-talents,.talent-picker-dialog .artist-check{transition:none}}
