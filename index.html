@@ -9,8 +9,8 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://hololive.hololivepro.com" crossorigin>
   <link rel="preconnect" href="https://i.ytimg.com" crossorigin>
-  <link rel="stylesheet" href="styles.css?v=20261012-queue-numbers-1">
-  <script defer src="app.js?v=20261012-queue-numbers-1"></script>
+  <link rel="stylesheet" href="styles.css?v=20261012-selected-artist-chips-1">
+  <script defer src="app.js?v=20261012-selected-artist-chips-1"></script>
 </head>
 <body>
   <a class="skip-link" href="#catalogue">Skip to music library</a>
@@ -164,6 +164,7 @@
           <button class="music-type-button" type="button" data-song-type="original" aria-pressed="false">Originals <span id="type-original-count">—</span></button>
           <button class="music-type-button" type="button" data-song-type="cover" aria-pressed="false">Covers <span id="type-cover-count">—</span></button>
         </div>
+        <div id="selected-artist-filters" class="selected-artist-filters" aria-label="Selected artist filters" aria-live="polite" hidden></div>
         <div id="notice" class="notice" role="status" hidden></div>
         <div id="song-list" class="song-grid" aria-live="polite" aria-busy="true"></div>
         <div id="empty-state" class="empty-state" hidden><div class="empty-note">♫</div><h3 id="empty-title">No songs found</h3><p id="empty-copy">Try another search or clear some filters.</p><button id="empty-reset" class="soft-action" type="button">Reset filters</button></div>
