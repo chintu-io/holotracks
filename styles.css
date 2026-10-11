@@ -1538,3 +1538,13 @@ button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid 
 @media(prefers-reduced-motion:reduce){
   .global-search-button{transition:none}
 }
+
+
+/* Search results: land at the library heading, below sticky navigation. */
+#music-library{scroll-margin-top:100px}
+@media(max-width:680px){
+  #music-library{scroll-margin-top:174px}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+}
