@@ -3031,3 +3031,101 @@ button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid 
   .talent-picker-dialog .artist-check{grid-template-columns:17px 38px minmax(0,1fr) auto!important;gap:5px!important}
   .talent-picker-dialog .artist-check .artist-avatar-frame{width:38px!important;height:38px!important}
 }
+
+
+/* Final mobile heading fix: keep the title and Browse button in one stable row. */
+@media(max-width:680px){
+  .talent-section{
+    width:100%!important;
+    max-width:100%!important;
+    min-width:0!important;
+  }
+  .talent-section .section-heading{
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr) auto!important;
+    grid-template-areas:"intro action"!important;
+    align-items:center!important;
+    justify-content:initial!important;
+    gap:9px!important;
+    width:100%!important;
+    min-width:0!important;
+    margin-bottom:9px!important;
+  }
+  .talent-section .section-heading>div:first-child{
+    grid-area:intro!important;
+    display:flex!important;
+    flex-direction:column!important;
+    align-items:flex-start!important;
+    width:auto!important;
+    min-width:0!important;
+    max-width:none!important;
+    flex:initial!important;
+  }
+  .talent-section .section-heading .section-kicker{
+    display:block!important;
+    width:100%!important;
+    margin:0 0 4px!important;
+    font-size:8px!important;
+    letter-spacing:.75px!important;
+    line-height:1.35!important;
+    white-space:nowrap!important;
+    overflow:visible!important;
+  }
+  .talent-section .section-heading h2{
+    display:block!important;
+    width:100%!important;
+    max-width:none!important;
+    margin:0!important;
+    font-size:clamp(16px,4.7vw,19px)!important;
+    line-height:1.25!important;
+    letter-spacing:-.35px!important;
+    overflow-wrap:normal!important;
+    word-break:normal!important;
+  }
+  .talent-section .section-heading p{display:none!important}
+  .talent-section .section-heading .talent-section-actions{
+    grid-area:action!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:flex-end!important;
+    width:auto!important;
+    max-width:none!important;
+    min-width:0!important;
+    margin:0!important;
+    padding:0!important;
+    flex:initial!important;
+    flex-wrap:nowrap!important;
+    gap:0!important;
+  }
+  .talent-section .section-heading .browse-talents-button{
+    display:inline-flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    gap:5px!important;
+    width:auto!important;
+    max-width:none!important;
+    min-width:0!important;
+    min-height:36px!important;
+    height:auto!important;
+    padding:8px 9px!important;
+    border-radius:10px!important;
+    font-size:10px!important;
+    line-height:1.2!important;
+    white-space:nowrap!important;
+    text-align:center!important;
+  }
+  .talent-section .section-heading .browse-talents-button span{
+    flex:none!important;
+    font-size:13px!important;
+  }
+}
+@media(max-width:390px){
+  .talent-section .section-heading{gap:7px!important}
+  .talent-section .section-heading h2{font-size:16px!important}
+  .talent-section .section-heading .section-kicker{font-size:7px!important;letter-spacing:.55px!important}
+  .talent-section .section-heading .browse-talents-button{
+    padding:7px 7px!important;
+    font-size:9px!important;
+    gap:4px!important;
+  }
+}
