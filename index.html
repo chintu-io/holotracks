@@ -4,13 +4,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#101025">
-  <meta name="description" content="Discover Hololive original songs. Browse talents, build queues and play official YouTube music videos in HoloTracks.">
+  <meta name="description" content="Discover Hololive original songs and covers. Browse talents, build queues and play official YouTube music videos in HoloTracks.">
   <title>HoloTracks — Hololive Music Universe</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://hololive.hololivepro.com" crossorigin>
   <link rel="preconnect" href="https://i.ytimg.com" crossorigin>
-  <link rel="stylesheet" href="styles.css?v=20261011-bannerfit">
-  <script defer src="app.js?v=20261011-bannerfit"></script>
+  <link rel="stylesheet" href="styles.css?v=20261011-coverstage">
+  <script defer src="app.js?v=20261011-coverstage"></script>
 </head>
 <body>
   <a class="skip-link" href="#catalogue">Skip to music library</a>
@@ -95,8 +95,7 @@
         <div id="hero-talent-art" class="hero-stage" aria-label="Random Hololive talent artwork">
           <div class="stage-ring ring-a"></div><div class="stage-ring ring-b"></div><div class="stage-ring ring-c"></div>
           <div class="stage-spark sparkle-a">✦</div><div class="stage-spark sparkle-b">✧</div><div class="stage-spark sparkle-c">♫</div>
-          <div class="stage-chip"><i></i> ORIGINAL SONGS • YOUTUBE VIDEOS</div>
-          <div class="stage-caption"><span class="caption-note">♫</span><span><strong>Press play. Find your next fave.</strong><small>Official videos · Your own queue</small></span></div>
+          <div class="stage-chip"><i></i> ORIGINALS &amp; COVERS • YOUTUBE VIDEOS</div>
         </div>
         <div class="hero-footer"><span>✦</span> Made for the songs that stay with you <span>✦</span></div>
       </section>
@@ -133,8 +132,13 @@
 
       <section class="library-section" aria-label="Browse songs">
         <div class="library-top">
-          <div><span class="section-kicker">THE MUSIC LIBRARY</span><h2><span id="catalogue-title-text">All original songs</span> <span id="results-count" class="result-count">—</span></h2><p id="results-caption">Explore original music across the Hololive universe.</p></div>
+          <div><span class="section-kicker">THE MUSIC LIBRARY</span><h2><span id="catalogue-title-text">All music</span> <span id="results-count" class="result-count">—</span></h2><p id="results-caption">Original songs and fan-performed covers from across the Hololive universe.</p></div>
           <div class="library-controls"><label class="sort-control"><span>Sort by</span><select id="sort-select" aria-label="Sort songs"><option value="newest">Newest release</option><option value="oldest">Oldest release</option><option value="title">Title A–Z</option><option value="popular">Most viewed</option></select></label><button id="play-all" class="play-all-button" type="button"><span>▶</span> Play all</button></div>
+        </div>
+        <div class="music-type-filter" role="group" aria-label="Filter catalogue by music type">
+          <button class="music-type-button active" type="button" data-song-type="all" aria-pressed="true">All music <span id="type-all-count">—</span></button>
+          <button class="music-type-button" type="button" data-song-type="original" aria-pressed="false">Originals <span id="type-original-count">—</span></button>
+          <button class="music-type-button" type="button" data-song-type="cover" aria-pressed="false">Covers <span id="type-cover-count">—</span></button>
         </div>
         <div id="notice" class="notice" role="status" hidden></div>
         <div id="song-list" class="song-grid" aria-live="polite" aria-busy="true"></div>
