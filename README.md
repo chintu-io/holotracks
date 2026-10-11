@@ -12,7 +12,9 @@ A searchable, fan-made Hololive original-song library with a dark, colourful sta
 - Official YouTube embedded playback, queue controls, previous/next, shuffle, and repeat.
 - Favourites and named playlists saved in the browser's local storage.
 - Daily incremental catalogue updates, weekly full reconciliation, API retry/backoff, and tests.
-- Responsive dark-neon music UI with a browsable rail of official Hololive talent illustrations; the page uses the artwork in-context and does not divert listeners to a talent directory.
+- Responsive dark-neon music UI with a talent rail sourced from the official roster, plus a shuffled three-talent hero that cycles through members over successive visits.
+- Persistent mobile mini-player with one-tap playback/next controls and an expandable player/queue sheet.
+- Explicit ascending/descending sort control for release dates, titles, and view counts.
 
 ## Catalogue update design
 
