@@ -9,8 +9,8 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://hololive.hololivepro.com" crossorigin>
   <link rel="preconnect" href="https://i.ytimg.com" crossorigin>
-  <link rel="stylesheet" href="styles.css?v=20261011-polish">
-  <script defer src="app.js?v=20261011-polish"></script>
+  <link rel="stylesheet" href="styles.css?v=20261011-bannerfocus">
+  <script defer src="app.js?v=20261011-bannerfocus"></script>
 </head>
 <body>
   <a class="skip-link" href="#catalogue">Skip to music library</a>
@@ -52,8 +52,7 @@
       <div class="sidebar-topline"><span class="sidebar-orb">✦</span><span class="sidebar-brand-copy"><strong>Your music lounge</strong><small>Pick a vibe. Find a voice.</small></span><button id="sidebar-collapse" class="sidebar-collapse" type="button" aria-label="Collapse sidebar" aria-pressed="false" title="Collapse sidebar">‹</button></div>
       <nav class="main-nav" aria-label="Library views">
         <button class="nav-item active" data-view="all" type="button"><span class="nav-symbol">▦</span><span>All songs</span><span id="nav-total" class="nav-count">—</span></button>
-        <button class="nav-item" data-view="fresh" type="button"><span class="nav-symbol">✧</span><span>Fresh releases</span><span class="nav-pill">NEW</span></button>
-        <button class="nav-item" data-view="favorites" type="button"><span class="nav-symbol">♥</span><span>My favourites</span><span id="fav-total" class="nav-count">0</span></button>
+                <button class="nav-item" data-view="favorites" type="button"><span class="nav-symbol">♥</span><span>My favourites</span><span id="fav-total" class="nav-count">0</span></button>
       </nav>
 
       <div class="sidebar-rule"><span>ARTIST FILTERS</span><i></i></div>
@@ -85,10 +84,6 @@
           <div class="hero-eyebrow"><span class="hero-eyebrow-dot"></span> YOUR HOLOLIVE SOUNDTRACK STARTS HERE</div>
           <h1>A universe<br>of <span>voices.</span><br><em>One playlist.</em></h1>
           <p>From iconic originals to the songs you haven't found yet. Explore the music, choose your talents, and keep your next favourite playing.</p>
-          <div class="hero-actions">
-            <button id="hero-fresh" class="hero-primary" type="button"><span>Browse all songs</span><i>↗</i></button>
-            <button id="show-newest" class="hero-secondary" type="button"><span class="secondary-play">▶</span> Fresh releases</button>
-          </div>
           <div class="hero-stats">
             <div><strong id="hero-song-count">—</strong><span>SONGS TO DISCOVER</span></div>
             <i></i>
@@ -132,7 +127,7 @@
       </section>
 
       <section class="quick-discovery" aria-label="Music discovery shortcuts">
-        <button class="discovery-card discovery-fresh" id="show-fresh-card" type="button" data-view="fresh"><span class="discovery-symbol">✧</span><span><strong>Fresh drops</strong><small>The latest music added to the scene</small></span><i>↗</i></button>
+        <button class="discovery-card discovery-fresh" id="show-fresh-card" type="button" data-view="fresh"><span class="discovery-symbol">✧</span><span><strong>Fresh releases</strong><small>The latest music added to the scene</small></span><i>↗</i></button>
         <button class="discovery-card discovery-random" id="play-random" type="button"><span class="discovery-symbol">🎲</span><span><strong>Surprise me</strong><small>Let the next song choose you</small></span><i>↗</i></button>
       </section>
 

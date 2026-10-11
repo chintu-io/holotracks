@@ -34,7 +34,7 @@
     'clear-filters','nav-total','fav-total','hero-song-count','hero-artist-count','hero-updated',
     'source-status','catalogue-title-text','results-count','results-caption','sort-select',
     'song-list','empty-state','empty-title','empty-copy','empty-reset','load-more','notice',
-    'play-all','play-random','show-newest','hero-fresh','favorites-shortcut','mobile-filter-toggle',
+    'play-all','play-random','favorites-shortcut','mobile-filter-toggle',
     'mobile-player-toggle','sidebar','player-column','player-hide','youtube-player','youtube-fallback',
     'playing-thumb','playing-art-placeholder','playing-title','playing-artist','playing-favorite',
     'player-state','watch-youtube','play-pause','previous-song','next-song','queue-shuffle',
@@ -747,8 +747,6 @@
     el['play-all'].addEventListener('click', () => {
       if (state.filtered.length) playSong(state.filtered[0].id, state.filtered.map(item => item.id));
     });
-    el['show-newest'].addEventListener('click', activateFreshReleases);
-    el['hero-fresh'].addEventListener('click', activateAllSongs);
     el['play-random'].addEventListener('click', () => {
       if (state.filtered.length) playSong(state.filtered[Math.floor(Math.random() * state.filtered.length)].id);
     });
