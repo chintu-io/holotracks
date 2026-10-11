@@ -14,7 +14,7 @@ A searchable, fan-made Hololive original-song library with a dark, colourful sta
 - Daily incremental catalogue updates, weekly full reconciliation, API retry/backoff, and tests.
 - Responsive dark-neon music UI with a talent rail sourced from the official roster, plus a shuffled three-talent hero that cycles through members over successive visits.
 - Persistent mobile mini-player with one-tap playback/next controls and an expandable player/queue sheet.
-- Explicit ascending/descending sort control for release dates, titles, and view counts.
+- A collapsible desktop navigation rail that gives the music catalogue and video player more room.
 
 ## Catalogue update design
 

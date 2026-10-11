@@ -26,6 +26,7 @@
     shuffle: 'holotracks:shuffle:v1',
     repeat: 'holotracks:repeat:v1',
     bannerDeck: 'holotracks:banner-deck:v1',
+    sidebarCollapsed: 'holotracks:sidebar-collapsed:v1',
     lastBanner: 'holotracks:banner-last:v1',
   };
   const ids = [
@@ -39,7 +40,7 @@
     'player-state','watch-youtube','play-pause','previous-song','next-song','queue-shuffle',
     'queue-repeat','queue-count','queue-list','clear-queue','create-playlist','playlist-list',
     'playlist-select','save-queue','play-selected-playlist','playlist-dialog','playlist-form',
-    'playlist-name','talent-strip','sort-direction','mobile-mini-player','mobile-mini-thumb','mobile-mini-expand','mobile-mini-title','mobile-mini-artist','mobile-mini-toggle','mobile-mini-next','hero-talent-art',
+    'playlist-name','talent-strip','sidebar-collapse','mobile-mini-player','mobile-mini-thumb','mobile-mini-expand','mobile-mini-title','mobile-mini-artist','mobile-mini-toggle','mobile-mini-next','hero-talent-art',
   ];
   const el = Object.fromEntries(ids.map(id => [id, document.getElementById(id)]));
   const readJSON = (key, fallback) => {
@@ -50,7 +51,7 @@
     catch { showNotice('Browser storage is unavailable; the latest changes may not persist.'); }
   };
   const state = {
-    songs: [], filtered: [], visibleCount: PAGE_SIZE, talents: [], sortDirection: 'desc',
+    songs: [], filtered: [], visibleCount: PAGE_SIZE, talents: [], artistPortraits: new Map(),
     selectedArtists: new Set(),
     query: '', artistQuery: '',
     view: 'all',
@@ -129,7 +130,7 @@
     return result;
   }
   function pickBannerTalents() {
-    const roster = state.talents.filter(item => item.slug && safeTalentImage(item.image));
+    const roster = state.talents.filter(item => item.slug && safeTalentImage(item.bannerImage || item.image));
     if (roster.length <= 3) return roster.slice(0, 3);
     const bySlug = new Map(roster.map(item => [item.slug, item]));
     let deck = readJSON(KEYS.bannerDeck, []);
@@ -165,7 +166,7 @@
     talents.forEach((talent, index) => {
       const image = document.createElement('img');
       image.className = 'stage-talent stage-' + slots[index];
-      image.src = safeTalentImage(talent.image);
+      image.src = safeTalentImage(talent.bannerImage) || safeTalentImage(ARTIST_IMAGES[talent.name]) || safeTalentImage(talent.image);
       image.alt = talent.name;
       image.loading = 'eager';
       image.decoding = 'async';
@@ -211,49 +212,107 @@
 
   function sortSongs(items) {
     const mode = el['sort-select'].value;
-    const descending = state.sortDirection === 'desc';
     const list = [...items];
     list.sort((a, b) => {
-      if (mode === 'title') return descending
-        ? titleOf(b).localeCompare(titleOf(a))
-        : titleOf(a).localeCompare(titleOf(b));
-      if (mode === 'popular') return descending
-        ? (Number(b.viewCount) || -1) - (Number(a.viewCount) || -1)
-        : (Number(a.viewCount) || -1) - (Number(b.viewCount) || -1);
-      return descending ? dateValue(b) - dateValue(a) : dateValue(a) - dateValue(b);
+      if (mode === 'oldest') return dateValue(a) - dateValue(b);
+      if (mode === 'title') return titleOf(a).localeCompare(titleOf(b));
+      if (mode === 'popular') return (Number(b.viewCount) || -1) - (Number(a.viewCount) || -1);
+      return dateValue(b) - dateValue(a);
     });
     return list;
-  }
-
-  function updateSortDirectionButton() {
-    const mode = el['sort-select'].value;
-    const descending = state.sortDirection === 'desc';
-    el['sort-direction'].textContent = descending ? '↓' : '↑';
-    const label = mode === 'title'
-      ? (descending ? 'Z to A' : 'A to Z')
-      : mode === 'popular'
-        ? (descending ? 'Most viewed first' : 'Fewest views first')
-        : (descending ? 'Newest first' : 'Oldest first');
-    el['sort-direction'].title = label;
-    el['sort-direction'].setAttribute('aria-label', 'Sort order: ' + label + '. Activate to reverse.');
-    el['sort-direction'].dataset.direction = state.sortDirection;
   }
   function isRecent(item) {
     const date = dateValue(item);
     return date > 0 && date >= Date.now() - FRESH_WINDOW_DAYS * 86400000;
   }
+
+  function artistKey(value) {
+    return normalized(value).replace(/[^\p{L}\p{N}]/gu, '');
+  }
+  const ARTIST_ALIASES = {
+    suisei: 'Hoshimachi Suisei', miko: 'Sakura Miko', marine: 'Houshou Marine',
+    calliope: 'Mori Calliope', fubuki: 'Shirakami Fubuki', pekora: 'Usada Pekora',
+    korone: 'Inugami Korone', okayu: 'Nekomata Okayu', mio: 'Ookami Mio',
+    flare: 'Shiranui Flare', kiara: 'Takanashi Kiara', sora: 'Tokino Sora',
+    ayame: 'Nakiri Ayame', towa: 'Tokoyami Towa', kanata: 'Amane Kanata',
+    aqua: 'Minato Aqua', shion: 'Murasaki Shion', gura: 'Gawr Gura',
+    fauna: 'Ceres Fauna', mumei: 'Nanashi Mumei', ame: 'Watson Amelia',
+    chloe: 'Sakamata Chloe', sana: 'Tsukumo Sana',
+  };
+  function setSidebarCollapsed(collapsed, persist = true) {
+    document.body.classList.toggle('sidebar-collapsed', !!collapsed);
+    el['sidebar-collapse'].textContent = collapsed ? '›' : '‹';
+    el['sidebar-collapse'].title = collapsed ? 'Expand sidebar' : 'Collapse sidebar';
+    el['sidebar-collapse'].setAttribute('aria-label', collapsed ? 'Expand sidebar' : 'Collapse sidebar');
+    el['sidebar-collapse'].setAttribute('aria-pressed', String(!!collapsed));
+    if (persist) saveJSON(KEYS.sidebarCollapsed, !!collapsed);
+  }
+  function resolveRosterPortrait(name) {
+    if (ARTIST_IMAGES[name] && safeTalentImage(ARTIST_IMAGES[name])) return ARTIST_IMAGES[name];
+    const target = artistKey(name);
+    if (!target) return '';
+    const alias = ARTIST_ALIASES[target];
+    if (alias && ARTIST_IMAGES[alias]) return ARTIST_IMAGES[alias];
+    const exact = state.talents.find(talent => artistKey(talent.name) === target);
+    if (exact) return exact.image;
+    if (target.length >= 5) {
+      const close = state.talents
+        .filter(talent => {
+          const candidate = artistKey(talent.name);
+          return candidate.length >= 5 && (candidate.includes(target) || target.includes(candidate));
+        })
+        .sort((a,b) => Math.abs(artistKey(a.name).length-target.length)-Math.abs(artistKey(b.name).length-target.length))[0];
+      if (close) return close.image;
+    }
+    return '';
+  }
+  function buildArtistPortraitMap(artists) {
+    const roster = state.talents.filter(talent => safeTalentImage(talent.image));
+    const related = new Map();
+    for (const song of state.songs) {
+      const credits = [...new Set(artistsOf(song))];
+      const creditedPortraits = credits.map(name => ({ name, image: resolveRosterPortrait(name) })).filter(item => item.image);
+      for (const name of credits) {
+        if (!artists.includes(name) || resolveRosterPortrait(name)) continue;
+        const bag = related.get(name) || new Map();
+        for (const item of creditedPortraits) {
+          if (item.name === name) continue;
+          bag.set(item.image, (bag.get(item.image) || 0) + 1);
+        }
+        related.set(name, bag);
+      }
+    }
+    const fallbackPool = roster.length ? roster : Object.entries(ARTIST_IMAGES).map(([name,image])=>({name,image}));
+    const stableHash = value => {
+      let hash = 2166136261;
+      for (const character of value) hash = Math.imul(hash ^ character.charCodeAt(0), 16777619);
+      return hash >>> 0;
+    };
+    const result = new Map();
+    for (const name of artists) {
+      let image = resolveRosterPortrait(name);
+      if (!image) {
+        const choices = [...(related.get(name) || new Map()).entries()].sort((a,b)=>b[1]-a[1]);
+        image = choices[0]?.[0] || fallbackPool[stableHash(artistKey(name)) % fallbackPool.length]?.image || '';
+      }
+      result.set(name, image);
+    }
+    state.artistPortraits = result;
+  }
+
   function renderArtists() {
     const counts = new Map();
     for (const item of state.songs) {
       for (const artist of artistsOf(item)) counts.set(artist, (counts.get(artist) || 0) + 1);
     }
+    if (!state.artistPortraits.size && state.songs.length) buildArtistPortraitMap([...counts.keys()]);
     const query = state.artistQuery.toLocaleLowerCase();
     const rows = [...counts.entries()]
       .sort((a, b) => a[0].localeCompare(b[0]))
       .filter(([artist]) => artist.toLocaleLowerCase().includes(query));
     el['artist-count'].textContent = counts.size;
     el['artist-filters'].innerHTML = rows.map(([artist, count]) => {
-      const portrait = ARTIST_IMAGES[artist];
+      const portrait = state.artistPortraits.get(artist) || resolveRosterPortrait(artist) || ARTIST_IMAGES[artist];
       const portraitMarkup = portrait
         ? '<img class="artist-avatar" src="' + portrait + '" alt="" loading="lazy" onerror="this.style.display=\'none\'">'
         : '';
@@ -579,9 +638,7 @@
     state.query = '';
     el['search-input'].value = '';
     el['artist-search'].value = '';
-    el['sort-select'].value = 'date';
-    state.sortDirection = 'desc';
-    updateSortDirectionButton();
+    el['sort-select'].value = 'newest';
     renderArtists();
     renderPlaylists();
     applyFilters();
@@ -598,9 +655,7 @@
     state.activePlaylist = null;
     el['search-input'].value = '';
     el['artist-search'].value = '';
-    el['sort-select'].value = 'date';
-    state.sortDirection = 'desc';
-    updateSortDirectionButton();
+    el['sort-select'].value = 'newest';
     renderArtists();
     renderPlaylists();
     applyFilters();
@@ -614,9 +669,7 @@
     state.activePlaylist = null;
     el['search-input'].value = '';
     el['artist-search'].value = '';
-    el['sort-select'].value = 'date';
-    state.sortDirection = 'desc';
-    updateSortDirectionButton();
+    el['sort-select'].value = 'newest';
     renderArtists();
     renderPlaylists();
     applyFilters();
@@ -668,16 +721,7 @@
         document.body.classList.remove('filters-open');
       }
     });
-    el['sort-select'].addEventListener('change', () => {
-      state.sortDirection = el['sort-select'].value === 'title' ? 'asc' : 'desc';
-      updateSortDirectionButton();
-      applyFilters();
-    });
-    el['sort-direction'].addEventListener('click', () => {
-      state.sortDirection = state.sortDirection === 'desc' ? 'asc' : 'desc';
-      updateSortDirectionButton();
-      applyFilters();
-    });
+    el['sort-select'].addEventListener('change', applyFilters);
     el['clear-filters'].addEventListener('click', resetFilters);
     el['empty-reset'].addEventListener('click', resetFilters);
     el['show-all-artists'].addEventListener('click', () => {
@@ -806,6 +850,9 @@
       if (event.target.closest('#player-column, #mobile-mini-player, #mobile-player-toggle')) return;
       toggleMobilePlayerPanel(false);
     });
+    el['sidebar-collapse'].addEventListener('click', () => {
+      setSidebarCollapsed(!document.body.classList.contains('sidebar-collapsed'));
+    });
     el['player-hide'].addEventListener('click', () => {
       document.body.classList.toggle('compact-player');
     });
@@ -818,7 +865,7 @@
   }
   async function init() {
     initEvents();
-    updateSortDirectionButton();
+    setSidebarCollapsed(!!readJSON(KEYS.sidebarCollapsed, false), false);
     await loadTalentRoster();
     try {
       const response = await fetch('data/songs.json', { cache: 'no-cache' });
@@ -826,6 +873,7 @@
       const data = await response.json();
       if (!Array.isArray(data.songs)) throw new Error('Catalogue schema is invalid');
       state.songs = data.songs.filter(item => item && typeof item.id === 'string' && item.id.trim());
+      state.artistPortraits = new Map();
       el['source-status'].textContent = state.songs.length
         ? 'Catalogue ready · ' + state.songs.length.toLocaleString() + ' songs'
         : 'Waiting for first catalogue sync';

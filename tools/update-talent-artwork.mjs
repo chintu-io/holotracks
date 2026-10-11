@@ -157,9 +157,60 @@ function imageCandidates(inner) {
 function fallbackRoster() {
   return FALLBACK_TALENTS.map(([name,image]) => ({
     slug: name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g,''),
-    name, image,
+    name, image, bannerImage: image,
     profileUrl: DIRECTORY_URL,
   }));
+}
+
+
+async function fullBodyImageFromProfile(profileUrl) {
+  const response = await fetch(profileUrl, {
+    headers: { 'user-agent': 'HoloTracks talent-artwork catalog (independent fan project)' },
+    signal: AbortSignal.timeout(12000),
+  });
+  if (!response.ok) throw new Error('Profile returned HTTP ' + response.status);
+  const html = await response.text();
+  const bodyCandidates = [];
+  const allCandidates = [];
+  for (const match of html.matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a>/gi)) {
+    const href = absoluteURL(attr(match[1], 'href'), profileUrl);
+    if (!href) continue;
+    allCandidates.push(href);
+    if (/全身画像|full[\s-]*body|full[\s-]*length/i.test(match[2])) bodyCandidates.push(href);
+  }
+  const attrCandidates = [];
+  for (const match of html.matchAll(/(?:href|src|data-src|data-lazy-src|data-original)=["']([^"']+)["']/gi)) {
+    const url = absoluteURL(match[1], profileUrl);
+    if (url) attrCandidates.push(url);
+  }
+  const unique = values => [...new Set(values)];
+  const priority = url => /_pr-img_0?1\./i.test(url) ? 0 : /_pr-img_0?2\./i.test(url) ? 1 : /pr-img/i.test(url) ? 2 : 3;
+  const fullBody = unique(bodyCandidates).sort((a,b)=>priority(a)-priority(b));
+  if (fullBody.length) return fullBody[0];
+  const candidates = unique([...allCandidates, ...attrCandidates]).sort((a,b)=>priority(a)-priority(b));
+  return candidates.find(url => /_pr-img_0?1\./i.test(url)) ||
+    candidates.find(url => /_pr-img/i.test(url)) || '';
+}
+async function enrichFullBodyArtwork(entries) {
+  let cursor = 0;
+  const workers = Array.from({ length: 8 }, async () => {
+    while (cursor < entries.length) {
+      const entry = entries[cursor++];
+      try {
+        const path = new URL(entry.profileUrl).pathname;
+        if (!/\/en\/talents\/[^/]+\/?$/i.test(path)) {
+          entry.bannerImage = entry.bannerImage || '';
+          continue;
+        }
+        entry.bannerImage = await fullBodyImageFromProfile(entry.profileUrl) || entry.bannerImage || '';
+      } catch {
+        entry.bannerImage = entry.bannerImage || '';
+      }
+    }
+  });
+  await Promise.all(workers);
+  const found = entries.filter(entry => entry.bannerImage && entry.bannerImage !== entry.image).length;
+  console.log('[HoloTracks] Matched ' + found + ' full-body profile illustrations for seamless banner cut-outs.');
 }
 
 let roster = [];
@@ -209,6 +260,8 @@ try {
     console.warn('[HoloTracks] Official roster unavailable; using ' + roster.length + ' known artwork fallbacks: ' + error.message);
   }
 }
+
+await enrichFullBodyArtwork(roster);
 
 await mkdir(dirname(OUTPUT), { recursive: true });
 await writeFile(OUTPUT, JSON.stringify({

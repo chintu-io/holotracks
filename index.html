@@ -9,8 +9,8 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://hololive.hololivepro.com" crossorigin>
   <link rel="preconnect" href="https://i.ytimg.com" crossorigin>
-  <link rel="stylesheet" href="styles.css?v=20261011-roster-mobile2">
-  <script defer src="app.js?v=20261011-roster-mobile2"></script>
+  <link rel="stylesheet" href="styles.css?v=20261011-polish">
+  <script defer src="app.js?v=20261011-polish"></script>
 </head>
 <body>
   <a class="skip-link" href="#catalogue">Skip to music library</a>
@@ -49,7 +49,7 @@
 
   <main class="app-layout">
     <aside id="sidebar" class="sidebar" aria-label="Music navigation and artist filters">
-      <div class="sidebar-topline"><span class="sidebar-orb">✦</span><span><strong>Your music lounge</strong><small>Pick a vibe. Find a voice.</small></span></div>
+      <div class="sidebar-topline"><span class="sidebar-orb">✦</span><span class="sidebar-brand-copy"><strong>Your music lounge</strong><small>Pick a vibe. Find a voice.</small></span><button id="sidebar-collapse" class="sidebar-collapse" type="button" aria-label="Collapse sidebar" aria-pressed="false" title="Collapse sidebar">‹</button></div>
       <nav class="main-nav" aria-label="Library views">
         <button class="nav-item active" data-view="all" type="button"><span class="nav-symbol">▦</span><span>All songs</span><span id="nav-total" class="nav-count">—</span></button>
         <button class="nav-item" data-view="fresh" type="button"><span class="nav-symbol">✧</span><span>Fresh releases</span><span class="nav-pill">NEW</span></button>
@@ -139,7 +139,7 @@
       <section class="library-section" aria-label="Browse songs">
         <div class="library-top">
           <div><span class="section-kicker">THE MUSIC LIBRARY</span><h2><span id="catalogue-title-text">All original songs</span> <span id="results-count" class="result-count">—</span></h2><p id="results-caption">Explore original music across the Hololive universe.</p></div>
-          <div class="library-controls"><label class="sort-control"><span>Sort by</span><select id="sort-select" aria-label="Sort songs"><option value="date">Release date</option><option value="title">Title</option><option value="popular">Views</option></select></label><button id="sort-direction" class="sort-direction" type="button" data-direction="desc" aria-label="Descending order" title="Newest first">↓</button><button id="play-all" class="play-all-button" type="button"><span>▶</span> Play all</button></div>
+          <div class="library-controls"><label class="sort-control"><span>Sort by</span><select id="sort-select" aria-label="Sort songs"><option value="newest">Newest release</option><option value="oldest">Oldest release</option><option value="title">Title A–Z</option><option value="popular">Most viewed</option></select></label><button id="play-all" class="play-all-button" type="button"><span>▶</span> Play all</button></div>
         </div>
         <div id="notice" class="notice" role="status" hidden></div>
         <div id="song-list" class="song-grid" aria-live="polite" aria-busy="true"></div>
