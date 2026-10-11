@@ -123,7 +123,7 @@ export function normalizeRecord(item) {
     artists: [artist],
     channelName,
     channelId: firstString(channel.id, item.channel_id),
-    // Use YouTube's publish date for release ordering; availability is a fallback.
+    // Schema migration: use YouTube's publish date for release ordering; availability is a fallback.
     releaseDate: firstDate(item.published_at, item.available_at, item.start_actual, item.start_scheduled),
     publishedAt: firstDate(item.published_at),
     viewCount: safeCount(item.view_count, item.viewCount, item.views, item.statistics?.viewCount),
