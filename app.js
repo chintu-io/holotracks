@@ -16,6 +16,9 @@
     'Shiranui Flare': 'https://hololive.hololivepro.com/wp-content/uploads/2020/06/Shiranui-Flare_pr-img_01.png',
     'AZKi': 'https://hololive.hololivepro.com/wp-content/uploads/2020/06/AZKi_pr-img_01.webp',
     'Takanashi Kiara': 'https://hololive.hololivepro.com/wp-content/uploads/2020/07/Takanashi-Kiara_pr-img_01.webp',
+    'Tokino Sora': 'https://hololive.hololivepro.com/wp-content/uploads/2020/06/Tokino-Sora_pr-img_01.webp',
+    'Nakiri Ayame': 'https://hololive.hololivepro.com/wp-content/uploads/2020/06/Nakiri-Ayame_pr-img_01.webp',
+    'Tokoyami Towa': 'https://hololive.hololivepro.com/wp-content/uploads/2020/06/Tokoyami-Towa_pr-img_01.webp',
   };
   const KEYS = {
     favorites: 'holotracks:favorites:v1',
