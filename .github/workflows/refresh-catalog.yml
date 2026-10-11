@@ -1,0 +1,45 @@
+name: Refresh Hololive catalogue
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Full paginated refresh once daily, at 04:23 UTC.
+    - cron: '23 4 * * *'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: holotracks-catalogue-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: true
+      - name: Setup Node.js
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
+        with:
+          node-version: '24'
+          package-manager-cache: false
+      - name: Refresh complete catalogue from Holodex
+        env:
+          HOLODEX_API_KEY: ${{ secrets.HOLODEX_API_KEY }}
+          YOUTUBE_DATA_API_KEY: ${{ secrets.YOUTUBE_DATA_API_KEY }}
+        run: node scripts/update-catalog.mjs
+      - name: Commit catalogue when changed
+        run: |
+          if git diff --quiet -- data/songs.json; then
+            echo 'Catalogue is unchanged; no commit needed.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data/songs.json
+          git commit -m 'chore: refresh Hololive song catalogue'
+          git push
