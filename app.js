@@ -1122,10 +1122,12 @@
   }
   function renderQueue() {
     el['queue-count'].textContent = state.queue.length.toLocaleString();
-    el['queue-list'].innerHTML = state.queue.length ? state.queue.map(id => {
+    el['queue-list'].innerHTML = state.queue.length ? state.queue.map((id, index) => {
       const item = songById(id);
       if (!item) return '';
+      const trackNumber = index + 1;
       return '<div class="queue-track ' + (id === state.currentId ? 'current' : '') + '" data-queue-track="' + escapeHTML(id) + '">' +
+        '<span class="queue-track-number" aria-label="Track ' + trackNumber + '" title="Track ' + trackNumber + '">' + trackNumber + '</span>' +
         '<img class="queue-track-art" loading="lazy" src="' + thumbnail(item) + '" alt="">' +
         '<div class="queue-track-info"><strong>' + escapeHTML(titleOf(item)) + '</strong><span>' +
         escapeHTML(artistsOf(item).join(', ')) + '</span></div><div class="queue-track-actions">' +
