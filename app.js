@@ -787,6 +787,7 @@
     state.selectedArtists.clear();
     el['search-input'].value = '';
     el['sort-select'].value = 'newest';
+    renderArtists();
 
     // This smart mix is intended to play newest-first and loop the whole queue.
     state.shuffle = false;
