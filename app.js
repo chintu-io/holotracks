@@ -787,7 +787,6 @@
     state.selectedArtists.clear();
     el['search-input'].value = '';
     el['sort-select'].value = 'newest';
-    el['playlist-select'].value = playlist.id;
 
     // This smart mix is intended to play newest-first and loop the whole queue.
     state.shuffle = false;
@@ -795,6 +794,7 @@
     saveJSON(KEYS.shuffle, false);
     saveJSON(KEYS.repeat, true);
     renderPlaylists();
+    el['playlist-select'].value = playlist.id;
     applyFilters();
     updatePlayerButtons();
     playSong(playlist.songIds[0], playlist.songIds);
