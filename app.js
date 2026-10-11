@@ -227,7 +227,7 @@
     }, BANNER_ROTATE_MS);
   }
   const TALENT_SET_SIZE = 10;
-  const TALENT_ROTATE_MS = 15000;
+  const TALENT_ROTATE_MS = 60000;
   const TALENT_FADE_MS = 650;
   let talentSpotlightRoster = [];
   let talentSpotlightPage = 0;
@@ -888,7 +888,7 @@
     el['queue-list'].innerHTML = state.queue.length ? state.queue.map(id => {
       const item = songById(id);
       if (!item) return '';
-      return '<div class="queue-track ' + (id === state.currentId ? 'current' : '') + '">' +
+      return '<div class="queue-track ' + (id === state.currentId ? 'current' : '') + '" data-queue-track="' + escapeHTML(id) + '">' +
         '<img class="queue-track-art" loading="lazy" src="' + thumbnail(item) + '" alt="">' +
         '<div class="queue-track-info"><strong>' + escapeHTML(titleOf(item)) + '</strong><span>' +
         escapeHTML(artistsOf(item).join(', ')) + '</span></div><div class="queue-track-actions">' +
@@ -1239,7 +1239,10 @@
     el['queue-list'].addEventListener('click', event => {
       const playButton = event.target.closest('[data-queue-play]');
       const removeButton = event.target.closest('[data-queue-remove]');
-      if (playButton) playSong(playButton.dataset.queuePlay);
+      if (playButton) {
+        playSong(playButton.dataset.queuePlay);
+        return;
+      }
       if (removeButton) {
         const removedId = removeButton.dataset.queueRemove;
         state.queue = state.queue.filter(id => id !== removedId);
@@ -1250,7 +1253,10 @@
         renderQueue();
         renderPlayerMeta();
         updatePlayerButtons();
+        return;
       }
+      const track = event.target.closest('[data-queue-track]');
+      if (track) playSong(track.dataset.queueTrack);
     });
     el['previous-song'].addEventListener('click', previousSong);
     el['next-song'].addEventListener('click', nextSong);
