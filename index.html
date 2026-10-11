@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#e7f7ff">
-  <meta name="description" content="A colourful, searchable Hololive original-song library with official YouTube playback, artist filters, playlists and a personal queue.">
-  <title>HoloTracks — Your Hololive Music Universe</title>
+  <meta name="theme-color" content="#101025">
+  <meta name="description" content="Discover Hololive original songs. Browse talents, build queues and play official YouTube music videos in HoloTracks.">
+  <title>HoloTracks — Hololive Music Universe</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://hololive.hololivepro.com" crossorigin>
   <link rel="preconnect" href="https://i.ytimg.com" crossorigin>
@@ -13,137 +13,152 @@
   <script defer src="app.js"></script>
 </head>
 <body>
-  <a class="skip-link" href="#catalogue">Skip to song catalogue</a>
+  <a class="skip-link" href="#catalogue">Skip to music library</a>
+
   <header class="topbar">
     <a class="brand" href="./" aria-label="HoloTracks home">
-      <span class="brand-emblem" aria-hidden="true"><span>♫</span><i>✦</i></span>
-      <span class="brand-copy"><strong>HoloTracks<span>☆</span></strong><small>HOLOLIVE MUSIC UNIVERSE</small></span>
+      <span class="brand-mark" aria-hidden="true"><i>♫</i><b>✦</b></span>
+      <span class="brand-copy"><strong>HoloTracks<span>★</span></strong><small>THE HOLOLIVE MUSIC UNIVERSE</small></span>
     </a>
     <div class="global-search">
-      <span class="search-glyph" aria-hidden="true">⌕</span>
-      <label class="sr-only" for="search-input">Search songs and artists</label>
-      <input id="search-input" type="search" placeholder="Find a song, oshi, or Japanese title…" autocomplete="off">
-      <kbd>⌘ K</kbd>
+      <span class="search-icon" aria-hidden="true">⌕</span>
+      <label class="sr-only" for="search-input">Search songs and talents</label>
+      <input id="search-input" type="search" placeholder="Search songs, talents or Japanese titles…" autocomplete="off">
+      <kbd>Ctrl K</kbd>
     </div>
     <div class="top-actions">
-      <button id="favorites-shortcut" class="header-favorite" type="button" aria-label="Show favourites"><span>♡</span><b>Favourites</b></button>
-      <a class="github-link" href="https://github.com/chintu-io/holotracks" target="_blank" rel="noreferrer">Project <span>↗</span></a>
+      <button id="favorites-shortcut" class="favorite-shortcut" type="button" aria-label="Show favourites"><span>♥</span><b>Favourites</b></button>
+      <span class="top-live"><i></i> FAN MUSIC ARCHIVE</span>
     </div>
   </header>
 
   <div class="mobile-toolbar">
-    <button id="mobile-filter-toggle" class="soft-button" type="button"><span>☷</span> Filters</button>
-    <button id="mobile-player-toggle" class="soft-button" type="button"><span>♫</span> Player &amp; queue</button>
+    <button id="mobile-filter-toggle" class="mobile-tool" type="button"><span>☷</span> Browse &amp; filters</button>
+    <button id="mobile-player-toggle" class="mobile-tool" type="button"><span>♫</span> Player &amp; queue</button>
   </div>
 
   <main class="app-layout">
-    <aside id="sidebar" class="sidebar" aria-label="Library and filters">
-      <div class="side-intro"><span class="side-orbit">✦</span><span><strong>Your little music corner</strong><small>Find the voices you love.</small></span></div>
+    <aside id="sidebar" class="sidebar" aria-label="Music navigation and artist filters">
+      <div class="sidebar-topline"><span class="sidebar-orb">✦</span><span><strong>Your music lounge</strong><small>Pick a vibe. Find a voice.</small></span></div>
       <nav class="main-nav" aria-label="Library views">
-        <button class="nav-item active" data-view="all" type="button"><span class="nav-icon">▦</span> All songs <span id="nav-total" class="nav-count">—</span></button>
-        <button class="nav-item" data-view="favorites" type="button"><span class="nav-icon">♡</span> Favourites <span id="fav-total" class="nav-count">0</span></button>
-        <button class="nav-item" data-view="fresh" type="button"><span class="nav-icon">✧</span> Fresh releases <span class="nav-sparkle">NEW</span></button>
+        <button class="nav-item active" data-view="all" type="button"><span class="nav-symbol">▦</span><span>All songs</span><span id="nav-total" class="nav-count">—</span></button>
+        <button class="nav-item" data-view="fresh" type="button"><span class="nav-symbol">✧</span><span>Fresh releases</span><span class="nav-pill">NEW</span></button>
+        <button class="nav-item" data-view="favorites" type="button"><span class="nav-symbol">♥</span><span>My favourites</span><span id="fav-total" class="nav-count">0</span></button>
       </nav>
 
-      <div class="side-divider"><span>YOUR OSHI FILTER</span><i></i></div>
+      <div class="sidebar-rule"><span>FIND YOUR OSHI</span><i></i></div>
       <section class="filter-section" aria-labelledby="artists-heading">
-        <div class="section-title-row"><h2 id="artists-heading">Pick your talents</h2><span id="artist-count" class="muted-count">0</span></div>
-        <label class="artist-search"><span>⌕</span><input id="artist-search" type="search" placeholder="Search talents…" aria-label="Filter artist list"></label>
-        <div class="filter-hint">Choose one or more members to tune your feed.</div>
-        <div id="artist-filters" class="artist-filters"><p class="filter-empty">Artists will appear after the catalogue sync.</p></div>
-        <button id="show-all-artists" class="text-button show-all" type="button" hidden>Show all artists</button>
-        <button id="clear-filters" class="clear-filters" type="button">↺ Clear all filters</button>
+        <div class="section-title-row"><h2 id="artists-heading">Filter by talent</h2><span id="artist-count" class="muted-count">0</span></div>
+        <label class="artist-search"><span>⌕</span><input id="artist-search" type="search" placeholder="Find a member…" aria-label="Filter artist list"></label>
+        <p class="filter-hint">Select more than one to mix your favourites.</p>
+        <div id="artist-filters" class="artist-filters"><p class="filter-empty">Talent filters appear after the catalogue loads.</p></div>
+        <button id="show-all-artists" class="text-button show-all" type="button" hidden>Show all talents</button>
+        <button id="clear-filters" class="clear-filters" type="button"><span>↺</span> Reset search and filters</button>
       </section>
 
       <section class="playlist-section" aria-labelledby="playlists-heading">
-        <div class="section-title-row"><h2 id="playlists-heading">My mixtapes</h2><button id="create-playlist" class="add-playlist" type="button" aria-label="Create playlist">+</button></div>
-        <div id="playlist-list" class="playlist-list"><p class="filter-empty">Create a playlist to save your favourite vibes.</p></div>
+        <div class="section-title-row"><h2 id="playlists-heading">My mixtapes</h2><button id="create-playlist" class="add-playlist" type="button" aria-label="Create a playlist">+</button></div>
+        <div id="playlist-list" class="playlist-list"><p class="filter-empty">Save a queue to create your first mixtape.</p></div>
       </section>
 
-      <div class="sidebar-footnote">
-        <span class="status-pill"><i class="live-dot"></i><span id="source-status">Waiting for catalogue</span></span>
-        <p>Independent fan project. Not affiliated with COVER Corp.</p>
+      <div class="sidebar-footer">
+        <span class="catalogue-status"><i class="live-dot"></i><span id="source-status">Loading music library…</span></span>
+        <p>Fan-made music discovery · Not affiliated with COVER Corp.</p>
       </div>
     </aside>
 
     <section id="catalogue" class="catalogue-column" aria-label="Hololive music catalogue">
       <section class="hero-card">
-        <div class="hero-shape hero-shape-a"></div><div class="hero-shape hero-shape-b"></div>
-        <span class="hero-sticker sticker-star">✦</span><span class="hero-sticker sticker-heart">♡</span><span class="hero-sticker sticker-note">♫</span>
+        <div class="hero-glow hero-glow-one"></div><div class="hero-glow hero-glow-two"></div>
+        <div class="hero-grid" aria-hidden="true"></div>
         <div class="hero-copy">
-          <div class="hero-eyebrow"><span class="eyebrow-dot"></span> A FAN-MADE HOLOLIVE SONG LIBRARY</div>
-          <h1>Your oshis.<br>Your songs.<br><span>Your universe.</span></h1>
-          <p>All the original-song moments you love, in one happy little place. Pick a talent, make a queue, and let the next song find you.</p>
-          <div class="hero-buttons"><button id="hero-fresh" class="hero-cta" type="button">Explore all songs <span>↗</span></button><a class="hero-official-link" href="https://hololive.hololivepro.com/en/talents" target="_blank" rel="noreferrer">Meet the talents <span>↗</span></a></div>
-          <div class="hero-metrics">
-            <div><strong id="hero-song-count">—</strong><span>SONGS IN THE LIBRARY</span></div><i></i>
-            <div><strong id="hero-artist-count">—</strong><span>VOICES TO DISCOVER</span></div><i></i>
-            <div><strong id="hero-updated">—</strong><span>CATALOGUE UPDATED</span></div>
+          <div class="hero-eyebrow"><span class="hero-eyebrow-dot"></span> YOUR HOLOLIVE SOUNDTRACK STARTS HERE</div>
+          <h1>A universe<br>of <span>voices.</span><br><em>One playlist.</em></h1>
+          <p>From iconic originals to the songs you haven't found yet. Explore the music, choose your talents, and keep your next favourite playing.</p>
+          <div class="hero-actions">
+            <button id="hero-fresh" class="hero-primary" type="button"><span>Browse all songs</span><i>↗</i></button>
+            <button id="show-newest" class="hero-secondary" type="button"><span class="secondary-play">▶</span> Fresh releases</button>
+          </div>
+          <div class="hero-stats">
+            <div><strong id="hero-song-count">—</strong><span>SONGS TO DISCOVER</span></div>
+            <i></i>
+            <div><strong id="hero-artist-count">—</strong><span>HOLO VOICES</span></div>
+            <i></i>
+            <div><strong id="hero-updated">—</strong><span>LIBRARY UPDATED</span></div>
           </div>
         </div>
-        <div class="hero-art" aria-label="Official Hololive talent artwork">
-          <div class="hero-orbit orbit-back"></div><div class="hero-orbit orbit-front"></div>
-          <span class="hero-art-tag tag-blue">♪ PLAY YOUR FAVOURITES</span>
-          <img class="hero-character character-fubuki" src="https://hololive.hololivepro.com/wp-content/uploads/2020/06/Shirakami-Fubuki_pr-img_01.webp" alt="Shirakami Fubuki" loading="eager" onerror="this.style.display='none'">
-          <img class="hero-character character-suisei" src="https://hololive.hololivepro.com/wp-content/uploads/2020/06/Hoshimachi-Suisei_pr-img_01.png" alt="Hoshimachi Suisei" loading="eager" onerror="this.style.display='none'">
-          <img class="hero-character character-marine" src="https://hololive.hololivepro.com/wp-content/uploads/2020/06/Houshou-Marine_pr-img_01.png" alt="Houshou Marine" loading="eager" onerror="this.style.display='none'">
-          <img class="hero-character character-korone" src="https://hololive.hololivepro.com/wp-content/uploads/2020/06/Inugami-Korone_pr-img_01.png" alt="Inugami Korone" loading="eager" onerror="this.style.display='none'">
-          <div class="hero-art-label"><span>♪</span><span><b>Press play, spread joy</b><small>Original songs · Official YouTube videos</small></span></div>
+        <div class="hero-stage" aria-label="Hololive talent profile artwork">
+          <div class="stage-ring ring-a"></div><div class="stage-ring ring-b"></div><div class="stage-ring ring-c"></div>
+          <div class="stage-spark sparkle-a">✦</div><div class="stage-spark sparkle-b">✧</div><div class="stage-spark sparkle-c">♫</div>
+          <div class="stage-chip"><i></i> ORIGINAL SONGS • YOUTUBE VIDEOS</div>
+          <img class="stage-talent stage-fubuki" src="https://hololive.hololivepro.com/wp-content/uploads/2020/06/Shirakami-Fubuki_pr-img_01.webp" alt="Shirakami Fubuki" loading="eager" onerror="this.style.display='none'">
+          <img class="stage-talent stage-miko" src="https://hololive.hololivepro.com/wp-content/uploads/2020/06/Sakura-Miko_pr-img_01.webp" alt="Sakura Miko" loading="eager" onerror="this.style.display='none'">
+          <img class="stage-talent stage-suisei" src="https://hololive.hololivepro.com/wp-content/uploads/2020/06/Hoshimachi-Suisei_pr-img_01.png" alt="Hoshimachi Suisei" loading="eager" onerror="this.style.display='none'">
+          <img class="stage-talent stage-marine" src="https://hololive.hololivepro.com/wp-content/uploads/2020/06/Houshou-Marine_pr-img_01.png" alt="Houshou Marine" loading="eager" onerror="this.style.display='none'">
+          <div class="stage-caption"><span class="caption-note">♫</span><span><strong>Press play. Find your next fave.</strong><small>Official videos · Your own queue</small></span></div>
         </div>
-        <div class="hero-bottom-note"><span>✦</span> Made for the music-loving Holo community <span>✦</span></div>
+        <div class="hero-footer"><span>✦</span> Made for the songs that stay with you <span>✦</span></div>
       </section>
 
       <section class="talent-section" aria-labelledby="talents-title">
-        <div class="section-heading talent-heading">
-          <div><span class="section-kicker">WHO'S ON YOUR MIND?</span><h2 id="talents-title">Choose your <span>oshi</span> <span class="heading-deco">♡</span></h2><p>Tap a talent to make the library all about them.</p></div>
-          <a href="https://hololive.hololivepro.com/en/talents" target="_blank" rel="noreferrer" class="official-talent-link">Official talent profiles ↗</a>
+        <div class="section-heading">
+          <div><span class="section-kicker">PICK YOUR SOUND</span><h2 id="talents-title">Who's on your <span>playlist?</span></h2><p>Tap a talent to filter the library to their songs.</p></div>
+          <span class="talent-section-note">YOUR OSHI, YOUR VIBE <b>♡</b></span>
         </div>
         <div id="talent-strip" class="talent-strip">
-          <button class="talent-card talent-suisei" type="button" data-spotlight-artist="Hoshimachi Suisei"><span class="talent-photo"><i>星</i><img src="https://hololive.hololivepro.com/wp-content/uploads/2020/06/Hoshimachi-Suisei_pr-img_01.png" alt="" loading="lazy" onerror="this.style.display='none'"></span><strong>Suisei</strong><small>STELLAR VOICE</small></button>
-          <button class="talent-card talent-marine" type="button" data-spotlight-artist="Houshou Marine"><span class="talent-photo"><i>宝</i><img src="https://hololive.hololivepro.com/wp-content/uploads/2020/06/Houshou-Marine_pr-img_01.png" alt="" loading="lazy" onerror="this.style.display='none'"></span><strong>Marine</strong><small>AHOY!</small></button>
-          <button class="talent-card talent-calliope" type="button" data-spotlight-artist="Mori Calliope"><span class="talent-photo"><i>💀</i><img src="https://hololive.hololivepro.com/wp-content/uploads/2020/07/Mori-Calliope_pr-img_02.webp" alt="" loading="lazy" onerror="this.style.display='none'"></span><strong>Mori Calliope</strong><small>DEAD BEATS</small></button>
-          <button class="talent-card talent-fubuki" type="button" data-spotlight-artist="Shirakami Fubuki"><span class="talent-photo"><i>狐</i><img src="https://hololive.hololivepro.com/wp-content/uploads/2020/06/Shirakami-Fubuki_pr-img_01.webp" alt="" loading="lazy" onerror="this.style.display='none'"></span><strong>Fubuki</strong><small>KON KON!</small></button>
-          <button class="talent-card talent-korone" type="button" data-spotlight-artist="Inugami Korone"><span class="talent-photo"><i>🥐</i><img src="https://hololive.hololivepro.com/wp-content/uploads/2020/06/Inugami-Korone_pr-img_01.png" alt="" loading="lazy" onerror="this.style.display='none'"></span><strong>Korone</strong><small>YUBI YUBI</small></button>
-          <button class="talent-card talent-pekora" type="button" data-spotlight-artist="Usada Pekora"><span class="talent-photo"><i>🥕</i><img src="https://hololive.hololivepro.com/wp-content/uploads/2020/06/Usada-Pekora_pr-img_01.png" alt="" loading="lazy" onerror="this.style.display='none'"></span><strong>Pekora</strong><small>KONPEKO!</small></button>
+          <button class="talent-card talent-suisei" type="button" data-spotlight-artist="Hoshimachi Suisei"><span class="talent-image"><img src="https://hololive.hololivepro.com/wp-content/uploads/2020/06/Hoshimachi-Suisei_pr-img_01.png" alt="" loading="lazy" onerror="this.style.display='none'"><i>星</i></span><strong>Suisei</strong><small>STELLAR VOICE</small></button>
+          <button class="talent-card talent-miko" type="button" data-spotlight-artist="Sakura Miko"><span class="talent-image"><img src="https://hololive.hololivepro.com/wp-content/uploads/2020/06/Sakura-Miko_pr-img_01.webp" alt="" loading="lazy" onerror="this.style.display='none'"><i>🌸</i></span><strong>Sakura Miko</strong><small>ELITE IDOL</small></button>
+          <button class="talent-card talent-marine" type="button" data-spotlight-artist="Houshou Marine"><span class="talent-image"><img src="https://hololive.hololivepro.com/wp-content/uploads/2020/06/Houshou-Marine_pr-img_01.png" alt="" loading="lazy" onerror="this.style.display='none'"><i>宝</i></span><strong>Marine</strong><small>AHOY!</small></button>
+          <button class="talent-card talent-calliope" type="button" data-spotlight-artist="Mori Calliope"><span class="talent-image"><img src="https://hololive.hololivepro.com/wp-content/uploads/2020/07/Mori-Calliope_megane_07.png" alt="" loading="lazy" onerror="this.style.display='none'"><i>💀</i></span><strong>Mori Calliope</strong><small>DEAD BEATS</small></button>
+          <button class="talent-card talent-fubuki" type="button" data-spotlight-artist="Shirakami Fubuki"><span class="talent-image"><img src="https://hololive.hololivepro.com/wp-content/uploads/2020/06/Shirakami-Fubuki_pr-img_01.webp" alt="" loading="lazy" onerror="this.style.display='none'"><i>狐</i></span><strong>Fubuki</strong><small>KON KON!</small></button>
+          <button class="talent-card talent-pekora" type="button" data-spotlight-artist="Usada Pekora"><span class="talent-image"><img src="https://hololive.hololivepro.com/wp-content/uploads/2020/06/Usada-Pekora_pr-img_01.webp" alt="" loading="lazy" onerror="this.style.display='none'"><i>🥕</i></span><strong>Pekora</strong><small>KONPEKO!</small></button>
+          <button class="talent-card talent-korone" type="button" data-spotlight-artist="Inugami Korone"><span class="talent-image"><img src="https://hololive.hololivepro.com/wp-content/uploads/2020/06/Inugami-Korone_pr-img_01.png" alt="" loading="lazy" onerror="this.style.display='none'"><i>🐾</i></span><strong>Korone</strong><small>YUBI YUBI</small></button>
+          <button class="talent-card talent-okayu" type="button" data-spotlight-artist="Nekomata Okayu"><span class="talent-image"><img src="https://hololive.hololivepro.com/wp-content/uploads/2020/06/Nekomata-Okayu_pr-img_01.png" alt="" loading="lazy" onerror="this.style.display='none'"><i>🍙</i></span><strong>Okayu</strong><small>ONIGIRI CAT</small></button>
+          <button class="talent-card talent-mio" type="button" data-spotlight-artist="Ookami Mio"><span class="talent-image"><img src="https://hololive.hololivepro.com/wp-content/uploads/2020/06/Ookami-Mio_pr-img_01.webp" alt="" loading="lazy" onerror="this.style.display='none'"><i>狼</i></span><strong>Mio</strong><small>WOLF GIRL</small></button>
+          <button class="talent-card talent-flare" type="button" data-spotlight-artist="Shiranui Flare"><span class="talent-image"><img src="https://hololive.hololivepro.com/wp-content/uploads/2020/06/Shiranui-Flare_pr-img_01.png" alt="" loading="lazy" onerror="this.style.display='none'"><i>🔥</i></span><strong>Flare</strong><small>HALF-ELF</small></button>
+          <button class="talent-card talent-azki" type="button" data-spotlight-artist="AZKi"><span class="talent-image"><img src="https://hololive.hololivepro.com/wp-content/uploads/2020/06/AZKi_pr-img_01.webp" alt="" loading="lazy" onerror="this.style.display='none'"><i>AZ</i></span><strong>AZKi</strong><small>VIRTUAL DIVA</small></button>
+          <button class="talent-card talent-kiara" type="button" data-spotlight-artist="Takanashi Kiara"><span class="talent-image"><img src="https://hololive.hololivepro.com/wp-content/uploads/2020/07/Takanashi-Kiara_pr-img_01.webp" alt="" loading="lazy" onerror="this.style.display='none'"><i>🔥</i></span><strong>Kiara</strong><small>KIKKERIKI!</small></button>
         </div>
-        <div class="art-credit">Talent profile artwork is served from the <a href="https://hololive.hololivepro.com/en/talents" target="_blank" rel="noreferrer">official Hololive website</a>. Artwork © COVER Corp. and respective rights holders.</div>
+        <div class="art-note">Talent illustrations © COVER Corp. and their respective rights holders. Displayed as artwork in this independent fan music project.</div>
       </section>
 
-      <section class="discovery-row" aria-label="Quick discovery">
-        <button class="discovery-card discovery-new" id="show-newest" type="button"><span class="discovery-icon">✧</span><span><strong>Fresh releases</strong><small>New drops and recent songs</small></span><span class="discovery-arrow">↗</span></button>
-        <button class="discovery-card discovery-random" id="play-random" type="button"><span class="discovery-icon">🎲</span><span><strong>Surprise me!</strong><small>Let the next song choose you</small></span><span class="discovery-arrow">↗</span></button>
+      <section class="quick-discovery" aria-label="Music discovery shortcuts">
+        <button class="discovery-card discovery-fresh" id="show-fresh-card" type="button" data-view="fresh"><span class="discovery-symbol">✧</span><span><strong>Fresh drops</strong><small>The latest music added to the scene</small></span><i>↗</i></button>
+        <button class="discovery-card discovery-random" id="play-random" type="button"><span class="discovery-symbol">🎲</span><span><strong>Surprise me</strong><small>Let the next song choose you</small></span><i>↗</i></button>
       </section>
 
-      <div class="catalogue-heading">
-        <div><span class="section-kicker">YOUR SOUNDTRACK STARTS HERE</span><h2 id="catalogue-title"><span id="catalogue-title-text">All original songs</span> <span id="results-count" class="heading-count">—</span></h2><p id="results-caption" class="results-caption">Every indexed Hololive original-song video, ready to explore.</p></div>
-        <div class="catalogue-actions"><label class="sort-control"><span>Sort your library</span><select id="sort-select" aria-label="Sort songs"><option value="newest">Newest first</option><option value="oldest">Oldest first</option><option value="title">Title A–Z</option><option value="popular">Most viewed</option></select></label><button id="play-all" class="primary-button" type="button">▶ Play all</button></div>
-      </div>
-      <div id="notice" class="notice" role="status" hidden></div>
-      <div id="song-list" class="song-grid" aria-live="polite" aria-busy="true"></div>
-      <div id="empty-state" class="empty-state" hidden><div class="empty-illustration">♫</div><h3 id="empty-title">No songs found</h3><p id="empty-copy">Try a different search or clear some filters.</p><button id="empty-reset" class="secondary-button" type="button">Reset filters</button></div>
-      <div class="load-more-wrap"><button id="load-more" class="secondary-button" type="button" hidden>Show more songs ↓</button></div>
-      <footer class="page-footer"><span>Made with <b class="footer-heart">♡</b> for the Holo music community.</span><span>Data via <a href="https://holodex.net/" target="_blank" rel="noreferrer">Holodex</a> · Playback via <a href="https://www.youtube.com/" target="_blank" rel="noreferrer">YouTube</a> · <a href="https://github.com/chintu-io/holotracks" target="_blank" rel="noreferrer">Open source</a></span></footer>
+      <section class="library-section" aria-label="Browse songs">
+        <div class="library-top">
+          <div><span class="section-kicker">THE MUSIC LIBRARY</span><h2><span id="catalogue-title-text">All original songs</span> <span id="results-count" class="result-count">—</span></h2><p id="results-caption">Explore original music across the Hololive universe.</p></div>
+          <div class="library-controls"><label class="sort-control"><span>Sort by</span><select id="sort-select" aria-label="Sort songs"><option value="newest">Newest release</option><option value="oldest">Oldest release</option><option value="title">Title A–Z</option><option value="popular">Most viewed</option></select></label><button id="play-all" class="play-all-button" type="button"><span>▶</span> Play all</button></div>
+        </div>
+        <div id="notice" class="notice" role="status" hidden></div>
+        <div id="song-list" class="song-grid" aria-live="polite" aria-busy="true"></div>
+        <div id="empty-state" class="empty-state" hidden><div class="empty-note">♫</div><h3 id="empty-title">No songs found</h3><p id="empty-copy">Try another search or clear some filters.</p><button id="empty-reset" class="soft-action" type="button">Reset filters</button></div>
+        <div class="load-more-wrap"><button id="load-more" class="soft-action" type="button" hidden>Load more songs ↓</button></div>
+      </section>
+      <footer class="page-footer"><span>Made for the music. <b>Powered by fans.</b></span><span>Catalogue via Holodex · Official videos via YouTube · Talent artwork © their rights holders</span></footer>
     </section>
 
     <aside id="player-column" class="player-column" aria-label="YouTube music player and queue">
       <section class="player-card">
-        <div class="player-head"><div><span class="panel-kicker"><i></i> LIVE LISTENING ROOM</span><h2>Now playing <span>♪</span></h2></div><button id="player-hide" class="icon-button quiet-icon" type="button" aria-label="Collapse player" title="Collapse player">⌄</button></div>
-        <div class="video-frame-wrap"><div id="youtube-player" class="youtube-player"><div class="player-placeholder"><div class="placeholder-orbit"><span>♫</span><i>✦</i></div><strong>Your next favourite is waiting</strong><small>Pick a song to start the magic</small></div></div><a id="youtube-fallback" class="youtube-fallback" href="https://www.youtube.com/" target="_blank" rel="noreferrer" hidden>Open this video on YouTube ↗</a></div>
+        <div class="player-head"><div><span class="player-kicker"><i></i> THE LISTENING ROOM</span><h2>Now playing <span>♫</span></h2></div><button id="player-hide" class="panel-collapse" type="button" aria-label="Collapse player panel" title="Collapse player">⌄</button></div>
+        <div class="video-frame-wrap"><div id="youtube-player" class="youtube-player"><div class="player-placeholder"><div class="placeholder-record"><span>♫</span><i>✦</i></div><strong>Your next favourite is waiting</strong><small>Pick a song and make some magic</small></div></div><a id="youtube-fallback" class="youtube-fallback" href="https://www.youtube.com/" target="_blank" rel="noreferrer" hidden>Open this video on YouTube ↗</a></div>
         <div class="now-playing-meta">
-          <div class="playing-title-row"><div class="playing-art"><img id="playing-thumb" alt="" hidden><span id="playing-art-placeholder">♫</span></div><div class="playing-text"><strong id="playing-title">Nothing playing yet</strong><span id="playing-artist">The queue is ready when you are</span></div><button id="playing-favorite" class="icon-button player-heart" type="button" aria-label="Favourite current song" title="Favourite" disabled>♡</button></div>
-          <div class="player-controls"><button id="queue-shuffle" class="icon-button control-small" type="button" aria-label="Toggle shuffle" title="Shuffle">⤨</button><button id="previous-song" class="icon-button control-main" type="button" aria-label="Previous song" title="Previous" disabled>◀</button><button id="play-pause" class="play-toggle" type="button" aria-label="Play" title="Play" disabled>▶</button><button id="next-song" class="icon-button control-main" type="button" aria-label="Next song" title="Next" disabled>▶|</button><button id="queue-repeat" class="icon-button control-small" type="button" aria-label="Toggle repeat" title="Repeat queue">↻</button></div>
+          <div class="playing-title-row"><div class="playing-art"><img id="playing-thumb" alt="" hidden><span id="playing-art-placeholder">♫</span></div><div class="playing-text"><strong id="playing-title">Nothing playing yet</strong><span id="playing-artist">Your queue is ready when you are</span></div><button id="playing-favorite" class="player-heart" type="button" aria-label="Favourite current song" title="Favourite current song" disabled>♡</button></div>
+          <div class="player-controls"><button id="queue-shuffle" class="control-button" type="button" aria-label="Toggle shuffle" title="Shuffle">⤨</button><button id="previous-song" class="control-button" type="button" aria-label="Previous song" title="Previous" disabled>◀</button><button id="play-pause" class="play-toggle" type="button" aria-label="Play" title="Play" disabled>▶</button><button id="next-song" class="control-button" type="button" aria-label="Next song" title="Next" disabled>▶|</button><button id="queue-repeat" class="control-button" type="button" aria-label="Toggle repeat" title="Repeat queue">↻</button></div>
           <div class="player-status-row"><span id="player-state">Waiting for your first song</span><a id="watch-youtube" href="https://www.youtube.com/" target="_blank" rel="noreferrer" hidden>Watch on YouTube ↗</a></div>
         </div>
       </section>
       <section class="queue-card">
-        <div class="queue-heading"><div><span class="panel-kicker"><i class="queue-dot"></i> UP NEXT</span><h2>Your queue <span id="queue-count" class="heading-count">0</span></h2></div><button id="clear-queue" class="text-button" type="button">Clear</button></div>
-        <div id="queue-list" class="queue-list"><div class="queue-empty"><span>≋</span><p>Your queue is empty.<br><small>Add songs and your mini mixtape will appear here.</small></p></div></div>
-        <div class="queue-actions"><label class="playlist-select-label" for="playlist-select">Save queue as a mixtape</label><div class="playlist-select-row"><select id="playlist-select" aria-label="Choose a playlist"><option value="">Choose playlist…</option></select><button id="save-queue" class="secondary-button small-button" type="button">Save</button></div><button id="play-selected-playlist" class="text-button playlist-play" type="button">Play selected mixtape ↗</button></div>
+        <div class="queue-heading"><div><span class="player-kicker"><i class="queue-light"></i> COMING UP NEXT</span><h2>Up next <span id="queue-count" class="result-count">0</span></h2></div><button id="clear-queue" class="clear-queue" type="button">Clear</button></div>
+        <div id="queue-list" class="queue-list"><div class="queue-empty"><span>≋</span><p>Your queue is empty.<br><small>Play or queue songs to start a mixtape.</small></p></div></div>
+        <div class="queue-actions"><label class="playlist-select-label" for="playlist-select">Save your queue as a playlist</label><div class="playlist-select-row"><select id="playlist-select" aria-label="Choose a playlist"><option value="">Choose a playlist…</option></select><button id="save-queue" class="save-button" type="button">Save</button></div><button id="play-selected-playlist" class="playlist-play" type="button">Play selected playlist ↗</button></div>
       </section>
-      <div class="player-footnote"><span>♪</span><p>The video plays through YouTube's official player. Some videos may not allow embedded playback.</p></div>
+      <p class="player-footnote">♪ Videos play through YouTube's official embedded player. Some videos may disable embedding.</p>
     </aside>
   </main>
 
-  <dialog id="playlist-dialog" class="playlist-dialog"><form method="dialog" id="playlist-form"><div class="dialog-mark">♫</div><h2>Create a mixtape</h2><p>Give your little collection a name. It stays saved in this browser.</p><label for="playlist-name">Mixtape name</label><input id="playlist-name" maxlength="60" required placeholder="e.g. Suisei starlight hours"><div class="dialog-actions"><button class="secondary-button" value="cancel">Maybe later</button><button class="primary-button" value="create">Create mixtape</button></div></form></dialog>
+  <dialog id="playlist-dialog" class="playlist-dialog"><form method="dialog" id="playlist-form"><div class="dialog-mark">♫</div><h2>Create a mixtape</h2><p>Name your collection. It will stay saved in this browser.</p><label for="playlist-name">Playlist name</label><input id="playlist-name" maxlength="60" required placeholder="e.g. Midnight Suisei Mix"><div class="dialog-actions"><button class="dialog-cancel" value="cancel">Cancel</button><button class="dialog-create" value="create">Create playlist</button></div></form></dialog>
 </body>
 </html>
