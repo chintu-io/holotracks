@@ -38,7 +38,7 @@
     'clear-filters','nav-total','fav-total','hero-song-count','hero-artist-count','hero-updated',
     'source-status','catalogue-title-text','results-count','results-caption','sort-select',
     'type-all-count','type-original-count','type-cover-count','nav-original-total','nav-cover-total',
-    'song-list','pagination','empty-state','empty-title','empty-copy','empty-reset','notice',
+    'song-list','selected-artist-filters','pagination','empty-state','empty-title','empty-copy','empty-reset','notice',
     'play-all','play-random','favorites-shortcut','mobile-filter-toggle',
     'mobile-player-toggle','sidebar','player-column','player-hide','youtube-player','youtube-fallback',
     'playing-thumb','playing-art-placeholder','playing-title','playing-artist','playing-favorite',
@@ -487,6 +487,26 @@
     return false;
   }
 
+  function renderSelectedArtistFilters() {
+    const container = el['selected-artist-filters'];
+    const selected = [...state.selectedArtists];
+    container.hidden = selected.length === 0;
+    if (!selected.length) {
+      container.replaceChildren();
+      return;
+    }
+
+    container.innerHTML =
+      '<span class="selected-filter-caption">FILTERED BY</span>' +
+      selected.map(name =>
+        '<button class="selected-artist-chip" type="button" data-remove-selected-artist="' +
+        escapeHTML(name) + '" aria-label="Remove artist filter ' + escapeHTML(name) +
+        '" title="Remove ' + escapeHTML(name) + ' filter"><span>' + escapeHTML(name) +
+        '</span><span class="selected-artist-chip-remove" aria-hidden="true">×</span></button>'
+      ).join('') +
+      '<button class="selected-artist-clear" type="button" data-clear-selected-artists>Reset artists</button>';
+  }
+
   function renderArtists() {
     // Include every current official talent, even with zero catalogue songs,
     // then add every distinct non-roster artist credit.
@@ -626,6 +646,7 @@
       }
     }
     state.filtered = list;
+    renderSelectedArtistFilters();
     state.currentPage = 1;
     renderSongs();
     renderCounts();
@@ -1582,6 +1603,24 @@
       if (window.matchMedia && window.matchMedia('(max-width: 680px)').matches) {
         document.body.classList.remove('filters-open');
       }
+    });
+    el['selected-artist-filters'].addEventListener('click', event => {
+      const removeButton = event.target.closest('[data-remove-selected-artist]');
+      const clearButton = event.target.closest('[data-clear-selected-artists]');
+      if (!removeButton && !clearButton) return;
+
+      if (clearButton) {
+        if (!state.selectedArtists.size) return;
+        state.selectedArtists.clear();
+      } else {
+        if (!state.selectedArtists.delete(removeButton.dataset.removeSelectedArtist)) return;
+      }
+
+      state.view = 'all';
+      state.activePlaylist = null;
+      renderPlaylists();
+      renderArtists();
+      applyFilters();
     });
     let lastObservedPageSize = getPageSize();
     window.addEventListener('resize', () => {
