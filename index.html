@@ -9,8 +9,8 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://hololive.hololivepro.com" crossorigin>
   <link rel="preconnect" href="https://i.ytimg.com" crossorigin>
-  <link rel="stylesheet" href="styles.css?v=20261011-compact">
-  <script defer src="app.js?v=20261011-compact"></script>
+  <link rel="stylesheet" href="styles.css?v=20261011-roster-mobile">
+  <script defer src="app.js?v=20261011-roster-mobile"></script>
 </head>
 <body>
   <a class="skip-link" href="#catalogue">Skip to music library</a>
@@ -35,6 +35,16 @@
   <div class="mobile-toolbar">
     <button id="mobile-filter-toggle" class="mobile-tool" type="button"><span>☷</span> Browse &amp; filters</button>
     <button id="mobile-player-toggle" class="mobile-tool" type="button"><span>♫</span> Player &amp; queue</button>
+  </div>
+
+  <div id="mobile-mini-player" class="mobile-mini-player" hidden aria-label="Currently playing">
+    <img id="mobile-mini-thumb" class="mobile-mini-thumb" alt="" src="" loading="lazy">
+    <button id="mobile-mini-expand" class="mobile-mini-info" type="button" aria-label="Open player and queue">
+      <strong id="mobile-mini-title">Nothing playing yet</strong>
+      <small id="mobile-mini-artist">Choose a song to start listening</small>
+    </button>
+    <button id="mobile-mini-toggle" class="mobile-mini-control mobile-mini-play" type="button" aria-label="Play or pause" disabled>▶</button>
+    <button id="mobile-mini-next" class="mobile-mini-control" type="button" aria-label="Next song" disabled>▶|</button>
   </div>
 
   <main class="app-layout">
@@ -87,14 +97,10 @@
             <div><strong id="hero-updated">—</strong><span>LIBRARY UPDATED</span></div>
           </div>
         </div>
-        <div class="hero-stage" aria-label="Hololive talent profile artwork">
+        <div id="hero-talent-art" class="hero-stage" aria-label="Random Hololive talent artwork">
           <div class="stage-ring ring-a"></div><div class="stage-ring ring-b"></div><div class="stage-ring ring-c"></div>
           <div class="stage-spark sparkle-a">✦</div><div class="stage-spark sparkle-b">✧</div><div class="stage-spark sparkle-c">♫</div>
           <div class="stage-chip"><i></i> ORIGINAL SONGS • YOUTUBE VIDEOS</div>
-          <img class="stage-talent stage-fubuki" src="https://hololive.hololivepro.com/wp-content/uploads/2020/06/Shirakami-Fubuki_pr-img_01.webp" alt="Shirakami Fubuki" loading="eager" onerror="this.style.display='none'">
-          <img class="stage-talent stage-miko" src="https://hololive.hololivepro.com/wp-content/uploads/2020/06/Sakura-Miko_pr-img_01.webp" alt="Sakura Miko" loading="eager" onerror="this.style.display='none'">
-          <img class="stage-talent stage-suisei" src="https://hololive.hololivepro.com/wp-content/uploads/2020/06/Hoshimachi-Suisei_pr-img_01.png" alt="Hoshimachi Suisei" loading="eager" onerror="this.style.display='none'">
-          <img class="stage-talent stage-marine" src="https://hololive.hololivepro.com/wp-content/uploads/2020/06/Houshou-Marine_pr-img_01.png" alt="Houshou Marine" loading="eager" onerror="this.style.display='none'">
           <div class="stage-caption"><span class="caption-note">♫</span><span><strong>Press play. Find your next fave.</strong><small>Official videos · Your own queue</small></span></div>
         </div>
         <div class="hero-footer"><span>✦</span> Made for the songs that stay with you <span>✦</span></div>
@@ -133,7 +139,7 @@
       <section class="library-section" aria-label="Browse songs">
         <div class="library-top">
           <div><span class="section-kicker">THE MUSIC LIBRARY</span><h2><span id="catalogue-title-text">All original songs</span> <span id="results-count" class="result-count">—</span></h2><p id="results-caption">Explore original music across the Hololive universe.</p></div>
-          <div class="library-controls"><label class="sort-control"><span>Sort by</span><select id="sort-select" aria-label="Sort songs"><option value="newest">Newest release</option><option value="oldest">Oldest release</option><option value="title">Title A–Z</option><option value="popular">Most viewed</option></select></label><button id="play-all" class="play-all-button" type="button"><span>▶</span> Play all</button></div>
+          <div class="library-controls"><label class="sort-control"><span>Sort by</span><select id="sort-select" aria-label="Sort songs"><option value="date">Release date</option><option value="title">Title</option><option value="popular">Views</option></select></label><button id="sort-direction" class="sort-direction" type="button" data-direction="desc" aria-label="Descending order" title="Newest first">↓</button><button id="play-all" class="play-all-button" type="button"><span>▶</span> Play all</button></div>
         </div>
         <div id="notice" class="notice" role="status" hidden></div>
         <div id="song-list" class="song-grid" aria-live="polite" aria-busy="true"></div>
