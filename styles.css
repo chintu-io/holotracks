@@ -4923,3 +4923,163 @@ body{
     min-height:36px!important;
   }
 }
+
+
+/* Touch-friendly spacing: distribute all seven player controls across the full row. */
+.player-controls{
+  display:grid!important;
+  grid-template-columns:repeat(7,minmax(0,1fr))!important;
+  grid-template-rows:48px!important;
+  justify-content:stretch!important;
+  align-items:center!important;
+  justify-items:center!important;
+  column-gap:0!important;
+  width:100%!important;
+  height:48px!important;
+  min-height:48px!important;
+  margin:10px 0 8px!important;
+  padding:0!important;
+  overflow:visible!important;
+}
+.player-controls > .volume-control,
+.player-controls > #queue-shuffle,
+.player-controls > #previous-song,
+.player-controls > #play-pause,
+.player-controls > #next-song,
+.player-controls > #queue-repeat,
+.player-controls > #player-share{
+  position:static!important;
+  inset:auto!important;
+  top:auto!important;
+  left:auto!important;
+  grid-row:1!important;
+  place-self:center!important;
+  margin:0!important;
+  transform:none!important;
+  flex:none!important;
+}
+.player-controls > .volume-control{
+  grid-column:1!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  width:38px!important;
+  height:38px!important;
+  min-width:38px!important;
+  min-height:38px!important;
+}
+.player-controls > #queue-shuffle{grid-column:2!important}
+.player-controls > #previous-song{grid-column:3!important}
+.player-controls > #play-pause{
+  grid-column:4!important;
+  width:46px!important;
+  height:46px!important;
+  min-width:46px!important;
+  min-height:46px!important;
+  z-index:2!important;
+}
+.player-controls > #next-song{grid-column:5!important}
+.player-controls > #queue-repeat{grid-column:6!important}
+.player-controls > #player-share{grid-column:7!important}
+.player-controls .volume-control > #volume-toggle,
+.player-controls > #queue-shuffle,
+.player-controls > #previous-song,
+.player-controls > #next-song,
+.player-controls > #queue-repeat,
+.player-controls > #player-share{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  width:36px!important;
+  height:36px!important;
+  min-width:36px!important;
+  min-height:36px!important;
+  padding:0!important;
+  font-size:16px!important;
+  line-height:1!important;
+  border-radius:10px!important;
+}
+.player-controls > #player-share{
+  color:#d6caff!important;
+  border:1px solid #4e4376!important;
+  background:#211e3b!important;
+}
+.player-controls > #player-share:hover:not(:disabled),
+.player-controls > #player-share:focus-visible{
+  border-color:#b59cff!important;
+  background:#342750!important;
+  color:#fff!important;
+}
+.player-controls > #player-share:disabled{
+  opacity:.35!important;
+  cursor:not-allowed!important;
+}
+.player-controls > #play-pause:hover:not(:disabled){
+  transform:scale(1.04)!important;
+}
+
+/* Keep the same even distribution on touch screens without horizontal overflow. */
+@media(max-width:680px){
+  .player-controls{
+    grid-template-columns:repeat(7,minmax(0,1fr))!important;
+    grid-template-rows:44px!important;
+    height:44px!important;
+    min-height:44px!important;
+    margin:8px 0 6px!important;
+  }
+  .player-controls > .volume-control{
+    width:36px!important;
+    height:36px!important;
+    min-width:36px!important;
+    min-height:36px!important;
+  }
+  .player-controls .volume-control > #volume-toggle,
+  .player-controls > #queue-shuffle,
+  .player-controls > #previous-song,
+  .player-controls > #next-song,
+  .player-controls > #queue-repeat,
+  .player-controls > #player-share{
+    width:34px!important;
+    height:34px!important;
+    min-width:34px!important;
+    min-height:34px!important;
+    font-size:15px!important;
+  }
+  .player-controls > #play-pause{
+    width:42px!important;
+    height:42px!important;
+    min-width:42px!important;
+    min-height:42px!important;
+  }
+}
+@media(max-width:390px){
+  .player-controls{
+    grid-template-columns:repeat(7,minmax(0,1fr))!important;
+    grid-template-rows:42px!important;
+    height:42px!important;
+    min-height:42px!important;
+  }
+  .player-controls > .volume-control{
+    width:34px!important;
+    height:34px!important;
+    min-width:34px!important;
+    min-height:34px!important;
+  }
+  .player-controls .volume-control > #volume-toggle,
+  .player-controls > #queue-shuffle,
+  .player-controls > #previous-song,
+  .player-controls > #next-song,
+  .player-controls > #queue-repeat,
+  .player-controls > #player-share{
+    width:32px!important;
+    height:32px!important;
+    min-width:32px!important;
+    min-height:32px!important;
+  }
+  .player-controls > #play-pause{
+    width:40px!important;
+    height:40px!important;
+    min-width:40px!important;
+    min-height:40px!important;
+  }
+}
