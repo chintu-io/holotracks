@@ -42,7 +42,7 @@
     'playing-thumb','playing-art-placeholder','playing-title','playing-artist','playing-favorite',
     'player-state','watch-youtube','play-pause','previous-song','next-song','queue-shuffle',
     'queue-repeat','queue-count','queue-list','clear-queue','create-playlist','playlist-list',
-    'playlist-select','save-queue','play-selected-playlist','playlist-dialog','playlist-form',
+    'playlist-select','save-queue','play-selected-playlist','playlist-dialog','playlist-form','cancel-playlist',
     'playlist-name','talent-strip','sidebar-collapse','mobile-mini-player','mobile-mini-thumb','mobile-mini-expand','mobile-mini-title','mobile-mini-artist','mobile-mini-toggle','mobile-mini-next','hero-talent-art',
   ];
   const el = Object.fromEntries(ids.map(id => [id, document.getElementById(id)]));
@@ -892,16 +892,43 @@
       el['search-button'].blur();
       el['search-input'].blur();
     });
+    const closeTalentPicker = () => {
+      const dialog = el['talent-picker-dialog'];
+      if (typeof dialog.close === 'function' && dialog.open) {
+        try {
+          dialog.close();
+          return;
+        } catch { /* Fall back to the non-modal open state below. */ }
+      }
+      dialog.removeAttribute('open');
+    };
     const openTalentPicker = () => {
-      if (!el['talent-picker-dialog'].open) el['talent-picker-dialog'].showModal();
+      const dialog = el['talent-picker-dialog'];
+      // Refresh the roster before opening so both entry points always show the
+      // latest catalogue, including when the user opens the picker quickly.
+      renderArtists();
+      if (!dialog.open) {
+        if (typeof dialog.showModal === 'function') {
+          try { dialog.showModal(); }
+          catch { dialog.setAttribute('open', ''); }
+        } else {
+          dialog.setAttribute('open', '');
+        }
+      }
       el['artist-search'].focus({ preventScroll: true });
     };
-    el['talent-picker-toggle'].addEventListener('click', openTalentPicker);
-    el['browse-all-talents'].addEventListener('click', openTalentPicker);
-    el['talent-picker-close'].addEventListener('click', () => el['talent-picker-dialog'].close());
-    el['talent-picker-done'].addEventListener('click', () => el['talent-picker-dialog'].close());
+    el['talent-picker-toggle'].addEventListener('click', event => {
+      event.preventDefault();
+      openTalentPicker();
+    });
+    el['browse-all-talents'].addEventListener('click', event => {
+      event.preventDefault();
+      openTalentPicker();
+    });
+    el['talent-picker-close'].addEventListener('click', closeTalentPicker);
+    el['talent-picker-done'].addEventListener('click', closeTalentPicker);
     el['talent-picker-dialog'].addEventListener('click', event => {
-      if (event.target === el['talent-picker-dialog']) el['talent-picker-dialog'].close();
+      if (event.target === el['talent-picker-dialog']) closeTalentPicker();
     });
     el['artist-search'].addEventListener('input', event => {
       state.artistQuery = event.target.value;
@@ -1016,6 +1043,12 @@
     el['create-playlist'].addEventListener('click', () => {
       el['playlist-name'].value = '';
       el['playlist-dialog'].showModal();
+      el['playlist-name'].focus({ preventScroll: true });
+    });
+    // Cancellation must never be blocked by the required playlist-name field.
+    el['cancel-playlist'].addEventListener('click', () => el['playlist-dialog'].close());
+    el['playlist-dialog'].addEventListener('click', event => {
+      if (event.target === el['playlist-dialog']) el['playlist-dialog'].close();
     });
     el['playlist-form'].addEventListener('submit', event => {
       event.preventDefault();
