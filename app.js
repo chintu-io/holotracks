@@ -130,51 +130,49 @@
     }
     return result;
   }
-  function pickBannerTalents() {
+  function pickBannerTalent() {
     const roster = state.talents.filter(item => item.slug && safeTalentImage(item.bannerImage || item.image));
-    if (roster.length <= 3) return roster.slice(0, 3);
+    if (!roster.length) return null;
     const bySlug = new Map(roster.map(item => [item.slug, item]));
     let deck = readJSON(KEYS.bannerDeck, []);
     if (!Array.isArray(deck)) deck = [];
     deck = deck.filter((slug, index) => bySlug.has(slug) && deck.indexOf(slug) === index);
-    if (deck.length < 3) {
-      const alreadyQueued = new Set(deck);
-      deck = [...deck, ...shuffled(roster.filter(item => !alreadyQueued.has(item.slug)).map(item => item.slug))];
-    }
-    const pickedSlugs = deck.splice(0, 3);
-    const previous = readJSON(KEYS.lastBanner, []);
-    if (Array.isArray(previous) &&
-        [...pickedSlugs].sort().join('|') === [...previous].sort().join('|') &&
-        deck.length) {
-      const replacementIndex = deck.findIndex(slug => !pickedSlugs.includes(slug));
-      if (replacementIndex >= 0) {
-        const previousPick = pickedSlugs[2];
-        pickedSlugs[2] = deck[replacementIndex];
-        deck.splice(replacementIndex, 1);
-        deck.push(previousPick);
+
+    // Rotate one featured talent per visit, exhausting the shuffled deck before reshuffling.
+    if (!deck.length) {
+      deck = shuffled(roster.map(item => item.slug));
+      const previous = readJSON(KEYS.lastBanner, []);
+      const previousSlugs = Array.isArray(previous)
+        ? previous
+        : (typeof previous === 'string' ? [previous] : []);
+      if (deck.length > 1 && previousSlugs.includes(deck[0])) {
+        const replacementIndex = deck.findIndex(slug => !previousSlugs.includes(slug));
+        if (replacementIndex > 0) [deck[0], deck[replacementIndex]] = [deck[replacementIndex], deck[0]];
       }
     }
+
+    const pickedSlug = deck.shift();
     saveJSON(KEYS.bannerDeck, deck);
-    saveJSON(KEYS.lastBanner, pickedSlugs);
-    return pickedSlugs.map(slug => bySlug.get(slug)).filter(Boolean);
+    saveJSON(KEYS.lastBanner, pickedSlug);
+    return bySlug.get(pickedSlug) || roster[0];
   }
   function renderHeroTalentArt() {
     const stage = el['hero-talent-art'];
     if (!stage) return;
     stage.querySelectorAll('.stage-talent').forEach(image => image.remove());
-    const talents = pickBannerTalents();
-    const slots = ['left', 'center', 'right'];
-    talents.forEach((talent, index) => {
-      const image = document.createElement('img');
-      image.className = 'stage-talent stage-' + slots[index];
-      image.src = safeTalentImage(talent.bannerImage) || safeTalentImage(ARTIST_IMAGES[talent.name]) || safeTalentImage(talent.image);
-      image.alt = talent.name;
-      image.loading = 'eager';
-      image.decoding = 'async';
-      image.onerror = () => { image.style.display = 'none'; };
-      const caption = stage.querySelector('.stage-caption');
-      stage.insertBefore(image, caption || null);
-    });
+    const talent = pickBannerTalent();
+    if (!talent) return;
+
+    const image = document.createElement('img');
+    image.className = 'stage-talent stage-featured';
+    image.src = safeTalentImage(talent.bannerImage) ||
+      safeTalentImage(ARTIST_IMAGES[talent.name]) || safeTalentImage(talent.image);
+    image.alt = talent.name + ' — featured Hololive talent';
+    image.loading = 'eager';
+    image.decoding = 'async';
+    image.onerror = () => { image.style.display = 'none'; };
+    const chip = stage.querySelector('.stage-chip');
+    stage.insertBefore(image, chip || null);
   }
   function renderTalentSpotlight() {
     const palette = ['#3b5993','#7c3b6e','#8d4a36','#704367','#327b99','#3d6d9e','#8c5c32','#75498f','#774337','#a46d36','#69476d','#a84c36'];
