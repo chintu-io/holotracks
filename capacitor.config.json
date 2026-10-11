@@ -1,0 +1,9 @@
+{
+  "appId": "io.chintu.holotracks",
+  "appName": "HoloTracks",
+  "webDir": "www",
+  "android": {
+    "allowMixedContent": false,
+    "backgroundColor": "#101025"
+  }
+}
