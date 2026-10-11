@@ -27,7 +27,7 @@
     shuffle: 'holotracks:shuffle:v1',
     repeat: 'holotracks:repeat:v1',
     bannerDeck: 'holotracks:banner-deck:v1',
-    sidebarCollapsed: 'holotracks:sidebar-collapsed:v1',
+    sidebarCollapsed: 'holotracks:sidebar-collapsed:v2',
     lastBanner: 'holotracks:banner-last:v1',
   };
   const ids = [
