@@ -3803,3 +3803,223 @@ body{
     padding-inline:15px!important;
   }
 }
+
+
+/* Balanced pinned player/queue layout: protect usable queue height on desktop. */
+@media (min-width:1221px){
+  .player-column,
+  body.player-docked .player-column{
+    grid-template-columns:minmax(0,1fr)!important;
+    grid-template-rows:minmax(0,1fr) minmax(350px,1fr)!important;
+    gap:10px!important;
+    height:calc(100vh - 96px)!important;
+    height:calc(100dvh - 96px)!important;
+    max-height:calc(100vh - 96px)!important;
+    max-height:calc(100dvh - 96px)!important;
+    min-height:0!important;
+    overflow:hidden!important;
+  }
+  .player-column .player-card,
+  body.player-docked .player-column .player-card{
+    display:flex!important;
+    flex-direction:column!important;
+    min-height:0!important;
+    height:100%!important;
+    overflow:hidden!important;
+  }
+  .player-column .player-head,
+  body.player-docked .player-column .player-head{
+    flex:none!important;
+    padding:7px 12px 5px!important;
+  }
+  .player-column .player-head h2,
+  body.player-docked .player-column .player-head h2{
+    margin-top:1px!important;
+    font-size:17px!important;
+    line-height:1.2!important;
+  }
+  .player-column .video-frame-wrap,
+  body.player-docked .player-column .video-frame-wrap{
+    flex:none!important;
+    width:min(100%,360px)!important;
+    max-width:360px!important;
+    height:auto!important;
+    min-height:0!important;
+    aspect-ratio:16/9!important;
+    margin-inline:auto!important;
+  }
+  .player-column .now-playing-meta,
+  body.player-docked .player-column .now-playing-meta{
+    flex:none!important;
+    min-height:0!important;
+    padding:6px 10px 7px!important;
+  }
+  .player-column .playing-title-row,
+  body.player-docked .player-column .playing-title-row{
+    gap:8px!important;
+  }
+  .player-column .playing-art,
+  body.player-docked .player-column .playing-art{
+    width:36px!important;
+    height:32px!important;
+  }
+  .player-column .playing-text strong,
+  body.player-docked .player-column .playing-text strong{
+    font-size:11.5px!important;
+    line-height:1.2!important;
+  }
+  .player-column .playing-text span,
+  body.player-docked .player-column .playing-text span{
+    font-size:10px!important;
+    line-height:1.2!important;
+  }
+  .player-column .player-heart,
+  body.player-docked .player-column .player-heart{
+    width:28px!important;
+    height:28px!important;
+  }
+  .player-column .player-controls,
+  body.player-docked .player-column .player-controls{
+    gap:8px!important;
+    margin:5px 0 3px!important;
+  }
+  .player-column .control-button,
+  body.player-docked .player-column .control-button{
+    width:27px!important;
+    height:27px!important;
+    min-width:27px!important;
+    min-height:27px!important;
+    font-size:14px!important;
+  }
+  .player-column .player-controls .volume-toggle,
+  body.player-docked .player-column .player-controls .volume-toggle{
+    width:27px!important;
+    height:27px!important;
+    min-width:27px!important;
+    min-height:27px!important;
+  }
+  .player-column .play-toggle,
+  body.player-docked .player-column .play-toggle{
+    width:34px!important;
+    height:34px!important;
+    min-width:34px!important;
+    min-height:34px!important;
+    font-size:14px!important;
+  }
+  .player-column .player-status-row,
+  body.player-docked .player-column .player-status-row{
+    gap:6px!important;
+    font-size:9.5px!important;
+    line-height:1.2!important;
+  }
+  .player-column .queue-card,
+  body.player-docked .player-column .queue-card{
+    display:flex!important;
+    flex-direction:column!important;
+    min-width:0!important;
+    min-height:0!important;
+    height:100%!important;
+    max-height:none!important;
+    padding:7px 9px 6px!important;
+    overflow:hidden!important;
+  }
+  .player-column .queue-heading,
+  body.player-docked .player-column .queue-heading{
+    flex:none!important;
+    margin-bottom:3px!important;
+  }
+  .player-column .queue-heading h2,
+  body.player-docked .player-column .queue-heading h2{
+    margin-top:1px!important;
+    font-size:16px!important;
+    line-height:1.2!important;
+  }
+  .player-column .queue-heading .result-count,
+  body.player-docked .player-column .queue-heading .result-count{
+    padding:2px 6px!important;
+    font-size:11px!important;
+  }
+  .player-column .queue-list,
+  body.player-docked .player-column .queue-list{
+    display:block!important;
+    flex:1 1 0!important;
+    min-height:0!important;
+    max-height:none!important;
+    padding:1px 2px 2px!important;
+    overflow-x:hidden!important;
+    overflow-y:auto!important;
+    overscroll-behavior:contain!important;
+  }
+  .player-column .queue-track,
+  body.player-docked .player-column .queue-track{
+    min-height:34px!important;
+    padding:2px 4px!important;
+    gap:6px!important;
+  }
+  .player-column .queue-track-art,
+  body.player-docked .player-column .queue-track-art{
+    width:42px!important;
+    height:30px!important;
+    flex:0 0 42px!important;
+  }
+  .player-column .queue-track-info strong,
+  body.player-docked .player-column .queue-track-info strong{
+    display:block!important;
+    font-size:11px!important;
+    line-height:1.2!important;
+    white-space:nowrap!important;
+  }
+  .player-column .queue-track-info span,
+  body.player-docked .player-column .queue-track-info span{
+    font-size:9.5px!important;
+    line-height:1.2!important;
+  }
+  .player-column .queue-track-play,
+  .player-column .queue-track-remove,
+  body.player-docked .player-column .queue-track-play,
+  body.player-docked .player-column .queue-track-remove{
+    width:26px!important;
+    height:26px!important;
+    min-width:26px!important;
+    min-height:26px!important;
+    font-size:14px!important;
+  }
+  .player-column .queue-actions,
+  body.player-docked .player-column .queue-actions{
+    flex:none!important;
+    margin-top:3px!important;
+    padding-top:5px!important;
+  }
+  .player-column .playlist-select-label,
+  body.player-docked .player-column .playlist-select-label{
+    margin-bottom:3px!important;
+    font-size:10.5px!important;
+    line-height:1.2!important;
+  }
+  .player-column .playlist-select-row select,
+  body.player-docked .player-column .playlist-select-row select,
+  .player-column .save-button,
+  body.player-docked .player-column .save-button{
+    min-height:30px!important;
+    padding:5px 7px!important;
+    font-size:10px!important;
+  }
+  .player-column .playlist-play,
+  body.player-docked .player-column .playlist-play{
+    margin-top:2px!important;
+    padding:2px 0!important;
+    font-size:10px!important;
+    line-height:1.2!important;
+  }
+}
+@media (min-width:1221px) and (max-height:760px){
+  .player-column,
+  body.player-docked .player-column{
+    grid-template-rows:minmax(0,1fr) minmax(310px,1fr)!important;
+  }
+  .player-column .video-frame-wrap,
+  body.player-docked .player-column .video-frame-wrap{
+    width:min(100%,310px)!important;
+    max-width:310px!important;
+  }
+}
