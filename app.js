@@ -43,7 +43,7 @@
     'player-state','watch-youtube','play-pause','previous-song','next-song','queue-shuffle',
     'queue-repeat','queue-count','queue-list','clear-queue','create-playlist','playlist-list',
     'playlist-select','save-queue','play-selected-playlist','playlist-dialog','playlist-form','cancel-playlist',
-    'playlist-name','talent-strip','talent-page-status','talent-page-prev','talent-page-next','talent-page-shuffle','sidebar-collapse','mobile-mini-player','mobile-mini-thumb','mobile-mini-expand','mobile-mini-title','mobile-mini-artist','mobile-mini-toggle','mobile-mini-next','hero-talent-art',
+    'playlist-name','talent-strip','sidebar-collapse','mobile-mini-player','mobile-mini-thumb','mobile-mini-expand','mobile-mini-title','mobile-mini-artist','mobile-mini-toggle','mobile-mini-next','hero-talent-art',
   ];
   const el = Object.fromEntries(ids.map(id => [id, document.getElementById(id)]));
   const readJSON = (key, fallback) => {
@@ -222,23 +222,43 @@
       renderHeroTalentArt({ transition: true });
     }, BANNER_ROTATE_MS);
   }
-  const TALENT_PAGE_SIZE = 10;
+  const TALENT_SET_SIZE = 10;
+  const TALENT_ROTATE_MS = 8500;
+  const TALENT_FADE_MS = 400;
   let talentSpotlightRoster = [];
   let talentSpotlightPage = 0;
+  let talentSpotlightTimer = null;
+  let talentSpotlightFadeTimer = null;
 
-  function renderTalentSpotlightPage() {
+  function visibleSpotlightNames() {
+    return new Set(
+      [...el['talent-strip'].querySelectorAll('[data-spotlight-artist]')]
+        .map(card => artistKey(card.dataset.spotlightArtist)),
+    );
+  }
+
+  function shuffleSpotlightAvoiding(previousNames) {
+    const roster = state.talents.filter(item => item.name && safeTalentImage(item.image));
+    let candidate = shuffled(roster);
+    // Avoid a visually repetitive transition at the end of the cycle.
+    for (let attempt = 0; attempt < 16 && candidate.length > TALENT_SET_SIZE; attempt += 1) {
+      const firstSet = candidate.slice(0, TALENT_SET_SIZE);
+      if (!firstSet.some(item => previousNames.has(artistKey(item.name)))) break;
+      candidate = shuffled(roster);
+    }
+    return candidate;
+  }
+
+  function renderTalentSpotlightSet() {
     const strip = el['talent-strip'];
     if (!strip) return;
-    const total = talentSpotlightRoster.length;
-    const pageCount = Math.max(1, Math.ceil(total / TALENT_PAGE_SIZE));
-    talentSpotlightPage = Math.min(Math.max(0, talentSpotlightPage), pageCount - 1);
-    const start = talentSpotlightPage * TALENT_PAGE_SIZE;
-    const visible = talentSpotlightRoster.slice(start, start + TALENT_PAGE_SIZE);
     const palette = ['#3b5993','#7c3b6e','#8d4a36','#704367','#327b99','#3d6d9e','#8c5c32','#75498f','#774337','#a46d36','#69476d','#a84c36'];
+    const start = talentSpotlightPage * TALENT_SET_SIZE;
+    const visible = talentSpotlightRoster.slice(start, start + TALENT_SET_SIZE);
 
     strip.innerHTML = visible.map((talent, index) =>
       '<button class="talent-card" type="button" data-spotlight-artist="' + escapeHTML(talent.name) +
-      '" style="--talent:' + palette[(start + index) % palette.length] + '" title="Browse ' + escapeHTML(talent.name) + '">' +
+      '" style="--talent:' + palette[index % palette.length] + '" title="Browse ' + escapeHTML(talent.name) + '">' +
       '<span class="talent-image"><img src="' + escapeHTML(safeTalentImage(talent.image)) +
       '" alt="" loading="eager" decoding="async"><i>' +
       escapeHTML(talent.name.slice(0, 2).toUpperCase()) + '</i></span><strong>' +
@@ -248,28 +268,55 @@
     strip.querySelectorAll('img').forEach(image => {
       image.addEventListener('error', () => { image.style.display = 'none'; }, { once: true });
     });
+    renderArtists();
+  }
 
-    const firstNumber = total ? start + 1 : 0;
-    const lastNumber = Math.min(start + TALENT_PAGE_SIZE, total);
-    el['talent-page-status'].textContent = total
-      ? firstNumber.toLocaleString() + '–' + lastNumber.toLocaleString() + ' of ' + total.toLocaleString()
-      : 'No talents available';
-    el['talent-page-prev'].disabled = talentSpotlightPage === 0;
-    el['talent-page-next'].disabled = lastNumber >= total;
-    el['talent-page-prev'].setAttribute('aria-label', 'Previous 10 talents');
-    el['talent-page-next'].setAttribute('aria-label', 'Next 10 talents');
-    el['talent-page-shuffle'].setAttribute('aria-label', 'Shuffle official talent order');
+  function rotateTalentSpotlightSet() {
+    const strip = el['talent-strip'];
+    if (!strip || document.hidden || strip.matches(':hover') ||
+        strip.contains(document.activeElement) ||
+        (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) {
+      return;
+    }
+
+    if (talentSpotlightFadeTimer !== null) window.clearTimeout(talentSpotlightFadeTimer);
+    const currentNames = visibleSpotlightNames();
+    strip.classList.add('is-fading');
+
+    talentSpotlightFadeTimer = window.setTimeout(() => {
+      const pageCount = Math.max(1, Math.floor(talentSpotlightRoster.length / TALENT_SET_SIZE));
+      if (talentSpotlightPage + 1 >= pageCount) {
+        talentSpotlightRoster = shuffleSpotlightAvoiding(currentNames);
+        talentSpotlightPage = 0;
+      } else {
+        talentSpotlightPage += 1;
+      }
+
+      renderTalentSpotlightSet();
+      // Two frames ensure the replacement cards are painted at full opacity
+      // rather than blending with the previous set.
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        strip.classList.remove('is-fading');
+        talentSpotlightFadeTimer = null;
+      }));
+    }, TALENT_FADE_MS);
   }
 
   function renderTalentSpotlight() {
-    // Randomize on page load, then use stable ten-talent pages so portraits
-    // remain still and sharp instead of being continuously moved.
+    // Randomize the order at startup, then fade between still groups of ten.
+    // Using complete groups means all visible sets have a balanced layout;
+    // the one remaining talent (when the roster isn't divisible by ten) gets
+    // another chance to appear after the next reshuffle.
     talentSpotlightRoster = shuffled(
       state.talents.filter(item => item.name && safeTalentImage(item.image))
     );
     talentSpotlightPage = 0;
-    renderTalentSpotlightPage();
-    renderArtists();
+    if (talentSpotlightTimer !== null) window.clearInterval(talentSpotlightTimer);
+    if (talentSpotlightFadeTimer !== null) window.clearTimeout(talentSpotlightFadeTimer);
+    el['talent-strip'].classList.remove('is-fading');
+    renderTalentSpotlightSet();
+
+    talentSpotlightTimer = window.setInterval(rotateTalentSpotlightSet, TALENT_ROTATE_MS);
   }
 
   async function loadTalentRoster() {
@@ -1081,21 +1128,6 @@
       if (button.dataset.action === 'play') playSong(id);
       if (button.dataset.action === 'queue') addToQueue(id);
       if (button.dataset.action === 'favorite') toggleFavorite(id);
-    });
-    el['talent-page-prev'].addEventListener('click', () => {
-      if (talentSpotlightPage <= 0) return;
-      talentSpotlightPage -= 1;
-      renderTalentSpotlightPage();
-    });
-    el['talent-page-next'].addEventListener('click', () => {
-      if ((talentSpotlightPage + 1) * TALENT_PAGE_SIZE >= talentSpotlightRoster.length) return;
-      talentSpotlightPage += 1;
-      renderTalentSpotlightPage();
-    });
-    el['talent-page-shuffle'].addEventListener('click', () => {
-      talentSpotlightRoster = shuffled(talentSpotlightRoster);
-      talentSpotlightPage = 0;
-      renderTalentSpotlightPage();
     });
     el['talent-strip'].addEventListener('click', event => {
       const button = event.target.closest('[data-spotlight-artist]');
