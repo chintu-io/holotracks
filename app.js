@@ -31,7 +31,7 @@
     lastBanner: 'holotracks:banner-last:v1',
   };
   const ids = [
-    'search-input','search-button','artist-search','artist-filters','artist-count','show-all-artists',
+    'search-input','search-button','global-search-form','artist-search','artist-filters','artist-count','show-all-artists',
     'clear-filters','nav-total','fav-total','hero-song-count','hero-artist-count','hero-updated',
     'source-status','catalogue-title-text','results-count','results-caption','sort-select',
     'type-all-count','type-original-count','type-cover-count','nav-original-total','nav-cover-total',
@@ -789,7 +789,8 @@
       state.query = event.target.value;
       applyFilters();
     });
-    el['search-button'].addEventListener('click', () => {
+    el['global-search-form'].addEventListener('submit', event => {
+      event.preventDefault();
       state.query = el['search-input'].value;
       applyFilters();
       const target = document.getElementById('catalogue') || el['song-list'];
