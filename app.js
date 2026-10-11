@@ -227,8 +227,8 @@
     }, BANNER_ROTATE_MS);
   }
   const TALENT_SET_SIZE = 10;
-  const TALENT_ROTATE_MS = 8500;
-  const TALENT_FADE_MS = 400;
+  const TALENT_ROTATE_MS = 15000;
+  const TALENT_FADE_MS = 650;
   let talentSpotlightRoster = [];
   let talentSpotlightPage = 0;
   let talentSpotlightTimer = null;
