@@ -949,15 +949,18 @@
   function toggleMobilePlayerPanel(force) {
     const open = typeof force === 'boolean' ? force : !el['player-column'].classList.contains('mobile-open');
 
-    // This overlay can be minimized without pausing the embedded YouTube player.
-    // Clear compact mode when opening/closing so its hidden-video state cannot stick.
+    // Player and filter panels are mutually exclusive on phones.
+    // Minimize to the mini-player without interrupting playback.
     document.body.classList.remove('compact-player');
+    document.body.classList.remove('filters-open');
+    el['mobile-filter-toggle'].setAttribute('aria-expanded', 'false');
     el['player-column'].classList.toggle('mobile-open', open);
     document.body.classList.toggle('mobile-player-open', open);
     el['mobile-player-toggle'].setAttribute('aria-expanded', String(open));
     el['player-hide'].setAttribute('aria-expanded', String(open));
     el['player-hide'].setAttribute('aria-label', open ? 'Minimize player and return to library' : 'Collapse player panel');
     el['player-hide'].title = open ? 'Minimize player and return to library' : 'Collapse player panel';
+    if (open) el['player-column'].scrollTop = 0;
   }
 
   function loadYouTubeAPI() {
@@ -1374,7 +1377,13 @@
       playSong(playlist.songIds[0], playlist.songIds);
     });
     el['mobile-filter-toggle'].addEventListener('click', () => {
-      document.body.classList.toggle('filters-open');
+      const willOpen = !document.body.classList.contains('filters-open');
+      if (willOpen && document.body.classList.contains('mobile-player-open')) {
+        toggleMobilePlayerPanel(false);
+      }
+      document.body.classList.toggle('filters-open', willOpen);
+      el['mobile-filter-toggle'].setAttribute('aria-expanded', String(willOpen));
+      if (willOpen) document.body.classList.remove('compact-player');
     });
     el['mobile-player-toggle'].addEventListener('click', () => {
       if (window.matchMedia && window.matchMedia('(max-width: 680px)').matches) {
@@ -1384,11 +1393,31 @@
       }
     });
     document.addEventListener('click', event => {
-      if (!document.body.classList.contains('mobile-player-open')) return;
-      if (event.target.closest('#player-column, #mobile-mini-player, #mobile-player-toggle')) return;
-      toggleMobilePlayerPanel(false);
+      if (document.body.classList.contains('mobile-player-open') &&
+          !event.target.closest('#player-column, #mobile-mini-player, #mobile-player-toggle')) {
+        toggleMobilePlayerPanel(false);
+      }
+      if (document.body.classList.contains('filters-open') &&
+          !event.target.closest('#sidebar, #mobile-filter-toggle')) {
+        document.body.classList.remove('filters-open');
+        el['mobile-filter-toggle'].setAttribute('aria-expanded', 'false');
+      }
+    });
+    document.addEventListener('keydown', event => {
+      if (event.key !== 'Escape') return;
+      if (document.body.classList.contains('mobile-player-open')) toggleMobilePlayerPanel(false);
+      if (document.body.classList.contains('filters-open')) {
+        document.body.classList.remove('filters-open');
+        el['mobile-filter-toggle'].setAttribute('aria-expanded', 'false');
+      }
     });
     el['sidebar-collapse'].addEventListener('click', () => {
+      if (window.matchMedia && window.matchMedia('(max-width: 680px)').matches &&
+          document.body.classList.contains('filters-open')) {
+        document.body.classList.remove('filters-open');
+        el['mobile-filter-toggle'].setAttribute('aria-expanded', 'false');
+        return;
+      }
       setSidebarCollapsed(!document.body.classList.contains('sidebar-collapsed'));
     });
     el['player-hide'].addEventListener('click', () => {
