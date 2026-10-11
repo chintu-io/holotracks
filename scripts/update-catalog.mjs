@@ -401,7 +401,7 @@ async function main() {
     schemaVersion: 1,
     generatedAt,
     lastFullReconciledAt: mode === 'full' ? startedAt : (existing.lastFullReconciledAt || null),
-    lastMode: mode,
+    lastMode: mode === 'incremental' && !songDataChanged ? (existing.lastMode || mode) : mode,
     source: 'Holodex API v2',
     query: { org: 'Hololive', topic: 'Original_Song', target: ['stream'] },
     total: mergedSongs.length,
