@@ -1,7 +1,7 @@
 'use strict';
 
 (() => {
-  const PAGE_SIZE = 60;
+  const PAGE_SIZE = 30;
   const FRESH_WINDOW_DAYS = 180;
   const BANNER_ROTATE_MS = 7000;
   const ARTIST_IMAGES = {
@@ -32,6 +32,7 @@
   };
   const ids = [
     'search-input','search-button','global-search-form','artist-search','artist-filters','artist-count','show-all-artists',
+    'talent-picker-toggle','talent-picker-count','talent-picker-dialog','talent-picker-close','talent-picker-done','talent-picker-selected','browse-all-talents',
     'clear-filters','nav-total','fav-total','hero-song-count','hero-artist-count','hero-updated',
     'source-status','catalogue-title-text','results-count','results-caption','sort-select',
     'type-all-count','type-original-count','type-cover-count','nav-original-total','nav-cover-total',
@@ -217,7 +218,12 @@
   function renderTalentSpotlight() {
     const palette = ['#3b5993','#7c3b6e','#8d4a36','#704367','#327b99','#3d6d9e','#8c5c32','#75498f','#774337','#a46d36','#69476d','#a84c36'];
     const roster = state.talents.filter(item => item.name && safeTalentImage(item.image));
-    el['talent-strip'].innerHTML = roster.map((talent, index) =>
+    const featuredNames = Object.keys(ARTIST_IMAGES);
+    const featured = featuredNames
+      .map(name => roster.find(talent => normalized(talent.name) === normalized(name)))
+      .filter(Boolean)
+      .slice(0, 12);
+    el['talent-strip'].innerHTML = featured.map((talent, index) =>
       '<button class="talent-card" type="button" data-spotlight-artist="' + escapeHTML(talent.name) +
       '" style="--talent:' + palette[index % palette.length] + '" title="Browse ' + escapeHTML(talent.name) + '">' +
       '<span class="talent-image"><img src="' + escapeHTML(safeTalentImage(talent.image)) +
@@ -350,18 +356,27 @@
     const rows = [...counts.entries()]
       .sort((a, b) => a[0].localeCompare(b[0]))
       .filter(([artist]) => artist.toLocaleLowerCase().includes(query));
-    el['artist-count'].textContent = counts.size;
+    el['artist-count'].textContent = counts.size.toLocaleString();
     el['artist-filters'].innerHTML = rows.map(([artist, count]) => {
       const portrait = state.artistPortraits.get(artist) || resolveRosterPortrait(artist) || ARTIST_IMAGES[artist];
       const portraitMarkup = portrait
-        ? '<img class="artist-avatar" src="' + portrait + '" alt="" loading="lazy" onerror="this.style.display=\'none\'">'
-        : '';
-      return '<label class="artist-check"><input type="checkbox" data-artist="' + escapeHTML(artist) + '"' +
+        ? '<img class="artist-avatar" src="' + escapeHTML(portrait) + '" alt="" loading="lazy" decoding="async">'
+        : '<span class="artist-avatar artist-avatar-fallback" aria-hidden="true">♫</span>';
+      return '<label class="artist-check" title="Filter songs by ' + escapeHTML(artist) + '">' +
+        '<input type="checkbox" data-artist="' + escapeHTML(artist) + '"' +
         (state.selectedArtists.has(artist) ? ' checked' : '') + '>' + portraitMarkup +
-        '<span>' + escapeHTML(artist) + '</span><small>' + count + '</small></label>';
+        '<span class="artist-name">' + escapeHTML(artist) + '</span><small>' + count.toLocaleString() + '</small></label>';
     }).join('') || '<p class="filter-empty">No matching talents.</p>';
-    el['show-all-artists'].hidden = rows.length <= 12;
-    if (rows.length > 12) el['show-all-artists'].textContent = 'Show all ' + rows.length + ' talents';
+    el['show-all-artists'].hidden = true;
+    const selectedCount = state.selectedArtists.size;
+    el['talent-picker-count'].textContent = selectedCount ? String(selectedCount) : 'Browse';
+    el['talent-picker-selected'].textContent = selectedCount
+      ? selectedCount + ' talent' + (selectedCount === 1 ? '' : 's') + ' selected · matching songs are shown together'
+      : 'All talents · no filters applied';
+    el['talent-picker-toggle'].classList.toggle('has-selection', selectedCount > 0);
+    el['talent-picker-toggle'].setAttribute('aria-label', selectedCount
+      ? 'Browse talents; ' + selectedCount + ' selected'
+      : 'Browse talent filters');
     document.querySelectorAll('[data-spotlight-artist]').forEach(button => {
       const wanted = normalized(button.dataset.spotlightArtist);
       const selectedName = [...state.selectedArtists].some(name => normalized(name) === wanted);
@@ -868,6 +883,17 @@
       // Remove the persistent focus-within glow after the search action.
       el['search-button'].blur();
       el['search-input'].blur();
+    });
+    const openTalentPicker = () => {
+      if (!el['talent-picker-dialog'].open) el['talent-picker-dialog'].showModal();
+      el['artist-search'].focus({ preventScroll: true });
+    };
+    el['talent-picker-toggle'].addEventListener('click', openTalentPicker);
+    el['browse-all-talents'].addEventListener('click', openTalentPicker);
+    el['talent-picker-close'].addEventListener('click', () => el['talent-picker-dialog'].close());
+    el['talent-picker-done'].addEventListener('click', () => el['talent-picker-dialog'].close());
+    el['talent-picker-dialog'].addEventListener('click', event => {
+      if (event.target === el['talent-picker-dialog']) el['talent-picker-dialog'].close();
     });
     el['artist-search'].addEventListener('input', event => {
       state.artistQuery = event.target.value;
