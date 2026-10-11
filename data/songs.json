@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-11T17:38:28.555Z",
+  "generatedAt": "2026-10-11T17:47:12.974Z",
   "lastFullReconciledAt": "2026-10-11T17:38:28.555Z",
   "lastMode": "full",
   "source": "Holodex API v2",
@@ -6184,8 +6184,8 @@
       "duration": 273,
       "source": "Holodex",
       "songType": "original",
-      "likeCount": null,
-      "statisticsCheckedAt": "2026-10-11T17:47:02.435Z"
+      "statisticsCheckedAt": "2026-10-11T17:47:02.435Z",
+      "likeCount": null
     },
     {
       "id": "2ki3sBxtNzo",
@@ -8152,8 +8152,8 @@
       "duration": 217,
       "source": "Holodex",
       "songType": "original",
-      "likeCount": null,
-      "statisticsCheckedAt": "2026-10-11T17:47:02.435Z"
+      "statisticsCheckedAt": "2026-10-11T17:47:02.435Z",
+      "likeCount": null
     },
     {
       "id": "-7cYjcTL7OE",
@@ -9028,8 +9028,8 @@
       "duration": 163,
       "source": "Holodex",
       "songType": "original",
-      "likeCount": null,
-      "statisticsCheckedAt": "2026-10-11T17:47:02.435Z"
+      "statisticsCheckedAt": "2026-10-11T17:47:02.435Z",
+      "likeCount": null
     },
     {
       "id": "qWZGv3V7vaY",
@@ -110912,7 +110912,8 @@
       "viewCount": 98653,
       "duration": 270,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": null
     },
     {
       "id": "YLZRPGqtMv4",
