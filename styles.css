@@ -2276,3 +2276,23 @@ button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid 
   }
   .talent-section #talent-strip .talent-card strong{font-size:9px!important}
 }
+
+
+/* Banner-style talent rotation: stable portraits with an opacity-only crossfade. */
+.talent-section #talent-strip{
+  opacity:1;
+  transition:opacity 400ms ease;
+  will-change:opacity;
+}
+.talent-section #talent-strip.is-fading{
+  opacity:0;
+  pointer-events:none;
+}
+.talent-section #talent-strip .talent-card,
+.talent-section #talent-strip .talent-card .talent-image img{
+  animation:none!important;
+  transition:none!important;
+}
+@media(prefers-reduced-motion:reduce){
+  .talent-section #talent-strip{transition:none}
+}
