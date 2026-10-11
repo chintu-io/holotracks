@@ -3,6 +3,7 @@
 (() => {
   const PAGE_SIZE = 60;
   const FRESH_WINDOW_DAYS = 180;
+  const BANNER_ROTATE_MS = 7000;
   const ARTIST_IMAGES = {
     'Hoshimachi Suisei': 'https://hololive.hololivepro.com/wp-content/uploads/2020/06/Hoshimachi-Suisei_pr-img_01.png',
     'Sakura Miko': 'https://hololive.hololivepro.com/wp-content/uploads/2020/06/Sakura-Miko_pr-img_01.webp',
@@ -156,23 +157,47 @@
     saveJSON(KEYS.lastBanner, pickedSlug);
     return bySlug.get(pickedSlug) || roster[0];
   }
-  function renderHeroTalentArt() {
+  function renderHeroTalentArt({ transition = false } = {}) {
     const stage = el['hero-talent-art'];
     if (!stage) return;
-    stage.querySelectorAll('.stage-talent').forEach(image => image.remove());
+    const previous = stage.querySelector('.stage-featured:not(.is-exiting)');
     const talent = pickBannerTalent();
     if (!talent) return;
 
     const image = document.createElement('img');
-    image.className = 'stage-talent stage-featured';
+    image.className = 'stage-talent stage-featured is-entering';
     image.src = safeTalentImage(talent.bannerImage) ||
       safeTalentImage(ARTIST_IMAGES[talent.name]) || safeTalentImage(talent.image);
     image.alt = talent.name + ' — featured Hololive talent';
     image.loading = 'eager';
     image.decoding = 'async';
-    image.onerror = () => { image.style.display = 'none'; };
-    const chip = stage.querySelector('.stage-chip');
-    stage.insertBefore(image, chip || null);
+    image.onerror = () => {
+      image.remove();
+      if (previous) previous.classList.remove('is-exiting');
+    };
+    image.onload = () => {
+      if (!transition || !previous) {
+        image.classList.remove('is-entering');
+        image.classList.add('is-visible');
+        if (previous) previous.remove();
+        return;
+      }
+      window.requestAnimationFrame(() => {
+        image.classList.remove('is-entering');
+        image.classList.add('is-visible');
+        previous.classList.add('is-exiting');
+        window.setTimeout(() => previous.remove(), 720);
+      });
+    };
+    stage.appendChild(image);
+  }
+  let heroRotationTimer = null;
+  function startHeroRotation() {
+    if (heroRotationTimer !== null) window.clearInterval(heroRotationTimer);
+    heroRotationTimer = window.setInterval(() => {
+      if (document.visibilityState === 'hidden') return;
+      renderHeroTalentArt({ transition: true });
+    }, BANNER_ROTATE_MS);
   }
   function renderTalentSpotlight() {
     const palette = ['#3b5993','#7c3b6e','#8d4a36','#704367','#327b99','#3d6d9e','#8c5c32','#75498f','#774337','#a46d36','#69476d','#a84c36'];
@@ -207,6 +232,7 @@
     for (const talent of state.talents) ARTIST_IMAGES[talent.name] = talent.image;
     renderHeroTalentArt();
     renderTalentSpotlight();
+    startHeroRotation();
   }
 
   function sortSongs(items) {
@@ -939,6 +965,7 @@
     renderCounts();
   }
   window.addEventListener('beforeunload', () => {
+    if (heroRotationTimer !== null) window.clearInterval(heroRotationTimer);
     saveJSON(KEYS.favorites, [...state.favorites]);
     saveJSON(KEYS.playlists, state.playlists);
   });
