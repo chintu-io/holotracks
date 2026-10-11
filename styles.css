@@ -1015,3 +1015,51 @@ button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid 
   .stage-talent.stage-featured{right:-7%!important;height:calc(100% - 67px)!important;opacity:.75!important}
   .stage-chip{max-width:calc(100% - 14px);font-size:5.5px!important}
 }
+
+/* Featured talent spotlight refinement: increase presence while reserving the badge corner. */
+.hero-stage{
+  background:
+    radial-gradient(ellipse at 76% 55%,#86a6ff30 0%,#657de814 34%,transparent 62%),
+    radial-gradient(ellipse at 74% 84%,#45ddf23b 0%,transparent 48%),
+    radial-gradient(ellipse at 64% 44%,#ff79cf12 0%,transparent 58%)!important;
+}
+.hero-stage:after{
+  background:
+    radial-gradient(ellipse at 74% 61%,#95a6ff1c 0%,transparent 53%),
+    linear-gradient(180deg,#11122a08 45%,#11152d4a 100%)!important;
+}
+.stage-talent.stage-featured{
+  right:1%!important;
+  bottom:-27px!important;
+  height:calc(100% + 28px)!important;
+  filter:
+    drop-shadow(0 16px 23px #03030bd0)
+    drop-shadow(0 0 15px #83dfff1e)
+    drop-shadow(-9px 0 18px #b5a0ff13)!important;
+}
+.stage-chip{
+  left:12px!important;
+  right:auto!important;
+  top:12px!important;
+  z-index:8!important;
+  box-shadow:0 6px 18px #05061855,0 0 18px #6e91ff12!important;
+  backdrop-filter:blur(12px);
+}
+.stage-ring{left:65%!important;top:56%!important;opacity:.65!important}
+.sparkle-a{top:27%!important;right:10%!important;font-size:22px!important}
+.sparkle-b{top:52%!important;left:8%!important}
+@media(min-width:1221px){
+  .stage-talent.stage-featured{right:1%!important;bottom:-30px!important;height:calc(100% + 34px)!important}
+}
+@media(max-width:1220px) and (min-width:681px){
+  .stage-talent.stage-featured{right:-2%!important;bottom:-20px!important;height:calc(100% + 6px)!important}
+  .stage-chip{left:8px!important;right:auto!important;max-width:calc(100% - 20px)}
+}
+@media(max-width:680px){
+  .stage-talent.stage-featured{right:-4%!important;bottom:-12px!important;height:calc(100% - 22px)!important;opacity:.9!important}
+  .stage-chip{left:auto!important;right:8px!important;top:9px!important;max-width:calc(100% - 14px)}
+  .stage-ring{left:66%!important;top:56%!important}
+}
+@media(max-width:390px){
+  .stage-talent.stage-featured{right:-8%!important;height:calc(100% - 36px)!important;opacity:.84!important}
+}
