@@ -46,6 +46,7 @@ jobs:
           EVENT_NAME: ${{ github.event_name }}
           SCHEDULE: ${{ github.event.schedule }}
           DISPATCH_MODE: ${{ inputs.mode }}
+          COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
         shell: bash
         run: |
           MODE="incremental"
@@ -53,10 +54,9 @@ jobs:
             MODE="full"
           elif [[ "$EVENT_NAME" == "schedule" && "$SCHEDULE" == "43 4 * * 0" ]]; then
             MODE="full"
-          elif [[ "$EVENT_NAME" == "push" ]]; then
-            # This workflow only runs on importer/package/workflow-path changes.
-            # Run a complete reconciliation for those code changes. Catalogue data commits
-            # do not match the push path filter, so normal daily runs remain incremental.
+          elif [[ "$EVENT_NAME" == "push" && "$COMMIT_MESSAGE" == *"[full-scan]"* ]]; then
+            # Add [full-scan] to an importer/schema-change commit to reconcile all pages.
+            # Routine workflow/package edits remain incremental and low-traffic.
             MODE="full"
           fi
           echo "mode=$MODE" >> "$GITHUB_OUTPUT"
