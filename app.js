@@ -903,6 +903,7 @@
       const input = event.target.closest('input[data-artist]');
       if (!input) return;
       input.checked ? state.selectedArtists.add(input.dataset.artist) : state.selectedArtists.delete(input.dataset.artist);
+      renderArtists();
       state.view = 'all';
       state.activePlaylist = null;
       renderPlaylists();
