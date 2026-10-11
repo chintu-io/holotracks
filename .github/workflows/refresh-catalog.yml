@@ -46,7 +46,6 @@ jobs:
           EVENT_NAME: ${{ github.event_name }}
           SCHEDULE: ${{ github.event.schedule }}
           DISPATCH_MODE: ${{ inputs.mode }}
-          MODIFIED_FILES: ${{ toJSON(github.event.head_commit.modified) }}
         shell: bash
         run: |
           MODE="incremental"
@@ -54,9 +53,10 @@ jobs:
             MODE="full"
           elif [[ "$EVENT_NAME" == "schedule" && "$SCHEDULE" == "43 4 * * 0" ]]; then
             MODE="full"
-          elif [[ "$EVENT_NAME" == "push" && "$MODIFIED_FILES" == *"scripts/update-catalog.mjs"* ]]; then
-            # Importer/schema changes need one complete reconciliation before returning
-            # to routine incremental mode.
+          elif [[ "$EVENT_NAME" == "push" ]]; then
+            # This workflow only runs on importer/package/workflow-path changes.
+            # Run a complete reconciliation for those code changes. Catalogue data commits
+            # do not match the push path filter, so normal daily runs remain incremental.
             MODE="full"
           fi
           echo "mode=$MODE" >> "$GITHUB_OUTPUT"
