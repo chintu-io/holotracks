@@ -480,7 +480,7 @@
     }).join('');
     el['song-list'].innerHTML = append ? el['song-list'].innerHTML + html : html;
     el['song-list'].setAttribute('aria-busy', 'false');
-    el['empty-state'].hidden = visible.length > 0;
+    el['empty-state'].hidden = state.filtered.length > 0;
     el['load-more'].hidden = state.visibleCount >= state.filtered.length;
     el['results-count'].textContent = state.filtered.length.toLocaleString();
     if (!state.filtered.length) {
