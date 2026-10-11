@@ -222,7 +222,7 @@
       renderHeroTalentArt({ transition: true });
     }, BANNER_ROTATE_MS);
   }
-  const TALENT_MARQUEE_SPEED = 13; // pixels per second: intentionally calm, not ticker-fast.
+  const TALENT_MARQUEE_SPEED = 32; // pixels per second: clearly visible while remaining comfortable.
   let talentMarqueeFrame = 0;
   let talentMarqueeLastTime = 0;
   let talentMarqueeUserPaused = !!(window.matchMedia &&
