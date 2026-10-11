@@ -3262,17 +3262,54 @@ button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid 
 
 
 
-/* Desktop scroll behavior: let the listening room move naturally with the catalogue. */
+/* Desktop listening room: keep the video and queue pinned together while the catalogue scrolls. */
 @media (min-width:1221px){
   .player-column,
   body.player-docked .player-column{
-    position:static!important;
-    top:auto!important;
-    max-height:none!important;
-    overflow:visible!important;
+    position:sticky!important;
+    top:84px!important;
+    align-self:start!important;
+    z-index:30;
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr)!important;
+    grid-template-rows:auto minmax(0,1fr)!important;
+    gap:10px!important;
+    height:calc(100vh - 96px)!important;
+    height:calc(100dvh - 96px)!important;
+    max-height:calc(100vh - 96px)!important;
+    max-height:calc(100dvh - 96px)!important;
+    min-height:0!important;
+    overflow:hidden!important;
   }
-  body.player-docked .player-column .queue-card,
+  .player-column .player-card,
+  body.player-docked .player-column .player-card{
+    min-height:0!important;
+    max-width:100%;
+  }
+  .player-column .queue-card,
+  body.player-docked .player-column .queue-card{
+    display:flex!important;
+    flex-direction:column!important;
+    min-height:0!important;
+    max-height:none!important;
+    overflow:hidden!important;
+  }
+  .player-column .queue-list,
+  body.player-docked .player-column .queue-list{
+    flex:1 1 auto!important;
+    min-height:64px!important;
+    max-height:none!important;
+    overflow-x:hidden!important;
+    overflow-y:auto!important;
+    overscroll-behavior:contain;
+    scrollbar-width:thin;
+  }
+  .player-column .queue-actions,
+  body.player-docked .player-column .queue-actions{
+    flex:none!important;
+  }
+  .player-column .player-footnote,
   body.player-docked .player-column .player-footnote{
-    display:block!important;
+    display:none!important;
   }
 }
