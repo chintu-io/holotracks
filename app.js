@@ -1397,10 +1397,15 @@
           !event.target.closest('#player-column, #mobile-mini-player, #mobile-player-toggle')) {
         toggleMobilePlayerPanel(false);
       }
-      if (document.body.classList.contains('filters-open') &&
-          !event.target.closest('#sidebar, #mobile-filter-toggle')) {
-        document.body.classList.remove('filters-open');
-        el['mobile-filter-toggle'].setAttribute('aria-expanded', 'false');
+      if (document.body.classList.contains('filters-open')) {
+        const pickedDestination = event.target.closest(
+          '#sidebar [data-view], #sidebar [data-sidebar-song-type], #sidebar [data-playlist]'
+        );
+        const clickedOutsideDrawer = !event.target.closest('#sidebar, #mobile-filter-toggle');
+        if (pickedDestination || clickedOutsideDrawer) {
+          document.body.classList.remove('filters-open');
+          el['mobile-filter-toggle'].setAttribute('aria-expanded', 'false');
+        }
       }
     });
     document.addEventListener('keydown', event => {
