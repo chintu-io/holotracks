@@ -2296,3 +2296,33 @@ button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid 
 @media(prefers-reduced-motion:reduce){
   .talent-section #talent-strip{transition:none}
 }
+
+
+/* Built-in smart mixtape badge in the sidebar */
+.playlist-row-label{
+  flex:1;
+  min-width:0;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.playlist-smart-badge{
+  flex:none;
+  padding:3px 5px;
+  border:1px solid #51437a;
+  border-radius:5px;
+  background:#29213f;
+  color:#c8adff;
+  font:800 7px 'DM Mono',monospace;
+  font-style:normal;
+  letter-spacing:.35px;
+}
+.playlist-row-smart{
+  border:1px solid #3a3159;
+  background:linear-gradient(100deg,#211b37,#17182e);
+}
+.playlist-row-smart:hover,.playlist-row-smart.active{
+  border-color:#7865b0;
+  background:linear-gradient(100deg,#302346,#20203b);
+}
+.playlist-row-smart .playlist-smart-badge{color:#d4c1ff}
