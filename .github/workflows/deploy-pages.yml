@@ -30,6 +30,13 @@ jobs:
         with:
           ref: main
           persist-credentials: false
+      - name: Validate site scripts
+        run: |
+          node --check app.js
+          node --check tools/update-talent-artwork.mjs
+          npm test
+      - name: Generate official talent artwork manifest
+        run: node tools/update-talent-artwork.mjs
       - name: Setup Pages
         uses: actions/configure-pages@v5
         with:
