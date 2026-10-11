@@ -9,8 +9,8 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://hololive.hololivepro.com" crossorigin>
   <link rel="preconnect" href="https://i.ytimg.com" crossorigin>
-  <link rel="stylesheet" href="styles.css?v=20261011-mobileminimize">
-  <script defer src="app.js?v=20261011-mobileminimize"></script>
+  <link rel="stylesheet" href="styles.css?v=20261011-sidebardistinct">
+  <script defer src="app.js?v=20261011-sidebardistinct"></script>
 </head>
 <body>
   <a class="skip-link" href="#catalogue">Skip to music library</a>
@@ -51,10 +51,10 @@
     <aside id="sidebar" class="sidebar" aria-label="Music navigation and artist filters">
       <div class="sidebar-topline"><span class="sidebar-orb">✦</span><span class="sidebar-brand-copy"><strong>Your music lounge</strong><small>Pick a vibe. Find a voice.</small></span><button id="sidebar-collapse" class="sidebar-collapse" type="button" aria-label="Collapse sidebar" aria-pressed="false" title="Collapse sidebar">‹</button></div>
       <nav class="main-nav" aria-label="Music filters and library views">
-        <button class="nav-item active" data-view="all" data-sidebar-song-type="all" type="button" aria-pressed="true"><span class="nav-symbol">▦</span><span>All songs</span><span id="nav-total" class="nav-count">—</span></button>
-        <button class="nav-item" data-sidebar-song-type="original" type="button" aria-pressed="false"><span class="nav-symbol">♫</span><span>Originals</span><span id="nav-original-total" class="nav-count">—</span></button>
-        <button class="nav-item" data-sidebar-song-type="cover" type="button" aria-pressed="false"><span class="nav-symbol">♬</span><span>Covers</span><span id="nav-cover-total" class="nav-count">—</span></button>
-        <button class="nav-item" data-view="favorites" type="button"><span class="nav-symbol">♥</span><span>My favourites</span><span id="fav-total" class="nav-count">0</span></button>
+        <button class="nav-item active" data-view="all" data-sidebar-song-type="all" data-tooltip="All songs" title="All songs" aria-label="All songs" type="button" aria-pressed="true"><span class="nav-symbol" aria-hidden="true">▦</span><span class="nav-label">All songs</span><span class="nav-short-label" aria-hidden="true">ALL</span><span id="nav-total" class="nav-count">—</span></button>
+        <button class="nav-item" data-sidebar-song-type="original" data-tooltip="Original songs" title="Original songs" aria-label="Original songs" type="button" aria-pressed="false"><span class="nav-symbol" aria-hidden="true">♪</span><span class="nav-label">Originals</span><span class="nav-short-label" aria-hidden="true">ORIG</span><span id="nav-original-total" class="nav-count">—</span></button>
+        <button class="nav-item" data-sidebar-song-type="cover" data-tooltip="Cover songs" title="Cover songs" aria-label="Cover songs" type="button" aria-pressed="false"><span class="nav-symbol" aria-hidden="true">🎤</span><span class="nav-label">Covers</span><span class="nav-short-label" aria-hidden="true">COVER</span><span id="nav-cover-total" class="nav-count">—</span></button>
+        <button class="nav-item" data-view="favorites" data-tooltip="My favourites" title="My favourites" aria-label="My favourites" type="button"><span class="nav-symbol" aria-hidden="true">♥</span><span class="nav-label">My favourites</span><span class="nav-short-label" aria-hidden="true">FAV</span><span id="fav-total" class="nav-count">0</span></button>
       </nav>
 
       <div class="sidebar-rule"><span>ARTIST FILTERS</span><i></i></div>
