@@ -9,7 +9,7 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://hololive.hololivepro.com" crossorigin>
   <link rel="preconnect" href="https://i.ytimg.com" crossorigin>
-  <link rel="stylesheet" href="styles.css?v=20261011-all-artists-avatars-5">
+  <link rel="stylesheet" href="styles.css?v=20261011-artist-categories-1">
   <script defer src="app.js?v=20261011-all-artists-avatars-4"></script>
 </head>
 <body>
@@ -54,11 +54,17 @@
         <div>
           <span class="section-kicker">FIND YOUR OSHI</span>
           <h2 id="talent-picker-title">Browse artists <span id="artist-count" class="result-count">—</span></h2>
-          <p>Browse every distinct artist credited in the catalogue, including Hololive talents and guest singers.</p>
+          <p>Browse official talents separately from guest singers, alumni, and other catalogue credits.</p>
         </div>
         <button id="talent-picker-close" class="talent-picker-close" type="button" aria-label="Close artist browser">×</button>
       </header>
       <label class="artist-search talent-picker-search"><span aria-hidden="true">⌕</span><input id="artist-search" type="search" placeholder="Find an artist…" aria-label="Search artists" autocomplete="off"></label>
+      <div class="artist-category-filter" role="group" aria-label="Artist category">
+        <button type="button" data-artist-category="all" class="is-active" aria-pressed="true">All artists <span data-category-count>—</span></button>
+        <button type="button" data-artist-category="official" aria-pressed="false">Official talents <span data-category-count>—</span></button>
+        <button type="button" data-artist-category="other" aria-pressed="false">Guests &amp; collaborators <span data-category-count>—</span></button>
+      </div>
+      <p class="artist-category-note">Guests &amp; collaborators includes alumni, groups, and other credits not in the current official roster.</p>
       <div class="talent-picker-toolbar">
         <span id="talent-picker-selected">All artists · no filters applied</span>
         <button id="clear-filters" class="clear-filters" type="button"><span aria-hidden="true">↺</span> Reset filters</button>
