@@ -5159,3 +5159,101 @@ body{
     font-size:10px!important;
   }
 }
+
+
+/* Selected artist filters: visible removable chips in the music library. */
+.selected-artist-filters{
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:7px;
+  margin:0 0 14px;
+  padding:10px 11px;
+  border:1px solid #303153;
+  border-radius:12px;
+  background:linear-gradient(110deg,#17182f,#14152a);
+}
+.selected-artist-filters[hidden]{display:none!important}
+.selected-filter-caption{
+  margin-right:2px;
+  color:#8f94bc;
+  font:9px 'DM Mono',monospace;
+  letter-spacing:.65px;
+}
+.selected-artist-chip{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  max-width:100%;
+  min-width:0;
+  padding:6px 9px;
+  border:1px solid #55456f;
+  border-radius:999px;
+  background:#29213d;
+  color:#e1d9f4;
+  font-size:11px;
+  font-weight:750;
+  line-height:1.2;
+  white-space:normal;
+  overflow-wrap:anywhere;
+  text-align:left;
+  cursor:pointer;
+}
+.selected-artist-chip:hover,
+.selected-artist-chip:focus-visible{
+  border-color:#d079bd;
+  background:#38243f;
+  color:#fff;
+  outline:none;
+}
+.selected-artist-chip-remove{
+  display:inline-grid;
+  place-items:center;
+  flex:none;
+  width:17px;
+  height:17px;
+  border-radius:50%;
+  background:#ffffff12;
+  color:#f3a4d9;
+  font-size:15px;
+  line-height:1;
+}
+.selected-artist-chip:hover .selected-artist-chip-remove,
+.selected-artist-chip:focus-visible .selected-artist-chip-remove{
+  background:#ff79c41e;
+  color:#fff;
+}
+.selected-artist-clear{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:29px;
+  margin-left:auto;
+  padding:5px 10px;
+  border:1px solid #454264;
+  border-radius:9px;
+  background:#191a32;
+  color:#bfc1dd;
+  font-size:10px;
+  font-weight:800;
+  white-space:nowrap;
+  cursor:pointer;
+}
+.selected-artist-clear:hover,
+.selected-artist-clear:focus-visible{
+  border-color:#8d7bd2;
+  background:#27233f;
+  color:#fff;
+  outline:none;
+}
+@media(max-width:680px){
+  .selected-artist-filters{
+    gap:6px;
+    padding:8px;
+    margin-bottom:11px;
+  }
+  .selected-filter-caption{width:100%;font-size:8.5px}
+  .selected-artist-chip{font-size:10px;padding:6px 8px}
+  .selected-artist-clear{margin-left:0;font-size:9.5px}
+}
