@@ -23,6 +23,9 @@ export function mergeCatalogues(latest, candidate) {
     byId.set(song.id, {
       ...song,
       ...existing,
+      viewCount: existing.viewCount ?? song.viewCount ?? null,
+      likeCount: existing.likeCount ?? song.likeCount ?? null,
+      statisticsCheckedAt: existing.statisticsCheckedAt ?? song.statisticsCheckedAt,
       ...(isCover ? { songType: 'cover' } : {}),
     });
   }
