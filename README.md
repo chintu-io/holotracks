@@ -11,7 +11,7 @@ HoloTracks is a fan-made music discovery website for exploring Hololive original
 - **Explore a huge catalogue** of Hololive original songs and music covers.
 - **Search your way** with song titles, artist names, alternate titles, and Japanese text.
 - **Browse by talent** with artist artwork, multi-select filters, and talent spotlights.
-- **Find something fresh** with recent releases, newest and oldest sorting, title sorting, and optional popularity sorting.
+- **Find something fresh** with recent releases, newest and oldest sorting, title sorting, most-viewed, and most-liked sorting.
 - **Choose your vibe** by filtering Originals and Covers separately.
 - **Play and queue songs** with previous/next controls, shuffle, and repeat.
 - **Make it yours** with favourites and custom playlists (mixtapes) saved in your browser.
@@ -26,8 +26,6 @@ Your favourites and mixtapes are stored locally in your browser. They are not ti
 ## Playback
 
 Videos play using **YouTube's official embedded player**. Some videos may be unavailable because they are removed, restricted, region-limited, or do not allow embedding.
-
-On Android, HoloTracks can open the selected track in the official YouTube app. YouTube Premium background playback is handled by YouTube itself; HoloTracks' embedded player does not continue playing in the background, and its custom queue is not transferred to YouTube.
 
 ## Sources and fan-project note
 
