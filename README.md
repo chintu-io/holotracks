@@ -42,7 +42,7 @@ Enable **YouTube Data API v3** in Google Cloud, create an API key restricted to 
 
 ### 3. GitHub Pages
 
-In **Settings → Pages**, set the deployment source to **GitHub Actions**. The deployment workflow publishes the site automatically after repository pushes. The catalogue refresh workflow commits data/songs.json only when it changes; that commit triggers another website deployment.
+In **Settings → Pages**, set the deployment source to **GitHub Actions**. The deployment workflow publishes the site after repository pushes and listens for a `catalogue-updated` repository-dispatch event. The refresh job commits `data/songs.json` only when it changes, then dispatches the deployment event after the commit is safely pushed. Unchanged incremental runs skip both the catalogue commit and the extra deployment.
 
 ## Run locally
 
