@@ -101,7 +101,7 @@ const FALLBACK_TALENTS = [
 ];
 
 function attr(tag, name) {
-  const match = tag.match(new RegExp('(?:^|\\\\s)' + name + '\\\\s*=\\\\s*(?:"([^"]*)"|\\'([^\\']*)\\'|([^\\\\s>]+))', 'i'));
+  const match = tag.match(new RegExp('(?:^|\\s)' + name + '\\s*=\\s*(?:"([^"]*)"|\'([^\']*)\'|([^\\s>]+))', 'i'));
   return match ? (match[1] ?? match[2] ?? match[3] ?? '').trim() : '';
 }
 function absoluteURL(value, base = DIRECTORY_URL) {
@@ -110,7 +110,7 @@ function absoluteURL(value, base = DIRECTORY_URL) {
     const url = new URL(value.replace(/&amp;/g, '&'), base);
     if (url.origin !== 'https://hololive.hololivepro.com') return '';
     if (!url.pathname.includes('/wp-content/uploads/')) return '';
-    if (!/\\.(?:png|webp|jpe?g|avif)(?:$|\\?)/i.test(url.href)) return '';
+    if (!/\.(?:png|webp|jpe?g|avif)(?:$|\?)/i.test(url.href)) return '';
     return url.href;
   } catch { return ''; }
 }
@@ -124,7 +124,7 @@ function slugName(slug) {
 }
 function imageCandidates(inner) {
   const found = [];
-  const tags = inner.match(/<(?:img|source)\\b[^>]*>/gi) || [];
+  const tags = inner.match(/<(?:img|source)\b[^>]*>/gi) || [];
   for (const tag of tags) {
     for (const key of ['data-src','data-lazy-src','data-original','src']) {
       const src = absoluteURL(attr(tag, key));
@@ -133,24 +133,24 @@ function imageCandidates(inner) {
     const srcset = attr(tag, 'data-srcset') || attr(tag, 'srcset');
     if (srcset) {
       const options = srcset.split(',').map(part => {
-        const bits = part.trim().split(/\\s+/);
+        const bits = part.trim().split(/\s+/);
         const width = Number((bits[1] || '').replace(/w$/i, '')) || (parseFloat(bits[1]) || 1) * 1000;
         return { url: absoluteURL(bits[0]), width };
       }).filter(item => item.url).sort((a,b) => b.width-a.width);
       found.push(...options.map(item => item.url));
     }
     const style = attr(tag, 'style');
-    for (const match of style.matchAll(/url\\((?:"|')?(.*?)(?:"|')?\\)/gi)) {
+    for (const match of style.matchAll(/url\((?:"|')?(.*?)(?:"|')?\)/gi)) {
       const src = absoluteURL(match[1]);
       if (src) found.push(src);
     }
   }
-  for (const match of inner.matchAll(/(?:href|src|data-src|data-original)=["']([^"']+\\.(?:png|webp|jpe?g|avif)(?:\\?[^"']*)?)["']/gi)) {
+  for (const match of inner.matchAll(/(?:href|src|data-src|data-original)=["']([^"']+\.(?:png|webp|jpe?g|avif)(?:\?[^"']*)?)["']/gi)) {
     const src = absoluteURL(match[1]);
     if (src) found.push(src);
   }
   return [...new Set(found)].sort((a,b) => {
-    const rank = url => (/_pr-img_0?1\\./i.test(url) ? 4 : /pr-img/i.test(url) ? 3 : /wp-content\\/uploads/i.test(url) ? 1 : 0);
+    const rank = url => (/_pr-img_0?1\./i.test(url) ? 4 : /pr-img/i.test(url) ? 3 : /wp-content\/uploads/i.test(url) ? 1 : 0);
     return rank(b)-rank(a);
   });
 }
@@ -171,12 +171,12 @@ try {
   if (!response.ok) throw new Error('Official directory returned HTTP ' + response.status);
   const html = await response.text();
   const seen = new Set();
-  for (const match of html.matchAll(/<a\\b([^>]*)>([\\s\\S]*?)<\\/a>/gi)) {
+  for (const match of html.matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a>/gi)) {
     const href = attr(match[1], 'href');
     let profile;
     try { profile = new URL(href.replace(/&amp;/g,'&'), DIRECTORY_URL); } catch { continue; }
     if (profile.origin !== 'https://hololive.hololivepro.com') continue;
-    const pathMatch = profile.pathname.match(/^\\/en\\/talents\\/([^/]+)\\/?$/i);
+    const pathMatch = profile.pathname.match(/^\/en\/talents\/([^/]+)\/?$/i);
     if (!pathMatch) continue;
     const slug = decodeURIComponent(pathMatch[1]).toLowerCase();
     if (EXCLUDED_SLUGS.test(slug) || seen.has(slug)) continue;
