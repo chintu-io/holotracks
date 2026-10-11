@@ -8,6 +8,7 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const OUTPUT_PATH = path.join(ROOT, 'data', 'songs.json');
 const HOLODEX_SEARCH_URL = 'https://holodex.net/api/v2/search/videoSearch';
 const PAGE_SIZE = 50;
+const MAX_INCREMENTAL_RESULTS = 100;
 const MAX_SONGS = 25000;
 const API_TIMEOUT_MS = 30000;
 const PAGE_DELAY_FULL_MS = 500;
@@ -213,6 +214,7 @@ export async function fetchAllHolodexResults(apiKey, { mode = 'full', knownIds =
   let offset = 0;
   let pages = 0;
   let stoppedAtKnownPage = false;
+  let stoppedAtLimit = false;
 
   while (true) {
     if (offset >= MAX_SONGS) {
@@ -260,6 +262,12 @@ export async function fetchAllHolodexResults(apiKey, { mode = 'full', knownIds =
         console.log('Reached a page of already-known video IDs; stopping incremental scan.');
         break;
       }
+      if (offset >= MAX_INCREMENTAL_RESULTS) {
+        stoppedAtLimit = true;
+        console.log('Reached the incremental scan limit of ' + MAX_INCREMENTAL_RESULTS +
+          ' newest records for ' + topic + '; older catalogue entries are retained.');
+        break;
+      }
     } else if (reportedTotal !== null && offset >= reportedTotal) {
       break;
     }
@@ -271,7 +279,7 @@ export async function fetchAllHolodexResults(apiKey, { mode = 'full', knownIds =
     throw new Error('Holodex reported ' + reportedTotal + ' records but returned only ' + rawItems.length +
       '; refusing to publish an incomplete catalogue.');
   }
-  return { rawItems, reportedTotal, pages, stoppedAtKnownPage, complete: mode === 'full' };
+  return { rawItems, reportedTotal, pages, stoppedAtKnownPage, stoppedAtLimit, complete: mode === 'full' };
 }
 
 async function fetchYouTubeViewCounts(ids, key) {

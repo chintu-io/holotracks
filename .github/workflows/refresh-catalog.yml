@@ -17,7 +17,6 @@ on:
         options: [incremental, full]
   schedule:
     - cron: '23 4 * * *'
-    - cron: '43 4 * * 0'
 
 permissions:
   contents: write
@@ -52,8 +51,6 @@ jobs:
           MODE="incremental"
           if [[ "$EVENT_NAME" == "workflow_dispatch" && "$DISPATCH_MODE" == "full" ]]; then
             MODE="full"
-          elif [[ "$EVENT_NAME" == "schedule" && "$SCHEDULE" == "43 4 * * 0" ]]; then
-            MODE="full"
           elif [[ "$EVENT_NAME" == "push" && "$COMMIT_MESSAGE" == *"[full-scan]"* ]]; then
             # Add [full-scan] to an importer/schema-change commit to reconcile all pages.
             # Routine workflow/package edits remain incremental and low-traffic.
@@ -66,6 +63,7 @@ jobs:
           npm test
           node --check app.js
           node --check scripts/update-catalog.mjs
+          node --check scripts/merge-catalogues.mjs
       - name: Refresh catalogue from Holodex
         env:
           HOLODEX_API_KEY: ${{ secrets.HOLODEX_API_KEY }}
@@ -85,14 +83,35 @@ jobs:
           git add data/songs.json
           git commit -m "chore: refresh Hololive song catalogue"
 
-          # A UI or workflow commit can land while a full scan is running.
-          # Rebase this data-only commit on the current main branch before pushing.
+          # Workflow runs are tied to their triggering commit SHA, so a queued run
+          # can start from an older catalogue even if another refresh already pushed.
+          # Resolve a data-only conflict by unioning IDs; current main wins for shared IDs.
           for attempt in 1 2 3; do
             git fetch origin main
             if ! git rebase origin/main; then
-              echo 'Could not rebase catalogue update. Existing remote files have been preserved.'
+              mapfile -t conflicted_files < <(git diff --name-only --diff-filter=U)
+              if [[ "${#conflicted_files[@]}" -ne 1 || "${conflicted_files[0]}" != "data/songs.json" ]]; then
+                echo "Rebase conflicted outside the catalogue file: ${conflicted_files[*]}"
+                git rebase --abort || true
+                exit 1
+              fi
+
+              git show :2:data/songs.json > "$RUNNER_TEMP/catalogue-main.json"
+              git show :3:data/songs.json > "$RUNNER_TEMP/catalogue-generated.json"
               git rebase --abort || true
-              exit 1
+              git reset --hard origin/main
+              node scripts/merge-catalogues.mjs \
+                "$RUNNER_TEMP/catalogue-main.json" \
+                "$RUNNER_TEMP/catalogue-generated.json" \
+                data/songs.json
+
+              if git diff --quiet -- data/songs.json; then
+                echo 'The concurrent refresh already contains all candidate catalogue changes.'
+                echo "changed=false" >> "$GITHUB_OUTPUT"
+                exit 0
+              fi
+              git add data/songs.json
+              git commit -m "chore: merge Hololive catalogue update after concurrent refresh"
             fi
             if git push origin HEAD:main; then
               echo 'Catalogue update pushed successfully.'

@@ -146,6 +146,30 @@ test('incremental fetch stops at a page containing only known video IDs', async 
   }
 });
 
+test('incremental fetch caps each topic scan at the newest 100 records', async () => {
+  const original = globalThis.fetch;
+  const offsets = [];
+  globalThis.fetch = async (_url, options = {}) => {
+    const payload = JSON.parse(options.body);
+    offsets.push(payload.offset);
+    const items = Array.from({ length: 50 }, (_, i) =>
+      record(String(payload.offset + i + 1).padStart(11, '0')));
+    return new Response(JSON.stringify({ total: 3160, items }), {
+      status: 200, headers: { 'content-type': 'application/json' },
+    });
+  };
+  try {
+    const result = await fetchAllHolodexResults('test-key', { mode: 'incremental', knownIds: new Set() });
+    assert.deepEqual(offsets, [0, 50]);
+    assert.equal(result.rawItems.length, 100);
+    assert.equal(result.pages, 2);
+    assert.equal(result.stoppedAtLimit, true);
+    assert.equal(result.complete, false);
+  } finally {
+    globalThis.fetch = original;
+  }
+});
+
 test('incremental fetch gets new page then stops when the next page is already known', async () => {
   const original = globalThis.fetch;
   const offsets = [];
