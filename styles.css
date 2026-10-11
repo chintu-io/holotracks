@@ -3260,3 +3260,19 @@ button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid 
 }
 
 
+
+
+/* Desktop scroll behavior: let the listening room move naturally with the catalogue. */
+@media (min-width:1221px){
+  .player-column,
+  body.player-docked .player-column{
+    position:static!important;
+    top:auto!important;
+    max-height:none!important;
+    overflow:visible!important;
+  }
+  body.player-docked .player-column .queue-card,
+  body.player-docked .player-column .player-footnote{
+    display:block!important;
+  }
+}
