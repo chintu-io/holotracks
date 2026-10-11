@@ -2559,3 +2559,475 @@ button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid 
     display:block!important;
   }
 }
+
+
+/* =========================================================
+   Mobile-only repair: stable header, contained drawers/dialogs,
+   and a single viewport-fitted player overlay. Desktop is unchanged.
+   ========================================================= */
+@media(max-width:680px){
+  html,body{
+    width:100%;
+    max-width:100%;
+    overflow-x:clip!important;
+    scroll-padding-top:12px;
+  }
+  body{
+    min-width:0;
+    padding-left:0;
+    padding-right:0;
+  }
+  .topbar{
+    position:sticky!important;
+    top:0!important;
+    z-index:60!important;
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr) auto!important;
+    grid-template-rows:auto auto!important;
+    gap:8px!important;
+    width:100%!important;
+    min-width:0!important;
+    max-width:100vw!important;
+    height:auto!important;
+    min-height:0!important;
+    padding:9px 11px 10px!important;
+    overflow:visible!important;
+  }
+  .topbar .brand{
+    display:flex!important;
+    grid-column:1!important;
+    grid-row:1!important;
+    min-width:0!important;
+    max-width:100%!important;
+    gap:8px!important;
+  }
+  .topbar .brand-mark{width:35px!important;height:35px!important;flex:0 0 35px!important}
+  .topbar .brand-copy{min-width:0!important}
+  .topbar .brand-copy strong{font-size:19px!important;white-space:nowrap}
+  .topbar .brand-copy small{
+    max-width:100%;
+    overflow:hidden;
+    font-size:6px!important;
+    letter-spacing:.55px!important;
+    text-overflow:ellipsis;
+  }
+  .topbar .top-actions{
+    grid-column:2!important;
+    grid-row:1!important;
+    min-width:0!important;
+    gap:2px!important;
+  }
+  .topbar .favorite-shortcut{padding:5px!important}
+  .topbar .favorite-shortcut b{display:none!important}
+  .topbar .favorite-shortcut span{font-size:22px!important}
+  .topbar .global-search{
+    grid-column:1/-1!important;
+    grid-row:2!important;
+    width:100%!important;
+    min-width:0!important;
+    max-width:100%!important;
+    height:42px!important;
+    padding:0 8px!important;
+    gap:6px!important;
+  }
+  .topbar .global-search input{
+    display:block!important;
+    flex:1 1 0!important;
+    width:0!important;
+    min-width:0!important;
+    font-size:12px!important;
+  }
+  .topbar .global-search .search-icon{flex:none!important;font-size:23px!important}
+  .topbar .global-search .talent-picker-toggle{
+    flex:none!important;
+    max-width:95px!important;
+    min-width:0!important;
+    padding:5px 6px!important;
+    gap:4px!important;
+    font-size:9px!important;
+  }
+  .topbar .global-search .talent-picker-toggle b{font-size:8px!important}
+  .topbar .global-search-button{
+    flex:none!important;
+    min-width:65px!important;
+    max-width:82px!important;
+    padding:8px 10px!important;
+    font-size:11px!important;
+  }
+
+  .mobile-toolbar{
+    position:relative!important;
+    top:auto!important;
+    z-index:20!important;
+    display:flex!important;
+    width:100%!important;
+    max-width:100vw!important;
+    min-width:0!important;
+    gap:7px!important;
+    padding:8px 10px!important;
+  }
+  .mobile-tool{
+    flex:1 1 0!important;
+    min-width:0!important;
+    min-height:43px!important;
+    padding:8px 5px!important;
+    gap:6px!important;
+    font-size:11px!important;
+    white-space:nowrap;
+  }
+  .mobile-tool span{flex:none;font-size:17px!important}
+  .mobile-tool[aria-expanded="true"]{
+    border-color:#9b83e5!important;
+    background:#282242!important;
+    color:#fff!important;
+  }
+
+  .app-layout{
+    display:flex!important;
+    flex-direction:column!important;
+    align-items:stretch!important;
+    width:100%!important;
+    max-width:100vw!important;
+    min-width:0!important;
+    gap:13px!important;
+    padding:10px 9px calc(30px + env(safe-area-inset-bottom))!important;
+    overflow:visible!important;
+  }
+  .catalogue-column,.hero-card,.talent-section,.quick-discovery,.library-section,
+  .library-top,.library-controls,.song-grid,.song-card,.player-column,
+  .player-card,.queue-card,.queue-list{
+    min-width:0!important;
+    max-width:100%!important;
+  }
+  .catalogue-column{width:100%!important;overflow:visible!important}
+  .song-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;width:100%!important}
+  .song-card{width:100%!important;overflow:hidden!important}
+  .song-card-cover,.song-card-art,.song-card-media{min-width:0;max-width:100%}
+  .library-controls{grid-template-columns:minmax(0,1fr) auto!important;width:100%!important}
+  .library-controls>*{min-width:0!important}
+  .sort-control select{min-width:0!important;max-width:100%!important}
+  .talent-section .section-heading{display:flex;align-items:flex-end;gap:8px;min-width:0}
+  .talent-section .section-heading>div:first-child{min-width:0}
+  .talent-section .section-heading h2{font-size:16px!important;line-height:1.25!important}
+  .talent-section .section-heading .section-kicker{font-size:8px!important;white-space:normal}
+  .talent-section .browse-talents-button{flex:none;max-width:46%;white-space:normal;text-align:center}
+
+  /* Browse & filters is a proper overlay drawer, not a full page section. */
+  body.filters-open{overflow:hidden!important;overscroll-behavior:none}
+  body.filters-open::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    z-index:69;
+    background:#03030bd1;
+    backdrop-filter:blur(3px);
+  }
+  body.filters-open .sidebar{
+    display:block!important;
+    position:fixed!important;
+    z-index:90!important;
+    top:10px!important;
+    bottom:calc(10px + env(safe-area-inset-bottom))!important;
+    left:10px!important;
+    right:10px!important;
+    width:auto!important;
+    max-width:none!important;
+    height:auto!important;
+    max-height:none!important;
+    min-width:0!important;
+    margin:0!important;
+    padding:15px 13px!important;
+    overflow-x:hidden!important;
+    overflow-y:auto!important;
+    overscroll-behavior:contain!important;
+    -webkit-overflow-scrolling:touch!important;
+    border:1px solid #625282!important;
+    border-radius:18px!important;
+    box-shadow:0 25px 70px #000c!important;
+  }
+  body.filters-open .sidebar-topline{position:relative;padding-right:42px!important}
+  body.filters-open .sidebar-collapse{
+    display:grid!important;
+    position:absolute!important;
+    top:0!important;
+    right:0!important;
+    width:36px!important;
+    height:36px!important;
+    font-size:0!important;
+    border-radius:10px!important;
+    z-index:2;
+  }
+  body.filters-open .sidebar-collapse::before{
+    content:"×";
+    font-size:26px;
+    line-height:1;
+    color:#f3eaff;
+  }
+  body.filters-open .sidebar .playlist-row{
+    width:100%!important;
+    max-width:100%!important;
+    min-width:0!important;
+  }
+  body.filters-open .sidebar .playlist-row-label{
+    min-width:0!important;
+    overflow:hidden!important;
+    text-overflow:ellipsis!important;
+  }
+
+  /* The full player is one viewport-sized sheet; do not show the mini player behind it. */
+  body.mobile-player-open{
+    overflow:hidden!important;
+    overscroll-behavior:none!important;
+  }
+  body.mobile-player-open .mobile-mini-player:not([hidden]){
+    display:none!important;
+    visibility:hidden!important;
+    pointer-events:none!important;
+  }
+  body.mobile-player-open::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    z-index:69;
+    background:#03030bd8;
+    backdrop-filter:blur(3px);
+  }
+  .player-column.mobile-open{
+    display:grid!important;
+    position:fixed!important;
+    z-index:90!important;
+    inset:calc(env(safe-area-inset-top) + 8px) 8px calc(env(safe-area-inset-bottom) + 8px)!important;
+    width:auto!important;
+    height:auto!important;
+    min-width:0!important;
+    min-height:0!important;
+    max-width:none!important;
+    max-height:none!important;
+    margin:0!important;
+    padding:8px!important;
+    grid-template-columns:minmax(0,1fr)!important;
+    grid-auto-rows:max-content!important;
+    align-content:start!important;
+    align-items:start!important;
+    gap:10px!important;
+    overflow-x:hidden!important;
+    overflow-y:auto!important;
+    overscroll-behavior:contain!important;
+    -webkit-overflow-scrolling:touch!important;
+    border:1px solid #716092!important;
+    border-radius:17px!important;
+    background:#111222!important;
+    box-shadow:0 24px 70px #000c!important;
+    transform:none!important;
+  }
+  .player-column.mobile-open>*{
+    position:relative!important;
+    inset:auto!important;
+    width:100%!important;
+    min-width:0!important;
+    max-width:100%!important;
+    margin:0!important;
+  }
+  .player-column.mobile-open .player-card,
+  .player-column.mobile-open .queue-card{
+    display:block!important;
+    overflow:hidden!important;
+    flex:none!important;
+    min-height:0!important;
+    border-radius:13px!important;
+  }
+  .player-column.mobile-open .player-head{
+    display:flex!important;
+    align-items:center!important;
+    gap:8px!important;
+    padding:10px 11px!important;
+  }
+  .player-column.mobile-open .player-head>div{min-width:0}
+  .player-column.mobile-open .player-head h2{font-size:16px!important}
+  .player-column.mobile-open .player-kicker{font-size:8px!important;letter-spacing:.8px}
+  .player-column.mobile-open .panel-collapse{
+    display:grid!important;
+    flex:none!important;
+    width:40px!important;
+    min-width:40px!important;
+    height:40px!important;
+    min-height:40px!important;
+    margin-left:auto!important;
+    place-items:center!important;
+    font-size:21px!important;
+    touch-action:manipulation;
+  }
+  .player-column.mobile-open .video-frame-wrap{
+    display:block!important;
+    position:relative!important;
+    width:100%!important;
+    max-width:100%!important;
+    height:auto!important;
+    min-height:0!important;
+    aspect-ratio:16/9!important;
+    overflow:hidden!important;
+  }
+  .player-column.mobile-open #youtube-player,
+  .player-column.mobile-open #youtube-player iframe,
+  .player-column.mobile-open .youtube-fallback{
+    width:100%!important;
+    max-width:100%!important;
+  }
+  .player-column.mobile-open #youtube-player{height:100%!important;min-height:0!important}
+  .player-column.mobile-open #youtube-player iframe{position:absolute!important;inset:0!important;height:100%!important}
+  .player-column.mobile-open .now-playing-meta{padding:9px 10px!important;min-width:0!important}
+  .player-column.mobile-open .playing-title-row{display:flex;gap:8px;min-width:0}
+  .player-column.mobile-open .playing-text{flex:1 1 0;min-width:0}
+  .player-column.mobile-open .playing-text strong{
+    display:block;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px!important
+  }
+  .player-column.mobile-open .playing-text span{font-size:10px!important}
+  .player-column.mobile-open .playing-art{flex:none;width:42px;height:42px}
+  .player-column.mobile-open .player-controls{display:flex;justify-content:center;gap:clamp(5px,3vw,14px);margin-top:7px}
+  .player-column.mobile-open .player-controls button{flex:none;min-width:34px;min-height:34px}
+  .player-column.mobile-open .play-toggle{width:43px;height:43px}
+  .player-column.mobile-open .player-status-row{display:flex;gap:8px;align-items:center;justify-content:space-between;margin-top:6px;font-size:9px!important}
+  .player-column.mobile-open .player-status-row>*{min-width:0;overflow:hidden;text-overflow:ellipsis}
+  .player-column.mobile-open .queue-card{padding:10px!important}
+  .player-column.mobile-open .queue-heading{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:7px!important}
+  .player-column.mobile-open .queue-heading h2{font-size:16px!important}
+  .player-column.mobile-open .queue-list{
+    max-height:clamp(100px,20dvh,210px)!important;
+    min-height:0!important;
+    overflow-x:hidden!important;
+    overflow-y:auto!important;
+    overscroll-behavior:contain!important;
+  }
+  .player-column.mobile-open .queue-track{min-width:0!important;max-width:100%!important;gap:6px!important;padding:6px 3px!important}
+  .player-column.mobile-open .queue-track-art{flex:none!important;width:48px!important;height:36px!important}
+  .player-column.mobile-open .queue-track-info{flex:1 1 0!important;min-width:0!important}
+  .player-column.mobile-open .queue-track-info strong{font-size:10px!important}
+  .player-column.mobile-open .queue-track-info span{font-size:9px!important}
+  .player-column.mobile-open .queue-track-play,
+  .player-column.mobile-open .queue-track-remove{
+    flex:none!important;width:32px!important;height:34px!important;min-width:32px!important;min-height:34px!important
+  }
+  .player-column.mobile-open .queue-actions{display:grid;gap:6px;min-width:0!important}
+  .player-column.mobile-open .playlist-select-row{display:flex;gap:6px;min-width:0}
+  .player-column.mobile-open .playlist-select-row select{flex:1 1 0;min-width:0;max-width:100%}
+  .player-column.mobile-open .player-footnote{display:none!important}
+
+  /* The artist dialog must be constrained to the actual phone viewport. */
+  .talent-picker-dialog[open]{
+    position:fixed!important;
+    inset:calc(env(safe-area-inset-top) + 8px) 8px calc(env(safe-area-inset-bottom) + 8px)!important;
+    display:block!important;
+    width:auto!important;
+    min-width:0!important;
+    max-width:none!important;
+    height:auto!important;
+    max-height:none!important;
+    margin:0!important;
+    padding:0!important;
+    overflow:hidden!important;
+    transform:none!important;
+    box-sizing:border-box!important;
+    border-radius:16px!important;
+  }
+  .talent-picker-shell{
+    display:flex!important;
+    flex-direction:column!important;
+    width:100%!important;
+    height:100%!important;
+    max-width:100%!important;
+    max-height:100%!important;
+    min-width:0!important;
+    min-height:0!important;
+    gap:8px!important;
+    padding:13px 10px 10px!important;
+    overflow:hidden!important;
+  }
+  .talent-picker-head{gap:7px!important;min-width:0!important}
+  .talent-picker-head>div{flex:1 1 0;min-width:0!important}
+  .talent-picker-head h2{font-size:19px!important;line-height:1.2!important;overflow-wrap:anywhere}
+  .talent-picker-head p{max-width:100%!important;font-size:10px!important}
+  .talent-picker-close{flex:none!important;width:38px!important;height:38px!important}
+  .talent-picker-search{flex:none!important;width:100%!important;min-width:0!important;height:42px!important}
+  .artist-category-filter{
+    display:grid!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:5px!important;
+    width:100%!important;
+    min-width:0!important;
+  }
+  .artist-category-filter button{
+    min-width:0!important;
+    max-width:100%!important;
+    padding:6px 7px!important;
+    gap:5px!important;
+    white-space:normal!important;
+    font-size:10px!important;
+  }
+  .artist-category-filter button:first-child{grid-column:1/-1!important}
+  .artist-category-filter button span{flex:none}
+  .artist-category-note{flex:none!important;margin:0!important;font-size:9px!important;line-height:1.35!important}
+  .talent-picker-toolbar{flex:none!important;min-width:0!important;gap:5px!important}
+  #talent-picker-selected{flex:1 1 0;min-width:0!important;font-size:9px!important}
+  .talent-picker-dialog .clear-filters{flex:none;max-width:43%;font-size:9px!important;padding:6px!important}
+  .talent-picker-dialog .artist-filters{
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr)!important;
+    flex:1 1 0!important;
+    width:100%!important;
+    min-width:0!important;
+    min-height:0!important;
+    max-height:none!important;
+    overflow-x:hidden!important;
+    overflow-y:auto!important;
+    overscroll-behavior:contain!important;
+  }
+  .talent-picker-dialog .artist-check{
+    display:grid!important;
+    grid-template-columns:18px 42px minmax(0,1fr) auto!important;
+    width:100%!important;
+    min-width:0!important;
+    min-height:58px!important;
+    padding:6px 7px!important;
+    gap:7px!important;
+  }
+  .talent-picker-dialog .artist-check .artist-avatar-frame{width:42px!important;height:42px!important}
+  .talent-picker-dialog .artist-check .artist-name{min-width:0!important;font-size:11px!important}
+  .talent-picker-footer{flex:none!important;gap:6px!important;padding-top:8px!important}
+  .talent-picker-footer>span{flex:1 1 0;max-width:none!important;min-width:0;font-size:9px!important}
+  .talent-picker-done{flex:none;min-width:68px!important;padding:8px 10px!important}
+
+  .mobile-mini-player:not([hidden]){
+    position:fixed!important;
+    z-index:80!important;
+    left:8px!important;
+    right:8px!important;
+    bottom:calc(6px + env(safe-area-inset-bottom))!important;
+    width:auto!important;
+    max-width:none!important;
+    min-width:0!important;
+    grid-template-columns:40px minmax(0,1fr) 36px 30px!important;
+    gap:5px!important;
+    padding:6px 7px!important;
+    min-height:58px!important;
+  }
+  .mobile-mini-thumb{width:40px!important;height:40px!important}
+  .mobile-mini-info{min-width:0!important}
+  .mobile-mini-info strong{font-size:10px!important}
+  .mobile-mini-info small{font-size:8px!important}
+  body.mobile-player-open .mobile-mini-player:not([hidden]){display:none!important}
+}
+@media(max-width:390px){
+  .topbar{padding-inline:8px!important;gap:7px!important}
+  .topbar .brand-mark{width:32px!important;height:32px!important;flex-basis:32px!important}
+  .topbar .brand-copy strong{font-size:17px!important}
+  .topbar .brand-copy small{font-size:5.2px!important;letter-spacing:.3px!important}
+  .topbar .global-search{gap:4px!important;padding-inline:6px!important}
+  .topbar .global-search .search-icon{font-size:20px!important}
+  .topbar .global-search .talent-picker-toggle{max-width:70px!important;padding-inline:4px!important}
+  .topbar .global-search-button{min-width:58px!important;padding-inline:7px!important}
+  .mobile-tool{font-size:10px!important}
+  .mobile-tool span{font-size:15px!important}
+  .app-layout{padding-inline:7px!important}
+  .talent-picker-dialog .artist-check{grid-template-columns:17px 38px minmax(0,1fr) auto!important;gap:5px!important}
+  .talent-picker-dialog .artist-check .artist-avatar-frame{width:38px!important;height:38px!important}
+}
