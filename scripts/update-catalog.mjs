@@ -12,6 +12,7 @@ const MAX_SONGS = 25000;
 const API_TIMEOUT_MS = 30000;
 const PAGE_DELAY_FULL_MS = 500;
 const PAGE_DELAY_INCREMENTAL_MS = 250;
+const TOPIC_TYPES = Object.freeze({ Original_Song: 'original', Music_Cover: 'cover' });
 
 function requireEnv(name) {
   const value = process.env[name]?.trim();
@@ -103,7 +104,7 @@ function cleanName(name) {
   return String(name || '').replace(/\s*(?:Ch\.|Channel)\s*.*$/i, '').replace(/\s*[-|｜].*$/, '').replace(/\s+/g, ' ').trim();
 }
 
-export function normalizeRecord(item) {
+export function normalizeRecord(item, { topic = 'Original_Song' } = {}) {
   if (!item || typeof item !== 'object') return null;
   const id = typeof item.id === 'string' ? item.id.trim() : '';
   if (!/^[\w-]{11}$/.test(id) ||
@@ -128,6 +129,7 @@ export function normalizeRecord(item) {
     publishedAt: firstDate(item.published_at),
     viewCount: safeCount(item.view_count, item.viewCount, item.views, item.statistics?.viewCount),
     duration: safeCount(item.duration) || null,
+    songType: TOPIC_TYPES[topic] || 'original',
     source: 'Holodex',
   };
 }
@@ -184,8 +186,12 @@ export function deduplicateSongs(songs) {
     if (!existing) { byId.set(song.id, song); continue; }
     const oldDate = Date.parse(existing.releaseDate || '') || 0;
     const newDate = Date.parse(song.releaseDate || '') || 0;
-    if ((!existing.title || existing.title === existing.id) && song.title) byId.set(song.id, { ...existing, ...song });
-    else if (newDate > oldDate) byId.set(song.id, { ...existing, ...song });
+    const songType = existing.songType === 'cover' || song.songType === 'cover' ? 'cover' : 'original';
+    const shouldReplace = ((!existing.title || existing.title === existing.id) && song.title) || newDate > oldDate;
+    byId.set(song.id, {
+      ...(shouldReplace ? { ...existing, ...song } : existing),
+      songType,
+    });
   }
   return [...byId.values()].sort((a, b) =>
     (Date.parse(b.releaseDate || '') || 0) - (Date.parse(a.releaseDate || '') || 0) || a.title.localeCompare(b.title));
@@ -198,8 +204,9 @@ function sourceId(item) {
  * Full mode scans every matching page. Incremental mode scans newest-first and
  * stops when a page contains only IDs already present in the saved catalogue.
  */
-export async function fetchAllHolodexResults(apiKey, { mode = 'full', knownIds = new Set() } = {}) {
+export async function fetchAllHolodexResults(apiKey, { mode = 'full', knownIds = new Set(), topic = 'Original_Song' } = {}) {
   if (!['full', 'incremental'].includes(mode)) throw new Error('Unknown refresh mode: ' + mode);
+  if (!Object.hasOwn(TOPIC_TYPES, topic)) throw new Error('Unknown Holodex topic: ' + topic);
   const rawItems = [];
   const pageStartIds = new Set();
   let reportedTotal = null;
@@ -214,14 +221,14 @@ export async function fetchAllHolodexResults(apiKey, { mode = 'full', knownIds =
     pages += 1;
     const payload = {
       sort: 'newest', target: ['stream'], conditions: [],
-      topic: ['Original_Song'], org: ['Hololive'],
+      topic: [topic], org: ['Hololive'],
       paginated: true, offset, limit: PAGE_SIZE,
     };
     const data = await fetchJson(HOLODEX_SEARCH_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'X-APIKEY': apiKey },
       body: JSON.stringify(payload),
-    }, 'Holodex catalogue page ' + pages);
+    }, 'Holodex ' + topic + ' catalogue page ' + pages);
 
     if (!data || !Array.isArray(data.items)) {
       throw new Error('Holodex response on page ' + pages + ' did not contain items[].');
@@ -285,15 +292,16 @@ async function fetchYouTubeViewCounts(ids, key) {
   return views;
 }
 
-export function buildCatalogue(rawItems, { generatedAt = new Date().toISOString(), pages = 0, reportedTotal = null } = {}) {
-  const usable = rawItems.map(normalizeRecord).filter(Boolean);
+export function buildCatalogue(rawItems, { generatedAt = new Date().toISOString(), pages = 0, reportedTotal = null, topic = 'Original_Song' } = {}) {
+  if (!Object.hasOwn(TOPIC_TYPES, topic)) throw new Error('Unknown Holodex topic: ' + topic);
+  const usable = rawItems.map(item => normalizeRecord(item, { topic })).filter(Boolean);
   const credited = assignArtistCredits(rawItems, usable);
   const songs = deduplicateSongs(credited);
   return {
     schemaVersion: 1,
     generatedAt,
     source: 'Holodex API v2',
-    query: { org: 'Hololive', topic: 'Original_Song', target: ['stream'] },
+    query: { org: 'Hololive', topic, target: ['stream'] },
     total: songs.length,
     sourceTotal: reportedTotal,
     pagesFetched: pages,
@@ -311,8 +319,8 @@ function readExistingCatalogue() {
   return {
     schemaVersion: 1, generatedAt: null, lastFullReconciledAt: null,
     source: 'Holodex API v2',
-    query: { org: 'Hololive', topic: 'Original_Song', target: ['stream'] },
-    total: 0, sourceTotal: null, pagesFetched: 0, songs: [],
+    query: { org: 'Hololive', topics: Object.keys(TOPIC_TYPES), target: ['stream'] },
+    total: 0, sourceTotal: null, sourceTotalByTopic: {}, pagesFetched: 0, songs: [],
   };
 }
 function mergeSongs(existingSongs, incomingSongs, { preserveMissing = true } = {}) {
@@ -352,33 +360,62 @@ async function main() {
 
   const existing = readExistingCatalogue();
   const oldSongs = existing.songs;
-  const knownIds = new Set(oldSongs.map(song => song.id));
+  const topicConfigs = [
+    { topic: 'Original_Song', songType: 'original' },
+    { topic: 'Music_Cover', songType: 'cover' },
+  ];
+  // Older catalogues predate songType and contain only Original_Song results.
+  const knownIdsByTopic = new Map(topicConfigs.map(({ topic, songType }) => [
+    topic,
+    new Set(oldSongs.filter(song =>
+      (song.songType === 'cover' ? 'cover' : 'original') === songType
+    ).map(song => song.id)),
+  ]));
+  const globallyKnownIds = new Set(oldSongs.map(song => song.id));
   const startedAt = new Date().toISOString();
-  console.log('Refreshing Hololive Original_Song catalogue (' + mode + ' mode)…');
-  console.log('Existing catalogue: ' + oldSongs.length + ' songs.');
+  console.log('Refreshing Hololive Original_Song + Music_Cover catalogue (' + mode + ' mode)…');
+  console.log('Existing catalogue: ' + oldSongs.length + ' videos.');
 
-  const fetched = await fetchAllHolodexResults(apiKey, { mode, knownIds });
-  const scannedCatalogue = buildCatalogue(fetched.rawItems, {
-    generatedAt: startedAt,
-    pages: fetched.pages,
-    reportedTotal: fetched.reportedTotal,
-  });
+  const scans = [];
+  for (const { topic, songType } of topicConfigs) {
+    const fetched = await fetchAllHolodexResults(apiKey, {
+      mode, knownIds: knownIdsByTopic.get(topic), topic,
+    });
+    const catalogue = buildCatalogue(fetched.rawItems, {
+      generatedAt: startedAt, pages: fetched.pages, reportedTotal: fetched.reportedTotal, topic,
+    });
+    scans.push({ topic, songType, fetched, catalogue });
+    console.log(topic + ' scan: ' + fetched.rawItems.length + ' records, ' +
+      catalogue.songs.length + ' playable entries.');
+  }
 
-  let incomingSongs = scannedCatalogue.songs;
+  const scannedSongs = deduplicateSongs(scans.flatMap(scan => scan.catalogue.songs));
+  const fetchedPages = scans.reduce((sum, scan) => sum + scan.fetched.pages, 0);
+  const sourceTotalByTopic = Object.fromEntries(scans.map(scan => [
+    scan.topic, scan.fetched.reportedTotal ?? existing.sourceTotalByTopic?.[scan.topic] ?? null,
+  ]));
+  const combinedSourceTotal = Object.values(sourceTotalByTopic).reduce(
+    (sum, value) => sum + (Number.isFinite(Number(value)) ? Number(value) : 0), 0,
+  );
+
+  let incomingSongs = scannedSongs;
   if (mode === 'incremental') {
-    incomingSongs = incomingSongs.filter(song => !knownIds.has(song.id));
-    console.log('New video IDs found: ' + incomingSongs.length + '.');
+    incomingSongs = scannedSongs.filter(song => {
+      const topic = song.songType === 'cover' ? 'Music_Cover' : 'Original_Song';
+      return !knownIdsByTopic.get(topic).has(song.id);
+    });
+    console.log('New or newly classified video IDs found: ' + incomingSongs.length + '.');
   }
 
   let mergedSongs = mode === 'full'
-    ? mergeSongs(oldSongs, scannedCatalogue.songs, { preserveMissing: true })
+    ? mergeSongs(oldSongs, scannedSongs, { preserveMissing: true })
     : mergeSongs(oldSongs, incomingSongs, { preserveMissing: true });
 
   const youtubeKey = process.env.YOUTUBE_DATA_API_KEY?.trim();
   if (youtubeKey) {
     const idsToRefresh = mode === 'full'
-      ? scannedCatalogue.songs.map(song => song.id)
-      : mergedSongs.filter(song => !knownIds.has(song.id) && song.viewCount === null).map(song => song.id);
+      ? scannedSongs.map(song => song.id)
+      : mergedSongs.filter(song => !globallyKnownIds.has(song.id) && song.viewCount === null).map(song => song.id);
     if (idsToRefresh.length > 0) {
       try {
         const freshCounts = await fetchYouTubeViewCounts(idsToRefresh, youtubeKey);
@@ -403,15 +440,16 @@ async function main() {
     lastFullReconciledAt: mode === 'full' ? startedAt : (existing.lastFullReconciledAt || null),
     lastMode: mode === 'incremental' && !songDataChanged ? (existing.lastMode || mode) : mode,
     source: 'Holodex API v2',
-    query: { org: 'Hololive', topic: 'Original_Song', target: ['stream'] },
+    query: { org: 'Hololive', topics: Object.keys(TOPIC_TYPES), target: ['stream'] },
     total: mergedSongs.length,
-    sourceTotal: fetched.reportedTotal ?? existing.sourceTotal ?? null,
-    pagesFetched: mode === 'full' ? fetched.pages : (existing.pagesFetched || fetched.pages),
+    sourceTotal: combinedSourceTotal || existing.sourceTotal || null,
+    sourceTotalByTopic,
+    pagesFetched: mode === 'full' ? fetchedPages : (existing.pagesFetched || fetchedPages),
     songs: mergedSongs,
   };
 
-  console.log('Refresh summary: mode=' + mode + '; scanned=' + fetched.rawItems.length +
-    '; pages=' + fetched.pages + '; catalogue=' + catalogue.total + '; changed=' + songDataChanged + '.');
+  console.log('Refresh summary: mode=' + mode + '; scanned=' + scans.reduce((sum, scan) => sum + scan.fetched.rawItems.length, 0) +
+    '; pages=' + fetchedPages + '; catalogue=' + catalogue.total + '; changed=' + songDataChanged + '.');
   if (process.env.DRY_RUN === '1' || process.argv.includes('--dry-run')) {
     console.log('Dry run complete. No catalogue file written.');
     return;
