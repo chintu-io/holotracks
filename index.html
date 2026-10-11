@@ -9,7 +9,7 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://hololive.hololivepro.com" crossorigin>
   <link rel="preconnect" href="https://i.ytimg.com" crossorigin>
-  <link rel="stylesheet" href="styles.css?v=20261011-artist-scrollbar-layout-2">
+  <link rel="stylesheet" href="styles.css?v=20261011-all-official-talent-marquee-1">
   <script defer src="app.js?v=20261011-artist-scrollbar-layout-2"></script>
 </head>
 <body>
@@ -125,7 +125,10 @@
       <section class="talent-section" aria-labelledby="talents-title">
         <div class="section-heading">
           <div><span class="section-kicker">PICK YOUR SOUND</span><h2 id="talents-title">Who's on your <span>playlist?</span></h2><p>Tap a talent to filter the library to their songs.</p></div>
-          <button id="browse-all-talents" class="browse-talents-button" type="button">Browse all artists <span aria-hidden="true">↗</span></button>
+          <div class="talent-section-actions">
+            <button id="talent-strip-toggle" class="talent-marquee-toggle" type="button" aria-controls="talent-strip" aria-label="Pause automatic artist scrolling" title="Pause automatic artist scrolling"><span aria-hidden="true">Ⅱ</span> Pause</button>
+            <button id="browse-all-talents" class="browse-talents-button" type="button">Browse all artists <span aria-hidden="true">↗</span></button>
+          </div>
         </div>
         <div id="talent-strip" class="talent-strip">
           <button class="talent-card talent-suisei" type="button" data-spotlight-artist="Hoshimachi Suisei"><span class="talent-image"><img src="https://hololive.hololivepro.com/wp-content/uploads/2020/06/Hoshimachi-Suisei_pr-img_01.png" alt="" loading="lazy" onerror="this.style.display='none'"><i>星</i></span><strong>Suisei</strong><small>STELLAR VOICE</small></button>
