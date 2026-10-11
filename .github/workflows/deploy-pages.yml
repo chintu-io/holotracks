@@ -3,6 +3,10 @@ name: Deploy HoloTracks to GitHub Pages
 on:
   push:
     branches: [main]
+  # GITHUB_TOKEN pushes do not trigger push workflows. The catalogue job dispatches
+  # this event only after a changed data/songs.json catalogue is successfully pushed.
+  repository_dispatch:
+    types: [catalogue-updated]
   workflow_dispatch:
 
 permissions:
@@ -24,6 +28,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
+          ref: main
           persist-credentials: false
       - name: Setup Pages
         uses: actions/configure-pages@v5
