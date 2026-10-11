@@ -56,7 +56,7 @@
   const state = {
     songs: [], filtered: [], currentPage: 1, talents: [], artistPortraits: new Map(),
     selectedArtists: new Set(),
-    query: '', artistQuery: '',
+    query: '', artistQuery: '', artistCategory: 'all',
     view: 'all', songType: 'all',
     activePlaylist: null,
     favorites: new Set(readJSON(KEYS.favorites, [])),
@@ -358,24 +358,52 @@
   }
 
   function renderArtists() {
-    // Browse every distinct credit from the actual song catalogue, not just
-    // the current official roster. Guests, Holostars, alumni, and credits
-    // without a portrait stay visible and remain filterable.
-    const counts = new Map();
-    for (const song of state.songs) {
-      for (const artist of new Set(artistsOf(song))) {
-        counts.set(artist, (counts.get(artist) || 0) + 1);
+    // Include every current official talent, even with zero catalogue songs,
+    // then add every distinct non-roster artist credit.
+    const directory = new Map();
+    for (const talent of state.talents) {
+      if (!talent || typeof talent.name !== 'string' || !safeTalentImage(talent.image)) continue;
+      const key = artistKey(talent.name);
+      if (key && !directory.has(key)) {
+        directory.set(key, { name: talent.name, count: 0, category: 'official' });
       }
     }
 
-    const query = artistKey(state.artistQuery);
-    const rows = [...counts.entries()]
-      .sort((a, b) => a[0].localeCompare(b[0], undefined, { sensitivity: 'base' }))
-      .filter(([artist]) => !query || artistKey(artist).includes(query));
+    for (const song of state.songs) {
+      const creditedThisSong = new Set();
+      for (const credit of new Set(artistsOf(song))) {
+        const talent = resolveRosterTalent(credit);
+        const name = talent?.name || credit;
+        const key = artistKey(name);
+        if (!key || creditedThisSong.has(key)) continue;
+        creditedThisSong.add(key);
+        let item = directory.get(key);
+        if (!item) {
+          item = { name, count: 0, category: 'other' };
+          directory.set(key, item);
+        }
+        item.count += 1;
+      }
+    }
 
-    el['artist-count'].textContent = counts.size.toLocaleString();
-    el['artist-filters'].innerHTML = rows.map(([artist, count]) => {
-      const officialTalent = resolveRosterTalent(artist);
+    const allRows = [...directory.values()]
+      .sort((a, b) => a.name.localeCompare(b.name, undefined, { sensitivity: 'base' }));
+    const officialCount = allRows.filter(item => item.category === 'official').length;
+    const categoryCounts = {
+      all: allRows.length,
+      official: officialCount,
+      other: allRows.length - officialCount,
+    };
+    const query = artistKey(state.artistQuery);
+    const rows = allRows
+      .filter(item => state.artistCategory === 'all' || item.category === state.artistCategory)
+      .filter(item => !query || artistKey(item.name).includes(query));
+
+    el['artist-count'].textContent = allRows.length.toLocaleString();
+    el['artist-filters'].innerHTML = rows.map(item => {
+      const artist = item.name;
+      const count = item.count;
+      const officialTalent = item.category === 'official' ? resolveRosterTalent(artist) : null;
       const portrait = safeTalentImage(officialTalent?.image) ||
         safeTalentImage(ARTIST_IMAGES[artist]) ||
         safeArtistPortrait(state.artistPortraits.get(artistKey(artist)));
@@ -383,26 +411,41 @@
         ? '<span class="artist-avatar-frame"><img class="artist-avatar" src="' + escapeHTML(portrait) +
           '" alt="" loading="lazy" decoding="async"><span class="artist-avatar-fallback" aria-hidden="true">♫</span></span>'
         : '<span class="artist-avatar-frame image-unavailable"><span class="artist-avatar-fallback" aria-hidden="true">♫</span></span>';
-      return '<label class="artist-check" title="Browse songs credited to ' + escapeHTML(artist) + '">' +
+      const categoryLabel = item.category === 'official' ? 'Official talent' : 'Guest, alumni or other credit';
+      return '<label class="artist-check" title="' + escapeHTML(categoryLabel + ': ' + artist) + '">' +
         '<input type="checkbox" data-artist="' + escapeHTML(artist) + '"' +
         (state.selectedArtists.has(artist) ? ' checked' : '') + '>' + portraitMarkup +
         '<span class="artist-name">' + escapeHTML(artist) + '</span><small title="' + count.toLocaleString() +
         ' matching catalogue videos">' + count.toLocaleString() + '</small></label>';
-    }).join('') || '<p class="filter-empty">No artists match that search. Try a different name.</p>';
+    }).join('') || '<p class="filter-empty">No artists match this category and search. Try another category or name.</p>';
 
-    // A broken official or cached image never removes its artist from the list.
+    // Image failures affect only the portrait, never directory membership.
     el['artist-filters'].querySelectorAll('.artist-avatar').forEach(image => {
       image.addEventListener('error', () => {
         image.closest('.artist-avatar-frame')?.classList.add('image-unavailable');
       }, { once: true });
     });
 
-    el['show-all-artists'].hidden = true;
+    document.querySelectorAll('[data-artist-category]').forEach(button => {
+      const category = button.dataset.artistCategory || 'all';
+      button.classList.toggle('is-active', category === state.artistCategory);
+      button.setAttribute('aria-pressed', String(category === state.artistCategory));
+      const badge = button.querySelector('[data-category-count]');
+      if (badge) badge.textContent = (categoryCounts[category] || 0).toLocaleString();
+    });
+
     const selectedCount = state.selectedArtists.size;
     el['talent-picker-count'].textContent = selectedCount ? String(selectedCount) : 'Browse';
-    el['talent-picker-selected'].textContent = selectedCount
-      ? selectedCount + ' artist' + (selectedCount === 1 ? '' : 's') + ' selected · matching songs are shown together'
-      : 'All artists · no filters applied';
+    if (selectedCount) {
+      el['talent-picker-selected'].textContent =
+        selectedCount + ' artist' + (selectedCount === 1 ? '' : 's') + ' selected · matching songs are shown together';
+    } else if (state.artistCategory === 'official') {
+      el['talent-picker-selected'].textContent = 'Official talents · select one or more to filter songs';
+    } else if (state.artistCategory === 'other') {
+      el['talent-picker-selected'].textContent = 'Guests, alumni & other credits · select to filter songs';
+    } else {
+      el['talent-picker-selected'].textContent = 'All artists · no filters applied';
+    }
     el['talent-picker-toggle'].classList.toggle('has-selection', selectedCount > 0);
     el['talent-picker-toggle'].setAttribute('aria-label', selectedCount
       ? 'Browse artists; ' + selectedCount + ' selected'
@@ -414,7 +457,7 @@
     });
   }
 
-  function renderCounts() {
+    function renderCounts() {
     el['nav-total'].textContent = state.songs.length.toLocaleString();
     el['fav-total'].textContent = state.favorites.size.toLocaleString();
     el['hero-song-count'].textContent = state.songs.length.toLocaleString();
@@ -844,6 +887,7 @@
     state.selectedArtists.clear();
     state.query = '';
     state.artistQuery = '';
+    state.artistCategory = 'all';
     state.view = 'all';
     state.activePlaylist = null;
     el['search-input'].value = '';
@@ -965,6 +1009,12 @@
     el['artist-search'].addEventListener('input', event => {
       state.artistQuery = event.target.value;
       renderArtists();
+    });
+    document.querySelectorAll('[data-artist-category]').forEach(button => {
+      button.addEventListener('click', () => {
+        state.artistCategory = button.dataset.artistCategory || 'all';
+        renderArtists();
+      });
     });
     el['artist-filters'].addEventListener('change', event => {
       const input = event.target.closest('input[data-artist]');
