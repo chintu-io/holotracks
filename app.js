@@ -3,6 +3,20 @@
 (() => {
   const PAGE_SIZE = 60;
   const FRESH_WINDOW_DAYS = 180;
+  const ARTIST_IMAGES = {
+    'Hoshimachi Suisei': 'https://hololive.hololivepro.com/wp-content/uploads/2020/06/Hoshimachi-Suisei_pr-img_01.png',
+    'Sakura Miko': 'https://hololive.hololivepro.com/wp-content/uploads/2020/06/Sakura-Miko_pr-img_01.webp',
+    'Houshou Marine': 'https://hololive.hololivepro.com/wp-content/uploads/2020/06/Houshou-Marine_pr-img_01.png',
+    'Mori Calliope': 'https://hololive.hololivepro.com/wp-content/uploads/2020/07/Mori-Calliope_megane_07.png',
+    'Shirakami Fubuki': 'https://hololive.hololivepro.com/wp-content/uploads/2020/06/Shirakami-Fubuki_pr-img_01.webp',
+    'Usada Pekora': 'https://hololive.hololivepro.com/wp-content/uploads/2020/06/Usada-Pekora_pr-img_01.webp',
+    'Inugami Korone': 'https://hololive.hololivepro.com/wp-content/uploads/2020/06/Inugami-Korone_pr-img_01.png',
+    'Nekomata Okayu': 'https://hololive.hololivepro.com/wp-content/uploads/2020/06/Nekomata-Okayu_pr-img_01.png',
+    'Ookami Mio': 'https://hololive.hololivepro.com/wp-content/uploads/2020/06/Ookami-Mio_pr-img_01.webp',
+    'Shiranui Flare': 'https://hololive.hololivepro.com/wp-content/uploads/2020/06/Shiranui-Flare_pr-img_01.png',
+    'AZKi': 'https://hololive.hololivepro.com/wp-content/uploads/2020/06/AZKi_pr-img_01.webp',
+    'Takanashi Kiara': 'https://hololive.hololivepro.com/wp-content/uploads/2020/07/Takanashi-Kiara_pr-img_01.webp',
+  };
   const KEYS = {
     favorites: 'holotracks:favorites:v1',
     playlists: 'holotracks:playlists:v1',
@@ -111,11 +125,15 @@
       .sort((a, b) => a[0].localeCompare(b[0]))
       .filter(([artist]) => artist.toLocaleLowerCase().includes(query));
     el['artist-count'].textContent = counts.size;
-    el['artist-filters'].innerHTML = rows.map(([artist, count]) =>
-      '<label class="artist-check"><input type="checkbox" data-artist="' + escapeHTML(artist) + '"' +
-      (state.selectedArtists.has(artist) ? ' checked' : '') + '><span>' + escapeHTML(artist) +
-      '</span><small>' + count + '</small></label>'
-    ).join('') || '<p class="filter-empty">No matching talents.</p>';
+    el['artist-filters'].innerHTML = rows.map(([artist, count]) => {
+      const portrait = ARTIST_IMAGES[artist];
+      const portraitMarkup = portrait
+        ? '<img class="artist-avatar" src="' + portrait + '" alt="" loading="lazy" onerror="this.style.display=\'none\'">'
+        : '';
+      return '<label class="artist-check"><input type="checkbox" data-artist="' + escapeHTML(artist) + '"' +
+        (state.selectedArtists.has(artist) ? ' checked' : '') + '>' + portraitMarkup +
+        '<span>' + escapeHTML(artist) + '</span><small>' + count + '</small></label>';
+    }).join('') || '<p class="filter-empty">No matching talents.</p>';
     el['show-all-artists'].hidden = rows.length <= 12;
     if (rows.length > 12) el['show-all-artists'].textContent = 'Show all ' + rows.length + ' talents';
     document.querySelectorAll('[data-spotlight-artist]').forEach(button => {
@@ -490,6 +508,9 @@
       state.activePlaylist = null;
       renderPlaylists();
       applyFilters();
+      if (window.matchMedia && window.matchMedia('(max-width: 680px)').matches) {
+        document.body.classList.remove('filters-open');
+      }
     });
     el['sort-select'].addEventListener('change', applyFilters);
     el['clear-filters'].addEventListener('click', resetFilters);
