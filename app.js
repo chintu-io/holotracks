@@ -1083,6 +1083,47 @@
     showNotice('Showing songs credited to ' + match + '.');
     el['catalogue'].scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
+  function setupDesktopVideoDock() {
+    const column = el['player-column'];
+    const playerCard = column?.querySelector('.player-card');
+    if (!column || !playerCard) return;
+
+    let dockThreshold = Infinity;
+    let scheduledFrame = 0;
+
+    const isWideDesktop = () =>
+      !!(window.matchMedia && window.matchMedia('(min-width: 1221px)').matches);
+
+    const applyDockState = () => {
+      scheduledFrame = 0;
+      const shouldDock = isWideDesktop() && window.scrollY >= dockThreshold;
+      document.body.classList.toggle('player-docked', shouldDock);
+    };
+
+    const scheduleDockUpdate = () => {
+      if (scheduledFrame) return;
+      scheduledFrame = window.requestAnimationFrame(applyDockState);
+    };
+
+    const measureDockThreshold = () => {
+      // Measure only while in normal document flow, then pin the player only
+      // when its full-size card would otherwise have scrolled mostly away.
+      document.body.classList.remove('player-docked');
+      if (!isWideDesktop()) {
+        dockThreshold = Infinity;
+        applyDockState();
+        return;
+      }
+      const rect = playerCard.getBoundingClientRect();
+      dockThreshold = Math.max(0, rect.top + window.scrollY + playerCard.offsetHeight - 110);
+      applyDockState();
+    };
+
+    window.addEventListener('scroll', scheduleDockUpdate, { passive: true });
+    window.addEventListener('resize', measureDockThreshold, { passive: true });
+    measureDockThreshold();
+  }
+
   function initEvents() {
     document.querySelectorAll('[data-view]').forEach(button => {
       button.addEventListener('click', () => setView(button.dataset.view));
@@ -1372,6 +1413,7 @@
   }
   async function init() {
     initEvents();
+    setupDesktopVideoDock();
     setSidebarCollapsed(!!readJSON(KEYS.sidebarCollapsed, false), false);
     await loadTalentRoster();
     await loadArtistPortraitManifest();
