@@ -9,8 +9,8 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://hololive.hololivepro.com" crossorigin>
   <link rel="preconnect" href="https://i.ytimg.com" crossorigin>
-  <link rel="stylesheet" href="styles.css?v=20261011-songpages">
-  <script defer src="app.js?v=20261011-songpages"></script>
+  <link rel="stylesheet" href="styles.css?v=20261011-talentpicker">
+  <script defer src="app.js?v=20261011-talentpicker"></script>
 </head>
 <body>
   <a class="skip-link" href="#catalogue">Skip to music library</a>
@@ -23,7 +23,8 @@
     <form id="global-search-form" class="global-search" role="search" aria-label="Search Hololive music">
       <span class="search-icon" aria-hidden="true">⌕</span>
       <label class="sr-only" for="search-input">Search songs and talents</label>
-      <input id="search-input" type="search" placeholder="Search songs, talents or Japanese titles…" autocomplete="off">
+      <input id="search-input" type="search" placeholder="Search songs, titles…" autocomplete="off">
+      <button id="talent-picker-toggle" class="talent-picker-toggle" type="button" aria-haspopup="dialog" aria-controls="talent-picker-dialog" aria-label="Browse talent filters"><span aria-hidden="true">✦</span><span>Talents</span><b id="talent-picker-count">Browse</b></button>
       <button id="search-button" class="global-search-button" type="submit">Search</button>
     </form>
     <div class="top-actions">
@@ -47,6 +48,30 @@
     <button id="mobile-mini-next" class="mobile-mini-control" type="button" aria-label="Next song" disabled>▶|</button>
   </div>
 
+  <dialog id="talent-picker-dialog" class="talent-picker-dialog" aria-labelledby="talent-picker-title">
+    <div class="talent-picker-shell">
+      <header class="talent-picker-head">
+        <div>
+          <span class="section-kicker">FIND YOUR OSHI</span>
+          <h2 id="talent-picker-title">Browse talents <span id="artist-count" class="result-count">—</span></h2>
+          <p>Choose one or more members. Their songs will be mixed into your results.</p>
+        </div>
+        <button id="talent-picker-close" class="talent-picker-close" type="button" aria-label="Close talent browser">×</button>
+      </header>
+      <label class="artist-search talent-picker-search"><span aria-hidden="true">⌕</span><input id="artist-search" type="search" placeholder="Find a member…" aria-label="Search talents" autocomplete="off"></label>
+      <div class="talent-picker-toolbar">
+        <span id="talent-picker-selected">All talents · no filters applied</span>
+        <button id="clear-filters" class="clear-filters" type="button"><span aria-hidden="true">↺</span> Reset filters</button>
+      </div>
+      <div id="artist-filters" class="artist-filters" aria-label="Choose talents"><p class="filter-empty">Talent filters appear after the catalogue loads.</p></div>
+      <button id="show-all-artists" class="text-button show-all" type="button" hidden>Show all talents</button>
+      <footer class="talent-picker-footer">
+        <span>Selected talents combine their songs in the library.</span>
+        <button id="talent-picker-done" class="talent-picker-done" type="button">Done</button>
+      </footer>
+    </div>
+  </dialog>
+
   <main class="app-layout">
     <aside id="sidebar" class="sidebar" aria-label="Music navigation and artist filters">
       <div class="sidebar-topline"><span class="sidebar-orb">✦</span><span class="sidebar-brand-copy"><strong>Your music lounge</strong><small>Pick a vibe. Find a voice.</small></span><button id="sidebar-collapse" class="sidebar-collapse" type="button" aria-label="Collapse sidebar" aria-pressed="false" title="Collapse sidebar">‹</button></div>
@@ -56,16 +81,6 @@
         <button class="nav-item" data-sidebar-song-type="cover" data-tooltip="Cover songs" title="Cover songs" aria-label="Cover songs" type="button" aria-pressed="false"><span class="nav-symbol" aria-hidden="true">🎤</span><span class="nav-label">Covers</span><span class="nav-short-label" aria-hidden="true">COVER</span><span id="nav-cover-total" class="nav-count">—</span></button>
         <button class="nav-item" data-view="favorites" data-tooltip="My favourites" title="My favourites" aria-label="My favourites" type="button"><span class="nav-symbol" aria-hidden="true">♥</span><span class="nav-label">My favourites</span><span class="nav-short-label" aria-hidden="true">FAV</span><span id="fav-total" class="nav-count">0</span></button>
       </nav>
-
-      <div class="sidebar-rule"><span>ARTIST FILTERS</span><i></i></div>
-      <section class="filter-section" aria-labelledby="artists-heading">
-        <div class="section-title-row"><h2 id="artists-heading">Filter by talent</h2><span id="artist-count" class="muted-count">0</span></div>
-        <label class="artist-search"><span>⌕</span><input id="artist-search" type="search" placeholder="Find a member…" aria-label="Filter artist list"></label>
-        <p class="filter-hint">Select more than one to mix your favourites.</p>
-        <div id="artist-filters" class="artist-filters"><p class="filter-empty">Talent filters appear after the catalogue loads.</p></div>
-        <button id="show-all-artists" class="text-button show-all" type="button" hidden>Show all talents</button>
-        <button id="clear-filters" class="clear-filters" type="button"><span>↺</span> Reset search and filters</button>
-      </section>
 
       <section class="playlist-section" aria-labelledby="playlists-heading">
         <div class="section-title-row"><h2 id="playlists-heading">My mixtapes</h2><button id="create-playlist" class="add-playlist" type="button" aria-label="Create a playlist">+</button></div>
@@ -104,7 +119,7 @@
       <section class="talent-section" aria-labelledby="talents-title">
         <div class="section-heading">
           <div><span class="section-kicker">PICK YOUR SOUND</span><h2 id="talents-title">Who's on your <span>playlist?</span></h2><p>Tap a talent to filter the library to their songs.</p></div>
-          <span class="talent-section-note">YOUR OSHI, YOUR VIBE <b>♡</b></span>
+          <button id="browse-all-talents" class="browse-talents-button" type="button">Browse all talents <span aria-hidden="true">↗</span></button>
         </div>
         <div id="talent-strip" class="talent-strip">
           <button class="talent-card talent-suisei" type="button" data-spotlight-artist="Hoshimachi Suisei"><span class="talent-image"><img src="https://hololive.hololivepro.com/wp-content/uploads/2020/06/Hoshimachi-Suisei_pr-img_01.png" alt="" loading="lazy" onerror="this.style.display='none'"><i>星</i></span><strong>Suisei</strong><small>STELLAR VOICE</small></button>
