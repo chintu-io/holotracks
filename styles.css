@@ -4199,3 +4199,63 @@ body{
   }
   .hero-footer{z-index:9!important}
 }
+
+
+/* Center the primary playback control independently of the surrounding buttons. */
+.player-controls{
+  position:relative!important;
+  display:block!important;
+  width:100%!important;
+  height:44px!important;
+  min-height:44px!important;
+  margin:12px 0 8px!important;
+  overflow:visible!important;
+}
+.player-controls > .volume-control,
+.player-controls > #queue-shuffle,
+.player-controls > #previous-song,
+.player-controls > #play-pause,
+.player-controls > #next-song,
+.player-controls > #queue-repeat{
+  position:absolute!important;
+  top:50%!important;
+  margin:0!important;
+  transform:translate(-50%,-50%)!important;
+}
+.player-controls > .volume-control{
+  left:10%!important;
+}
+.player-controls > #queue-shuffle{
+  left:27%!important;
+}
+.player-controls > #previous-song{
+  left:40%!important;
+}
+.player-controls > #play-pause{
+  left:50%!important;
+  z-index:2!important;
+}
+.player-controls > #next-song{
+  left:60%!important;
+}
+.player-controls > #queue-repeat{
+  left:73%!important;
+}
+.player-controls > #play-pause:hover:not(:disabled){
+  transform:translate(-50%,-50%) scale(1.04)!important;
+}
+
+/* On narrow screens, spread the surrounding controls a little further apart. */
+@media(max-width:680px){
+  .player-controls{
+    height:46px!important;
+    min-height:46px!important;
+    margin:8px 0 6px!important;
+  }
+  .player-controls > .volume-control{left:5%!important}
+  .player-controls > #queue-shuffle{left:22%!important}
+  .player-controls > #previous-song{left:36%!important}
+  .player-controls > #play-pause{left:50%!important}
+  .player-controls > #next-song{left:64%!important}
+  .player-controls > #queue-repeat{left:78%!important}
+}
