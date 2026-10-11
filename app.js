@@ -229,6 +229,7 @@
     window.matchMedia('(prefers-reduced-motion: reduce)').matches);
   let talentMarqueeHoverPaused = false;
   let talentMarqueeFocusPaused = false;
+  let talentMarqueePointerDown = false;
 
   function updateTalentMarqueeButton() {
     const button = el['talent-strip-toggle'];
@@ -286,8 +287,17 @@
       strip.addEventListener('focusout', event => {
         if (!strip.contains(event.relatedTarget)) talentMarqueeFocusPaused = false;
       });
-      // Let someone who touches or drags the strip take manual control.
-      strip.addEventListener('pointerdown', () => setTalentMarqueePaused(true), { passive: true });
+      // Temporarily yield to touch/mouse dragging without permanently disabling
+      // auto-scroll just because someone tapped a talent card.
+      strip.addEventListener('pointerdown', () => { talentMarqueePointerDown = true; }, { passive: true });
+      window.addEventListener('pointerup', () => {
+        talentMarqueePointerDown = false;
+        talentMarqueeLastTime = 0;
+      }, { passive: true });
+      window.addEventListener('pointercancel', () => {
+        talentMarqueePointerDown = false;
+        talentMarqueeLastTime = 0;
+      }, { passive: true });
       document.addEventListener('visibilitychange', () => { talentMarqueeLastTime = 0; });
       window.addEventListener('resize', () => { talentMarqueeLastTime = 0; });
       if (window.matchMedia) {
@@ -308,7 +318,7 @@
         return;
       }
       if (talentMarqueeLastTime && !document.hidden && !talentMarqueeUserPaused &&
-          !talentMarqueeHoverPaused && !talentMarqueeFocusPaused) {
+          !talentMarqueeHoverPaused && !talentMarqueeFocusPaused && !talentMarqueePointerDown) {
         const deltaSeconds = Math.min(80, timestamp - talentMarqueeLastTime) / 1000;
         const first = strip.querySelector('.talent-card:not([data-talent-duplicate="true"])');
         const firstDuplicate = strip.querySelector('.talent-card[data-talent-duplicate="true"]');
