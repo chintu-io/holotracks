@@ -524,6 +524,13 @@
       state.pendingVideoId = id;
       loadYouTubeAPI();
     }
+
+    // On phones, make the video/player visible as soon as a track is started.
+    // Defer until click bubbling completes so the outside-click listener cannot
+    // immediately close the panel that this interaction just opened.
+    if (window.matchMedia && window.matchMedia('(max-width: 680px)').matches) {
+      window.setTimeout(() => toggleMobilePlayerPanel(true), 0);
+    }
   }
   function addToQueue(id) {
     if (!songById(id)) return;
