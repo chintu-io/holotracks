@@ -1,8 +1,6 @@
 name: Refresh Hololive catalogue
 
 on:
-  # Code/config changes validate and do an incremental refresh. Catalogue-only commits
-  # do not trigger this workflow, which prevents an infinite commit loop.
   push:
     branches: [main]
     paths:
@@ -16,11 +14,8 @@ on:
         required: true
         default: incremental
         type: choice
-        options:
-          - incremental
-          - full
+        options: [incremental, full]
   schedule:
-    # Daily lightweight check; Sunday also performs a full reconciliation.
     - cron: '23 4 * * *'
     - cron: '43 4 * * 0'
 
@@ -40,19 +35,17 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           persist-credentials: true
-
       - name: Setup Node.js
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
         with:
           node-version: '24'
           package-manager-cache: false
-
       - name: Determine refresh mode
         id: mode
         env:
-          EVENT_NAME: \${{ github.event_name }}
-          SCHEDULE: \${{ github.event.schedule }}
-          DISPATCH_MODE: \${{ inputs.mode }}
+          EVENT_NAME: ${{ github.event_name }}
+          SCHEDULE: ${{ github.event.schedule }}
+          DISPATCH_MODE: ${{ inputs.mode }}
         shell: bash
         run: |
           MODE="incremental"
@@ -63,19 +56,16 @@ jobs:
           fi
           echo "mode=$MODE" >> "$GITHUB_OUTPUT"
           echo "Selected catalogue refresh mode: $MODE"
-
       - name: Run automated tests and syntax checks
         run: |
           npm test
           node --check app.js
           node --check scripts/update-catalog.mjs
-
       - name: Refresh catalogue from Holodex
         env:
-          HOLODEX_API_KEY: \${{ secrets.HOLODEX_API_KEY }}
-          YOUTUBE_DATA_API_KEY: \${{ secrets.YOUTUBE_DATA_API_KEY }}
-        run: node scripts/update-catalog.mjs --mode=\${{ steps.mode.outputs.mode }}
-
+          HOLODEX_API_KEY: ${{ secrets.HOLODEX_API_KEY }}
+          YOUTUBE_DATA_API_KEY: ${{ secrets.YOUTUBE_DATA_API_KEY }}
+        run: node scripts/update-catalog.mjs --mode=${{ steps.mode.outputs.mode }}
       - name: Commit catalogue only when it changed
         run: |
           if git diff --quiet -- data/songs.json; then
