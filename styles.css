@@ -1515,3 +1515,26 @@ button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid 
 @media(prefers-reduced-motion:reduce){
   body.sidebar-collapsed .nav-item[data-tooltip]::after{transition:none}
 }
+
+
+/* Search should be an obvious action, not an unexplained keyboard shortcut. */
+.global-search{gap:9px;padding-right:6px}
+.global-search-button{
+  flex:none;display:inline-flex;align-items:center;justify-content:center;
+  min-width:78px;min-height:34px;padding:7px 12px;
+  border:1px solid #4b7390;border-radius:9px;
+  background:linear-gradient(115deg,#1d759b,#5369b5);
+  color:#fff;font-size:12px;font-weight:900;letter-spacing:.1px;
+  white-space:nowrap;box-shadow:0 3px 10px #061c382e;
+  transition:filter .15s ease,transform .15s ease,border-color .15s ease;
+}
+.global-search-button:hover{filter:brightness(1.12);border-color:#8bdff3;transform:translateY(-1px)}
+.global-search-button:active{transform:translateY(0)}
+.global-search-button:focus-visible{outline:3px solid var(--cyan);outline-offset:2px}
+@media(max-width:680px){
+  .global-search{gap:7px;padding-right:5px}
+  .global-search-button{min-width:72px;min-height:34px;padding:7px 10px;font-size:11px}
+}
+@media(prefers-reduced-motion:reduce){
+  .global-search-button{transition:none}
+}
