@@ -3176,22 +3176,46 @@ button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid 
 }
 
 
-/* Native YouTube volume control — kept inside the Listening Room controls. */
-.volume-control-row{
-  display:flex;align-items:center;gap:9px;width:100%;min-width:0;
-  margin:2px 0 10px;padding:8px 10px;
-  border:1px solid #2e2f50;border-radius:11px;
-  background:linear-gradient(100deg,#17182f,#15162a);
+/* Compact, click-to-open volume controls in the playback row. */
+.player-controls{position:relative;overflow:visible}
+.volume-control{position:relative;display:flex;align-items:center;flex:none}
+.volume-toggle{
+  width:31px;height:31px;flex:none;display:grid;place-items:center;
+  padding:0;border:1px solid #373858;border-radius:10px;
+  background:linear-gradient(145deg,#20213d,#18192f);
+  color:#bdaeff;font-size:16px;line-height:1;
+  transition:background .16s ease,border-color .16s ease,color .16s ease,box-shadow .16s ease;
 }
+.volume-toggle:hover{border-color:#a68cff;background:#2b2548;color:#fff}
+.volume-toggle[aria-expanded="true"]{
+  border-color:#ad8cff;background:linear-gradient(140deg,#3a2b57,#272344);
+  color:#fff;box-shadow:0 0 0 3px #a98bff18,0 5px 15px #0003;
+}
+.volume-toggle.is-muted{color:#ff9bd7}
+.volume-popover,.volume-popover[hidden]{box-sizing:border-box}
+.volume-popover{
+  position:absolute;z-index:120;top:calc(100% + 9px);left:0;
+  width:224px;max-width:calc(100vw - 64px);padding:12px;
+  border:1px solid #49436f;border-radius:14px;
+  background:linear-gradient(145deg,#1d1c38f7,#111527f8);
+  box-shadow:0 16px 38px #02020bd9,0 0 0 1px #ffffff08;
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  animation:volume-popover-enter .13s ease-out;
+}
+.volume-popover[hidden]{display:none!important}
+.volume-popover-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.volume-popover-head>span{color:#9b9dc4;font:8px 'DM Mono',monospace;letter-spacing:.85px}
+.volume-value{flex:none;min-width:36px;color:#e1d3ff;font:11px 'DM Mono',monospace;text-align:right;font-variant-numeric:tabular-nums}
+.volume-popover-adjust{display:flex;align-items:center;gap:10px;margin-top:11px}
 .volume-mute{
-  display:grid;place-items:center;flex:none;width:29px;height:29px;
-  border:1px solid #3a3b60;border-radius:9px;background:#20213d;
-  color:#d5c6ff;font-size:16px;line-height:1;
+  width:30px;height:30px;display:grid;place-items:center;flex:none;
+  border:1px solid #3c3c60;border-radius:10px;
+  background:#252440;color:#d8cbff;font-size:14px;line-height:1;
+  transition:background .16s ease,border-color .16s ease,color .16s ease;
 }
-.volume-mute:hover{border-color:#a18aff;background:#2a2446;color:#fff}
-.volume-mute.is-muted{color:#ff9bd7;border-color:#6c3c67;background:#2e1e37}
-.volume-slider-label{display:grid;grid-template-columns:1fr;gap:4px;flex:1;min-width:0}
-.volume-slider-label>span{color:#888db6;font:7px 'DM Mono',monospace;letter-spacing:.8px}
+.volume-mute:hover{border-color:#a68cff;background:#302849;color:#fff}
+.volume-mute.is-muted{border-color:#77436d;background:#392039;color:#ff9bd7}
+.volume-slider-label{display:block;flex:1;min-width:0;padding:8px 0;cursor:pointer}
 .volume-slider{
   --volume-level:70%;
   display:block;width:100%;min-width:0;height:5px;margin:0;padding:0;
@@ -3207,11 +3231,22 @@ button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid 
   width:10px;height:10px;border:2px solid #fff;border-radius:50%;
   background:#d58be9;box-shadow:0 0 0 3px #d58be927;
 }
-.volume-value{flex:none;min-width:34px;color:#d8cbff;font:10px 'DM Mono',monospace;text-align:right;font-variant-numeric:tabular-nums}
 .volume-slider:focus-visible{outline:2px solid var(--cyan);outline-offset:5px}
-.player-column.mobile-open .volume-control-row{margin:2px 0 7px;padding:7px 9px}
+@keyframes volume-popover-enter{
+  from{opacity:0;transform:translateY(-4px) scale(.98)}
+  to{opacity:1;transform:translateY(0) scale(1)}
+}
+@media(max-width:680px){
+  .player-column.mobile-open .player-controls .volume-toggle{
+    width:32px!important;height:32px!important;min-width:32px!important;min-height:32px!important;
+  }
+  .player-column.mobile-open .volume-popover{top:calc(100% + 7px)}
+}
 @media(max-width:390px){
-  .volume-control-row{gap:7px;margin-bottom:8px;padding:7px 8px}
-  .volume-mute{width:27px;height:27px}
-  .volume-value{min-width:31px;font-size:9px}
+  .volume-popover{width:210px;max-width:calc(100vw - 52px);padding:11px}
+  .volume-popover-adjust{gap:8px}
+  .volume-mute{width:28px;height:28px}
+}
+@media(prefers-reduced-motion:reduce){
+  .volume-popover{animation:none}
 }
