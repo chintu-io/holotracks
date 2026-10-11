@@ -7,9 +7,21 @@
   "scripts": {
     "refresh": "node scripts/update-catalog.mjs",
     "refresh:dry": "node scripts/update-catalog.mjs --dry-run",
-    "test": "node --test scripts/*.test.mjs"
+    "test": "node --test scripts/*.test.mjs",
+    "mobile:prepare": "node scripts/build-mobile.mjs",
+    "mobile:add-android": "npm run mobile:prepare && cap add android",
+    "mobile:sync": "npm run mobile:prepare && cap sync android"
+  },
+  "dependencies": {
+    "@capacitor/app-launcher": "8.0.1",
+    "@capacitor/core": "8.5.2"
+  },
+  "devDependencies": {
+    "@capacitor/android": "8.5.3",
+    "@capacitor/cli": "8.5.3",
+    "esbuild": "0.25.0"
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=22"
   }
 }
