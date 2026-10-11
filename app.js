@@ -53,6 +53,10 @@
     try { localStorage.setItem(key, JSON.stringify(value)); }
     catch { showNotice('Browser storage is unavailable; the latest changes may not persist.'); }
   };
+  const LATEST_MIX_PLAYLIST_ID = 'holotracks-smart-latest-50-originals-covers';
+  const LATEST_MIX_PLAYLIST_KIND = 'latest-50-originals-covers';
+  const LATEST_MIX_PLAYLIST_NAME = 'Latest 50 Originals & Covers';
+
   const state = {
     songs: [], filtered: [], currentPage: 1, talents: [], artistPortraits: new Map(),
     selectedArtists: new Set(),
@@ -719,17 +723,85 @@
     applyFilters();
     renderPlayerMeta();
   }
+  function refreshLatest50Playlist() {
+    // Smart mixtape: rebuild from the current catalogue so new releases replace
+    // older entries on the next visit. Original songs and covers share one
+    // newest-first list, capped at 50 items total.
+    const songIds = state.songs
+      .filter(item => item.songType === 'original' || item.songType === 'cover')
+      .sort((a, b) => dateValue(b) - dateValue(a) || titleOf(a).localeCompare(titleOf(b)))
+      .slice(0, 50)
+      .map(item => item.id);
+
+    let playlist = state.playlists.find(item =>
+      item.id === LATEST_MIX_PLAYLIST_ID || item.smartType === LATEST_MIX_PLAYLIST_KIND
+    );
+    if (!playlist) {
+      // Avoid replacing a user-created mixtape with the same name.
+      const nameInUse = state.playlists.some(item =>
+        String(item.name || '').toLocaleLowerCase() === LATEST_MIX_PLAYLIST_NAME.toLocaleLowerCase()
+      );
+      playlist = {
+        id: LATEST_MIX_PLAYLIST_ID,
+        name: nameInUse ? LATEST_MIX_PLAYLIST_NAME + ' · Auto' : LATEST_MIX_PLAYLIST_NAME,
+        songIds: [],
+        smartType: LATEST_MIX_PLAYLIST_KIND,
+      };
+      state.playlists.unshift(playlist);
+    }
+    playlist.smartType = LATEST_MIX_PLAYLIST_KIND;
+    playlist.name = playlist.name || LATEST_MIX_PLAYLIST_NAME;
+    playlist.songIds = songIds;
+
+    // Keep the automatic playlist at the top of My Mixtapes.
+    state.playlists = [playlist, ...state.playlists.filter(item => item !== playlist)];
+    saveJSON(KEYS.playlists, state.playlists);
+    return playlist;
+  }
+
   function renderPlaylists() {
-    el['playlist-list'].innerHTML = state.playlists.map(playlist =>
-      '<button type="button" class="playlist-row ' + (playlist.id === state.activePlaylist ? 'active' : '') +
-      '" data-playlist="' + escapeHTML(playlist.id) + '"><span>♫ ' + escapeHTML(playlist.name) +
-      '</span><small>' + playlist.songIds.length + '</small></button>'
-    ).join('') || '<p class="filter-empty">No mixtapes yet. Use + to create one.</p>';
+    el['playlist-list'].innerHTML = state.playlists.map(playlist => {
+      const isSmart = playlist.smartType === LATEST_MIX_PLAYLIST_KIND;
+      const count = Array.isArray(playlist.songIds) ? playlist.songIds.length : 0;
+      return '<button type="button" class="playlist-row ' + (playlist.id === state.activePlaylist ? 'active' : '') +
+        (isSmart ? ' playlist-row-smart' : '') + '" data-playlist="' + escapeHTML(playlist.id) +
+        '"><span class="playlist-row-label">♫ ' + escapeHTML(playlist.name) + '</span>' +
+        (isSmart ? '<i class="playlist-smart-badge">AUTO</i>' : '') +
+        '<small>' + count + '</small></button>';
+    }).join('') || '<p class="filter-empty">No mixtapes yet. Use + to create one.</p>';
     el['playlist-select'].innerHTML = '<option value="">Choose playlist…</option>' + state.playlists.map(playlist =>
       '<option value="' + escapeHTML(playlist.id) + '">' + escapeHTML(playlist.name) + '</option>'
     ).join('');
   }
-  function createPlaylist(name) {
+
+  function playLatest50Playlist(playlist) {
+    if (!playlist || !Array.isArray(playlist.songIds) || !playlist.songIds.length) {
+      showNotice('The latest-song mixtape is empty until the catalogue has loaded.');
+      return;
+    }
+
+    state.activePlaylist = playlist.id;
+    state.view = 'all';
+    state.songType = 'all';
+    state.query = '';
+    state.selectedArtists.clear();
+    el['search-input'].value = '';
+    el['sort-select'].value = 'newest';
+    el['playlist-select'].value = playlist.id;
+
+    // This smart mix is intended to play newest-first and loop the whole queue.
+    state.shuffle = false;
+    state.repeat = true;
+    saveJSON(KEYS.shuffle, false);
+    saveJSON(KEYS.repeat, true);
+    renderPlaylists();
+    applyFilters();
+    updatePlayerButtons();
+    playSong(playlist.songIds[0], playlist.songIds);
+    showNotice('Playing the latest ' + playlist.songIds.length +
+      ' originals and covers. Repeat queue is on, so it will start again after the final song.');
+  }
+    function createPlaylist(name) {
     const clean = name.trim();
     if (!clean) return;
     if (state.playlists.some(playlist => playlist.name.toLocaleLowerCase() === clean.toLocaleLowerCase())) {
@@ -911,8 +983,8 @@
         },
         onStateChange: event => {
           if (event.data === window.YT.PlayerState.ENDED) {
-            if (state.repeat && state.currentId) state.player.seekTo(0, true);
-            else nextSong();
+            // "Repeat queue" loops the whole queue, not just the current track.
+            nextSong();
           } else if (event.data === window.YT.PlayerState.PLAYING) {
             el['player-state'].textContent = 'Playing on YouTube';
           } else if (event.data === window.YT.PlayerState.PAUSED) {
@@ -1215,7 +1287,13 @@
     el['playlist-list'].addEventListener('click', event => {
       const button = event.target.closest('[data-playlist]');
       if (!button) return;
-      state.activePlaylist = button.dataset.playlist;
+      const playlist = state.playlists.find(item => item.id === button.dataset.playlist);
+      if (!playlist) return;
+      if (playlist.smartType === LATEST_MIX_PLAYLIST_KIND) {
+        playLatest50Playlist(playlist);
+        return;
+      }
+      state.activePlaylist = playlist.id;
       state.view = 'all';
       renderPlaylists();
       applyFilters();
@@ -1226,7 +1304,11 @@
         showNotice('Choose a mixtape first.');
         return;
       }
-      playlist.songIds = [...new Set([...playlist.songIds, ...state.queue])];
+      if (playlist.smartType === LATEST_MIX_PLAYLIST_KIND) {
+        showNotice('This automatic mixtape refreshes itself from the newest originals and covers.');
+        return;
+      }
+      playlist.songIds = [...new Set([...(Array.isArray(playlist.songIds) ? playlist.songIds : []), ...state.queue])];
       saveJSON(KEYS.playlists, state.playlists);
       renderPlaylists();
       showNotice('Queue saved to "' + playlist.name + '".');
@@ -1235,6 +1317,10 @@
       const playlist = state.playlists.find(item => item.id === el['playlist-select'].value);
       if (!playlist || !playlist.songIds.length) {
         showNotice('Choose a mixtape with songs first.');
+        return;
+      }
+      if (playlist.smartType === LATEST_MIX_PLAYLIST_KIND) {
+        playLatest50Playlist(playlist);
         return;
       }
       playSong(playlist.songIds[0], playlist.songIds);
@@ -1304,6 +1390,7 @@
       el['source-status'].textContent = 'Catalogue load failed';
       showNotice('Could not load the song catalogue (' + error.message + '). Refresh the page to retry.');
     }
+    refreshLatest50Playlist();
     renderArtists();
     renderPlaylists();
     applyFilters();
