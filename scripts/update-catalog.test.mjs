@@ -23,6 +23,12 @@ test('normalizeRecord maps video fields and prefers YouTube publication date', (
   assert.equal(song.releaseDate, '2025-05-31T22:00:00.000Z');
   assert.equal(song.viewCount, 12450);
   assert.equal(song.duration, 181);
+  assert.equal(song.songType, 'original');
+});
+
+test('normalizeRecord labels Music_Cover records separately from originals', () => {
+  const song = normalizeRecord(record(idA), { topic: 'Music_Cover' });
+  assert.equal(song.songType, 'cover');
 });
 
 test('normalizeRecord rejects malformed IDs and non-playable statuses', () => {
@@ -40,6 +46,14 @@ test('deduplicateSongs keeps one record per ID and retains newer metadata', () =
   const result = deduplicateSongs(songs);
   assert.equal(result.length, 2);
   assert.equal(result.find(song => song.id === idA).title, 'Newer title');
+});
+
+test('deduplicateSongs prefers cover classification when one video matches both topics', () => {
+  const original = normalizeRecord(record(idA));
+  const cover = normalizeRecord(record(idA), { topic: 'Music_Cover' });
+  const result = deduplicateSongs([original, cover]);
+  assert.equal(result.length, 1);
+  assert.equal(result[0].songType, 'cover');
 });
 
 test('artist-credit inference detects collaboration names in English and Japanese', () => {
@@ -62,6 +76,10 @@ test('buildCatalogue deduplicates IDs and returns documented schema', () => {
   assert.equal(catalogue.pagesFetched, 1);
   assert.equal(catalogue.songs.length, 2);
   assert.ok(catalogue.songs.every(song => Array.isArray(song.artists) && song.artists.length > 0));
+  assert.ok(catalogue.songs.every(song => song.songType === 'original'));
+  const covers = buildCatalogue([record(idA)], { topic: 'Music_Cover' });
+  assert.equal(covers.query.topic, 'Music_Cover');
+  assert.ok(covers.songs.every(song => song.songType === 'cover'));
 });
 
 test('full fetch paginates beyond 50 until source total is reached', async () => {
@@ -82,6 +100,25 @@ test('full fetch paginates beyond 50 until source total is reached', async () =>
     assert.equal(result.reportedTotal, 51);
     assert.equal(result.pages, 2);
     assert.equal(result.complete, true);
+  } finally {
+    globalThis.fetch = original;
+  }
+});
+
+test('fetch uses the requested Holodex topic', async () => {
+  const original = globalThis.fetch;
+  const payloads = [];
+  globalThis.fetch = async (_url, options = {}) => {
+    payloads.push(JSON.parse(options.body));
+    return new Response(JSON.stringify({ total: 1, items: [record(idA)] }), {
+      status: 200, headers: { 'content-type': 'application/json' },
+    });
+  };
+  try {
+    const result = await fetchAllHolodexResults('test-key', { topic: 'Music_Cover' });
+    assert.deepEqual(payloads.map(payload => payload.topic), [['Music_Cover']]);
+    assert.equal(result.rawItems.length, 1);
+    assert.equal(buildCatalogue(result.rawItems, { topic: 'Music_Cover' }).songs[0].songType, 'cover');
   } finally {
     globalThis.fetch = original;
   }
