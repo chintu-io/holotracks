@@ -1861,3 +1861,51 @@ button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid 
   .talent-picker-dialog .artist-check .artist-avatar-frame{width:46px;height:46px;border-radius:10px}
   .talent-picker-dialog .artist-check .artist-name{font-size:11px}
 }
+
+
+/* Artist directory category filters */
+.artist-category-filter{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  flex:none;
+}
+.artist-category-filter button{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  min-height:36px;
+  padding:7px 11px;
+  border:1px solid #373858;
+  border-radius:10px;
+  background:#15162c;
+  color:#aeb2d1;
+  font-size:11px;
+  font-weight:900;
+  transition:border-color .15s,background .15s,color .15s;
+}
+.artist-category-filter button:hover{border-color:#7770aa;color:#f3efff}
+.artist-category-filter button.is-active{
+  border-color:#a68aff;
+  background:linear-gradient(135deg,#34264c,#252344);
+  color:#fff;
+  box-shadow:inset 0 0 0 1px #a68aff1c;
+}
+.artist-category-filter button span{
+  min-width:20px;
+  padding:2px 5px;
+  border-radius:6px;
+  background:#292a49;
+  color:#d2c5ff;
+  font:10px 'DM Mono',monospace;
+  text-align:center;
+}
+.artist-category-filter button.is-active span{background:#ae91ff;color:#171328}
+.artist-category-note{flex:none;margin:-7px 0 0;color:#8288af;font-size:10px;line-height:1.45}
+@media(max-width:560px){
+  .artist-category-filter{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+  .artist-category-filter button{justify-content:space-between;min-width:0;padding:7px 8px;font-size:10px}
+  .artist-category-filter button:first-child{grid-column:1/-1}
+  .artist-category-note{margin-top:-4px;font-size:9px}
+}
