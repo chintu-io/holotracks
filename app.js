@@ -43,7 +43,7 @@
     'mobile-player-toggle','sidebar','player-column','player-hide','youtube-player','youtube-fallback',
     'playing-thumb','playing-art-placeholder','playing-title','playing-artist','playing-favorite',
     'player-state','watch-youtube','play-pause','previous-song','next-song','queue-shuffle',
-    'queue-repeat','volume-toggle','volume-popover','volume-control','volume-value','volume-mute','queue-count','queue-list','clear-queue','create-playlist','playlist-list',
+    'queue-repeat','player-share','volume-toggle','volume-popover','volume-control','volume-value','volume-mute','queue-count','queue-list','clear-queue','create-playlist','playlist-list',
     'playlist-select','save-queue','play-selected-playlist','playlist-dialog','playlist-form','cancel-playlist',
     'playlist-name','talent-strip','sidebar-collapse','mobile-mini-player','mobile-mini-thumb','mobile-mini-expand','mobile-mini-title','mobile-mini-artist','mobile-mini-toggle','mobile-mini-next','hero-talent-art',
   ];
@@ -1164,6 +1164,7 @@
     el['mobile-mini-next'].disabled = !hasCurrent;
     el['previous-song'].disabled = !hasCurrent;
     el['next-song'].disabled = !hasCurrent;
+    el['player-share'].disabled = !hasCurrent;
     el['queue-shuffle'].classList.toggle('active', state.shuffle);
     el['queue-repeat'].classList.toggle('active', state.repeat);
     if (state.playerReady && state.player) {
@@ -1684,6 +1685,9 @@
       saveJSON(KEYS.repeat, state.repeat);
       updatePlayerButtons();
       showNotice(state.repeat ? 'Repeat queue is on.' : 'Repeat queue is off.');
+    });
+    el['player-share'].addEventListener('click', () => {
+      if (state.currentId) shareSong(state.currentId);
     });
     el['create-playlist'].addEventListener('click', () => {
       el['playlist-name'].value = '';
