@@ -43,7 +43,7 @@
     'player-state','watch-youtube','play-pause','previous-song','next-song','queue-shuffle',
     'queue-repeat','queue-count','queue-list','clear-queue','create-playlist','playlist-list',
     'playlist-select','save-queue','play-selected-playlist','playlist-dialog','playlist-form','cancel-playlist',
-    'playlist-name','talent-strip','sidebar-collapse','mobile-mini-player','mobile-mini-thumb','mobile-mini-expand','mobile-mini-title','mobile-mini-artist','mobile-mini-toggle','mobile-mini-next','hero-talent-art',
+    'playlist-name','talent-strip','talent-strip-toggle','sidebar-collapse','mobile-mini-player','mobile-mini-thumb','mobile-mini-expand','mobile-mini-title','mobile-mini-artist','mobile-mini-toggle','mobile-mini-next','hero-talent-art',
   ];
   const el = Object.fromEntries(ids.map(id => [id, document.getElementById(id)]));
   const readJSON = (key, fallback) => {
@@ -222,14 +222,113 @@
       renderHeroTalentArt({ transition: true });
     }, BANNER_ROTATE_MS);
   }
+  const TALENT_MARQUEE_SPEED = 13; // pixels per second: intentionally calm, not ticker-fast.
+  let talentMarqueeFrame = 0;
+  let talentMarqueeLastTime = 0;
+  let talentMarqueeLoopStart = null;
+  let talentMarqueeUserPaused = !!(window.matchMedia &&
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  let talentMarqueeHoverPaused = false;
+  let talentMarqueeFocusPaused = false;
+
+  function updateTalentMarqueeButton() {
+    const button = el['talent-strip-toggle'];
+    if (!button) return;
+    button.innerHTML = talentMarqueeUserPaused
+      ? '<span aria-hidden="true">▶</span> Resume'
+      : '<span aria-hidden="true">Ⅱ</span> Pause';
+    button.setAttribute('aria-label', talentMarqueeUserPaused
+      ? 'Resume automatic artist scrolling'
+      : 'Pause automatic artist scrolling');
+    button.title = talentMarqueeUserPaused
+      ? 'Resume automatic artist scrolling'
+      : 'Pause automatic artist scrolling';
+  }
+
+  function setTalentMarqueePaused(paused) {
+    talentMarqueeUserPaused = !!paused;
+    talentMarqueeLastTime = 0;
+    updateTalentMarqueeButton();
+  }
+
+  function setupTalentMarquee() {
+    const strip = el['talent-strip'];
+    if (!strip) return;
+    strip.querySelectorAll('[data-talent-duplicate="true"]').forEach(card => card.remove());
+    const originalCards = [...strip.children].filter(card =>
+      card.classList.contains('talent-card') && !card.hasAttribute('data-talent-duplicate')
+    );
+    if (!originalCards.length) return;
+
+    const duplicateFragment = document.createDocumentFragment();
+    for (const original of originalCards) {
+      const duplicate = original.cloneNode(true);
+      duplicate.dataset.talentDuplicate = 'true';
+      duplicate.setAttribute('aria-hidden', 'true');
+      duplicate.tabIndex = -1;
+      duplicate.querySelectorAll('button,a,input,[tabindex]').forEach(control => {
+        control.tabIndex = -1;
+      });
+      duplicateFragment.appendChild(duplicate);
+    }
+    strip.appendChild(duplicateFragment);
+
+    // Keep a single seamless loop. The clone is hidden from assistive tech and
+    // keyboard navigation, but mouse/touch selection still uses normal buttons.
+    if (!strip.dataset.marqueeEventsReady) {
+      strip.dataset.marqueeEventsReady = 'true';
+      strip.addEventListener('mouseenter', () => { talentMarqueeHoverPaused = true; });
+      strip.addEventListener('mouseleave', () => { talentMarqueeHoverPaused = false; });
+      strip.addEventListener('focusin', () => { talentMarqueeFocusPaused = true; });
+      strip.addEventListener('focusout', event => {
+        if (!strip.contains(event.relatedTarget)) talentMarqueeFocusPaused = false;
+      });
+      // Let someone who touches or drags the strip take manual control.
+      strip.addEventListener('pointerdown', () => setTalentMarqueePaused(true), { passive: true });
+      document.addEventListener('visibilitychange', () => { talentMarqueeLastTime = 0; });
+      window.addEventListener('resize', () => { talentMarqueeLastTime = 0; });
+      if (window.matchMedia) {
+        const preference = window.matchMedia('(prefers-reduced-motion: reduce)');
+        const onPreferenceChange = event => {
+          if (event.matches) setTalentMarqueePaused(true);
+        };
+        if (preference.addEventListener) preference.addEventListener('change', onPreferenceChange);
+        else if (preference.addListener) preference.addListener(onPreferenceChange);
+      }
+    }
+
+    updateTalentMarqueeButton();
+    if (talentMarqueeFrame) cancelAnimationFrame(talentMarqueeFrame);
+    const animate = timestamp => {
+      if (!strip.isConnected) {
+        talentMarqueeFrame = 0;
+        return;
+      }
+      if (talentMarqueeLastTime && !document.hidden && !talentMarqueeUserPaused &&
+          !talentMarqueeHoverPaused && !talentMarqueeFocusPaused) {
+        const deltaSeconds = Math.min(80, timestamp - talentMarqueeLastTime) / 1000;
+        const first = strip.querySelector('.talent-card:not([data-talent-duplicate="true"])');
+        const firstDuplicate = strip.querySelector('.talent-card[data-talent-duplicate="true"]');
+        if (first && firstDuplicate) {
+          const loopWidth = firstDuplicate.getBoundingClientRect().left - first.getBoundingClientRect().left;
+          if (loopWidth > 0) {
+            strip.scrollLeft += TALENT_MARQUEE_SPEED * deltaSeconds;
+            if (strip.scrollLeft >= loopWidth) strip.scrollLeft -= loopWidth;
+          }
+        }
+      }
+      talentMarqueeLastTime = timestamp;
+      talentMarqueeFrame = requestAnimationFrame(animate);
+    };
+    talentMarqueeLastTime = 0;
+    talentMarqueeFrame = requestAnimationFrame(animate);
+  }
+
   function renderTalentSpotlight() {
     const palette = ['#3b5993','#7c3b6e','#8d4a36','#704367','#327b99','#3d6d9e','#8c5c32','#75498f','#774337','#a46d36','#69476d','#a84c36'];
-    const roster = state.talents.filter(item => item.name && safeTalentImage(item.image));
-    const featuredNames = Object.keys(ARTIST_IMAGES);
-    const featured = featuredNames
-      .map(name => roster.find(talent => normalized(talent.name) === normalized(name)))
-      .filter(Boolean)
-      .slice(0, 12);
+    const featured = state.talents
+      .filter(item => item.name && safeTalentImage(item.image))
+      .sort((a, b) => a.name.localeCompare(b.name, undefined, { sensitivity: 'base' }));
     el['talent-strip'].innerHTML = featured.map((talent, index) =>
       '<button class="talent-card" type="button" data-spotlight-artist="' + escapeHTML(talent.name) +
       '" style="--talent:' + palette[index % palette.length] + '" title="Browse ' + escapeHTML(talent.name) + '">' +
@@ -241,6 +340,7 @@
     el['talent-strip'].querySelectorAll('img').forEach(image => {
       image.addEventListener('error', () => { image.style.display = 'none'; }, { once: true });
     });
+    setupTalentMarquee();
     renderArtists();
   }
   async function loadTalentRoster() {
@@ -1052,6 +1152,9 @@
       if (button.dataset.action === 'play') playSong(id);
       if (button.dataset.action === 'queue') addToQueue(id);
       if (button.dataset.action === 'favorite') toggleFavorite(id);
+    });
+    el['talent-strip-toggle'].addEventListener('click', () => {
+      setTalentMarqueePaused(!talentMarqueeUserPaused);
     });
     el['talent-strip'].addEventListener('click', event => {
       const button = event.target.closest('[data-spotlight-artist]');
