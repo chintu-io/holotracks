@@ -3258,3 +3258,72 @@ button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid 
 @media(prefers-reduced-motion:reduce){
   .volume-popover{animation:none}
 }
+
+
+/* Layered rotating official-talent ensemble for the homepage hero. The roster
+   and transparent/full-body artwork come from the same generated talent
+   manifest used by Browse Artists, rather than a separate hard-coded shortlist. */
+.stage-ensemble-group{
+  position:absolute!important;inset:0!important;z-index:4!important;
+  overflow:hidden!important;isolation:isolate;pointer-events:none;
+  opacity:0;transform:translateY(8px);
+  transition:opacity .7s ease,transform .7s ease;
+}
+.stage-ensemble-group.is-visible{opacity:1;transform:none}
+.stage-ensemble-group.is-exiting{opacity:0;transform:translateY(5px)}
+.stage-ensemble-group .stage-talent.stage-ensemble{
+  position:absolute!important;display:block!important;
+  top:auto!important;bottom:27px!important;
+  width:auto!important;height:calc(100% - 39px)!important;
+  max-height:none!important;max-width:54%!important;
+  object-fit:contain!important;object-position:center bottom!important;
+  background:transparent!important;border:0!important;border-radius:0!important;
+  box-shadow:none!important;mix-blend-mode:normal;
+  -webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 82%,transparent 100%)!important;
+  mask-image:linear-gradient(to bottom,#000 0%,#000 82%,transparent 100%)!important;
+  filter:drop-shadow(0 11px 16px #02030b70)!important;
+}
+.stage-ensemble-group .stage-talent.ensemble-left{
+  left:-5%!important;right:auto!important;bottom:26px!important;
+  height:76%!important;max-width:47%!important;opacity:.7!important;z-index:2!important;
+}
+.stage-ensemble-group .stage-talent.ensemble-center{
+  left:23%!important;right:auto!important;bottom:27px!important;
+  height:calc(100% - 39px)!important;max-width:58%!important;opacity:.98!important;z-index:4!important;
+  filter:drop-shadow(0 13px 18px #02030b90)!important;
+}
+.stage-ensemble-group .stage-talent.ensemble-right{
+  left:auto!important;right:-5%!important;bottom:26px!important;
+  height:85%!important;max-width:48%!important;opacity:.83!important;z-index:3!important;
+}
+@media(max-width:1699px) and (min-width:1221px){
+  .stage-ensemble-group .stage-talent.ensemble-left{height:75%!important;max-width:50%!important}
+  .stage-ensemble-group .stage-talent.ensemble-center{height:calc(100% - 37px)!important;max-width:62%!important}
+  .stage-ensemble-group .stage-talent.ensemble-right{height:83%!important;max-width:51%!important}
+}
+@media(max-width:1220px) and (min-width:681px){
+  .stage-ensemble-group .stage-talent.ensemble-left{left:-8%!important;height:74%!important;max-width:51%!important}
+  .stage-ensemble-group .stage-talent.ensemble-center{left:19%!important;height:calc(100% - 38px)!important;max-width:65%!important}
+  .stage-ensemble-group .stage-talent.ensemble-right{right:-8%!important;height:80%!important;max-width:53%!important}
+}
+@media(max-width:680px){
+  .stage-ensemble-group{inset:0!important}
+  .stage-ensemble-group .stage-talent.stage-ensemble{bottom:27px!important;height:calc(100% - 39px)!important;max-width:62%!important}
+  .stage-ensemble-group .stage-talent.ensemble-left{
+    left:-12%!important;bottom:27px!important;height:67%!important;max-width:59%!important;opacity:.56!important
+  }
+  .stage-ensemble-group .stage-talent.ensemble-center{
+    left:12%!important;bottom:27px!important;height:calc(100% - 39px)!important;max-width:70%!important;opacity:.91!important
+  }
+  .stage-ensemble-group .stage-talent.ensemble-right{
+    right:-12%!important;bottom:27px!important;height:74%!important;max-width:60%!important;opacity:.7!important
+  }
+}
+@media(max-width:390px){
+  .stage-ensemble-group .stage-talent.ensemble-left{left:-15%!important;height:63%!important;max-width:62%!important;opacity:.52!important}
+  .stage-ensemble-group .stage-talent.ensemble-center{left:10%!important;height:calc(100% - 44px)!important;max-width:73%!important}
+  .stage-ensemble-group .stage-talent.ensemble-right{right:-15%!important;height:69%!important;max-width:62%!important}
+}
+@media(prefers-reduced-motion:reduce){
+  .stage-ensemble-group{transition:none!important}
+}
