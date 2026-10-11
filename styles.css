@@ -4156,3 +4156,46 @@ body{
     min-height:2.6em!important;
   }
 }
+
+
+/* Seamless hero layering: one continuous background across copy and artwork. */
+@media (min-width:681px){
+  .hero-card{
+    isolation:isolate!important;
+    background:linear-gradient(112deg,#201b40 0%,#232149 38%,#22254b 67%,#172b44 100%)!important;
+  }
+  .hero-card::before{
+    z-index:0!important;
+    inset:0!important;
+    background:linear-gradient(105deg,
+      rgba(16,17,38,.34) 0%,
+      rgba(23,21,50,.22) 34%,
+      rgba(23,21,50,.10) 56%,
+      rgba(23,21,50,0) 82%)!important;
+    pointer-events:none!important;
+  }
+  .hero-card::after{
+    z-index:0!important;
+    pointer-events:none!important;
+  }
+  .hero-grid{
+    z-index:0!important;
+    opacity:.10!important;
+    -webkit-mask-image:none!important;
+    mask-image:none!important;
+  }
+  .hero-copy{
+    position:relative!important;
+    z-index:4!important;
+  }
+  .hero-stage{
+    position:relative!important;
+    z-index:1!important;
+    background:transparent!important;
+  }
+  /* The stage-only tint started at the grid boundary, creating the visible seam. */
+  .hero-stage::before{
+    background:none!important;
+  }
+  .hero-footer{z-index:9!important}
+}
