@@ -4547,3 +4547,90 @@ body{
     justify-content:flex-start!important;
   }
 }
+
+
+/* Desktop listening header and title-weight refinement. */
+@media (min-width:1221px){
+  /* Put the section label and Now playing title on one top row,
+     reclaiming vertical space for a wider video frame. */
+  .player-column .player-head,
+  body.player-docked .player-column .player-head{
+    padding:7px 12px 6px!important;
+  }
+  .player-column .player-head>div,
+  body.player-docked .player-column .player-head>div{
+    display:flex!important;
+    align-items:center!important;
+    justify-content:space-between!important;
+    gap:10px!important;
+    width:100%!important;
+    min-width:0!important;
+  }
+  .player-column .player-kicker,
+  body.player-docked .player-column .player-kicker{
+    flex:0 1 auto!important;
+    min-width:0!important;
+    font-size:9px!important;
+    letter-spacing:.35px!important;
+    white-space:nowrap!important;
+  }
+  .player-column .player-head h2,
+  body.player-docked .player-column .player-head h2{
+    flex:none!important;
+    margin:0!important;
+    font-size:16px!important;
+    font-weight:800!important;
+    line-height:1.2!important;
+    letter-spacing:-.2px!important;
+    white-space:nowrap!important;
+  }
+  .player-column .video-frame-wrap,
+  body.player-docked .player-column .video-frame-wrap,
+  body.sidebar-collapsed .player-column .video-frame-wrap,
+  body.sidebar-collapsed.player-docked .player-column .video-frame-wrap{
+    width:min(100%,370px)!important;
+    max-width:370px!important;
+    height:auto!important;
+    min-height:0!important;
+    aspect-ratio:16/9!important;
+    margin-inline:auto!important;
+  }
+  .player-column .playing-text strong,
+  body.player-docked .player-column .playing-text strong{
+    font-weight:800!important;
+  }
+  .player-column .queue-track-info strong,
+  body.player-docked .player-column .queue-track-info strong{
+    font-weight:750!important;
+  }
+}
+
+/* Catalogue song titles: reduce the extra-heavy weight without losing contrast. */
+.song-title{
+  font-size:14.5px!important;
+  font-weight:800!important;
+  line-height:1.43!important;
+  letter-spacing:-.12px!important;
+  color:#eeecf8!important;
+}
+.playing-text strong{
+  font-weight:800!important;
+  letter-spacing:-.08px;
+}
+.queue-track-info strong{
+  font-weight:750!important;
+}
+@media (max-width:1220px) and (min-width:681px){
+  .song-title{font-size:14px!important}
+}
+@media (max-width:680px){
+  .song-title{
+    font-size:13.25px!important;
+    font-weight:800!important;
+    line-height:1.4!important;
+    letter-spacing:0!important;
+  }
+}
+@media (max-width:390px){
+  .song-title{font-size:12.5px!important}
+}
