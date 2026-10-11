@@ -43,13 +43,18 @@ export function collectArtistDirectory(songs, talents = []) {
       .filter(Boolean),
   );
 
-  for (const song of Array.isArray(songs) ? songs : []) {
+  const catalogueSongs = Array.isArray(songs) ? songs : [];
+  for (const song of catalogueSongs) {
     for (const name of creditsFor(song)) {
       counts.set(name, (counts.get(name) || 0) + 1);
       const key = normalizeArtistKey(name);
       if (key && !namesByKey.has(key)) namesByKey.set(key, name);
     }
+  }
 
+  // Resolve channels in a second pass so the first uploader occurrence can
+  // still map to a canonical credit that appears later in the catalogue.
+  for (const song of catalogueSongs) {
     const channelKey = normalizeArtistKey(song?.channelName);
     const channelId = song?.channelId;
     if (!channelKey || !validYoutubeChannelId(channelId)) continue;
