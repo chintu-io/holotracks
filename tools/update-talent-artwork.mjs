@@ -184,7 +184,11 @@ async function fullBodyImageFromProfile(profileUrl) {
     if (url) attrCandidates.push(url);
   }
   const unique = values => [...new Set(values)];
-  const priority = url => /_pr-img_0?1\./i.test(url) ? 0 : /_pr-img_0?2\./i.test(url) ? 1 : /pr-img/i.test(url) ? 2 : 3;
+  // The official profile exposes several full-body poses. Prefer later pose variants over the default standing portrait.
+  const priority = url => {
+    const match = url.match(/_pr-img_0?(\d+)\./i);
+    return match ? -Number(match[1]) : 1;
+  };
   const fullBody = unique(bodyCandidates).sort((a,b)=>priority(a)-priority(b));
   if (fullBody.length) return fullBody[0];
   const candidates = unique([...allCandidates, ...attrCandidates]).sort((a,b)=>priority(a)-priority(b));
