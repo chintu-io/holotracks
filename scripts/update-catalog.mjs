@@ -13,6 +13,7 @@ const MAX_SONGS = 25000;
 const API_TIMEOUT_MS = 30000;
 const PAGE_DELAY_FULL_MS = 500;
 const PAGE_DELAY_INCREMENTAL_MS = 250;
+const MAX_INCREMENTAL_STATS_BACKFILL = 250;
 const TOPIC_TYPES = Object.freeze({ Original_Song: 'original', Music_Cover: 'cover' });
 
 function requireEnv(name) {
@@ -129,6 +130,7 @@ export function normalizeRecord(item, { topic = 'Original_Song' } = {}) {
     releaseDate: firstDate(item.published_at, item.available_at, item.start_actual, item.start_scheduled),
     publishedAt: firstDate(item.published_at),
     viewCount: safeCount(item.view_count, item.viewCount, item.views, item.statistics?.viewCount),
+    likeCount: safeCount(item.like_count, item.likeCount, item.statistics?.likeCount),
     duration: safeCount(item.duration) || null,
     songType: TOPIC_TYPES[topic] || 'original',
     source: 'Holodex',
@@ -189,8 +191,12 @@ export function deduplicateSongs(songs) {
     const newDate = Date.parse(song.releaseDate || '') || 0;
     const songType = existing.songType === 'cover' || song.songType === 'cover' ? 'cover' : 'original';
     const shouldReplace = ((!existing.title || existing.title === existing.id) && song.title) || newDate > oldDate;
+    const preferred = shouldReplace ? { ...existing, ...song } : { ...song, ...existing };
     byId.set(song.id, {
-      ...(shouldReplace ? { ...existing, ...song } : existing),
+      ...preferred,
+      viewCount: preferred.viewCount ?? existing.viewCount ?? song.viewCount ?? null,
+      likeCount: preferred.likeCount ?? existing.likeCount ?? song.likeCount ?? null,
+      statisticsCheckedAt: preferred.statisticsCheckedAt ?? existing.statisticsCheckedAt ?? song.statisticsCheckedAt,
       songType,
     });
   }
@@ -282,8 +288,8 @@ export async function fetchAllHolodexResults(apiKey, { mode = 'full', knownIds =
   return { rawItems, reportedTotal, pages, stoppedAtKnownPage, stoppedAtLimit, complete: mode === 'full' };
 }
 
-async function fetchYouTubeViewCounts(ids, key) {
-  const views = new Map();
+export async function fetchYouTubeVideoStatistics(ids, key) {
+  const statistics = new Map();
   for (let i = 0; i < ids.length; i += 50) {
     const batch = ids.slice(i, i + 50);
     const url = new URL('https://www.googleapis.com/youtube/v3/videos');
@@ -292,12 +298,35 @@ async function fetchYouTubeViewCounts(ids, key) {
     url.searchParams.set('key', key);
     const data = await fetchJson(url, {}, 'YouTube public-video statistics');
     for (const item of data.items || []) {
-      const count = safeCount(item.statistics?.viewCount);
-      if (count !== null) views.set(item.id, count);
+      statistics.set(item.id, {
+        viewCount: safeCount(item.statistics?.viewCount),
+        likeCount: safeCount(item.statistics?.likeCount),
+      });
     }
     if (i + 50 < ids.length) await delay(150);
   }
-  return views;
+  return statistics;
+}
+
+/**
+ * New videos are checked immediately. Existing entries missing a like count
+ * are backfilled in bounded batches, and their check timestamp prevents
+ * repeated requests for videos whose counts are hidden/unavailable.
+ */
+export function selectYouTubeStatisticsIds({
+  mode, scannedSongs, mergedSongs, globallyKnownIds, backfillLimit = MAX_INCREMENTAL_STATS_BACKFILL,
+}) {
+  if (mode === 'full') return [...new Set(scannedSongs.map(song => song.id).filter(Boolean))];
+
+  const newIds = mergedSongs
+    .filter(song => song?.id && !globallyKnownIds.has(song.id))
+    .map(song => song.id);
+  const backfillIds = mergedSongs
+    .filter(song => song?.id && globallyKnownIds.has(song.id) &&
+      song.likeCount == null && !song.statisticsCheckedAt)
+    .slice(0, Math.max(0, backfillLimit))
+    .map(song => song.id);
+  return [...new Set([...newIds, ...backfillIds])];
 }
 
 export function buildCatalogue(rawItems, { generatedAt = new Date().toISOString(), pages = 0, reportedTotal = null, topic = 'Original_Song' } = {}) {
@@ -337,7 +366,13 @@ function mergeSongs(existingSongs, incomingSongs, { preserveMissing = true } = {
   for (const existing of existingSongs) {
     const incoming = incomingById.get(existing.id);
     if (incoming) {
-      result.push({ ...existing, ...incoming, viewCount: incoming.viewCount ?? existing.viewCount ?? null });
+      result.push({
+        ...existing,
+        ...incoming,
+        viewCount: incoming.viewCount ?? existing.viewCount ?? null,
+        likeCount: incoming.likeCount ?? existing.likeCount ?? null,
+        statisticsCheckedAt: incoming.statisticsCheckedAt ?? existing.statisticsCheckedAt,
+      });
       incomingById.delete(existing.id);
     } else if (preserveMissing) {
       // Retain historical entries when a source scan temporarily stops returning them.
@@ -421,23 +456,37 @@ async function main() {
 
   const youtubeKey = process.env.YOUTUBE_DATA_API_KEY?.trim();
   if (youtubeKey) {
-    const idsToRefresh = mode === 'full'
-      ? scannedSongs.map(song => song.id)
-      : mergedSongs.filter(song => !globallyKnownIds.has(song.id) && song.viewCount === null).map(song => song.id);
+    const idsToRefresh = selectYouTubeStatisticsIds({
+      mode, scannedSongs, mergedSongs, globallyKnownIds,
+    });
     if (idsToRefresh.length > 0) {
       try {
-        const freshCounts = await fetchYouTubeViewCounts(idsToRefresh, youtubeKey);
-        mergedSongs = mergedSongs.map(song =>
-          freshCounts.has(song.id) ? { ...song, viewCount: freshCounts.get(song.id) } : song);
-        console.log('Refreshed public view counts for ' + freshCounts.size + ' videos.');
+        const freshStatistics = await fetchYouTubeVideoStatistics(idsToRefresh, youtubeKey);
+        const statisticsCheckedAt = new Date().toISOString();
+        const requestedIds = new Set(idsToRefresh);
+        mergedSongs = mergedSongs.map(song => {
+          if (!requestedIds.has(song.id)) return song;
+          const fresh = freshStatistics.get(song.id);
+          return {
+            ...song,
+            ...(fresh?.viewCount !== null && fresh?.viewCount !== undefined
+              ? { viewCount: fresh.viewCount } : {}),
+            ...(fresh?.likeCount !== null && fresh?.likeCount !== undefined
+              ? { likeCount: fresh.likeCount } : {}),
+            statisticsCheckedAt,
+          };
+        });
+        const likesAvailable = [...freshStatistics.values()].filter(stats => stats.likeCount !== null).length;
+        console.log('Refreshed YouTube statistics for ' + idsToRefresh.length +
+          ' videos; public like counts available for ' + likesAvailable + '.');
       } catch (error) {
         console.warn('YouTube statistics refresh failed; keeping existing counts: ' + error.message);
       }
     } else {
-      console.log('No new/missing view counts to fetch; skipping YouTube statistics requests.');
+      console.log('No new videos or unchecked like counts to fetch; skipping YouTube statistics requests.');
     }
   } else {
-    console.log('YOUTUBE_DATA_API_KEY not set; popularity statistics refresh skipped.');
+    console.log('YOUTUBE_DATA_API_KEY not set; view/like statistics refresh skipped.');
   }
 
   const songDataChanged = stableSongs(oldSongs) !== stableSongs(mergedSongs);
