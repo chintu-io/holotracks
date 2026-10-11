@@ -1083,21 +1083,58 @@
     el['volume-value'].textContent = displayedVolume + '%';
 
     const isOpen = !el['volume-popover'].hidden;
-    el['volume-toggle'].textContent = isMuted ? '♩×' : (state.volume < 50 ? '♪' : '♫');
     el['volume-toggle'].setAttribute('aria-label', isOpen ? 'Close volume controls' : 'Adjust volume');
     el['volume-toggle'].setAttribute('aria-expanded', String(isOpen));
     el['volume-toggle'].title = isOpen ? 'Close volume controls' : 'Adjust volume · ' + displayedVolume + '%';
     el['volume-toggle'].classList.toggle('is-muted', isMuted);
-    el['volume-mute'].textContent = isMuted ? '♫' : '♩×';
     el['volume-mute'].setAttribute('aria-label', isMuted ? 'Unmute YouTube audio' : 'Mute YouTube audio');
     el['volume-mute'].title = isMuted ? 'Unmute' : 'Mute';
     el['volume-mute'].classList.toggle('is-muted', isMuted);
+  }
+
+  function positionVolumePopover() {
+    const popover = el['volume-popover'];
+    if (!popover || popover.hidden) return;
+
+    const anchor = el['volume-toggle'].getBoundingClientRect();
+    const viewportWidth = document.documentElement.clientWidth || window.innerWidth;
+    const viewportHeight = window.innerHeight;
+    const popoverRect = popover.getBoundingClientRect();
+    const popoverWidth = popoverRect.width || 224;
+    const popoverHeight = popoverRect.height || 76;
+    const gap = 8;
+    const margin = 10;
+
+    // Position against the viewport so cards, video frames, and mobile sheets
+    // cannot clip the slider. Prefer below the icon only when there is room.
+    const roomBelow = viewportHeight - anchor.bottom - margin;
+    const roomAbove = anchor.top - margin;
+    const placeBelow = roomBelow >= popoverHeight + gap ||
+      (roomBelow >= roomAbove && roomBelow >= Math.min(popoverHeight, 56));
+    const preferredTop = placeBelow ? anchor.bottom + gap : anchor.top - popoverHeight - gap;
+    const top = Math.max(margin, Math.min(preferredTop, viewportHeight - popoverHeight - margin));
+    const left = Math.max(margin, Math.min(anchor.left, viewportWidth - popoverWidth - margin));
+
+    popover.style.left = Math.round(left) + 'px';
+    popover.style.top = Math.round(top) + 'px';
+  }
+
+  function mountVolumePopover() {
+    // Move the popover out of the clipped player card into the document layer.
+    // Its fixed position is recalculated from the speaker button when opened.
+    if (el['volume-popover'] && el['volume-popover'].parentElement !== document.body) {
+      document.body.appendChild(el['volume-popover']);
+    }
   }
 
   function toggleVolumePopover(force) {
     const open = typeof force === 'boolean' ? force : el['volume-popover'].hidden;
     el['volume-popover'].hidden = !open;
     updateVolumeControl();
+    if (open) {
+      positionVolumePopover();
+      el['volume-control'].focus({ preventScroll: true });
+    }
   }
 
   function applyPlayerVolume() {
@@ -1526,6 +1563,8 @@
     el['volume-toggle'].addEventListener('click', () => toggleVolumePopover());
     el['volume-control'].addEventListener('input', event => setPlayerVolume(event.currentTarget.value));
     el['volume-mute'].addEventListener('click', togglePlayerMute);
+    window.addEventListener('resize', positionVolumePopover, { passive: true });
+    window.addEventListener('scroll', positionVolumePopover, { passive: true, capture: true });
     el['mobile-mini-toggle'].addEventListener('click', togglePlayback);
     el['mobile-mini-next'].addEventListener('click', nextSong);
     el['mobile-mini-expand'].addEventListener('click', () => toggleMobilePlayerPanel());
@@ -1614,7 +1653,7 @@
       }
     });
     document.addEventListener('click', event => {
-      if (!event.target.closest('.volume-control')) toggleVolumePopover(false);
+      if (!event.target.closest('.volume-control, #volume-popover')) toggleVolumePopover(false);
       if (document.body.classList.contains('mobile-player-open') &&
           !event.target.closest('#player-column, #mobile-mini-player, #mobile-player-toggle')) {
         toggleMobilePlayerPanel(false);
@@ -1669,6 +1708,7 @@
     });
   }
   async function init() {
+    mountVolumePopover();
     initEvents();
     updateVolumeControl();
     setupDesktopVideoDock();
