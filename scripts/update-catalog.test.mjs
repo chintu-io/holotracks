@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {
   normalizeRecord, assignArtistCredits, deduplicateSongs, buildCatalogue, fetchAllHolodexResults,
+  fetchYouTubeVideoStatistics, selectYouTubeStatisticsIds,
 } from './update-catalog.mjs';
 
 const idA = 'abcdefghijk';
@@ -17,11 +18,12 @@ function record(id, overrides = {}) {
 }
 
 test('normalizeRecord maps video fields and prefers YouTube publication date', () => {
-  const song = normalizeRecord(record(idA, { view_count: '12450', duration: 181 }));
+  const song = normalizeRecord(record(idA, { view_count: '12450', like_count: '820', duration: 181 }));
   assert.equal(song.id, idA);
   assert.equal(song.artist, 'Mori Calliope');
   assert.equal(song.releaseDate, '2025-05-31T22:00:00.000Z');
   assert.equal(song.viewCount, 12450);
+  assert.equal(song.likeCount, 820);
   assert.equal(song.duration, 181);
   assert.equal(song.songType, 'original');
 });
@@ -37,15 +39,58 @@ test('normalizeRecord rejects malformed IDs and non-playable statuses', () => {
   assert.equal(normalizeRecord(record(idA, { status: 'missing' })), null);
 });
 
+test('YouTube public-video statistics returns view and like counts from the same request', async () => {
+  const original = globalThis.fetch;
+  let requestUrl;
+  globalThis.fetch = async url => {
+    requestUrl = new URL(url);
+    return new Response(JSON.stringify({
+      items: [
+        { id: idA, statistics: { viewCount: '12345', likeCount: '987' } },
+        { id: idB, statistics: { viewCount: '456', commentCount: '12' } },
+      ],
+    }), { status: 200, headers: { 'content-type': 'application/json' } });
+  };
+  try {
+    const result = await fetchYouTubeVideoStatistics([idA, idB], 'test-key');
+    assert.equal(requestUrl.searchParams.get('part'), 'statistics');
+    assert.equal(requestUrl.searchParams.get('id'), idA + ',' + idB);
+    assert.deepEqual(result.get(idA), { viewCount: 12345, likeCount: 987 });
+    assert.deepEqual(result.get(idB), { viewCount: 456, likeCount: null });
+  } finally {
+    globalThis.fetch = original;
+  }
+});
+
+test('incremental statistics refresh includes new videos and gradually backfills unchecked likes', () => {
+  const knownIds = new Set([idA, idB, 'mnopqrstuvw', 'rstuvwxyzab']);
+  const mergedSongs = [
+    { id: idA, likeCount: null },
+    { id: idB, likeCount: null, statisticsCheckedAt: '2026-10-10T00:00:00.000Z' },
+    { id: 'mnopqrstuvw', likeCount: 22 },
+    { id: 'rstuvwxyzab', likeCount: null },
+    { id: 'newSongID123', likeCount: null },
+  ];
+  const selected = selectYouTubeStatisticsIds({
+    mode: 'incremental', scannedSongs: [], mergedSongs, globallyKnownIds: knownIds, backfillLimit: 1,
+  });
+  assert.deepEqual(selected, ['newSongID123', idA]);
+  const full = selectYouTubeStatisticsIds({
+    mode: 'full', scannedSongs: [{ id: idA }, { id: idB }], mergedSongs, globallyKnownIds: knownIds,
+  });
+  assert.deepEqual(full, [idA, idB]);
+});
+
 test('deduplicateSongs keeps one record per ID and retains newer metadata', () => {
   const songs = [
-    { ...normalizeRecord(record(idA)), title: 'Older title', releaseDate: '2024-01-01T00:00:00.000Z' },
-    { ...normalizeRecord(record(idA)), title: 'Newer title', releaseDate: '2025-01-01T00:00:00.000Z' },
+    { ...normalizeRecord(record(idA)), title: 'Older title', releaseDate: '2024-01-01T00:00:00.000Z', likeCount: 55 },
+    { ...normalizeRecord(record(idA)), title: 'Newer title', releaseDate: '2025-01-01T00:00:00.000Z', likeCount: null },
     normalizeRecord(record(idB, { title: 'Another song' })),
   ];
   const result = deduplicateSongs(songs);
   assert.equal(result.length, 2);
   assert.equal(result.find(song => song.id === idA).title, 'Newer title');
+  assert.equal(result.find(song => song.id === idA).likeCount, 55, 'missing newer likes should not erase known counts');
 });
 
 test('deduplicateSongs prefers cover classification when one video matches both topics', () => {
