@@ -35,7 +35,7 @@
     'clear-filters','nav-total','fav-total','hero-song-count','hero-artist-count','hero-updated',
     'source-status','catalogue-title-text','results-count','results-caption','sort-select',
     'type-all-count','type-original-count','type-cover-count','nav-original-total','nav-cover-total',
-    'song-list','empty-state','empty-title','empty-copy','empty-reset','load-more','notice',
+    'song-list','pagination','empty-state','empty-title','empty-copy','empty-reset','notice',
     'play-all','play-random','favorites-shortcut','mobile-filter-toggle',
     'mobile-player-toggle','sidebar','player-column','player-hide','youtube-player','youtube-fallback',
     'playing-thumb','playing-art-placeholder','playing-title','playing-artist','playing-favorite',
@@ -53,7 +53,7 @@
     catch { showNotice('Browser storage is unavailable; the latest changes may not persist.'); }
   };
   const state = {
-    songs: [], filtered: [], visibleCount: PAGE_SIZE, talents: [], artistPortraits: new Map(),
+    songs: [], filtered: [], currentPage: 1, talents: [], artistPortraits: new Map(),
     selectedArtists: new Set(),
     query: '', artistQuery: '',
     view: 'all', songType: 'all',
@@ -407,7 +407,7 @@
       }
     }
     state.filtered = list;
-    state.visibleCount = PAGE_SIZE;
+    state.currentPage = 1;
     renderSongs();
     renderCounts();
 
@@ -446,17 +446,11 @@
       button.setAttribute('aria-pressed', String(active));
     });
   }
-  function renderSongs(append = false) {
-    const alreadyRendered = new Set(
-      append
-        ? [...el['song-list'].querySelectorAll('.song-card')].map(card => card.dataset.id)
-        : [],
-    );
-    const visible = state.filtered.slice(0, state.visibleCount).filter(item => {
-      if (!item || !item.id || alreadyRendered.has(item.id)) return false;
-      alreadyRendered.add(item.id);
-      return true;
-    });
+  function renderSongs() {
+    const totalPages = Math.max(1, Math.ceil(state.filtered.length / PAGE_SIZE));
+    state.currentPage = Math.min(Math.max(1, state.currentPage), totalPages);
+    const pageStart = (state.currentPage - 1) * PAGE_SIZE;
+    const visible = state.filtered.slice(pageStart, pageStart + PAGE_SIZE);
     const html = visible.map(item => {
       const artists = artistsOf(item).join(', ');
       const favorite = state.favorites.has(item.id);
@@ -478,10 +472,10 @@
         '<button class="mini-action" data-action="queue" data-id="' + escapeHTML(item.id) + '">＋ Queue</button>' +
         '</div></div></article>';
     }).join('');
-    el['song-list'].innerHTML = append ? el['song-list'].innerHTML + html : html;
+    el['song-list'].innerHTML = html;
     el['song-list'].setAttribute('aria-busy', 'false');
     el['empty-state'].hidden = state.filtered.length > 0;
-    el['load-more'].hidden = state.visibleCount >= state.filtered.length;
+    renderPagination();
     el['results-count'].textContent = state.filtered.length.toLocaleString();
     if (!state.filtered.length) {
       el['empty-title'].textContent = state.view === 'favorites' ? 'No favourites yet' : 'No songs found';
@@ -490,6 +484,59 @@
         : 'Try a different search or clear some filters.';
     }
   }
+  function renderPagination() {
+    const container = el['pagination'];
+    const total = state.filtered.length;
+    const totalPages = Math.ceil(total / PAGE_SIZE);
+    if (!container) return;
+    if (totalPages <= 1) {
+      container.hidden = true;
+      container.innerHTML = '';
+      return;
+    }
+
+    const current = Math.min(Math.max(1, state.currentPage), totalPages);
+    const firstIndex = (current - 1) * PAGE_SIZE + 1;
+    const lastIndex = Math.min(current * PAGE_SIZE, total);
+    const candidates = new Set([1, totalPages]);
+    for (let page = Math.max(2, current - 2); page <= Math.min(totalPages - 1, current + 2); page++) {
+      candidates.add(page);
+    }
+    const pages = [...candidates].sort((a, b) => a - b);
+    const pageButtons = [];
+    let previous = 0;
+    for (const page of pages) {
+      if (previous && page - previous > 1) {
+        pageButtons.push('<span class="pagination-ellipsis" aria-hidden="true">…</span>');
+      }
+      pageButtons.push(
+        '<button class="pagination-button pagination-number' + (page === current ? ' active' : '') +
+        '" type="button" data-page="' + page + '"' +
+        (page === current ? ' aria-current="page" disabled' : '') +
+        ' aria-label="Page ' + page + '">' + page + '</button>'
+      );
+      previous = page;
+    }
+
+    container.innerHTML =
+      '<div class="pagination-summary" aria-live="polite">Showing ' +
+      firstIndex.toLocaleString() + '–' + lastIndex.toLocaleString() + ' of ' +
+      total.toLocaleString() + ' songs <span>· Page ' + current.toLocaleString() +
+      ' of ' + totalPages.toLocaleString() + '</span></div>' +
+      '<div class="pagination-controls">' +
+      '<button class="pagination-button pagination-direction" type="button" data-page="1"' +
+      (current === 1 ? ' disabled' : '') + ' aria-label="First page" title="First page">«</button>' +
+      '<button class="pagination-button pagination-direction" type="button" data-page="' + (current - 1) + '"' +
+      (current === 1 ? ' disabled' : '') + ' aria-label="Previous page">‹ <span>Prev</span></button>' +
+      pageButtons.join('') +
+      '<button class="pagination-button pagination-direction" type="button" data-page="' + (current + 1) + '"' +
+      (current === totalPages ? ' disabled' : '') + ' aria-label="Next page"><span>Next</span> ›</button>' +
+      '<button class="pagination-button pagination-direction" type="button" data-page="' + totalPages + '"' +
+      (current === totalPages ? ' disabled' : '') + ' aria-label="Last page" title="Last page">»</button>' +
+      '</div>';
+    container.hidden = false;
+  }
+
   function persistFavorites() {
     saveJSON(KEYS.favorites, [...state.favorites]);
     renderCounts();
@@ -857,9 +904,17 @@
       const button = event.target.closest('[data-spotlight-artist]');
       if (button) selectSpotlightArtist(button.dataset.spotlightArtist);
     });
-    el['load-more'].addEventListener('click', () => {
-      state.visibleCount += PAGE_SIZE;
-      renderSongs(true);
+    el['pagination'].addEventListener('click', event => {
+      const button = event.target.closest('[data-page]');
+      if (!button || button.disabled) return;
+      const nextPage = Number(button.dataset.page);
+      const totalPages = Math.ceil(state.filtered.length / PAGE_SIZE);
+      if (!Number.isInteger(nextPage) || nextPage < 1 || nextPage > totalPages ||
+          nextPage === state.currentPage) return;
+      state.currentPage = nextPage;
+      renderSongs();
+      const target = document.getElementById('music-library') || el['song-list'];
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
     el['play-all'].addEventListener('click', () => {
       if (state.filtered.length) playSong(state.filtered[0].id, state.filtered.map(item => item.id));

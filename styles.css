@@ -1548,3 +1548,86 @@ button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid 
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
 }
+
+
+/* Numbered catalogue pagination */
+.pagination{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  padding:22px 8px 26px;
+  margin-top:4px;
+  color:#aeb2d4;
+}
+.pagination[hidden]{display:none!important}
+.pagination-summary{
+  font-size:11px;
+  font-weight:800;
+  line-height:1.4;
+  text-align:center;
+  color:#b9bbd8;
+}
+.pagination-summary span{color:#858bad;font-weight:600}
+.pagination-controls{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:6px;
+  max-width:100%;
+}
+.pagination-button{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:4px;
+  min-width:36px;
+  height:36px;
+  padding:0 9px;
+  border:1px solid #343557;
+  border-radius:9px;
+  background:#15162d;
+  color:#c5c8e4;
+  font-size:12px;
+  font-weight:800;
+  line-height:1;
+  transition:background .15s ease,border-color .15s ease,color .15s ease;
+}
+.pagination-button:hover:not(:disabled){
+  border-color:#647ba9;
+  background:#242646;
+  color:#fff;
+}
+.pagination-button.active,
+.pagination-button[aria-current="page"]{
+  border-color:#6f9abb;
+  background:linear-gradient(130deg,#225d7a,#4d4e91);
+  color:#fff;
+  box-shadow:0 3px 12px #050a1c40;
+}
+.pagination-button:disabled{opacity:.35;cursor:default}
+.pagination-ellipsis{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:17px;
+  color:#797fa7;
+  font-size:14px;
+}
+@media(max-width:680px){
+  .pagination{gap:10px;padding:18px 2px 23px}
+  .pagination-summary{font-size:10px}
+  .pagination-controls{gap:4px}
+  .pagination-button{min-width:31px;height:34px;padding:0 7px;border-radius:8px;font-size:11px}
+  .pagination-direction span{display:none}
+  .pagination-ellipsis{min-width:10px}
+}
+@media(max-width:390px){
+  .pagination-controls{gap:3px}
+  .pagination-button{min-width:29px;height:32px;padding:0 6px;font-size:10px}
+}
+@media(prefers-reduced-motion:reduce){
+  .pagination-button{transition:none}
+}
