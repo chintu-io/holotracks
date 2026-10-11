@@ -5116,3 +5116,46 @@ body{
     background:linear-gradient(135deg,#292744,#20223b)!important;
   }
 }
+
+
+/* Queue track numbering: stable position chips for every queued song. */
+.queue-track-number{
+  display:grid!important;
+  place-items:center!important;
+  flex:0 0 27px!important;
+  width:27px!important;
+  height:27px!important;
+  min-width:27px!important;
+  padding:0!important;
+  border:1px solid #454264!important;
+  border-radius:8px!important;
+  background:#1e1c36!important;
+  color:#c6bddf!important;
+  font:700 11px/1 'DM Mono',monospace!important;
+  font-variant-numeric:tabular-nums!important;
+  text-align:center!important;
+  user-select:none!important;
+}
+.queue-track.current .queue-track-number{
+  border-color:#8e68b2!important;
+  background:#392745!important;
+  color:#ffa0d9!important;
+}
+@media(max-width:680px){
+  .player-column.mobile-open .queue-track-number{
+    flex-basis:28px!important;
+    width:28px!important;
+    height:28px!important;
+    min-width:28px!important;
+    font-size:11px!important;
+  }
+}
+@media(max-width:390px){
+  .player-column.mobile-open .queue-track-number{
+    flex-basis:25px!important;
+    width:25px!important;
+    height:25px!important;
+    min-width:25px!important;
+    font-size:10px!important;
+  }
+}
