@@ -414,7 +414,7 @@
     });
   }
 
-    function renderCounts() {
+  function renderCounts() {
     el['nav-total'].textContent = state.songs.length.toLocaleString();
     el['fav-total'].textContent = state.favorites.size.toLocaleString();
     el['hero-song-count'].textContent = state.songs.length.toLocaleString();
@@ -1163,7 +1163,6 @@
       const data = await response.json();
       if (!Array.isArray(data.songs)) throw new Error('Catalogue schema is invalid');
       state.songs = deduplicateCatalogue(data.songs);
-      state.artistPortraits = new Map();
       el['source-status'].textContent = state.songs.length
         ? 'Catalogue ready · ' + state.songs.length.toLocaleString() + ' songs'
         : 'Waiting for first catalogue sync';
