@@ -1,6 +1,6 @@
 # HoloTracks
 
-A searchable, fan-made Hololive original-song library with a cheerful pastel interface, official YouTube playback, talent filters, a site-managed queue, favourites, and browser-local playlists.
+A searchable, fan-made Hololive original-song library with a dark, colourful stage-inspired interface, official YouTube playback, talent artwork, artist filters, a site-managed queue, favourites, and browser-local playlists.
 
 **HoloTracks does not create or edit YouTube playlists.** Search, filters, sorting, queues, favourites, and custom mixtapes are managed by the website. Video playback uses YouTube's official embedded player.
 
@@ -12,7 +12,7 @@ A searchable, fan-made Hololive original-song library with a cheerful pastel int
 - Official YouTube embedded playback, queue controls, previous/next, shuffle, and repeat.
 - Favourites and named playlists saved in the browser's local storage.
 - Daily incremental catalogue updates, weekly full reconciliation, API retry/backoff, and tests.
-- Responsive pastel UI using official Hololive profile artwork linked from the official talent site.
+- Responsive dark-neon music UI with a browsable rail of official Hololive talent illustrations; the page uses the artwork in-context and does not divert listeners to a talent directory.
 
 ## Catalogue update design
 
@@ -66,7 +66,7 @@ The Fresh releases view clears conflicting search/talent filters, sorts newest-f
 
 ## Artwork, attribution, and playback
 
-Talent illustrations and profile avatars are loaded from the [official Hololive talent website](https://hololive.hololivepro.com/en/talents). Artwork and character rights remain with COVER Corporation and the respective rights holders. HoloTracks is an independent fan project and is not affiliated with or endorsed by COVER Corporation.
+Talent illustrations and profile avatars are displayed from official Hololive image assets. Artwork and character rights remain with COVER Corporation and the respective rights holders. HoloTracks is an independent fan project and is not affiliated with or endorsed by COVER Corporation.
 
 The website displays video thumbnails and plays videos through YouTube's official embedded player. It does not download or rehost audio/video. Playback can fail when a video is removed, age-restricted, region-restricted, or does not allow embedding. YouTube's player terms and privacy practices apply when the embedded player is loaded.
 
