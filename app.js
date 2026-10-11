@@ -463,7 +463,7 @@
   }
   function getPageSize() {
     const template = window.getComputedStyle(el['song-list']).gridTemplateColumns;
-    const columns = template && template !== 'none' ? template.trim().split(/\\s+/).filter(Boolean).length : 3;
+    const columns = template && template !== 'none' ? template.trim().split(/\s+/).filter(Boolean).length : 3;
     return Math.max(1, columns) * PAGE_ROWS;
   }
 
