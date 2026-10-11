@@ -43,7 +43,7 @@
     'mobile-player-toggle','sidebar','player-column','player-hide','youtube-player','youtube-fallback',
     'playing-thumb','playing-art-placeholder','playing-title','playing-artist','playing-favorite',
     'player-state','watch-youtube','play-pause','previous-song','next-song','queue-shuffle',
-    'queue-repeat','volume-control','volume-value','volume-mute','queue-count','queue-list','clear-queue','create-playlist','playlist-list',
+    'queue-repeat','volume-toggle','volume-popover','volume-control','volume-value','volume-mute','queue-count','queue-list','clear-queue','create-playlist','playlist-list',
     'playlist-select','save-queue','play-selected-playlist','playlist-dialog','playlist-form','cancel-playlist',
     'playlist-name','talent-strip','sidebar-collapse','mobile-mini-player','mobile-mini-thumb','mobile-mini-expand','mobile-mini-title','mobile-mini-artist','mobile-mini-toggle','mobile-mini-next','hero-talent-art',
   ];
@@ -1075,15 +1075,29 @@
   }
   function updateVolumeControl() {
     if (!el['volume-control']) return;
-    const displayedVolume = state.muted ? 0 : state.volume;
+    const isMuted = state.muted || state.volume === 0;
+    const displayedVolume = isMuted ? 0 : state.volume;
     el['volume-control'].value = String(state.volume);
     el['volume-control'].style.setProperty('--volume-level', state.volume + '%');
-    el['volume-control'].setAttribute('aria-valuetext', state.volume + '% volume' + (state.muted ? ', muted' : ''));
+    el['volume-control'].setAttribute('aria-valuetext', state.volume + '% volume' + (isMuted ? ', muted' : ''));
     el['volume-value'].textContent = displayedVolume + '%';
-    el['volume-mute'].textContent = state.muted || state.volume === 0 ? '♩×' : (state.volume < 50 ? '♪' : '♫');
-    el['volume-mute'].setAttribute('aria-label', state.muted || state.volume === 0 ? 'Unmute YouTube audio' : 'Mute YouTube audio');
-    el['volume-mute'].title = state.muted || state.volume === 0 ? 'Unmute' : 'Mute';
-    el['volume-mute'].classList.toggle('is-muted', state.muted || state.volume === 0);
+
+    const isOpen = !el['volume-popover'].hidden;
+    el['volume-toggle'].textContent = isMuted ? '♩×' : (state.volume < 50 ? '♪' : '♫');
+    el['volume-toggle'].setAttribute('aria-label', isOpen ? 'Close volume controls' : 'Adjust volume');
+    el['volume-toggle'].setAttribute('aria-expanded', String(isOpen));
+    el['volume-toggle'].title = isOpen ? 'Close volume controls' : 'Adjust volume · ' + displayedVolume + '%';
+    el['volume-toggle'].classList.toggle('is-muted', isMuted);
+    el['volume-mute'].textContent = isMuted ? '♫' : '♩×';
+    el['volume-mute'].setAttribute('aria-label', isMuted ? 'Unmute YouTube audio' : 'Mute YouTube audio');
+    el['volume-mute'].title = isMuted ? 'Unmute' : 'Mute';
+    el['volume-mute'].classList.toggle('is-muted', isMuted);
+  }
+
+  function toggleVolumePopover(force) {
+    const open = typeof force === 'boolean' ? force : el['volume-popover'].hidden;
+    el['volume-popover'].hidden = !open;
+    updateVolumeControl();
   }
 
   function applyPlayerVolume() {
@@ -1509,6 +1523,7 @@
     el['previous-song'].addEventListener('click', previousSong);
     el['next-song'].addEventListener('click', nextSong);
     el['play-pause'].addEventListener('click', togglePlayback);
+    el['volume-toggle'].addEventListener('click', () => toggleVolumePopover());
     el['volume-control'].addEventListener('input', event => setPlayerVolume(event.currentTarget.value));
     el['volume-mute'].addEventListener('click', togglePlayerMute);
     el['mobile-mini-toggle'].addEventListener('click', togglePlayback);
@@ -1599,6 +1614,7 @@
       }
     });
     document.addEventListener('click', event => {
+      if (!event.target.closest('.volume-control')) toggleVolumePopover(false);
       if (document.body.classList.contains('mobile-player-open') &&
           !event.target.closest('#player-column, #mobile-mini-player, #mobile-player-toggle')) {
         toggleMobilePlayerPanel(false);
@@ -1616,6 +1632,7 @@
     });
     document.addEventListener('keydown', event => {
       if (event.key !== 'Escape') return;
+      toggleVolumePopover(false);
       if (document.body.classList.contains('mobile-player-open')) toggleMobilePlayerPanel(false);
       if (document.body.classList.contains('filters-open')) {
         document.body.classList.remove('filters-open');
