@@ -77,7 +77,7 @@
     queue: [], currentId: null,
     shuffle: readJSON(KEYS.shuffle, false),
     repeat: readJSON(KEYS.repeat, false),
-    volume: Math.max(0, Math.min(100, Number(readJSON(KEYS.volume, 70)) || 0)),
+    volume: (() => { const saved = Number(readJSON(KEYS.volume, 70)); return Number.isFinite(saved) ? Math.max(0, Math.min(100, saved)) : 70; })(),
     muted: readJSON(KEYS.muted, false),
     player: null, playerReady: false, pendingVideoId: null,
     usingFreshFallback: false,
@@ -1112,7 +1112,10 @@
     // A zero slider position is a mute state; unmuting restores the last non-zero level.
     if (state.muted || state.volume === 0) {
       state.muted = false;
-      if (state.volume === 0) state.volume = Math.max(1, Number(readJSON(KEYS.volume, 70)) || 70);
+      if (state.volume === 0) {
+        const rememberedVolume = Number(readJSON(KEYS.volume, 70));
+        state.volume = Math.max(1, Math.min(100, Number.isFinite(rememberedVolume) && rememberedVolume > 0 ? rememberedVolume : 70));
+      }
     } else {
       state.muted = true;
     }
