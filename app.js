@@ -166,7 +166,7 @@
 
     const image = document.createElement('img');
     image.className = 'stage-talent stage-featured is-entering';
-    image.src = safeTalentImage(talent.bannerImage) ||
+    const imageSource = safeTalentImage(talent.bannerImage) ||
       safeTalentImage(ARTIST_IMAGES[talent.name]) || safeTalentImage(talent.image);
     image.alt = talent.name + ' — featured Hololive talent';
     image.loading = 'eager';
@@ -190,6 +190,7 @@
       });
     };
     stage.appendChild(image);
+    image.src = imageSource;
   }
   let heroRotationTimer = null;
   function startHeroRotation() {
