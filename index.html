@@ -9,8 +9,8 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://hololive.hololivepro.com" crossorigin>
   <link rel="preconnect" href="https://i.ytimg.com" crossorigin>
-  <link rel="stylesheet" href="styles.css?v=20261011-coverensemble2">
-  <script defer src="app.js?v=20261011-coverensemble2"></script>
+  <link rel="stylesheet" href="styles.css?v=20261011-coverensemble3">
+  <script defer src="app.js?v=20261011-coverensemble3"></script>
 </head>
 <body>
   <a class="skip-link" href="#catalogue">Skip to music library</a>
@@ -50,9 +50,11 @@
   <main class="app-layout">
     <aside id="sidebar" class="sidebar" aria-label="Music navigation and artist filters">
       <div class="sidebar-topline"><span class="sidebar-orb">✦</span><span class="sidebar-brand-copy"><strong>Your music lounge</strong><small>Pick a vibe. Find a voice.</small></span><button id="sidebar-collapse" class="sidebar-collapse" type="button" aria-label="Collapse sidebar" aria-pressed="false" title="Collapse sidebar">‹</button></div>
-      <nav class="main-nav" aria-label="Library views">
-        <button class="nav-item active" data-view="all" type="button"><span class="nav-symbol">▦</span><span>All songs</span><span id="nav-total" class="nav-count">—</span></button>
-                <button class="nav-item" data-view="favorites" type="button"><span class="nav-symbol">♥</span><span>My favourites</span><span id="fav-total" class="nav-count">0</span></button>
+      <nav class="main-nav" aria-label="Music filters and library views">
+        <button class="nav-item active" data-view="all" data-sidebar-song-type="all" type="button" aria-pressed="true"><span class="nav-symbol">▦</span><span>All songs</span><span id="nav-total" class="nav-count">—</span></button>
+        <button class="nav-item" data-sidebar-song-type="original" type="button" aria-pressed="false"><span class="nav-symbol">♫</span><span>Originals</span><span id="nav-original-total" class="nav-count">—</span></button>
+        <button class="nav-item" data-sidebar-song-type="cover" type="button" aria-pressed="false"><span class="nav-symbol">♬</span><span>Covers</span><span id="nav-cover-total" class="nav-count">—</span></button>
+        <button class="nav-item" data-view="favorites" type="button"><span class="nav-symbol">♥</span><span>My favourites</span><span id="fav-total" class="nav-count">0</span></button>
       </nav>
 
       <div class="sidebar-rule"><span>ARTIST FILTERS</span><i></i></div>
