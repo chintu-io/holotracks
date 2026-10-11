@@ -1163,3 +1163,76 @@ button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid 
   .hero-card{min-height:335px}
   .stage-talent.stage-featured{bottom:27px!important;height:calc(100% - 47px)!important;opacity:.82!important}
 }
+
+
+/* Readability pass: strengthen the small labels and card metadata without enlarging the whole interface. */
+.hero-eyebrow{font-size:10px!important;letter-spacing:.5px!important;line-height:1.45}
+.hero-stats span{font-size:9px!important;line-height:1.35;letter-spacing:.15px}
+.section-kicker{font-size:10px!important;letter-spacing:.75px!important}
+.talent-section-note{font-size:9.5px!important}
+.talent-card small{font-size:9px!important;letter-spacing:.15px}
+.nav-count,.muted-count,.artist-check small,.playlist-row small{font-size:10.5px!important}
+.sidebar-rule{font-size:10px!important;letter-spacing:.75px!important}
+.filter-hint{font-size:11px!important;line-height:1.5}
+.catalogue-status{font-size:11px!important}
+.sidebar-footer p{font-size:10px!important;line-height:1.55}
+.brand-copy small{font-size:9px!important;letter-spacing:.8px!important}
+.top-live{font-size:9px!important;letter-spacing:.35px!important}
+.song-card-meta{font-size:11px!important;gap:7px 9px;flex-wrap:wrap;line-height:1.45}
+.song-card-meta span:not(.song-kind){font-size:11px!important;color:#a4aacb}
+.song-kind{font-size:9px!important;letter-spacing:.15px!important;padding:4px 6px!important}
+.mini-action{font-size:11px!important;padding:8px 4px}
+.section-heading p,.library-top p{font-size:13px!important;line-height:1.55}
+.result-count{font-size:11px!important}
+.sort-control>span{font-size:11px!important}
+.sort-control select,.playlist-select-row select{font-size:12px!important}
+.discovery-card small{font-size:11px!important;line-height:1.45}
+.player-kicker{font-size:9px!important;letter-spacing:.5px!important}
+.player-status-row,.playing-text span,.queue-track-info span{font-size:11px!important;line-height:1.45}
+.queue-track-info strong{font-size:12px!important}
+.playlist-select-label{font-size:11px!important}
+.player-footnote,.page-footer{font-size:10px!important;line-height:1.6}
+.hero-footer{font-size:10.5px!important}
+.artist-search input{font-size:13px!important}
+
+@media(max-width:1220px){
+  .hero-stats span{font-size:8.5px!important}
+  .song-card-meta,.song-card-meta span:not(.song-kind){font-size:10.5px!important}
+  .mini-action{font-size:10px!important}
+}
+@media(max-width:970px){
+  .brand-copy small{font-size:8px!important;letter-spacing:.45px!important}
+  .hero-eyebrow{font-size:8.5px!important;letter-spacing:.25px!important}
+  .hero-stats span{font-size:8px!important}
+  .player-kicker{font-size:8.5px!important}
+  .section-kicker{font-size:9.5px!important}
+}
+@media(max-width:680px){
+  .hero-eyebrow{font-size:8.5px!important;letter-spacing:.25px!important}
+  .hero-copy p{font-size:12px!important;line-height:1.65!important}
+  .hero-stats span{font-size:7.5px!important;white-space:normal!important;line-height:1.3!important}
+  .section-kicker{font-size:9.5px!important}
+  .song-title{font-size:12px!important;line-height:1.4!important}
+  .song-artist{font-size:10.5px!important}
+  .song-card-meta{font-size:10px!important;gap:6px 8px;margin-top:8px}
+  .song-card-meta span:not(.song-kind){font-size:10px!important}
+  .song-kind{font-size:8.8px!important;padding:3px 5px!important}
+  .mini-action{font-size:9.5px!important;padding:6px 2px;gap:3px}
+  .discovery-card strong{font-size:11px!important}
+  .discovery-card small{font-size:9.5px!important;white-space:normal!important}
+  .player-kicker{font-size:8.5px!important}
+  .player-status-row,.playing-text span,.queue-track-info span{font-size:10.5px!important}
+  .page-footer{font-size:9.5px!important}
+}
+@media(max-width:390px){
+  .hero-eyebrow{font-size:8px!important;letter-spacing:.1px!important}
+  .hero-card h1{font-size:31px!important;line-height:1.04!important}
+  .hero-copy p{font-size:11px!important;line-height:1.55!important}
+  .hero-stats span{font-size:7px!important}
+  .song-card-meta{font-size:9.5px!important;gap:5px 7px}
+  .song-card-meta span:not(.song-kind){font-size:9.5px!important}
+  .song-kind{font-size:8.3px!important;padding:3px 4px!important}
+  .mini-action{font-size:8.5px!important;padding:5px 1px;gap:2px}
+  .discovery-card small{font-size:9px!important}
+  .player-kicker{font-size:8px!important}
+}
