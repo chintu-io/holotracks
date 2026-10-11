@@ -1,6 +1,6 @@
 # HoloTracks
 
-A searchable, fan-made Hololive original-song library with a dark, colourful stage-inspired interface, official YouTube playback, talent artwork, artist filters, a site-managed queue, favourites, and browser-local playlists.
+A searchable, fan-made Hololive music library for original songs and community-tagged covers, with a dark stage-inspired interface, official YouTube playback, talent artwork, artist filters, a site-managed queue, favourites, and browser-local playlists.
 
 **HoloTracks does not create or edit YouTube playlists.** Search, filters, sorting, queues, favourites, and custom mixtapes are managed by the website. Video playback uses YouTube's official embedded player.
 
@@ -8,7 +8,7 @@ A searchable, fan-made Hololive original-song library with a dark, colourful sta
 
 - Search song titles, artist names, alternate titles, and Japanese text.
 - Multi-select talent filters and talent spotlight cards.
-- Fresh releases view, newest/oldest sorting, title sorting, and optional view-count popularity sorting.
+- Separate Originals and Covers filters, type labels on song cards, Fresh releases, newest/oldest sorting, title sorting, and optional view-count popularity sorting.
 - Official YouTube embedded playback, queue controls, previous/next, shuffle, and repeat.
 - Favourites and named playlists saved in the browser's local storage.
 - Daily incremental catalogue updates, weekly full reconciliation, API retry/backoff, and tests.
@@ -18,14 +18,14 @@ A searchable, fan-made Hololive original-song library with a dark, colourful sta
 
 ## Catalogue update design
 
-The source is Holodex's Hololive + Original_Song search, using a page size of 50. The importer has two modes:
+The source is Holodex's Hololive video-search API, queried separately for the `Original_Song` and `Music_Cover` topics with a page size of 50. Results are merged by YouTube video ID and labelled as original or cover; if the same video appears under both topics, the cover classification is retained. The importer has two modes:
 
 - **Incremental (daily):** request newest pages until it reaches a full page of IDs that are already in the saved catalogue. Only new IDs are added. If no songs or source-count metadata changed, the workflow does not create a commit or trigger a website deployment.
 - **Full reconciliation (weekly):** scan every page from Holodex, refresh source metadata and view counts, and retain historical IDs that are temporarily absent from the index. A 25,000-record safety guard stops an unexpectedly large source response before it can replace the catalogue.
 
 The scheduled workflows run daily at 04:23 UTC and perform the full reconciliation on Sundays at 04:43 UTC. GitHub scheduled jobs can start a little later than their cron time. You can also choose **Actions → Refresh Hololive catalogue → Run workflow** and select incremental or full mode. For an importer/schema change that needs a one-time backfill, include `[full-scan]` in that commit message; ordinary code/config pushes run incrementally.
 
-The importer observes Retry-After on rate-limit responses, backs off on HTTP 429/5xx and timeouts, checks pagination, deduplicates video IDs, and writes through a temporary file before replacing data/songs.json. A failed run leaves the last successful catalogue intact.
+The importer observes Retry-After on rate-limit responses, backs off on HTTP 429/5xx and timeouts, checks pagination independently for each topic, deduplicates video IDs, and writes through a temporary file before replacing data/songs.json. A failed run leaves the last successful catalogue intact. The one-time full scan after the topic change backfills cover entries; routine refreshes then continue incrementally.
 
 ## Setup
 
