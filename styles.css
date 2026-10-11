@@ -4634,3 +4634,24 @@ body{
 @media (max-width:390px){
   .song-title{font-size:12.5px!important}
 }
+
+
+/* Preserve player/queue balance on low-height desktop viewports after the wider-frame rule. */
+@media (min-width:1221px) and (max-height:760px){
+  .player-column .video-frame-wrap,
+  body.player-docked .player-column .video-frame-wrap,
+  body.sidebar-collapsed .player-column .video-frame-wrap,
+  body.sidebar-collapsed.player-docked .player-column .video-frame-wrap{
+    width:min(100%,250px)!important;
+    max-width:250px!important;
+  }
+}
+@media (min-width:1221px) and (max-height:600px){
+  .player-column .video-frame-wrap,
+  body.player-docked .player-column .video-frame-wrap,
+  body.sidebar-collapsed .player-column .video-frame-wrap,
+  body.sidebar-collapsed.player-docked .player-column .video-frame-wrap{
+    width:min(100%,190px)!important;
+    max-width:190px!important;
+  }
+}
