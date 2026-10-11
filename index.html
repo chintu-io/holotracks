@@ -9,8 +9,8 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://hololive.hololivepro.com" crossorigin>
   <link rel="preconnect" href="https://i.ytimg.com" crossorigin>
-  <link rel="stylesheet" href="styles.css?v=20261011-banner-single-full-roster-1">
-  <script defer src="app.js?v=20261011-banner-single-full-roster-1"></script>
+  <link rel="stylesheet" href="styles.css?v=20261011-sort-most-liked-1">
+  <script defer src="app.js?v=20261011-sort-most-liked-1"></script>
 </head>
 <body>
   <a class="skip-link" href="#catalogue">Skip to music library</a>
@@ -157,7 +157,7 @@
       <section class="library-section" aria-label="Browse songs">
         <div id="music-library" class="library-top">
           <div><span class="section-kicker">THE MUSIC LIBRARY</span><h2><span id="catalogue-title-text">All music</span> <span id="results-count" class="result-count">—</span></h2><p id="results-caption">Original songs and fan-performed covers from across the Hololive universe.</p></div>
-          <div class="library-controls"><label class="sort-control"><span>Sort by</span><select id="sort-select" aria-label="Sort songs"><option value="newest">Newest release</option><option value="oldest">Oldest release</option><option value="title">Title A–Z</option><option value="popular">Most viewed</option></select></label><button id="play-all" class="play-all-button" type="button"><span>▶</span> Play all</button></div>
+          <div class="library-controls"><label class="sort-control"><span>Sort by</span><select id="sort-select" aria-label="Sort songs"><option value="newest">Newest release</option><option value="oldest">Oldest release</option><option value="title">Title A–Z</option><option value="popular">Most viewed</option><option value="liked">Most liked</option></select></label><button id="play-all" class="play-all-button" type="button"><span>▶</span> Play all</button></div>
         </div>
         <div class="music-type-filter" role="group" aria-label="Filter catalogue by music type">
           <button class="music-type-button active" type="button" data-song-type="all" aria-pressed="true">All music <span id="type-all-count">—</span></button>
