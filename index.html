@@ -9,8 +9,8 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://hololive.hololivepro.com" crossorigin>
   <link rel="preconnect" href="https://i.ytimg.com" crossorigin>
-  <link rel="stylesheet" href="styles.css?v=20261011-talentpicker-layout">
-  <script defer src="app.js?v=20261011-talentpicker"></script>
+  <link rel="stylesheet" href="styles.css?v=20261011-navigation-fix-1">
+  <script defer src="app.js?v=20261011-navigation-fix-1"></script>
 </head>
 <body>
   <a class="skip-link" href="#catalogue">Skip to music library</a>
@@ -183,6 +183,6 @@
     </aside>
   </main>
 
-  <dialog id="playlist-dialog" class="playlist-dialog"><form method="dialog" id="playlist-form"><div class="dialog-mark">♫</div><h2>Create a mixtape</h2><p>Name your collection. It will stay saved in this browser.</p><label for="playlist-name">Playlist name</label><input id="playlist-name" maxlength="60" required placeholder="e.g. Midnight Suisei Mix"><div class="dialog-actions"><button class="dialog-cancel" value="cancel">Cancel</button><button class="dialog-create" value="create">Create playlist</button></div></form></dialog>
+  <dialog id="playlist-dialog" class="playlist-dialog"><form method="dialog" id="playlist-form"><div class="dialog-mark">♫</div><h2>Create a mixtape</h2><p>Name your collection. It will stay saved in this browser.</p><label for="playlist-name">Playlist name</label><input id="playlist-name" maxlength="60" required placeholder="e.g. Midnight Suisei Mix"><div class="dialog-actions"><button id="cancel-playlist" class="dialog-cancel" type="button">Cancel</button><button class="dialog-create" type="submit">Create playlist</button></div></form></dialog>
 </body>
 </html>
