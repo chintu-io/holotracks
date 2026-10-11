@@ -1103,3 +1103,63 @@ button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid 
 @media(prefers-reduced-motion:reduce){
   .stage-talent.stage-featured{transition:none!important}
 }
+
+
+/* Final hero framing: give the featured talent room for both head and feet. */
+.hero-card{
+  min-height:480px;
+  grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);
+}
+.hero-copy{max-width:530px}
+.hero-copy p{max-width:450px}
+.hero-stage{min-height:450px}
+.stage-talent.stage-featured{
+  right:0!important;
+  bottom:29px!important;
+  top:auto!important;
+  height:calc(100% - 41px)!important;
+  width:auto!important;
+  max-width:100%!important;
+  max-height:none!important;
+  object-fit:contain!important;
+  object-position:center bottom!important;
+  transform:none!important;
+  transform-origin:center bottom!important;
+}
+.stage-talent.stage-featured.is-entering{
+  transform:translateY(8px)!important;
+}
+.stage-talent.stage-featured.is-visible{
+  transform:none!important;
+}
+.stage-talent.stage-featured.is-exiting{
+  transform:translateY(5px)!important;
+}
+.hero-footer{z-index:9!important}
+@media(max-width:1699px) and (min-width:1221px){
+  .hero-card{min-height:450px}
+  .hero-stage{min-height:430px}
+  .stage-talent.stage-featured{bottom:27px!important;height:calc(100% - 38px)!important}
+}
+@media(max-width:1220px) and (min-width:971px){
+  .hero-card{min-height:430px;grid-template-columns:minmax(0,1fr) minmax(0,.9fr)}
+  .hero-stage{min-height:410px}
+  .stage-talent.stage-featured{bottom:27px!important;height:calc(100% - 38px)!important}
+}
+@media(max-width:970px) and (min-width:681px){
+  .hero-card{min-height:390px;grid-template-columns:minmax(0,1.02fr) minmax(0,.88fr)}
+  .hero-stage{min-height:370px}
+  .stage-talent.stage-featured{bottom:26px!important;height:calc(100% - 36px)!important;max-width:100%!important}
+}
+@media(max-width:680px){
+  .hero-card{min-height:350px}
+  .hero-stage{left:20%!important;right:0!important;top:0!important;bottom:0!important;min-height:0!important;height:auto!important}
+  .stage-talent.stage-featured{right:0!important;bottom:27px!important;height:calc(100% - 39px)!important;max-width:100%!important;opacity:.86!important;transform:none!important}
+  .stage-talent.stage-featured.is-visible{transform:none!important;opacity:.9!important}
+  .stage-talent.stage-featured.is-entering{transform:translateY(5px)!important}
+  .stage-talent.stage-featured.is-exiting{transform:translateY(3px)!important}
+}
+@media(max-width:390px){
+  .hero-card{min-height:335px}
+  .stage-talent.stage-featured{bottom:27px!important;height:calc(100% - 47px)!important;opacity:.82!important}
+}
