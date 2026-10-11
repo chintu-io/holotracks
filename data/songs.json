@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-11T16:41:00.691Z",
+  "generatedAt": "2026-10-11T17:33:50.271Z",
   "lastFullReconciledAt": "2026-10-11T09:30:39.795Z",
   "lastMode": "incremental",
   "source": "Holodex API v2",
@@ -33,10 +33,12 @@
       "channelId": "UC6eWCld0KwmyHFbAqK3V-Rw",
       "releaseDate": "2026-10-11T15:00:13.000Z",
       "publishedAt": "2026-10-11T15:00:13.000Z",
-      "viewCount": 197,
+      "viewCount": 249,
       "duration": 230,
       "songType": "original",
-      "source": "Holodex"
+      "source": "Holodex",
+      "likeCount": 69,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "SMBaRGyq2Qc",
@@ -52,7 +54,9 @@
       "viewCount": 27,
       "duration": 230,
       "songType": "original",
-      "source": "Holodex"
+      "source": "Holodex",
+      "likeCount": 18,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "WOZTqdQ6bnE",
@@ -65,10 +69,12 @@
       "channelId": "UC6eWCld0KwmyHFbAqK3V-Rw",
       "releaseDate": "2026-10-11T12:03:17.000Z",
       "publishedAt": "2026-10-11T12:03:17.000Z",
-      "viewCount": 14684,
+      "viewCount": 57060,
       "duration": 230,
       "songType": "original",
-      "source": "Holodex"
+      "source": "Holodex",
+      "likeCount": 6830,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "NfZnchcKVw0",
@@ -81,10 +87,12 @@
       "channelId": "UC_vMYWcDjmfdpH6r4TTn1MQ",
       "releaseDate": "2026-10-11T09:00:10.000Z",
       "publishedAt": "2026-10-11T09:00:10.000Z",
-      "viewCount": 12669,
+      "viewCount": 114087,
       "duration": 209,
       "songType": "cover",
-      "source": "Holodex"
+      "source": "Holodex",
+      "likeCount": 12461,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "8eG_vIYafAQ",
@@ -100,7 +108,9 @@
       "viewCount": null,
       "duration": 153,
       "songType": "cover",
-      "source": "Holodex"
+      "source": "Holodex",
+      "likeCount": 65,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "iG5qVO_lGI8",
@@ -113,10 +123,12 @@
       "channelId": "UCa9Y57gfeY0Zro_noHRVrnw",
       "releaseDate": "2026-10-10T15:03:56.000Z",
       "publishedAt": "2026-10-10T15:03:56.000Z",
-      "viewCount": 168,
+      "viewCount": 206,
       "duration": 202,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 14,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "zkQV9IRQfYA",
@@ -129,10 +141,12 @@
       "channelId": "UCa9Y57gfeY0Zro_noHRVrnw",
       "releaseDate": "2026-10-10T15:01:11.000Z",
       "publishedAt": "2026-10-10T15:01:11.000Z",
-      "viewCount": 621,
+      "viewCount": 915,
       "duration": 202,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 94,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "wYpu_zz1P3c",
@@ -145,10 +159,12 @@
       "channelId": "UCa9Y57gfeY0Zro_noHRVrnw",
       "releaseDate": "2026-10-10T12:05:07.000Z",
       "publishedAt": "2026-10-10T12:05:07.000Z",
-      "viewCount": 124136,
+      "viewCount": 138055,
       "duration": 200,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 10330,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "BK2mvHvdf4c",
@@ -162,10 +178,12 @@
       "channelId": "UCDqI2jOz0weumE8s7paEk6g",
       "releaseDate": "2026-10-10T10:00:10.000Z",
       "publishedAt": "2026-10-10T10:00:10.000Z",
-      "viewCount": 67026,
+      "viewCount": 81666,
       "duration": 127,
       "songType": "cover",
-      "source": "Holodex"
+      "source": "Holodex",
+      "likeCount": 6949,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "lZPgy6bHPcQ",
@@ -178,10 +196,12 @@
       "channelId": "UC3OH5FKQ3qtl4uRme_vZTgA",
       "releaseDate": "2026-10-10T09:40:07.000Z",
       "publishedAt": "2026-10-10T09:40:07.000Z",
-      "viewCount": 86302,
+      "viewCount": 110781,
       "duration": 221,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 11295,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "50C6XFeSIBg",
@@ -194,10 +214,12 @@
       "channelId": "UC1uv2Oq6kNxgATlCiez59hw",
       "releaseDate": "2026-10-08T15:04:57.000Z",
       "publishedAt": "2026-10-08T15:04:57.000Z",
-      "viewCount": 46081,
+      "viewCount": 49545,
       "duration": 199,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 1413,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "q94QJrG2rrg",
@@ -210,10 +232,12 @@
       "channelId": "UC1uv2Oq6kNxgATlCiez59hw",
       "releaseDate": "2026-10-08T15:03:19.000Z",
       "publishedAt": "2026-10-08T15:03:19.000Z",
-      "viewCount": 1296,
+      "viewCount": 1385,
       "duration": 199,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 45,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "yOI1qMpfuRw",
@@ -226,10 +250,12 @@
       "channelId": "UC1uv2Oq6kNxgATlCiez59hw",
       "releaseDate": "2026-10-08T11:00:07.000Z",
       "publishedAt": "2026-10-08T11:00:07.000Z",
-      "viewCount": 261242,
+      "viewCount": 267127,
       "duration": 199,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 16617,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "Vui-Eor7H2Y",
@@ -245,7 +271,9 @@
       "viewCount": 0,
       "duration": 219,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 5,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "BZwatlftTRI",
@@ -261,7 +289,9 @@
       "viewCount": 0,
       "duration": 233,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 7,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "9d-TpebqYfc",
@@ -277,7 +307,9 @@
       "viewCount": 0,
       "duration": 226,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 4,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "ipYrjAftTm4",
@@ -293,7 +325,9 @@
       "viewCount": 0,
       "duration": 175,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 3,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "zP9ieFhlgcQ",
@@ -309,7 +343,9 @@
       "viewCount": 0,
       "duration": 254,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 7,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "A6CTZrgOLss",
@@ -325,7 +361,9 @@
       "viewCount": 0,
       "duration": 202,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 4,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "uI8TCCLDBtk",
@@ -341,7 +379,9 @@
       "viewCount": 0,
       "duration": 268,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 4,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "HdWHQmDjw1Y",
@@ -357,7 +397,9 @@
       "viewCount": 0,
       "duration": 247,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 8,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "p8ecJRk2mvM",
@@ -373,7 +415,9 @@
       "viewCount": 0,
       "duration": 175,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 3,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "Li7R1z3v5kw",
@@ -389,7 +433,9 @@
       "viewCount": 0,
       "duration": 207,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 3,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "HNc2J2s6fL0",
@@ -405,7 +451,9 @@
       "viewCount": 0,
       "duration": 258,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 4,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "yhJ1yAqATmQ",
@@ -418,10 +466,12 @@
       "channelId": "UCqm3BQLlJfvkTsX_hvm0UmA",
       "releaseDate": "2026-10-07T10:00:08.000Z",
       "publishedAt": "2026-10-07T10:00:08.000Z",
-      "viewCount": 586289,
+      "viewCount": 609511,
       "duration": 210,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 26879,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "rxB1lNIgXQU",
@@ -434,10 +484,12 @@
       "channelId": "UCqm3BQLlJfvkTsX_hvm0UmA",
       "releaseDate": "2026-10-06T15:04:55.000Z",
       "publishedAt": "2026-10-06T15:04:55.000Z",
-      "viewCount": 45058,
+      "viewCount": 46813,
       "duration": 207,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 1908,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "-hzf0fiETvI",
@@ -450,10 +502,12 @@
       "channelId": "UCqm3BQLlJfvkTsX_hvm0UmA",
       "releaseDate": "2026-10-06T15:04:13.000Z",
       "publishedAt": "2026-10-06T15:04:13.000Z",
-      "viewCount": 6251,
+      "viewCount": 6369,
       "duration": 207,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 159,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "pIJX76AVP5M",
@@ -466,10 +520,12 @@
       "channelId": "UC8rcEBzJSleTkf_-agPM20g",
       "releaseDate": "2026-10-06T13:00:11.000Z",
       "publishedAt": "2026-10-06T13:00:11.000Z",
-      "viewCount": 518922,
+      "viewCount": 532716,
       "duration": 233,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 31753,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "WrwYOdZZUOs",
@@ -482,10 +538,12 @@
       "channelId": "UCqm3BQLlJfvkTsX_hvm0UmA",
       "releaseDate": "2026-10-06T10:02:30.000Z",
       "publishedAt": "2026-10-06T10:02:30.000Z",
-      "viewCount": 1000,
+      "viewCount": 1008,
       "duration": 207,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 28,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "ZoMRM3yzz14",
@@ -498,10 +556,12 @@
       "channelId": "UCqm3BQLlJfvkTsX_hvm0UmA",
       "releaseDate": "2026-10-06T10:01:56.000Z",
       "publishedAt": "2026-10-06T10:01:56.000Z",
-      "viewCount": 21575,
+      "viewCount": 22482,
       "duration": 207,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 860,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "GKfASiLqIrE",
@@ -514,10 +574,12 @@
       "channelId": "UCdn5BQ06XqgXoAxIhbqw5Rg",
       "releaseDate": "2026-10-05T15:00:33.000Z",
       "publishedAt": "2026-10-05T15:00:33.000Z",
-      "viewCount": 43154,
+      "viewCount": 46106,
       "duration": 207,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 1916,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "UbCe39B9djU",
@@ -530,10 +592,12 @@
       "channelId": "UCdn5BQ06XqgXoAxIhbqw5Rg",
       "releaseDate": "2026-10-05T15:00:02.000Z",
       "publishedAt": "2026-10-05T15:00:02.000Z",
-      "viewCount": 3776,
+      "viewCount": 3942,
       "duration": 207,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 142,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "NfG4zsc_Geo",
@@ -546,10 +610,12 @@
       "channelId": "UCdn5BQ06XqgXoAxIhbqw5Rg",
       "releaseDate": "2026-10-05T13:30:09.000Z",
       "publishedAt": "2026-10-05T13:30:09.000Z",
-      "viewCount": 295133,
+      "viewCount": 301768,
       "duration": 208,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 22367,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "P_C91D1fKqM",
@@ -562,10 +628,12 @@
       "channelId": "UCotXwY6s8pWmuWd_snKYjhg",
       "releaseDate": "2026-10-04T21:03:09.000Z",
       "publishedAt": "2026-10-04T21:03:09.000Z",
-      "viewCount": 883034,
+      "viewCount": 896121,
       "duration": 309,
       "songType": "cover",
-      "source": "Holodex"
+      "source": "Holodex",
+      "likeCount": 44076,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "xr-hQedTrgs",
@@ -578,10 +646,12 @@
       "channelId": "UCs9_O1tRPMQTHQ-N_L6FU2g",
       "releaseDate": "2026-10-04T15:00:21.000Z",
       "publishedAt": "2026-10-04T15:00:21.000Z",
-      "viewCount": 3872,
+      "viewCount": 3917,
       "duration": 171,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 85,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "jdY-sK6hXj4",
@@ -594,10 +664,12 @@
       "channelId": "UCs9_O1tRPMQTHQ-N_L6FU2g",
       "releaseDate": "2026-10-04T15:00:04.000Z",
       "publishedAt": "2026-10-04T15:00:04.000Z",
-      "viewCount": 17635,
+      "viewCount": 18521,
       "duration": 171,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 853,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "5g1i3Zxzi6I",
@@ -613,10 +685,12 @@
       "channelId": "UCK9V2B22uJYu3N7eR_BT9QA",
       "releaseDate": "2026-10-04T13:00:10.000Z",
       "publishedAt": "2026-10-04T13:00:10.000Z",
-      "viewCount": 273742,
+      "viewCount": 278242,
       "duration": 243,
       "songType": "cover",
-      "source": "Holodex"
+      "source": "Holodex",
+      "likeCount": 14802,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "f2bhTJqNwCk",
@@ -629,10 +703,12 @@
       "channelId": "UCs9_O1tRPMQTHQ-N_L6FU2g",
       "releaseDate": "2026-10-04T12:10:06.000Z",
       "publishedAt": "2026-10-04T12:10:06.000Z",
-      "viewCount": 181302,
+      "viewCount": 187356,
       "duration": 171,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 11260,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "VzgiaEu59Uk",
@@ -645,10 +721,12 @@
       "channelId": "UCDqI2jOz0weumE8s7paEk6g",
       "releaseDate": "2026-10-04T07:00:11.000Z",
       "publishedAt": "2026-10-04T07:00:11.000Z",
-      "viewCount": 704082,
+      "viewCount": 729839,
       "duration": 211,
       "songType": "cover",
-      "source": "Holodex"
+      "source": "Holodex",
+      "likeCount": 17034,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "Kcgj7JSSHvE",
@@ -661,10 +739,12 @@
       "channelId": "UC_sFNM0z0MWm9A6WlKPuMMg",
       "releaseDate": "2026-10-03T01:00:11.000Z",
       "publishedAt": "2026-10-03T01:00:11.000Z",
-      "viewCount": 365383,
+      "viewCount": 366873,
       "duration": 278,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 23207,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "mwz5__9K47Q",
@@ -677,10 +757,12 @@
       "channelId": "UC_sFNM0z0MWm9A6WlKPuMMg",
       "releaseDate": "2026-10-02T15:00:36.000Z",
       "publishedAt": "2026-10-02T15:00:36.000Z",
-      "viewCount": 5443,
+      "viewCount": 5484,
       "duration": 274,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 184,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "J2sXEP23668",
@@ -693,10 +775,12 @@
       "channelId": "UC_sFNM0z0MWm9A6WlKPuMMg",
       "releaseDate": "2026-10-02T15:00:22.000Z",
       "publishedAt": "2026-10-02T15:00:22.000Z",
-      "viewCount": 189296,
+      "viewCount": 190078,
       "duration": 274,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 8563,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "psfxOPjm6vo",
@@ -709,10 +793,12 @@
       "channelId": "UC3OH5FKQ3qtl4uRme_vZTgA",
       "releaseDate": "2026-09-30T15:04:03.000Z",
       "publishedAt": "2026-09-30T15:04:03.000Z",
-      "viewCount": 124412,
+      "viewCount": 125271,
       "duration": 221,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 5084,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "rTLuq0vpdSc",
@@ -725,10 +811,12 @@
       "channelId": "UC3OH5FKQ3qtl4uRme_vZTgA",
       "releaseDate": "2026-09-30T15:03:49.000Z",
       "publishedAt": "2026-09-30T15:03:49.000Z",
-      "viewCount": 6864,
+      "viewCount": 6878,
       "duration": 221,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 358,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "xMRwvFGy8Q4",
@@ -742,10 +830,12 @@
       "channelId": "UCu2n3qHuOuQIygREMnWeQWg",
       "releaseDate": "2026-09-29T12:00:11.000Z",
       "publishedAt": "2026-09-29T12:00:11.000Z",
-      "viewCount": 307778,
+      "viewCount": 310147,
       "duration": 173,
       "songType": "cover",
-      "source": "Holodex"
+      "source": "Holodex",
+      "likeCount": 11104,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "giRPLZKqhhk",
@@ -758,10 +848,12 @@
       "channelId": "UCCzUftO8KOVkV4wQG1vkUvg",
       "releaseDate": "2026-09-29T10:04:42.000Z",
       "publishedAt": "2026-09-29T10:04:42.000Z",
-      "viewCount": 26555,
+      "viewCount": 26960,
       "duration": 179,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 1453,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "116mJbph_c0",
@@ -774,10 +866,12 @@
       "channelId": "UCCzUftO8KOVkV4wQG1vkUvg",
       "releaseDate": "2026-09-29T10:04:20.000Z",
       "publishedAt": "2026-09-29T10:04:20.000Z",
-      "viewCount": 68970,
+      "viewCount": 69810,
       "duration": 207,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 2447,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "YroWhAX3cwM",
@@ -790,10 +884,12 @@
       "channelId": "UCCzUftO8KOVkV4wQG1vkUvg",
       "releaseDate": "2026-09-29T10:02:53.000Z",
       "publishedAt": "2026-09-29T10:02:53.000Z",
-      "viewCount": 80915,
+      "viewCount": 81666,
       "duration": 165,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 3178,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "qRLvtTUVHo8",
@@ -806,10 +902,12 @@
       "channelId": "UCCzUftO8KOVkV4wQG1vkUvg",
       "releaseDate": "2026-09-29T10:02:42.000Z",
       "publishedAt": "2026-09-29T10:02:42.000Z",
-      "viewCount": 32199,
+      "viewCount": 32763,
       "duration": 229,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 1344,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "TtcUmiRdZ8Y",
@@ -822,10 +920,12 @@
       "channelId": "UCjLEmnpCNeisMxy134KPwWw",
       "releaseDate": "2026-09-28T15:00:36.000Z",
       "publishedAt": "2026-09-28T15:00:36.000Z",
-      "viewCount": 4701,
+      "viewCount": 4748,
       "duration": 209,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 92,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "vTHdVDa5BFA",
@@ -838,10 +938,12 @@
       "channelId": "UCjLEmnpCNeisMxy134KPwWw",
       "releaseDate": "2026-09-28T15:00:33.000Z",
       "publishedAt": "2026-09-28T15:00:33.000Z",
-      "viewCount": 2066,
+      "viewCount": 2103,
       "duration": 209,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 56,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "1oPs4szRZRc",
@@ -854,10 +956,12 @@
       "channelId": "UCjLEmnpCNeisMxy134KPwWw",
       "releaseDate": "2026-09-28T15:00:22.000Z",
       "publishedAt": "2026-09-28T15:00:22.000Z",
-      "viewCount": 87555,
+      "viewCount": 88942,
       "duration": 209,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 3690,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "BnP2hgfBoGA",
@@ -870,10 +974,12 @@
       "channelId": "UCjLEmnpCNeisMxy134KPwWw",
       "releaseDate": "2026-09-28T15:00:10.000Z",
       "publishedAt": "2026-09-28T15:00:10.000Z",
-      "viewCount": 50630,
+      "viewCount": 51098,
       "duration": 209,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 2115,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "11VKhxkxlDs",
@@ -886,10 +992,12 @@
       "channelId": "UCawGfU44CZxd2ZVf_VGijbA",
       "releaseDate": "2026-09-28T11:00:06.000Z",
       "publishedAt": "2026-09-28T11:00:06.000Z",
-      "viewCount": 1174087,
+      "viewCount": 1177053,
       "duration": 128,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 12308,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "31nx6HKpxhQ",
@@ -902,10 +1010,12 @@
       "channelId": "UC_vMYWcDjmfdpH6r4TTn1MQ",
       "releaseDate": "2026-09-28T10:00:09.000Z",
       "publishedAt": "2026-09-28T10:00:09.000Z",
-      "viewCount": 262381,
+      "viewCount": 263932,
       "duration": 218,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 19140,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "EVnItjScKOk",
@@ -918,10 +1028,12 @@
       "channelId": "UCW5uhrG1eCBYditmhL0Ykjw",
       "releaseDate": "2026-09-27T19:45:45.000Z",
       "publishedAt": "2026-09-27T19:45:45.000Z",
-      "viewCount": 80702,
+      "viewCount": 81271,
       "duration": 290,
       "songType": "cover",
-      "source": "Holodex"
+      "source": "Holodex",
+      "likeCount": 5624,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "yP8OIadPmQc",
@@ -934,10 +1046,12 @@
       "channelId": "UCROQtXcp2loQEmvpe5rhJzQ",
       "releaseDate": "2026-09-26T14:15:11.000Z",
       "publishedAt": "2026-09-26T14:15:11.000Z",
-      "viewCount": 418245,
+      "viewCount": 421119,
       "duration": 207,
       "songType": "cover",
-      "source": "Holodex"
+      "source": "Holodex",
+      "likeCount": 23719,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "Mv1_K4affJw",
@@ -950,10 +1064,12 @@
       "channelId": "UCy9mgxB8pn2C4aNK_MPthDQ",
       "releaseDate": "2026-09-26T13:00:06.000Z",
       "publishedAt": "2026-09-26T13:00:06.000Z",
-      "viewCount": 650048,
+      "viewCount": 656444,
       "duration": 211,
       "songType": "cover",
-      "source": "Holodex"
+      "source": "Holodex",
+      "likeCount": 30037,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "IJUJV-5Im_M",
@@ -966,10 +1082,12 @@
       "channelId": "UC8eitCE9Z6EwUCs-VUi1blg",
       "releaseDate": "2026-09-26T12:15:07.000Z",
       "publishedAt": "2026-09-26T12:15:07.000Z",
-      "viewCount": 1202549,
+      "viewCount": 1208852,
       "duration": 248,
       "songType": "cover",
-      "source": "Holodex"
+      "source": "Holodex",
+      "likeCount": 56477,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "iICMQEyJdKs",
@@ -982,10 +1100,12 @@
       "channelId": "UC7gxU6NXjKF1LrgOddPzgTw",
       "releaseDate": "2026-09-26T02:00:10.000Z",
       "publishedAt": "2026-09-26T02:00:10.000Z",
-      "viewCount": 61028,
+      "viewCount": 61466,
       "duration": 153,
       "songType": "cover",
-      "source": "Holodex"
+      "source": "Holodex",
+      "likeCount": 3686,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "mIM113-9eSA",
@@ -998,10 +1118,12 @@
       "channelId": "UCAHwWUotyS3l2qBetFDsjgQ",
       "releaseDate": "2026-09-25T15:04:21.000Z",
       "publishedAt": "2026-09-25T15:04:21.000Z",
-      "viewCount": 1567,
+      "viewCount": 1590,
       "duration": 189,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 61,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "1X1cUk9hyco",
@@ -1014,10 +1136,12 @@
       "channelId": "UCAHwWUotyS3l2qBetFDsjgQ",
       "releaseDate": "2026-09-25T15:02:36.000Z",
       "publishedAt": "2026-09-25T15:02:36.000Z",
-      "viewCount": 66241,
+      "viewCount": 66983,
       "duration": 189,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 1401,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "09PC6CQbHeQ",
@@ -1030,10 +1154,12 @@
       "channelId": "UCAHwWUotyS3l2qBetFDsjgQ",
       "releaseDate": "2026-09-25T13:00:09.000Z",
       "publishedAt": "2026-09-25T13:00:09.000Z",
-      "viewCount": 874581,
+      "viewCount": 877797,
       "duration": 190,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 39638,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "9PSoZY2X3L4",
@@ -1047,10 +1173,12 @@
       "channelId": "UCawGfU44CZxd2ZVf_VGijbA",
       "releaseDate": "2026-09-25T12:00:11.000Z",
       "publishedAt": "2026-09-25T12:00:11.000Z",
-      "viewCount": 26652,
+      "viewCount": 26850,
       "duration": 182,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 1547,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "xdtU2P4jzF0",
@@ -1064,10 +1192,12 @@
       "channelId": "UCawGfU44CZxd2ZVf_VGijbA",
       "releaseDate": "2026-09-24T09:00:18.000Z",
       "publishedAt": "2026-09-24T09:00:18.000Z",
-      "viewCount": 95767,
+      "viewCount": 96035,
       "duration": 138,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 5217,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "7-2tSQYbdI0",
@@ -1080,10 +1210,12 @@
       "channelId": "UCawGfU44CZxd2ZVf_VGijbA",
       "releaseDate": "2026-09-23T12:00:29.000Z",
       "publishedAt": "2026-09-23T12:00:29.000Z",
-      "viewCount": 58460,
+      "viewCount": 58934,
       "duration": 185,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 2366,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "z3vft8VKyls",
@@ -1096,10 +1228,12 @@
       "channelId": "UCp6993wxpyDPHUpavwDFqgg",
       "releaseDate": "2026-09-22T10:00:30.000Z",
       "publishedAt": "2026-09-22T10:00:30.000Z",
-      "viewCount": 183898,
+      "viewCount": 184584,
       "duration": 173,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 6386,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "3iTM2nBOc1k",
@@ -1112,10 +1246,12 @@
       "channelId": "UCawGfU44CZxd2ZVf_VGijbA",
       "releaseDate": "2026-09-22T09:00:28.000Z",
       "publishedAt": "2026-09-22T09:00:28.000Z",
-      "viewCount": 213042,
+      "viewCount": 214495,
       "duration": 135,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 7965,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "9BMxcO7IrAA",
@@ -1128,10 +1264,12 @@
       "channelId": "UCawGfU44CZxd2ZVf_VGijbA",
       "releaseDate": "2026-09-21T12:00:28.000Z",
       "publishedAt": "2026-09-21T12:00:28.000Z",
-      "viewCount": 70696,
+      "viewCount": 71339,
       "duration": 182,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 3152,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "iSQYbf9XFg8",
@@ -1144,10 +1282,12 @@
       "channelId": "UCJFZiqLMntJufDCHc6bQixg",
       "releaseDate": "2026-09-21T11:24:21.000Z",
       "publishedAt": "2026-09-21T11:24:21.000Z",
-      "viewCount": 382726,
+      "viewCount": 383833,
       "duration": 273,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 13594,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "jCYFYrrwR6o",
@@ -1160,10 +1300,12 @@
       "channelId": "UCJFZiqLMntJufDCHc6bQixg",
       "releaseDate": "2026-09-20T15:04:26.000Z",
       "publishedAt": "2026-09-20T15:04:26.000Z",
-      "viewCount": 2172,
+      "viewCount": 2180,
       "duration": 219,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 75,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "FlTIIUWDF4U",
@@ -1176,10 +1318,12 @@
       "channelId": "UCotXwY6s8pWmuWd_snKYjhg",
       "releaseDate": "2026-09-20T15:03:49.000Z",
       "publishedAt": "2026-09-20T15:03:49.000Z",
-      "viewCount": 2425,
+      "viewCount": 2432,
       "duration": 193,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 53,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "cG8QKLoeWe4",
@@ -1192,10 +1336,12 @@
       "channelId": "UCotXwY6s8pWmuWd_snKYjhg",
       "releaseDate": "2026-09-20T15:03:39.000Z",
       "publishedAt": "2026-09-20T15:03:39.000Z",
-      "viewCount": 64723,
+      "viewCount": 65491,
       "duration": 193,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 1377,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "F9Z39rz4XdI",
@@ -1208,10 +1354,12 @@
       "channelId": "UCJFZiqLMntJufDCHc6bQixg",
       "releaseDate": "2026-09-20T15:02:06.000Z",
       "publishedAt": "2026-09-20T15:02:06.000Z",
-      "viewCount": 58436,
+      "viewCount": 58708,
       "duration": 219,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 2181,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "yWIVS0s7i8c",
@@ -1224,10 +1372,12 @@
       "channelId": "UCawGfU44CZxd2ZVf_VGijbA",
       "releaseDate": "2026-09-20T09:00:25.000Z",
       "publishedAt": "2026-09-20T09:00:25.000Z",
-      "viewCount": 173025,
+      "viewCount": 174124,
       "duration": 127,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 9331,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "oVvSnsqLkPk",
@@ -1240,10 +1390,12 @@
       "channelId": "UChgTyjG-pdNvxxhdsXfHQ5Q",
       "releaseDate": "2026-09-20T09:00:09.000Z",
       "publishedAt": "2026-09-20T09:00:09.000Z",
-      "viewCount": 28169,
+      "viewCount": 28234,
       "duration": 228,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 2600,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "htHnmN2gPY0",
@@ -1259,10 +1411,12 @@
       "channelId": "UCDqI2jOz0weumE8s7paEk6g",
       "releaseDate": "2026-09-20T09:00:09.000Z",
       "publishedAt": "2026-09-20T09:00:09.000Z",
-      "viewCount": 168188,
+      "viewCount": 169082,
       "duration": 231,
       "songType": "cover",
-      "source": "Holodex"
+      "source": "Holodex",
+      "likeCount": 6481,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "UGQfq16yY1A",
@@ -1276,10 +1430,12 @@
       "channelId": "UCKMWFR6lAstLa7Vbf5dH7ig",
       "releaseDate": "2026-09-20T08:00:06.000Z",
       "publishedAt": "2026-09-20T08:00:06.000Z",
-      "viewCount": 210029,
+      "viewCount": 210597,
       "duration": 287,
       "songType": "cover",
-      "source": "Holodex"
+      "source": "Holodex",
+      "likeCount": 9447,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "T2351eZtQC0",
@@ -1292,10 +1448,12 @@
       "channelId": "UCotXwY6s8pWmuWd_snKYjhg",
       "releaseDate": "2026-09-20T04:00:07.000Z",
       "publishedAt": "2026-09-20T04:00:07.000Z",
-      "viewCount": 826453,
+      "viewCount": 831165,
       "duration": 193,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 37934,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "vlxOSdgtZUA",
@@ -1308,10 +1466,12 @@
       "channelId": "UCUKD-uaobj9jiqB-VXt71mA",
       "releaseDate": "2026-09-19T15:04:58.000Z",
       "publishedAt": "2026-09-19T15:04:58.000Z",
-      "viewCount": 1400,
+      "viewCount": 1402,
       "duration": 180,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 55,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "06AqiZLq3-Q",
@@ -1324,10 +1484,12 @@
       "channelId": "UCUKD-uaobj9jiqB-VXt71mA",
       "releaseDate": "2026-09-19T15:01:48.000Z",
       "publishedAt": "2026-09-19T15:01:48.000Z",
-      "viewCount": 31260,
+      "viewCount": 31544,
       "duration": 180,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 695,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "Orzu2ixxDU4",
@@ -1340,10 +1502,12 @@
       "channelId": "UCawGfU44CZxd2ZVf_VGijbA",
       "releaseDate": "2026-09-19T12:00:03.000Z",
       "publishedAt": "2026-09-19T12:00:03.000Z",
-      "viewCount": 204580,
+      "viewCount": 205877,
       "duration": 206,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 6765,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "b6H54qq6c0A",
@@ -1356,10 +1520,12 @@
       "channelId": "UCUKD-uaobj9jiqB-VXt71mA",
       "releaseDate": "2026-09-19T11:00:07.000Z",
       "publishedAt": "2026-09-19T11:00:07.000Z",
-      "viewCount": 223148,
+      "viewCount": 223525,
       "duration": 180,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 13620,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "wajtV9ZiVkg",
@@ -1372,10 +1538,12 @@
       "channelId": "UC1suqwovbL1kzsoaZgFZLKg",
       "releaseDate": "2026-09-19T11:00:06.000Z",
       "publishedAt": "2026-09-19T11:00:06.000Z",
-      "viewCount": 112644,
+      "viewCount": 112929,
       "duration": 141,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 8904,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "JopgqurdtaU",
@@ -1389,10 +1557,12 @@
       "channelId": "UC1CfXB_kRs3C-zaeTG3oGyg",
       "releaseDate": "2026-09-19T10:00:07.000Z",
       "publishedAt": "2026-09-19T10:00:07.000Z",
-      "viewCount": 737534,
+      "viewCount": 739529,
       "duration": 152,
       "songType": "cover",
-      "source": "Holodex"
+      "source": "Holodex",
+      "likeCount": 28905,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "o4SH9mJRIwU",
@@ -1405,10 +1575,12 @@
       "channelId": "UCWQtYtq9EOB4-I5P-3fh8lA",
       "releaseDate": "2026-09-19T09:00:06.000Z",
       "publishedAt": "2026-09-19T09:00:06.000Z",
-      "viewCount": 1014397,
+      "viewCount": 1022923,
       "duration": 134,
       "songType": "cover",
-      "source": "Holodex"
+      "source": "Holodex",
+      "likeCount": 34299,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "wDDTyoxg3hI",
@@ -1421,10 +1593,12 @@
       "channelId": "UCDqI2jOz0weumE8s7paEk6g",
       "releaseDate": "2026-09-19T09:00:06.000Z",
       "publishedAt": "2026-09-19T09:00:06.000Z",
-      "viewCount": 113669,
+      "viewCount": 114499,
       "duration": 229,
       "songType": "cover",
-      "source": "Holodex"
+      "source": "Holodex",
+      "likeCount": 5779,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "Snvkb-GOuBw",
@@ -1437,10 +1611,12 @@
       "channelId": "UCMwGHR0BTZuLsmjY_NT5Pwg",
       "releaseDate": "2026-09-19T01:00:07.000Z",
       "publishedAt": "2026-09-19T01:00:07.000Z",
-      "viewCount": 1298753,
+      "viewCount": 1302112,
       "duration": 264,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 69422,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "awGVRSlqgoY",
@@ -1456,7 +1632,9 @@
       "viewCount": 1684,
       "duration": 213,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 37,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "ski4B60MVYg",
@@ -1469,10 +1647,12 @@
       "channelId": "UCa9Y57gfeY0Zro_noHRVrnw",
       "releaseDate": "2026-09-18T15:05:13.000Z",
       "publishedAt": "2026-09-18T15:05:13.000Z",
-      "viewCount": 23960,
+      "viewCount": 24176,
       "duration": 213,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 539,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "dIkjlrQmjIQ",
@@ -1485,10 +1665,12 @@
       "channelId": "UCYz_5n-uDuChHtLo7My1HnQ",
       "releaseDate": "2026-09-18T15:04:54.000Z",
       "publishedAt": "2026-09-18T15:04:54.000Z",
-      "viewCount": 25239,
+      "viewCount": 25482,
       "duration": 181,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 618,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "Vqk92MYaDDg",
@@ -1501,10 +1683,12 @@
       "channelId": "UC7fk0CB07ly8oSl0aqKkqFg",
       "releaseDate": "2026-09-18T15:03:46.000Z",
       "publishedAt": "2026-09-18T15:03:46.000Z",
-      "viewCount": 40035,
+      "viewCount": 40355,
       "duration": 217,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 784,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "s2abDrdP5gA",
@@ -1517,10 +1701,12 @@
       "channelId": "UCYz_5n-uDuChHtLo7My1HnQ",
       "releaseDate": "2026-09-18T15:02:13.000Z",
       "publishedAt": "2026-09-18T15:02:13.000Z",
-      "viewCount": 670,
+      "viewCount": 671,
       "duration": 181,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 28,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "3nHdNdQyaxg",
@@ -1533,10 +1719,12 @@
       "channelId": "UC7fk0CB07ly8oSl0aqKkqFg",
       "releaseDate": "2026-09-18T15:01:33.000Z",
       "publishedAt": "2026-09-18T15:01:33.000Z",
-      "viewCount": 865,
+      "viewCount": 875,
       "duration": 217,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 28,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "NBuT2rCrVeU",
@@ -1549,10 +1737,12 @@
       "channelId": "UCMwGHR0BTZuLsmjY_NT5Pwg",
       "releaseDate": "2026-09-18T15:00:26.000Z",
       "publishedAt": "2026-09-18T15:00:26.000Z",
-      "viewCount": 5034,
+      "viewCount": 5044,
       "duration": 213,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 175,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "e4_kGavOghw",
@@ -1565,10 +1755,12 @@
       "channelId": "UCL_qhgtOy0dy1Agp8vkySQg",
       "releaseDate": "2026-09-18T15:00:09.000Z",
       "publishedAt": "2026-09-18T15:00:09.000Z",
-      "viewCount": 252584,
+      "viewCount": 253813,
       "duration": 231,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 8555,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "cbzBOpw_tow",
@@ -1581,10 +1773,12 @@
       "channelId": "UCMwGHR0BTZuLsmjY_NT5Pwg",
       "releaseDate": "2026-09-18T15:00:02.000Z",
       "publishedAt": "2026-09-18T15:00:02.000Z",
-      "viewCount": 195083,
+      "viewCount": 195600,
       "duration": 213,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 5417,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "8ncXOgv_m34",
@@ -1597,10 +1791,12 @@
       "channelId": "UCawGfU44CZxd2ZVf_VGijbA",
       "releaseDate": "2026-09-18T10:00:10.000Z",
       "publishedAt": "2026-09-18T10:00:10.000Z",
-      "viewCount": 381960,
+      "viewCount": 384036,
       "duration": 127,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 12721,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "JyP1hD-IzZg",
@@ -1613,10 +1809,12 @@
       "channelId": "UCvzGlP9oQwU--Y0r9id_jnA",
       "releaseDate": "2026-09-16T13:40:21.000Z",
       "publishedAt": "2026-09-16T13:40:21.000Z",
-      "viewCount": 957925,
+      "viewCount": 962461,
       "duration": 198,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 39882,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "XgJOjDn5Z7Q",
@@ -1630,10 +1828,12 @@
       "channelId": "UCGzTVXqMQHa4AgJVJIVvtDQ",
       "releaseDate": "2026-09-16T09:00:06.000Z",
       "publishedAt": "2026-09-16T09:00:06.000Z",
-      "viewCount": 137899,
+      "viewCount": 138323,
       "duration": 195,
       "songType": "cover",
-      "source": "Holodex"
+      "source": "Holodex",
+      "likeCount": 6808,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "VonPbRQQIhU",
@@ -1646,10 +1846,12 @@
       "channelId": "UCuI_opAVX6qbxZY-a-AxFuQ",
       "releaseDate": "2026-09-16T09:00:06.000Z",
       "publishedAt": "2026-09-16T09:00:06.000Z",
-      "viewCount": 287683,
+      "viewCount": 288377,
       "duration": 165,
       "songType": "cover",
-      "source": "Holodex"
+      "source": "Holodex",
+      "likeCount": 12109,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "GZVPn-Mr2Ag",
@@ -1662,10 +1864,12 @@
       "channelId": "UC-hM6YJuNYVAmUWxeIr9FeA",
       "releaseDate": "2026-09-15T15:00:20.000Z",
       "publishedAt": "2026-09-15T15:00:20.000Z",
-      "viewCount": 78697,
+      "viewCount": 79048,
       "duration": 174,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 1785,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "3WLgo7ugX48",
@@ -1678,10 +1882,12 @@
       "channelId": "UC-hM6YJuNYVAmUWxeIr9FeA",
       "releaseDate": "2026-09-15T15:00:19.000Z",
       "publishedAt": "2026-09-15T15:00:19.000Z",
-      "viewCount": 5447,
+      "viewCount": 5455,
       "duration": 174,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 146,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "wtZod84wA24",
@@ -1694,10 +1900,12 @@
       "channelId": "UCAoy6rzhSf4ydcYjJw3WoVg",
       "releaseDate": "2026-09-15T12:15:06.000Z",
       "publishedAt": "2026-09-15T12:15:06.000Z",
-      "viewCount": 86162,
+      "viewCount": 86276,
       "duration": 236,
       "songType": "cover",
-      "source": "Holodex"
+      "source": "Holodex",
+      "likeCount": 6456,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "bKJefYPsJdk",
@@ -1710,10 +1918,12 @@
       "channelId": "UC-hM6YJuNYVAmUWxeIr9FeA",
       "releaseDate": "2026-09-15T11:00:07.000Z",
       "publishedAt": "2026-09-15T11:00:07.000Z",
-      "viewCount": 743499,
+      "viewCount": 746193,
       "duration": 175,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 28383,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "MQbAJKg5g7M",
@@ -1728,10 +1938,12 @@
       "channelId": "UCGzTVXqMQHa4AgJVJIVvtDQ",
       "releaseDate": "2026-09-15T09:00:09.000Z",
       "publishedAt": "2026-09-15T09:00:09.000Z",
-      "viewCount": 299958,
+      "viewCount": 300775,
       "duration": 219,
       "songType": "cover",
-      "source": "Holodex"
+      "source": "Holodex",
+      "likeCount": 9349,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "nkicQ5YwApU",
@@ -1744,10 +1956,12 @@
       "channelId": "UC1suqwovbL1kzsoaZgFZLKg",
       "releaseDate": "2026-09-14T15:05:07.000Z",
       "publishedAt": "2026-09-14T15:05:07.000Z",
-      "viewCount": 38093,
+      "viewCount": 38248,
       "duration": 142,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 1184,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "ditR-703Row",
@@ -1760,10 +1974,12 @@
       "channelId": "UC1suqwovbL1kzsoaZgFZLKg",
       "releaseDate": "2026-09-14T15:02:18.000Z",
       "publishedAt": "2026-09-14T15:02:18.000Z",
-      "viewCount": 5338,
+      "viewCount": 5349,
       "duration": 142,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 74,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "1i60xZoQ_JY",
@@ -1776,10 +1992,12 @@
       "channelId": "UCP0BspO_AMEe3aQqqpo89Dg",
       "releaseDate": "2026-09-14T13:00:06.000Z",
       "publishedAt": "2026-09-14T13:00:06.000Z",
-      "viewCount": 278059,
+      "viewCount": 278722,
       "duration": 204,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 14728,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "d-ARIKLmw6o",
@@ -1792,10 +2010,12 @@
       "channelId": "UCP0BspO_AMEe3aQqqpo89Dg",
       "releaseDate": "2026-09-13T15:00:35.000Z",
       "publishedAt": "2026-09-13T15:00:35.000Z",
-      "viewCount": 192269,
+      "viewCount": 192496,
       "duration": 203,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 7232,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "xf_hXocUfEE",
@@ -1808,10 +2028,12 @@
       "channelId": "UCP0BspO_AMEe3aQqqpo89Dg",
       "releaseDate": "2026-09-13T15:00:03.000Z",
       "publishedAt": "2026-09-13T15:00:03.000Z",
-      "viewCount": 6856,
+      "viewCount": 6878,
       "duration": 203,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 237,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "XuDswo6CBkI",
@@ -1824,10 +2046,12 @@
       "channelId": "UCL_qhgtOy0dy1Agp8vkySQg",
       "releaseDate": "2026-09-13T03:08:13.000Z",
       "publishedAt": "2026-09-13T03:08:13.000Z",
-      "viewCount": 785565,
+      "viewCount": 787560,
       "duration": 219,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 35316,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "P-RBLHkNsC4",
@@ -1840,10 +2064,12 @@
       "channelId": "UC6eWCld0KwmyHFbAqK3V-Rw",
       "releaseDate": "2026-09-12T12:05:06.000Z",
       "publishedAt": "2026-09-12T12:05:06.000Z",
-      "viewCount": 313499,
+      "viewCount": 314883,
       "duration": 159,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 12771,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "56IDp4g--jI",
@@ -1856,10 +2082,12 @@
       "channelId": "UC9LSiN9hXI55svYEBrrK-tw",
       "releaseDate": "2026-09-12T09:57:41.000Z",
       "publishedAt": "2026-09-12T09:57:41.000Z",
-      "viewCount": 232123,
+      "viewCount": 233001,
       "duration": 255,
       "songType": "cover",
-      "source": "Holodex"
+      "source": "Holodex",
+      "likeCount": 11492,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "Y0ZTNe1v5KA",
@@ -1873,10 +2101,12 @@
       "channelId": "UCawGfU44CZxd2ZVf_VGijbA",
       "releaseDate": "2026-09-12T09:00:06.000Z",
       "publishedAt": "2026-09-12T09:00:06.000Z",
-      "viewCount": 151126,
+      "viewCount": 151898,
       "duration": 160,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 4097,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "kEURY01wBxM",
@@ -1889,10 +2119,12 @@
       "channelId": "UC6eWCld0KwmyHFbAqK3V-Rw",
       "releaseDate": "2026-09-11T15:00:07.000Z",
       "publishedAt": "2026-09-11T15:00:07.000Z",
-      "viewCount": 100393,
+      "viewCount": 100638,
       "duration": 159,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 3267,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "nQ4r3Llbw4w",
@@ -1905,10 +2137,12 @@
       "channelId": "UC6eWCld0KwmyHFbAqK3V-Rw",
       "releaseDate": "2026-09-11T15:00:00.000Z",
       "publishedAt": "2026-09-11T15:00:00.000Z",
-      "viewCount": 7250,
+      "viewCount": 7260,
       "duration": 159,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 229,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "oHz1g-AmrwU",
@@ -1921,10 +2155,12 @@
       "channelId": "UC1iA6_NT4mtAcIII6ygrvCw",
       "releaseDate": "2026-09-10T15:00:23.000Z",
       "publishedAt": "2026-09-10T15:00:23.000Z",
-      "viewCount": 8308,
+      "viewCount": 8342,
       "duration": 150,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 241,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "20bHNqqINNM",
@@ -1937,10 +2173,12 @@
       "channelId": "UC1iA6_NT4mtAcIII6ygrvCw",
       "releaseDate": "2026-09-10T15:00:11.000Z",
       "publishedAt": "2026-09-10T15:00:11.000Z",
-      "viewCount": 8180,
+      "viewCount": 8222,
       "duration": 157,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 130,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "GPfgTo9HwDM",
@@ -1953,10 +2191,12 @@
       "channelId": "UCdXAk5MpyLD8594lm_OvtGQ",
       "releaseDate": "2026-09-10T15:00:10.000Z",
       "publishedAt": "2026-09-10T15:00:10.000Z",
-      "viewCount": 6830,
+      "viewCount": 6834,
       "duration": 182,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 163,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "hHJ_xZyphdE",
@@ -1969,10 +2209,12 @@
       "channelId": "UC1iA6_NT4mtAcIII6ygrvCw",
       "releaseDate": "2026-09-10T15:00:03.000Z",
       "publishedAt": "2026-09-10T15:00:03.000Z",
-      "viewCount": 314025,
+      "viewCount": 315838,
       "duration": 157,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 4536,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "TVU-0uDK4ys",
@@ -1985,10 +2227,12 @@
       "channelId": "UCdXAk5MpyLD8594lm_OvtGQ",
       "releaseDate": "2026-09-10T15:00:02.000Z",
       "publishedAt": "2026-09-10T15:00:02.000Z",
-      "viewCount": 89460,
+      "viewCount": 89706,
       "duration": 182,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 3171,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "UIQU8WKBwZA",
@@ -2001,10 +2245,12 @@
       "channelId": "UC1iA6_NT4mtAcIII6ygrvCw",
       "releaseDate": "2026-09-10T10:55:06.000Z",
       "publishedAt": "2026-09-10T10:55:06.000Z",
-      "viewCount": 1797492,
+      "viewCount": 1810357,
       "duration": 159,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 53155,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "2NxWcNGu5_c",
@@ -2017,10 +2263,12 @@
       "channelId": "UChgTyjG-pdNvxxhdsXfHQ5Q",
       "releaseDate": "2026-09-09T15:00:39.000Z",
       "publishedAt": "2026-09-09T15:00:39.000Z",
-      "viewCount": 96297,
+      "viewCount": 96483,
       "duration": 215,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 3001,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "z48mdY4v7U8",
@@ -2033,10 +2281,12 @@
       "channelId": "UChgTyjG-pdNvxxhdsXfHQ5Q",
       "releaseDate": "2026-09-09T15:00:17.000Z",
       "publishedAt": "2026-09-09T15:00:17.000Z",
-      "viewCount": 2648,
+      "viewCount": 2652,
       "duration": 216,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 101,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "PeitgWu6Yj8",
@@ -2049,10 +2299,12 @@
       "channelId": "UCWQtYtq9EOB4-I5P-3fh8lA",
       "releaseDate": "2026-09-09T10:55:06.000Z",
       "publishedAt": "2026-09-09T10:55:06.000Z",
-      "viewCount": 1775136,
+      "viewCount": 1780392,
       "duration": 256,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 71647,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "6iWKB-Tq8aA",
@@ -2066,10 +2318,12 @@
       "channelId": "UCawGfU44CZxd2ZVf_VGijbA",
       "releaseDate": "2026-09-07T11:00:34.000Z",
       "publishedAt": "2026-09-07T11:00:34.000Z",
-      "viewCount": 1461746,
+      "viewCount": 1465952,
       "duration": 132,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 30817,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "AZ5Qk6ns7Wk",
@@ -2082,10 +2336,12 @@
       "channelId": "UCDqI2jOz0weumE8s7paEk6g",
       "releaseDate": "2026-09-06T08:00:06.000Z",
       "publishedAt": "2026-09-06T08:00:06.000Z",
-      "viewCount": 100682,
+      "viewCount": 101039,
       "duration": 249,
       "songType": "cover",
-      "source": "Holodex"
+      "source": "Holodex",
+      "likeCount": 4236,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "7xYekUcLRs4",
@@ -2099,10 +2355,12 @@
       "channelId": "UCL_qhgtOy0dy1Agp8vkySQg",
       "releaseDate": "2026-09-06T03:00:06.000Z",
       "publishedAt": "2026-09-06T03:00:06.000Z",
-      "viewCount": 5001556,
+      "viewCount": 5013944,
       "duration": 286,
       "songType": "cover",
-      "source": "Holodex"
+      "source": "Holodex",
+      "likeCount": 133448,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "zb3l3favPXk",
@@ -2115,10 +2373,12 @@
       "channelId": "UCgnfPPb9JI3e9A4cXHnWbyg",
       "releaseDate": "2026-09-05T03:15:07.000Z",
       "publishedAt": "2026-09-05T03:15:07.000Z",
-      "viewCount": 148632,
+      "viewCount": 148846,
       "duration": 221,
       "songType": "cover",
-      "source": "Holodex"
+      "source": "Holodex",
+      "likeCount": 10232,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "rx2ZyiFIbL0",
@@ -2131,10 +2391,12 @@
       "channelId": "UCLk1hcmxg8rJ3Nm1_GvxTRA",
       "releaseDate": "2026-09-05T02:00:06.000Z",
       "publishedAt": "2026-09-05T02:00:06.000Z",
-      "viewCount": 33819,
+      "viewCount": 33884,
       "duration": 278,
       "songType": "cover",
-      "source": "Holodex"
+      "source": "Holodex",
+      "likeCount": 3109,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "ejrKy8bUUBQ",
@@ -2147,10 +2409,12 @@
       "channelId": "UC1suqwovbL1kzsoaZgFZLKg",
       "releaseDate": "2026-09-04T13:00:07.000Z",
       "publishedAt": "2026-09-04T13:00:07.000Z",
-      "viewCount": 122799,
+      "viewCount": 122958,
       "duration": 189,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 9702,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "r-WlMEBgnU4",
@@ -2163,10 +2427,12 @@
       "channelId": "UC1suqwovbL1kzsoaZgFZLKg",
       "releaseDate": "2026-09-04T10:00:39.000Z",
       "publishedAt": "2026-09-04T10:00:39.000Z",
-      "viewCount": 8082,
+      "viewCount": 8109,
       "duration": 188,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 219,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "1M0Kot6OWh8",
@@ -2179,10 +2445,12 @@
       "channelId": "UC3OH5FKQ3qtl4uRme_vZTgA",
       "releaseDate": "2026-09-01T12:30:07.000Z",
       "publishedAt": "2026-09-01T12:30:07.000Z",
-      "viewCount": 89259,
+      "viewCount": 89539,
       "duration": 290,
       "songType": "cover",
-      "source": "Holodex"
+      "source": "Holodex",
+      "likeCount": 6413,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "TmRLBcTjZnk",
@@ -2195,10 +2463,12 @@
       "channelId": "UCL_qhgtOy0dy1Agp8vkySQg",
       "releaseDate": "2026-08-31T15:00:28.000Z",
       "publishedAt": "2026-08-31T15:00:28.000Z",
-      "viewCount": 10514,
+      "viewCount": 10523,
       "duration": 230,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 184,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "MjCwAyjBQaw",
@@ -2211,10 +2481,12 @@
       "channelId": "UCL_qhgtOy0dy1Agp8vkySQg",
       "releaseDate": "2026-08-31T15:00:10.000Z",
       "publishedAt": "2026-08-31T15:00:10.000Z",
-      "viewCount": 121272,
+      "viewCount": 121818,
       "duration": 230,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 2847,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "or6VC0FkOOw",
@@ -2229,10 +2501,12 @@
       "channelId": "UCL_qhgtOy0dy1Agp8vkySQg",
       "releaseDate": "2026-08-31T14:00:06.000Z",
       "publishedAt": "2026-08-31T14:00:06.000Z",
-      "viewCount": 1276272,
+      "viewCount": 1278923,
       "duration": 235,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 43928,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "uSDtkV3PXSA",
@@ -2245,10 +2519,12 @@
       "channelId": "UC5CwaMl1eIgY8h02uZw7u8A",
       "releaseDate": "2026-08-31T11:00:06.000Z",
       "publishedAt": "2026-08-31T11:00:06.000Z",
-      "viewCount": 2117744,
+      "viewCount": 2124583,
       "duration": 185,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 52765,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "PxlEm_nUBho",
@@ -2262,10 +2538,12 @@
       "channelId": "UCp6993wxpyDPHUpavwDFqgg",
       "releaseDate": "2026-08-31T11:00:06.000Z",
       "publishedAt": "2026-08-31T11:00:06.000Z",
-      "viewCount": 1570878,
+      "viewCount": 1572617,
       "duration": 194,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 16983,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "8Pl36MnKurg",
@@ -2279,10 +2557,12 @@
       "channelId": "UCc88OV45ICgHbn3ZqLLb52w",
       "releaseDate": "2026-08-31T09:00:17.000Z",
       "publishedAt": "2026-08-31T09:00:17.000Z",
-      "viewCount": 140848,
+      "viewCount": 140977,
       "duration": 156,
       "songType": "cover",
-      "source": "Holodex"
+      "source": "Holodex",
+      "likeCount": 6346,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "sInzemf-tX0",
@@ -2296,10 +2576,12 @@
       "channelId": "UCGzTVXqMQHa4AgJVJIVvtDQ",
       "releaseDate": "2026-08-31T09:00:06.000Z",
       "publishedAt": "2026-08-31T09:00:06.000Z",
-      "viewCount": 886511,
+      "viewCount": 889000,
       "duration": 186,
       "songType": "cover",
-      "source": "Holodex"
+      "source": "Holodex",
+      "likeCount": 25003,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "QC-E3Vh50v4",
@@ -2312,10 +2594,12 @@
       "channelId": "UC5CwaMl1eIgY8h02uZw7u8A",
       "releaseDate": "2026-08-30T15:04:47.000Z",
       "publishedAt": "2026-08-30T15:04:47.000Z",
-      "viewCount": 557782,
+      "viewCount": 559519,
       "duration": 172,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 8204,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "5JXkriZl_9o",
@@ -2328,10 +2612,12 @@
       "channelId": "UC5CwaMl1eIgY8h02uZw7u8A",
       "releaseDate": "2026-08-30T10:04:08.000Z",
       "publishedAt": "2026-08-30T10:04:08.000Z",
-      "viewCount": 482039,
+      "viewCount": 483260,
       "duration": 172,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 9560,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "LCirVEMc8L8",
@@ -2345,10 +2631,12 @@
       "channelId": "UC3OH5FKQ3qtl4uRme_vZTgA",
       "releaseDate": "2026-08-30T09:00:06.000Z",
       "publishedAt": "2026-08-30T09:00:06.000Z",
-      "viewCount": 109096,
+      "viewCount": 109422,
       "duration": 217,
       "songType": "cover",
-      "source": "Holodex"
+      "source": "Holodex",
+      "likeCount": 5908,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "NuAJ64LO6CI",
@@ -2361,10 +2649,12 @@
       "channelId": "UCt9H_RpQzhxzlyBxFqrdHqA",
       "releaseDate": "2026-08-29T15:00:08.000Z",
       "publishedAt": "2026-08-29T15:00:08.000Z",
-      "viewCount": 4121,
+      "viewCount": 4128,
       "duration": 224,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 104,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "9BEAl7Zs_1A",
@@ -2377,10 +2667,12 @@
       "channelId": "UCt9H_RpQzhxzlyBxFqrdHqA",
       "releaseDate": "2026-08-29T15:00:03.000Z",
       "publishedAt": "2026-08-29T15:00:03.000Z",
-      "viewCount": 103609,
+      "viewCount": 103842,
       "duration": 224,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 2683,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "s5BfxzMPZqQ",
@@ -2393,10 +2685,12 @@
       "channelId": "UC10wVt6hoQiwySRhz7RdOUA",
       "releaseDate": "2026-08-28T15:00:29.000Z",
       "publishedAt": "2026-08-28T15:00:29.000Z",
-      "viewCount": 166972,
+      "viewCount": 167451,
       "duration": 240,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 2870,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "N77g7bsIJGQ",
@@ -2409,10 +2703,12 @@
       "channelId": "UC10wVt6hoQiwySRhz7RdOUA",
       "releaseDate": "2026-08-28T15:00:22.000Z",
       "publishedAt": "2026-08-28T15:00:22.000Z",
-      "viewCount": 5303,
+      "viewCount": 5316,
       "duration": 239,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 87,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "wWs-sl0zXqw",
@@ -2426,10 +2722,12 @@
       "channelId": "UC10wVt6hoQiwySRhz7RdOUA",
       "releaseDate": "2026-08-28T11:00:07.000Z",
       "publishedAt": "2026-08-28T11:00:07.000Z",
-      "viewCount": 522498,
+      "viewCount": 523673,
       "duration": 240,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 15244,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "FhmHBJkXxto",
@@ -2442,10 +2740,12 @@
       "channelId": "UCWNVjAzZmYUni8YBXYiy01w",
       "releaseDate": "2026-08-28T09:00:06.000Z",
       "publishedAt": "2026-08-28T09:00:06.000Z",
-      "viewCount": 1191239,
+      "viewCount": 1193554,
       "duration": 294,
       "songType": "cover",
-      "source": "Holodex"
+      "source": "Holodex",
+      "likeCount": 28185,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "5ccqXCOshHc",
@@ -2458,10 +2758,12 @@
       "channelId": "UCuI_opAVX6qbxZY-a-AxFuQ",
       "releaseDate": "2026-08-28T09:00:06.000Z",
       "publishedAt": "2026-08-28T09:00:06.000Z",
-      "viewCount": 785528,
+      "viewCount": 787207,
       "duration": 313,
       "songType": "cover",
-      "source": "Holodex"
+      "source": "Holodex",
+      "likeCount": 22197,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "XPx_jZv5D7o",
@@ -2474,10 +2776,12 @@
       "channelId": "UCDqI2jOz0weumE8s7paEk6g",
       "releaseDate": "2026-08-28T08:00:06.000Z",
       "publishedAt": "2026-08-28T08:00:06.000Z",
-      "viewCount": 483525,
+      "viewCount": 486803,
       "duration": 152,
       "songType": "cover",
-      "source": "Holodex"
+      "source": "Holodex",
+      "likeCount": 11769,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "l_FZRVU5Kbg",
@@ -2490,10 +2794,12 @@
       "channelId": "UCLk1hcmxg8rJ3Nm1_GvxTRA",
       "releaseDate": "2026-08-28T02:15:06.000Z",
       "publishedAt": "2026-08-28T02:15:06.000Z",
-      "viewCount": 18191,
+      "viewCount": 18241,
       "duration": 218,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 1330,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "fGda-g9HGLc",
@@ -2506,10 +2812,12 @@
       "channelId": "UCGzTVXqMQHa4AgJVJIVvtDQ",
       "releaseDate": "2026-08-27T15:02:59.000Z",
       "publishedAt": "2026-08-27T15:02:59.000Z",
-      "viewCount": 3642,
+      "viewCount": 3668,
       "duration": 178,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 107,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "LjtKYBFDiI4",
@@ -2522,10 +2830,12 @@
       "channelId": "UCGzTVXqMQHa4AgJVJIVvtDQ",
       "releaseDate": "2026-08-27T15:01:56.000Z",
       "publishedAt": "2026-08-27T15:01:56.000Z",
-      "viewCount": 159806,
+      "viewCount": 160795,
       "duration": 178,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 2702,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "3amzOH63hDw",
@@ -2538,10 +2848,12 @@
       "channelId": "UCawGfU44CZxd2ZVf_VGijbA",
       "releaseDate": "2026-08-26T15:00:24.000Z",
       "publishedAt": "2026-08-26T15:00:24.000Z",
-      "viewCount": 195535,
+      "viewCount": 195754,
       "duration": 213,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 6663,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "vwzQcLr_fQ8",
@@ -2554,10 +2866,12 @@
       "channelId": "UCawGfU44CZxd2ZVf_VGijbA",
       "releaseDate": "2026-08-26T09:00:14.000Z",
       "publishedAt": "2026-08-26T09:00:14.000Z",
-      "viewCount": 126776,
+      "viewCount": 126883,
       "duration": 119,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 8579,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "bzIAkLjfPnM",
@@ -2571,10 +2885,12 @@
       "channelId": "UCkevX8TzdLiIS12WPwKTS7A",
       "releaseDate": "2026-08-26T08:30:06.000Z",
       "publishedAt": "2026-08-26T08:30:06.000Z",
-      "viewCount": 51480,
+      "viewCount": 51594,
       "duration": 246,
       "songType": "cover",
-      "source": "Holodex"
+      "source": "Holodex",
+      "likeCount": 4044,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "yYIOv5y0mpI",
@@ -2587,10 +2903,12 @@
       "channelId": "UCJFZiqLMntJufDCHc6bQixg",
       "releaseDate": "2026-08-25T15:03:43.000Z",
       "publishedAt": "2026-08-25T15:03:43.000Z",
-      "viewCount": 133641,
+      "viewCount": 134079,
       "duration": 269,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 2702,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "VJlJQiuty6Y",
@@ -2603,10 +2921,12 @@
       "channelId": "UCJFZiqLMntJufDCHc6bQixg",
       "releaseDate": "2026-08-25T15:01:43.000Z",
       "publishedAt": "2026-08-25T15:01:43.000Z",
-      "viewCount": 3032,
+      "viewCount": 3035,
       "duration": 269,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 90,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "UxENc_4y7RI",
@@ -2619,10 +2939,12 @@
       "channelId": "UCawGfU44CZxd2ZVf_VGijbA",
       "releaseDate": "2026-08-24T15:00:16.000Z",
       "publishedAt": "2026-08-24T15:00:16.000Z",
-      "viewCount": 69707,
+      "viewCount": 69914,
       "duration": 215,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 2402,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "SxVcgZNQ0dU",
@@ -2635,10 +2957,12 @@
       "channelId": "UCawGfU44CZxd2ZVf_VGijbA",
       "releaseDate": "2026-08-24T09:00:35.000Z",
       "publishedAt": "2026-08-24T09:00:35.000Z",
-      "viewCount": 199898,
+      "viewCount": 200268,
       "duration": 135,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 7280,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "bLTkcPUJXWk",
@@ -2651,10 +2975,12 @@
       "channelId": "UCgmPnx-EEeOrZSg5Tiw7ZRQ",
       "releaseDate": "2026-08-23T15:00:39.000Z",
       "publishedAt": "2026-08-23T15:00:39.000Z",
-      "viewCount": 180840,
+      "viewCount": 181186,
       "duration": 262,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 3724,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "_ssdK_059Xg",
@@ -2667,10 +2993,12 @@
       "channelId": "UCgmPnx-EEeOrZSg5Tiw7ZRQ",
       "releaseDate": "2026-08-23T15:00:21.000Z",
       "publishedAt": "2026-08-23T15:00:21.000Z",
-      "viewCount": 6986,
+      "viewCount": 6985,
       "duration": 262,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 189,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "hU_Luteyejk",
@@ -2683,10 +3011,12 @@
       "channelId": "UCgmPnx-EEeOrZSg5Tiw7ZRQ",
       "releaseDate": "2026-08-23T04:15:07.000Z",
       "publishedAt": "2026-08-23T04:15:07.000Z",
-      "viewCount": 821065,
+      "viewCount": 822564,
       "duration": 263,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 59078,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "Nv9x1x7jAz8",
@@ -2699,10 +3029,12 @@
       "channelId": "UCmbs8T6MWqUHP1tIQvSgKrg",
       "releaseDate": "2026-08-22T15:00:38.000Z",
       "publishedAt": "2026-08-22T15:00:38.000Z",
-      "viewCount": 21521,
+      "viewCount": 21558,
       "duration": 121,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 907,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "aoVawG9mIx8",
@@ -2715,10 +3047,12 @@
       "channelId": "UCawGfU44CZxd2ZVf_VGijbA",
       "releaseDate": "2026-08-22T15:00:35.000Z",
       "publishedAt": "2026-08-22T15:00:35.000Z",
-      "viewCount": 86503,
+      "viewCount": 86693,
       "duration": 183,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 2963,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "Si0zdfSir1k",
@@ -2731,10 +3065,12 @@
       "channelId": "UCmbs8T6MWqUHP1tIQvSgKrg",
       "releaseDate": "2026-08-22T15:00:20.000Z",
       "publishedAt": "2026-08-22T15:00:20.000Z",
-      "viewCount": 32069,
+      "viewCount": 32106,
       "duration": 196,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 1161,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "weOEQHFfgjo",
@@ -2747,10 +3083,12 @@
       "channelId": "UCmbs8T6MWqUHP1tIQvSgKrg",
       "releaseDate": "2026-08-22T15:00:17.000Z",
       "publishedAt": "2026-08-22T15:00:17.000Z",
-      "viewCount": 42509,
+      "viewCount": 42638,
       "duration": 257,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 1280,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "nXDHXjnDWRs",
@@ -2763,10 +3101,12 @@
       "channelId": "UCmbs8T6MWqUHP1tIQvSgKrg",
       "releaseDate": "2026-08-22T15:00:17.000Z",
       "publishedAt": "2026-08-22T15:00:17.000Z",
-      "viewCount": 157659,
+      "viewCount": 158029,
       "duration": 213,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 4172,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "8ebvFt9Fc9Q",
@@ -2779,10 +3119,12 @@
       "channelId": "UCmbs8T6MWqUHP1tIQvSgKrg",
       "releaseDate": "2026-08-22T15:00:01.000Z",
       "publishedAt": "2026-08-22T15:00:01.000Z",
-      "viewCount": 256321,
+      "viewCount": 256751,
       "duration": 170,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 4396,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "spPdjFdOdDM",
@@ -2795,10 +3137,12 @@
       "channelId": "UCawGfU44CZxd2ZVf_VGijbA",
       "releaseDate": "2026-08-22T09:00:29.000Z",
       "publishedAt": "2026-08-22T09:00:29.000Z",
-      "viewCount": 207695,
+      "viewCount": 208126,
       "duration": 130,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 7647,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "8NllXAN086g",
@@ -2811,10 +3155,12 @@
       "channelId": "UC10wVt6hoQiwySRhz7RdOUA",
       "releaseDate": "2026-08-21T15:00:34.000Z",
       "publishedAt": "2026-08-21T15:00:34.000Z",
-      "viewCount": 163742,
+      "viewCount": 164231,
       "duration": 215,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 3140,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "nVOtF9OMOxI",
@@ -2827,10 +3173,12 @@
       "channelId": "UC10wVt6hoQiwySRhz7RdOUA",
       "releaseDate": "2026-08-21T15:00:27.000Z",
       "publishedAt": "2026-08-21T15:00:27.000Z",
-      "viewCount": 8197,
+      "viewCount": 8223,
       "duration": 214,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 263,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "-MTbZBYmn7o",
@@ -2844,10 +3192,12 @@
       "channelId": "UC10wVt6hoQiwySRhz7RdOUA",
       "releaseDate": "2026-08-21T11:00:07.000Z",
       "publishedAt": "2026-08-21T11:00:07.000Z",
-      "viewCount": 339746,
+      "viewCount": 341050,
       "duration": 216,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 16078,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "NZRzc12M7Xw",
@@ -2860,10 +3210,12 @@
       "channelId": "UCawGfU44CZxd2ZVf_VGijbA",
       "releaseDate": "2026-08-20T15:00:07.000Z",
       "publishedAt": "2026-08-20T15:00:07.000Z",
-      "viewCount": 109763,
+      "viewCount": 110031,
       "duration": 222,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 3761,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "FcNJfwfW52A",
@@ -2876,10 +3228,12 @@
       "channelId": "UCnVbtCwr-5LXxUlGxsgD7sQ",
       "releaseDate": "2026-08-20T11:00:06.000Z",
       "publishedAt": "2026-08-20T11:00:06.000Z",
-      "viewCount": 1482786,
+      "viewCount": 1488621,
       "duration": 252,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 12617,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "-V3iBUpu2qY",
@@ -2892,10 +3246,12 @@
       "channelId": "UCawGfU44CZxd2ZVf_VGijbA",
       "releaseDate": "2026-08-20T09:00:33.000Z",
       "publishedAt": "2026-08-20T09:00:33.000Z",
-      "viewCount": 271603,
+      "viewCount": 272243,
       "duration": 144,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 11067,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "zDUK2O6Lrvs",
@@ -2908,10 +3264,12 @@
       "channelId": "UCgmPnx-EEeOrZSg5Tiw7ZRQ",
       "releaseDate": "2026-08-20T09:00:18.000Z",
       "publishedAt": "2026-08-20T09:00:18.000Z",
-      "viewCount": 456741,
+      "viewCount": 457118,
       "duration": 210,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 20213,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "U48CBKV2fZA",
@@ -2924,10 +3282,12 @@
       "channelId": "UCgnfPPb9JI3e9A4cXHnWbyg",
       "releaseDate": "2026-08-20T03:00:07.000Z",
       "publishedAt": "2026-08-20T03:00:07.000Z",
-      "viewCount": 184441,
+      "viewCount": 184681,
       "duration": 128,
       "songType": "cover",
-      "source": "Holodex"
+      "source": "Holodex",
+      "likeCount": 15307,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "iCqqRNt6KIM",
@@ -2940,10 +3300,12 @@
       "channelId": "UCu2n3qHuOuQIygREMnWeQWg",
       "releaseDate": "2026-08-18T15:00:32.000Z",
       "publishedAt": "2026-08-18T15:00:32.000Z",
-      "viewCount": 185491,
+      "viewCount": 185846,
       "duration": 160,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 2489,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "pKN2Rr5LktE",
@@ -2956,10 +3318,12 @@
       "channelId": "UCawGfU44CZxd2ZVf_VGijbA",
       "releaseDate": "2026-08-18T15:00:19.000Z",
       "publishedAt": "2026-08-18T15:00:19.000Z",
-      "viewCount": 351645,
+      "viewCount": 351993,
       "duration": 231,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 14219,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "luDECMPD2Go",
@@ -2972,10 +3336,12 @@
       "channelId": "UCu2n3qHuOuQIygREMnWeQWg",
       "releaseDate": "2026-08-18T15:00:10.000Z",
       "publishedAt": "2026-08-18T15:00:10.000Z",
-      "viewCount": 8210,
+      "viewCount": 8231,
       "duration": 160,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 122,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "Mo5zXXNaLc4",
@@ -2988,10 +3354,12 @@
       "channelId": "UCu2n3qHuOuQIygREMnWeQWg",
       "releaseDate": "2026-08-18T12:00:06.000Z",
       "publishedAt": "2026-08-18T12:00:06.000Z",
-      "viewCount": 571534,
+      "viewCount": 572798,
       "duration": 166,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 24592,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "aifmJRiiBCI",
@@ -3004,10 +3372,12 @@
       "channelId": "UCnVbtCwr-5LXxUlGxsgD7sQ",
       "releaseDate": "2026-08-18T10:00:28.000Z",
       "publishedAt": "2026-08-18T10:00:28.000Z",
-      "viewCount": 266255,
+      "viewCount": 266556,
       "duration": 194,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 4219,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "kj4j4nkbi8Q",
@@ -3020,10 +3390,12 @@
       "channelId": "UCnVbtCwr-5LXxUlGxsgD7sQ",
       "releaseDate": "2026-08-18T10:00:24.000Z",
       "publishedAt": "2026-08-18T10:00:24.000Z",
-      "viewCount": 684289,
+      "viewCount": 686416,
       "duration": 176,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 10723,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "2RkLrMWF4pw",
@@ -3036,10 +3408,12 @@
       "channelId": "UCnVbtCwr-5LXxUlGxsgD7sQ",
       "releaseDate": "2026-08-18T10:00:15.000Z",
       "publishedAt": "2026-08-18T10:00:15.000Z",
-      "viewCount": 260506,
+      "viewCount": 261157,
       "duration": 153,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 3927,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "h8lP4QtXWzY",
@@ -3052,10 +3426,12 @@
       "channelId": "UCnVbtCwr-5LXxUlGxsgD7sQ",
       "releaseDate": "2026-08-18T10:00:02.000Z",
       "publishedAt": "2026-08-18T10:00:02.000Z",
-      "viewCount": 295367,
+      "viewCount": 295775,
       "duration": 213,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 3980,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "kuas99zAtNM",
@@ -3068,10 +3444,12 @@
       "channelId": "UCawGfU44CZxd2ZVf_VGijbA",
       "releaseDate": "2026-08-18T09:00:11.000Z",
       "publishedAt": "2026-08-18T09:00:11.000Z",
-      "viewCount": 164246,
+      "viewCount": 164445,
       "duration": 127,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 11946,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "MfJZB4F5H7k",
@@ -3084,10 +3462,12 @@
       "channelId": "UCJFZiqLMntJufDCHc6bQixg",
       "releaseDate": "2026-08-17T15:04:39.000Z",
       "publishedAt": "2026-08-17T15:04:39.000Z",
-      "viewCount": 717,
+      "viewCount": 719,
       "duration": 238,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 29,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "Re-ecg_XWr8",
@@ -3100,10 +3480,12 @@
       "channelId": "UCJFZiqLMntJufDCHc6bQixg",
       "releaseDate": "2026-08-17T15:01:26.000Z",
       "publishedAt": "2026-08-17T15:01:26.000Z",
-      "viewCount": 38748,
+      "viewCount": 38870,
       "duration": 238,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 895,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "2ei5abObL50",
@@ -3116,10 +3498,12 @@
       "channelId": "UCAoy6rzhSf4ydcYjJw3WoVg",
       "releaseDate": "2026-08-16T15:04:55.000Z",
       "publishedAt": "2026-08-16T15:04:55.000Z",
-      "viewCount": 975,
+      "viewCount": 981,
       "duration": 199,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 58,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "ssY5jCCcrRQ",
@@ -3132,10 +3516,12 @@
       "channelId": "UCAoy6rzhSf4ydcYjJw3WoVg",
       "releaseDate": "2026-08-16T15:04:08.000Z",
       "publishedAt": "2026-08-16T15:04:08.000Z",
-      "viewCount": 29144,
+      "viewCount": 29306,
       "duration": 199,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 788,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "02ugP8VUfGY",
@@ -3148,10 +3534,12 @@
       "channelId": "UCawGfU44CZxd2ZVf_VGijbA",
       "releaseDate": "2026-08-16T15:00:19.000Z",
       "publishedAt": "2026-08-16T15:00:19.000Z",
-      "viewCount": 1462,
+      "viewCount": 1468,
       "duration": 205,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 33,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "xfJSNPPG2cA",
@@ -3164,10 +3552,12 @@
       "channelId": "UCawGfU44CZxd2ZVf_VGijbA",
       "releaseDate": "2026-08-16T15:00:05.000Z",
       "publishedAt": "2026-08-16T15:00:05.000Z",
-      "viewCount": 80534,
+      "viewCount": 80786,
       "duration": 205,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 1123,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "nN7c7EgLbhg",
@@ -3180,10 +3570,12 @@
       "channelId": "UCAoy6rzhSf4ydcYjJw3WoVg",
       "releaseDate": "2026-08-16T13:00:06.000Z",
       "publishedAt": "2026-08-16T13:00:06.000Z",
-      "viewCount": 98193,
+      "viewCount": 98536,
       "duration": 198,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 10946,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "NvC7SqK3UXM",
@@ -3196,10 +3588,12 @@
       "channelId": "UCK9V2B22uJYu3N7eR_BT9QA",
       "releaseDate": "2026-08-16T13:00:06.000Z",
       "publishedAt": "2026-08-16T13:00:06.000Z",
-      "viewCount": 206478,
+      "viewCount": 206967,
       "duration": 217,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 21689,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "IX33Cz8TTmQ",
@@ -3212,10 +3606,12 @@
       "channelId": "UCDqI2jOz0weumE8s7paEk6g",
       "releaseDate": "2026-08-16T09:00:06.000Z",
       "publishedAt": "2026-08-16T09:00:06.000Z",
-      "viewCount": 147247,
+      "viewCount": 147938,
       "duration": 217,
       "songType": "cover",
-      "source": "Holodex"
+      "source": "Holodex",
+      "likeCount": 5470,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "2bGyah6312A",
@@ -3228,10 +3624,12 @@
       "channelId": "UCdyqAaZDKHXg4Ahi7VENThQ",
       "releaseDate": "2026-08-15T15:05:01.000Z",
       "publishedAt": "2026-08-15T15:05:01.000Z",
-      "viewCount": 58716,
+      "viewCount": 58865,
       "duration": 133,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 1169,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "thCs02rs3sU",
@@ -3244,10 +3642,12 @@
       "channelId": "UCdyqAaZDKHXg4Ahi7VENThQ",
       "releaseDate": "2026-08-15T15:04:32.000Z",
       "publishedAt": "2026-08-15T15:04:32.000Z",
-      "viewCount": 2265,
+      "viewCount": 2268,
       "duration": 126,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 51,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "Br2Tjs4d3HA",
@@ -3260,10 +3660,12 @@
       "channelId": "UCdyqAaZDKHXg4Ahi7VENThQ",
       "releaseDate": "2026-08-15T13:05:07.000Z",
       "publishedAt": "2026-08-15T13:05:07.000Z",
-      "viewCount": 263945,
+      "viewCount": 264227,
       "duration": 136,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 16112,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "xUTCQ0Ufiqg",
@@ -3277,10 +3679,12 @@
       "channelId": "UCCzUftO8KOVkV4wQG1vkUvg",
       "releaseDate": "2026-08-15T09:00:39.000Z",
       "publishedAt": "2026-08-15T09:00:39.000Z",
-      "viewCount": 330579,
+      "viewCount": 331595,
       "duration": 462,
       "songType": "cover",
-      "source": "Holodex"
+      "source": "Holodex",
+      "likeCount": 12717,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "_u0XYZs79e4",
@@ -3293,10 +3697,12 @@
       "channelId": "UC--zuEfONeFXPvLqX0Kvbuw",
       "releaseDate": "2026-08-15T09:00:06.000Z",
       "publishedAt": "2026-08-15T09:00:06.000Z",
-      "viewCount": 71361,
+      "viewCount": 71481,
       "duration": 300,
       "songType": "cover",
-      "source": "Holodex"
+      "source": "Holodex",
+      "likeCount": 3687,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "GODDmf2BKb8",
@@ -3309,10 +3715,12 @@
       "channelId": "UCDqI2jOz0weumE8s7paEk6g",
       "releaseDate": "2026-08-15T09:00:06.000Z",
       "publishedAt": "2026-08-15T09:00:06.000Z",
-      "viewCount": 311273,
+      "viewCount": 312535,
       "duration": 342,
       "songType": "cover",
-      "source": "Holodex"
+      "source": "Holodex",
+      "likeCount": 9218,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "TJlfvhmY6Sc",
@@ -3325,10 +3733,12 @@
       "channelId": "UC1suqwovbL1kzsoaZgFZLKg",
       "releaseDate": "2026-08-14T15:04:40.000Z",
       "publishedAt": "2026-08-14T15:04:40.000Z",
-      "viewCount": 21452,
+      "viewCount": 21485,
       "duration": 212,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 497,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "Kd2nvbAD7VA",
@@ -3344,7 +3754,9 @@
       "viewCount": 531,
       "duration": 212,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 26,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "2He1_YXzJYU",
@@ -3357,10 +3769,12 @@
       "channelId": "UC1suqwovbL1kzsoaZgFZLKg",
       "releaseDate": "2026-08-14T15:00:06.000Z",
       "publishedAt": "2026-08-14T15:00:06.000Z",
-      "viewCount": 52893,
+      "viewCount": 52960,
       "duration": 212,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 7657,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "dJFSXC7aQyU",
@@ -3375,10 +3789,12 @@
       "channelId": "UCCzUftO8KOVkV4wQG1vkUvg",
       "releaseDate": "2026-08-14T09:00:04.000Z",
       "publishedAt": "2026-08-14T09:00:04.000Z",
-      "viewCount": 239728,
+      "viewCount": 240519,
       "duration": 308,
       "songType": "cover",
-      "source": "Holodex"
+      "source": "Holodex",
+      "likeCount": 8992,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "sDTz7288GdM",
@@ -3392,10 +3808,12 @@
       "channelId": "UCDqI2jOz0weumE8s7paEk6g",
       "releaseDate": "2026-08-14T08:30:07.000Z",
       "publishedAt": "2026-08-14T08:30:07.000Z",
-      "viewCount": 473162,
+      "viewCount": 477124,
       "duration": 193,
       "songType": "cover",
-      "source": "Holodex"
+      "source": "Holodex",
+      "likeCount": 10524,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "wgxqf_qK_nI",
@@ -3408,10 +3826,12 @@
       "channelId": "UCjLEmnpCNeisMxy134KPwWw",
       "releaseDate": "2026-08-13T13:00:07.000Z",
       "publishedAt": "2026-08-13T13:00:07.000Z",
-      "viewCount": 366689,
+      "viewCount": 367845,
       "duration": 164,
       "songType": "cover",
-      "source": "Holodex"
+      "source": "Holodex",
+      "likeCount": 18148,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "X0wwLISllTM",
@@ -3424,10 +3844,12 @@
       "channelId": "UCFTLzh12_nrtzqBPsTCqenA",
       "releaseDate": "2026-08-13T09:30:06.000Z",
       "publishedAt": "2026-08-13T09:30:06.000Z",
-      "viewCount": 251030,
+      "viewCount": 251697,
       "duration": 310,
       "songType": "cover",
-      "source": "Holodex"
+      "source": "Holodex",
+      "likeCount": 11302,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "OKr0rgXI3Tg",
@@ -3440,10 +3862,12 @@
       "channelId": "UCCzUftO8KOVkV4wQG1vkUvg",
       "releaseDate": "2026-08-13T09:00:05.000Z",
       "publishedAt": "2026-08-13T09:00:05.000Z",
-      "viewCount": 632429,
+      "viewCount": 633973,
       "duration": 195,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 24797,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "6EF-CWO4PW4",
@@ -3456,10 +3880,12 @@
       "channelId": "UCjk2nKmHzgH5Xy-C5qYRd5A",
       "releaseDate": "2026-08-13T08:00:06.000Z",
       "publishedAt": "2026-08-13T08:00:06.000Z",
-      "viewCount": 153354,
+      "viewCount": 153813,
       "duration": 128,
       "songType": "cover",
-      "source": "Holodex"
+      "source": "Holodex",
+      "likeCount": 8647,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "YrPKGmgySr8",
@@ -3472,10 +3898,12 @@
       "channelId": "UCFKOVgVbGmX65RxO3EtH3iw",
       "releaseDate": "2026-08-12T15:02:31.000Z",
       "publishedAt": "2026-08-12T15:02:31.000Z",
-      "viewCount": 51891,
+      "viewCount": 52022,
       "duration": 209,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 924,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "4NecZLzLZoQ",
@@ -3488,10 +3916,12 @@
       "channelId": "UCFKOVgVbGmX65RxO3EtH3iw",
       "releaseDate": "2026-08-12T15:01:50.000Z",
       "publishedAt": "2026-08-12T15:01:50.000Z",
-      "viewCount": 1477,
+      "viewCount": 1478,
       "duration": 209,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 37,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "hXctctIKfrA",
@@ -3504,10 +3934,12 @@
       "channelId": "UCFKOVgVbGmX65RxO3EtH3iw",
       "releaseDate": "2026-08-12T14:00:16.000Z",
       "publishedAt": "2026-08-12T14:00:16.000Z",
-      "viewCount": 186262,
+      "viewCount": 186752,
       "duration": 211,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 15511,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "Ti2ELlQbuYc",
@@ -3520,10 +3952,12 @@
       "channelId": "UCFTLzh12_nrtzqBPsTCqenA",
       "releaseDate": "2026-08-12T13:00:07.000Z",
       "publishedAt": "2026-08-12T13:00:07.000Z",
-      "viewCount": 576564,
+      "viewCount": 577815,
       "duration": 309,
       "songType": "cover",
-      "source": "Holodex"
+      "source": "Holodex",
+      "likeCount": 29068,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "pP3Jwc3bfNM",
@@ -3536,10 +3970,12 @@
       "channelId": "UCCzUftO8KOVkV4wQG1vkUvg",
       "releaseDate": "2026-08-12T03:00:39.000Z",
       "publishedAt": "2026-08-12T03:00:39.000Z",
-      "viewCount": 632686,
+      "viewCount": 634014,
       "duration": 201,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 29808,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "Oe4q4Mxb1z8",
@@ -3552,10 +3988,12 @@
       "channelId": "UCCzUftO8KOVkV4wQG1vkUvg",
       "releaseDate": "2026-08-11T15:00:19.000Z",
       "publishedAt": "2026-08-11T15:00:19.000Z",
-      "viewCount": 37169,
+      "viewCount": 37266,
       "duration": 201,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 807,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "5hWjMfWoFHk",
@@ -3568,10 +4006,12 @@
       "channelId": "UCCzUftO8KOVkV4wQG1vkUvg",
       "releaseDate": "2026-08-11T15:00:16.000Z",
       "publishedAt": "2026-08-11T15:00:16.000Z",
-      "viewCount": 778541,
+      "viewCount": 781594,
       "duration": 201,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 13478,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "-H4bB6hxeEs",
@@ -3584,10 +4024,12 @@
       "channelId": "UCCzUftO8KOVkV4wQG1vkUvg",
       "releaseDate": "2026-08-11T13:05:07.000Z",
       "publishedAt": "2026-08-11T13:05:07.000Z",
-      "viewCount": 5236608,
+      "viewCount": 5263391,
       "duration": 202,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 145501,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "kEa2wHboln0",
@@ -3600,10 +4042,12 @@
       "channelId": "UCK9V2B22uJYu3N7eR_BT9QA",
       "releaseDate": "2026-08-11T12:00:06.000Z",
       "publishedAt": "2026-08-11T12:00:06.000Z",
-      "viewCount": 84738,
+      "viewCount": 84797,
       "duration": 246,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 10595,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "bL4XUgUQnMI",
@@ -3616,10 +4060,12 @@
       "channelId": "UCUKD-uaobj9jiqB-VXt71mA",
       "releaseDate": "2026-08-10T12:00:06.000Z",
       "publishedAt": "2026-08-10T12:00:06.000Z",
-      "viewCount": 92927,
+      "viewCount": 92954,
       "duration": 254,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 11862,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "4BuB6fcFHLw",
@@ -3632,10 +4078,12 @@
       "channelId": "UCAWSyEs_Io8MtpY3m-zqILA",
       "releaseDate": "2026-08-09T12:00:06.000Z",
       "publishedAt": "2026-08-09T12:00:06.000Z",
-      "viewCount": 249707,
+      "viewCount": 250573,
       "duration": 224,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 15777,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "3KzdBBAMg8E",
@@ -3648,10 +4096,12 @@
       "channelId": "UCDqI2jOz0weumE8s7paEk6g",
       "releaseDate": "2026-08-09T09:00:06.000Z",
       "publishedAt": "2026-08-09T09:00:06.000Z",
-      "viewCount": 60709,
+      "viewCount": 61046,
       "duration": 200,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 4374,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "JV9uwZ4mlug",
@@ -3664,10 +4114,12 @@
       "channelId": "UC1uv2Oq6kNxgATlCiez59hw",
       "releaseDate": "2026-08-08T15:05:16.000Z",
       "publishedAt": "2026-08-08T15:05:16.000Z",
-      "viewCount": 6440,
+      "viewCount": 6451,
       "duration": 176,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 153,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "lmBkWOkBCBA",
@@ -3680,10 +4132,12 @@
       "channelId": "UC1uv2Oq6kNxgATlCiez59hw",
       "releaseDate": "2026-08-08T15:05:11.000Z",
       "publishedAt": "2026-08-08T15:05:11.000Z",
-      "viewCount": 206942,
+      "viewCount": 207291,
       "duration": 176,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 4610,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "V_09zQsoH1o",
@@ -3696,10 +4150,12 @@
       "channelId": "UCTvHWSfBZgtxE4sILOaurIQ",
       "releaseDate": "2026-08-08T13:00:07.000Z",
       "publishedAt": "2026-08-08T13:00:07.000Z",
-      "viewCount": 22556,
+      "viewCount": 22576,
       "duration": 177,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 2966,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "N8twZPOqJBc",
@@ -3712,10 +4168,12 @@
       "channelId": "UCFKOVgVbGmX65RxO3EtH3iw",
       "releaseDate": "2026-08-08T13:00:07.000Z",
       "publishedAt": "2026-08-08T13:00:07.000Z",
-      "viewCount": 157519,
+      "viewCount": 157641,
       "duration": 203,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 14712,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "BVg1H-COU6I",
@@ -3729,10 +4187,12 @@
       "channelId": "UCDqI2jOz0weumE8s7paEk6g",
       "releaseDate": "2026-08-08T09:00:06.000Z",
       "publishedAt": "2026-08-08T09:00:06.000Z",
-      "viewCount": 209467,
+      "viewCount": 210325,
       "duration": 232,
       "songType": "cover",
-      "source": "Holodex"
+      "source": "Holodex",
+      "likeCount": 7604,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "5GBbu5Kfr8o",
@@ -3745,10 +4205,12 @@
       "channelId": "UCLk1hcmxg8rJ3Nm1_GvxTRA",
       "releaseDate": "2026-08-08T01:00:06.000Z",
       "publishedAt": "2026-08-08T01:00:06.000Z",
-      "viewCount": 115757,
+      "viewCount": 116128,
       "duration": 290,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 7282,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "Qm83TNTm2Cc",
@@ -3761,10 +4223,12 @@
       "channelId": "UCLk1hcmxg8rJ3Nm1_GvxTRA",
       "releaseDate": "2026-08-07T15:03:29.000Z",
       "publishedAt": "2026-08-07T15:03:29.000Z",
-      "viewCount": 1619,
+      "viewCount": 1629,
       "duration": 290,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 82,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "kY1n4W0O6T4",
@@ -3777,10 +4241,12 @@
       "channelId": "UCLk1hcmxg8rJ3Nm1_GvxTRA",
       "releaseDate": "2026-08-07T15:02:25.000Z",
       "publishedAt": "2026-08-07T15:02:25.000Z",
-      "viewCount": 38766,
+      "viewCount": 38927,
       "duration": 290,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 1062,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "JUXIXgRI-TY",
@@ -3793,10 +4259,12 @@
       "channelId": "UCvInZx9h3jC2JzsIzoOebWg",
       "releaseDate": "2026-08-07T13:00:07.000Z",
       "publishedAt": "2026-08-07T13:00:07.000Z",
-      "viewCount": 315423,
+      "viewCount": 315969,
       "duration": 198,
       "songType": "cover",
-      "source": "Holodex"
+      "source": "Holodex",
+      "likeCount": 14696,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "XdgzEDySUS8",
@@ -3809,10 +4277,12 @@
       "channelId": "UCTvHWSfBZgtxE4sILOaurIQ",
       "releaseDate": "2026-08-07T12:00:06.000Z",
       "publishedAt": "2026-08-07T12:00:06.000Z",
-      "viewCount": 192229,
+      "viewCount": 192521,
       "duration": 177,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 17016,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "gz6oAcL8Cw4",
@@ -3825,10 +4295,12 @@
       "channelId": "UCDqI2jOz0weumE8s7paEk6g",
       "releaseDate": "2026-08-07T09:00:06.000Z",
       "publishedAt": "2026-08-07T09:00:06.000Z",
-      "viewCount": 689439,
+      "viewCount": 692447,
       "duration": 282,
       "songType": "cover",
-      "source": "Holodex"
+      "source": "Holodex",
+      "likeCount": 15812,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "TUV4DsrQuxM",
@@ -3841,10 +4313,12 @@
       "channelId": "UCTvHWSfBZgtxE4sILOaurIQ",
       "releaseDate": "2026-08-06T15:03:39.000Z",
       "publishedAt": "2026-08-06T15:03:39.000Z",
-      "viewCount": 1822,
+      "viewCount": 1827,
       "duration": 174,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 60,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "HylMLbRlJ1c",
@@ -3857,10 +4331,12 @@
       "channelId": "UCTvHWSfBZgtxE4sILOaurIQ",
       "releaseDate": "2026-08-06T15:02:15.000Z",
       "publishedAt": "2026-08-06T15:02:15.000Z",
-      "viewCount": 74637,
+      "viewCount": 74815,
       "duration": 174,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 2290,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "gogcP73JeM8",
@@ -3873,10 +4349,12 @@
       "channelId": "UCtyWhCj3AqKh2dXctLkDtng",
       "releaseDate": "2026-08-06T12:00:06.000Z",
       "publishedAt": "2026-08-06T12:00:06.000Z",
-      "viewCount": 518436,
+      "viewCount": 519614,
       "duration": 135,
       "songType": "cover",
-      "source": "Holodex"
+      "source": "Holodex",
+      "likeCount": 19752,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "Rhah22LMguQ",
@@ -3889,10 +4367,12 @@
       "channelId": "UCOyYb1c43VlX9rc_lT6NKQw",
       "releaseDate": "2026-08-06T10:04:56.000Z",
       "publishedAt": "2026-08-06T10:04:56.000Z",
-      "viewCount": 231681,
+      "viewCount": 232766,
       "duration": 220,
       "songType": "cover",
-      "source": "Holodex"
+      "source": "Holodex",
+      "likeCount": 5795,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "GTpQYXMbPgY",
@@ -3905,10 +4385,12 @@
       "channelId": "UCotXwY6s8pWmuWd_snKYjhg",
       "releaseDate": "2026-08-06T02:00:06.000Z",
       "publishedAt": "2026-08-06T02:00:06.000Z",
-      "viewCount": 142755,
+      "viewCount": 143036,
       "duration": 200,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 10566,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "FBVAv8VxF_E",
@@ -3921,10 +4403,12 @@
       "channelId": "UCotXwY6s8pWmuWd_snKYjhg",
       "releaseDate": "2026-08-05T15:03:33.000Z",
       "publishedAt": "2026-08-05T15:03:33.000Z",
-      "viewCount": 65819,
+      "viewCount": 65926,
       "duration": 200,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 1789,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "Zd_Div1611w",
@@ -3937,10 +4421,12 @@
       "channelId": "UCotXwY6s8pWmuWd_snKYjhg",
       "releaseDate": "2026-08-05T15:02:42.000Z",
       "publishedAt": "2026-08-05T15:02:42.000Z",
-      "viewCount": 3707,
+      "viewCount": 3711,
       "duration": 196,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 79,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "GsO3K3hnO0g",
@@ -3954,10 +4440,12 @@
       "channelId": "UCasKmptouCrwWLl8SlQU2tQ",
       "releaseDate": "2026-08-05T10:00:06.000Z",
       "publishedAt": "2026-08-05T10:00:06.000Z",
-      "viewCount": 74108,
+      "viewCount": 74213,
       "duration": 255,
       "songType": "cover",
-      "source": "Holodex"
+      "source": "Holodex",
+      "likeCount": 4495,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "oZbqT1Mjm3I",
@@ -3971,10 +4459,12 @@
       "channelId": "UCp6993wxpyDPHUpavwDFqgg",
       "releaseDate": "2026-08-04T10:00:23.000Z",
       "publishedAt": "2026-08-04T10:00:23.000Z",
-      "viewCount": 245557,
+      "viewCount": 245955,
       "duration": 189,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 7169,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "uScdhQ-dA8E",
@@ -3987,10 +4477,12 @@
       "channelId": "UCZnZn-PIfo_REKwUvETBFOg",
       "releaseDate": "2026-08-03T09:45:11.000Z",
       "publishedAt": "2026-08-03T09:45:11.000Z",
-      "viewCount": 319132,
+      "viewCount": 319612,
       "duration": 303,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 7845,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "JPOnKCBQAPg",
@@ -4003,10 +4495,12 @@
       "channelId": "UCDqI2jOz0weumE8s7paEk6g",
       "releaseDate": "2026-08-02T15:04:57.000Z",
       "publishedAt": "2026-08-02T15:04:57.000Z",
-      "viewCount": 2566,
+      "viewCount": 2576,
       "duration": 197,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 47,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "yzhMEOjQY7I",
@@ -4019,10 +4513,12 @@
       "channelId": "UCDqI2jOz0weumE8s7paEk6g",
       "releaseDate": "2026-08-02T15:03:35.000Z",
       "publishedAt": "2026-08-02T15:03:35.000Z",
-      "viewCount": 93028,
+      "viewCount": 93334,
       "duration": 197,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 1488,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "_buc53b7gs8",
@@ -4035,10 +4531,12 @@
       "channelId": "UCDqI2jOz0weumE8s7paEk6g",
       "releaseDate": "2026-08-02T12:00:16.000Z",
       "publishedAt": "2026-08-02T12:00:16.000Z",
-      "viewCount": 269096,
+      "viewCount": 270136,
       "duration": 197,
       "source": "Holodex",
-      "songType": "original"
+      "songType": "original",
+      "likeCount": 18014,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "o4aNQu3KI1o",
@@ -4051,10 +4549,12 @@
       "channelId": "UC3OH5FKQ3qtl4uRme_vZTgA",
       "releaseDate": "2026-08-01T15:15:06.000Z",
       "publishedAt": "2026-08-01T15:15:06.000Z",
-      "viewCount": 66916,
+      "viewCount": 67090,
       "duration": 181,
       "songType": "cover",
-      "source": "Holodex"
+      "source": "Holodex",
+      "likeCount": 7398,
+      "statisticsCheckedAt": "2026-10-11T17:34:02.058Z"
     },
     {
       "id": "IyJ27NEFlBs",
