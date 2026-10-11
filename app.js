@@ -43,7 +43,7 @@
     'player-state','watch-youtube','play-pause','previous-song','next-song','queue-shuffle',
     'queue-repeat','queue-count','queue-list','clear-queue','create-playlist','playlist-list',
     'playlist-select','save-queue','play-selected-playlist','playlist-dialog','playlist-form','cancel-playlist',
-    'playlist-name','talent-strip','talent-strip-toggle','sidebar-collapse','mobile-mini-player','mobile-mini-thumb','mobile-mini-expand','mobile-mini-title','mobile-mini-artist','mobile-mini-toggle','mobile-mini-next','hero-talent-art',
+    'playlist-name','talent-strip','talent-page-status','talent-page-prev','talent-page-next','talent-page-shuffle','sidebar-collapse','mobile-mini-player','mobile-mini-thumb','mobile-mini-expand','mobile-mini-title','mobile-mini-artist','mobile-mini-toggle','mobile-mini-next','hero-talent-art',
   ];
   const el = Object.fromEntries(ids.map(id => [id, document.getElementById(id)]));
   const readJSON = (key, fallback) => {
@@ -222,142 +222,56 @@
       renderHeroTalentArt({ transition: true });
     }, BANNER_ROTATE_MS);
   }
-  const TALENT_MARQUEE_SPEED = 32; // pixels per second: clearly visible while remaining comfortable.
-  let talentMarqueeFrame = 0;
-  let talentMarqueeLastTime = 0;
-  let talentMarqueeUserPaused = !!(window.matchMedia &&
-    window.matchMedia('(prefers-reduced-motion: reduce)').matches);
-  let talentMarqueeHoverPaused = false;
-  let talentMarqueeFocusPaused = false;
-  let talentMarqueePointerDown = false;
+  const TALENT_PAGE_SIZE = 10;
+  let talentSpotlightRoster = [];
+  let talentSpotlightPage = 0;
 
-  function updateTalentMarqueeButton() {
-    const button = el['talent-strip-toggle'];
-    if (!button) return;
-    button.innerHTML = talentMarqueeUserPaused
-      ? '<span aria-hidden="true">▶</span> Resume'
-      : '<span aria-hidden="true">Ⅱ</span> Pause';
-    button.setAttribute('aria-label', talentMarqueeUserPaused
-      ? 'Resume automatic artist scrolling'
-      : 'Pause automatic artist scrolling');
-    button.title = talentMarqueeUserPaused
-      ? 'Resume automatic artist scrolling'
-      : 'Pause automatic artist scrolling';
-  }
-
-  function setTalentMarqueePaused(paused) {
-    talentMarqueeUserPaused = !!paused;
-    talentMarqueeLastTime = 0;
-    updateTalentMarqueeButton();
-  }
-
-  function setupTalentMarquee() {
+  function renderTalentSpotlightPage() {
     const strip = el['talent-strip'];
     if (!strip) return;
-    strip.querySelectorAll('[data-talent-duplicate="true"]').forEach(card => card.remove());
-    const originalCards = [...strip.children].filter(card =>
-      card.classList.contains('talent-card') && !card.hasAttribute('data-talent-duplicate')
-    );
-    if (!originalCards.length) return;
-
-    const duplicateFragment = document.createDocumentFragment();
-    for (const original of originalCards) {
-      const duplicate = original.cloneNode(true);
-      duplicate.dataset.talentDuplicate = 'true';
-      duplicate.setAttribute('aria-hidden', 'true');
-      duplicate.tabIndex = -1;
-      duplicate.querySelectorAll('button,a,input,[tabindex]').forEach(control => {
-        control.tabIndex = -1;
-      });
-      duplicateFragment.appendChild(duplicate);
-    }
-    strip.appendChild(duplicateFragment);
-    // Start at a known position each visit; native scroll snapping can fight
-    // small animation steps, so the strip's CSS disables snap while marqueeing.
-    strip.scrollLeft = 0;
-    talentMarqueeHoverPaused = strip.matches(':hover');
-
-    // Keep a single seamless loop. The clone is hidden from assistive tech and
-    // keyboard navigation, but mouse/touch selection still uses normal buttons.
-    if (!strip.dataset.marqueeEventsReady) {
-      strip.dataset.marqueeEventsReady = 'true';
-      strip.addEventListener('mouseenter', () => { talentMarqueeHoverPaused = true; });
-      strip.addEventListener('mouseleave', () => { talentMarqueeHoverPaused = false; });
-      strip.addEventListener('focusin', () => { talentMarqueeFocusPaused = true; });
-      strip.addEventListener('focusout', event => {
-        if (!strip.contains(event.relatedTarget)) talentMarqueeFocusPaused = false;
-      });
-      // Temporarily yield to touch/mouse dragging without permanently disabling
-      // auto-scroll just because someone tapped a talent card.
-      strip.addEventListener('pointerdown', () => { talentMarqueePointerDown = true; }, { passive: true });
-      window.addEventListener('pointerup', () => {
-        talentMarqueePointerDown = false;
-        talentMarqueeLastTime = 0;
-      }, { passive: true });
-      window.addEventListener('pointercancel', () => {
-        talentMarqueePointerDown = false;
-        talentMarqueeLastTime = 0;
-      }, { passive: true });
-      document.addEventListener('visibilitychange', () => { talentMarqueeLastTime = 0; });
-      window.addEventListener('resize', () => { talentMarqueeLastTime = 0; });
-      if (window.matchMedia) {
-        const preference = window.matchMedia('(prefers-reduced-motion: reduce)');
-        const onPreferenceChange = event => {
-          if (event.matches) setTalentMarqueePaused(true);
-        };
-        if (preference.addEventListener) preference.addEventListener('change', onPreferenceChange);
-        else if (preference.addListener) preference.addListener(onPreferenceChange);
-      }
-    }
-
-    updateTalentMarqueeButton();
-    if (talentMarqueeFrame) cancelAnimationFrame(talentMarqueeFrame);
-    const animate = timestamp => {
-      if (!strip.isConnected) {
-        talentMarqueeFrame = 0;
-        return;
-      }
-      if (talentMarqueeLastTime && !document.hidden && !talentMarqueeUserPaused &&
-          !talentMarqueeHoverPaused && !talentMarqueeFocusPaused && !talentMarqueePointerDown) {
-        const deltaSeconds = Math.min(80, timestamp - talentMarqueeLastTime) / 1000;
-        const first = strip.querySelector('.talent-card:not([data-talent-duplicate="true"])');
-        const firstDuplicate = strip.querySelector('.talent-card[data-talent-duplicate="true"]');
-        if (first && firstDuplicate) {
-          const loopWidth = firstDuplicate.getBoundingClientRect().left - first.getBoundingClientRect().left;
-          if (loopWidth > 0) {
-            strip.scrollLeft += TALENT_MARQUEE_SPEED * deltaSeconds;
-            if (strip.scrollLeft >= loopWidth) strip.scrollLeft -= loopWidth;
-          }
-        }
-      }
-      talentMarqueeLastTime = timestamp;
-      talentMarqueeFrame = requestAnimationFrame(animate);
-    };
-    talentMarqueeLastTime = 0;
-    talentMarqueeFrame = requestAnimationFrame(animate);
-  }
-
-  function renderTalentSpotlight() {
+    const total = talentSpotlightRoster.length;
+    const pageCount = Math.max(1, Math.ceil(total / TALENT_PAGE_SIZE));
+    talentSpotlightPage = Math.min(Math.max(0, talentSpotlightPage), pageCount - 1);
+    const start = talentSpotlightPage * TALENT_PAGE_SIZE;
+    const visible = talentSpotlightRoster.slice(start, start + TALENT_PAGE_SIZE);
     const palette = ['#3b5993','#7c3b6e','#8d4a36','#704367','#327b99','#3d6d9e','#8c5c32','#75498f','#774337','#a46d36','#69476d','#a84c36'];
-    // Shuffle the official roster on every page load so the homepage doesn't
-    // always begin with A/B/C names. The duplicate loop uses this same order.
-    const featured = shuffled(
-      state.talents.filter(item => item.name && safeTalentImage(item.image))
-    );
-    el['talent-strip'].innerHTML = featured.map((talent, index) =>
+
+    strip.innerHTML = visible.map((talent, index) =>
       '<button class="talent-card" type="button" data-spotlight-artist="' + escapeHTML(talent.name) +
-      '" style="--talent:' + palette[index % palette.length] + '" title="Browse ' + escapeHTML(talent.name) + '">' +
+      '" style="--talent:' + palette[(start + index) % palette.length] + '" title="Browse ' + escapeHTML(talent.name) + '">' +
       '<span class="talent-image"><img src="' + escapeHTML(safeTalentImage(talent.image)) +
-      '" alt="" loading="lazy" decoding="async"><i>' +
+      '" alt="" loading="eager" decoding="async"><i>' +
       escapeHTML(talent.name.slice(0, 2).toUpperCase()) + '</i></span><strong>' +
       escapeHTML(talent.name) + '</strong></button>'
     ).join('');
-    el['talent-strip'].querySelectorAll('img').forEach(image => {
+
+    strip.querySelectorAll('img').forEach(image => {
       image.addEventListener('error', () => { image.style.display = 'none'; }, { once: true });
     });
-    setupTalentMarquee();
+
+    const firstNumber = total ? start + 1 : 0;
+    const lastNumber = Math.min(start + TALENT_PAGE_SIZE, total);
+    el['talent-page-status'].textContent = total
+      ? firstNumber.toLocaleString() + '–' + lastNumber.toLocaleString() + ' of ' + total.toLocaleString()
+      : 'No talents available';
+    el['talent-page-prev'].disabled = talentSpotlightPage === 0;
+    el['talent-page-next'].disabled = lastNumber >= total;
+    el['talent-page-prev'].setAttribute('aria-label', 'Previous 10 talents');
+    el['talent-page-next'].setAttribute('aria-label', 'Next 10 talents');
+    el['talent-page-shuffle'].setAttribute('aria-label', 'Shuffle official talent order');
+  }
+
+  function renderTalentSpotlight() {
+    // Randomize on page load, then use stable ten-talent pages so portraits
+    // remain still and sharp instead of being continuously moved.
+    talentSpotlightRoster = shuffled(
+      state.talents.filter(item => item.name && safeTalentImage(item.image))
+    );
+    talentSpotlightPage = 0;
+    renderTalentSpotlightPage();
     renderArtists();
   }
+
   async function loadTalentRoster() {
     try {
       const response = await fetch('data/talents.json', { cache: 'no-cache' });
@@ -1168,8 +1082,20 @@
       if (button.dataset.action === 'queue') addToQueue(id);
       if (button.dataset.action === 'favorite') toggleFavorite(id);
     });
-    el['talent-strip-toggle'].addEventListener('click', () => {
-      setTalentMarqueePaused(!talentMarqueeUserPaused);
+    el['talent-page-prev'].addEventListener('click', () => {
+      if (talentSpotlightPage <= 0) return;
+      talentSpotlightPage -= 1;
+      renderTalentSpotlightPage();
+    });
+    el['talent-page-next'].addEventListener('click', () => {
+      if ((talentSpotlightPage + 1) * TALENT_PAGE_SIZE >= talentSpotlightRoster.length) return;
+      talentSpotlightPage += 1;
+      renderTalentSpotlightPage();
+    });
+    el['talent-page-shuffle'].addEventListener('click', () => {
+      talentSpotlightRoster = shuffled(talentSpotlightRoster);
+      talentSpotlightPage = 0;
+      renderTalentSpotlightPage();
     });
     el['talent-strip'].addEventListener('click', event => {
       const button = event.target.closest('[data-spotlight-artist]');
