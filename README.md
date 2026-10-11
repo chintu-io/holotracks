@@ -21,7 +21,7 @@ The source is Holodex's Hololive + Original_Song search, using a page size of 50
 - **Incremental (daily):** request newest pages until it reaches a full page of IDs that are already in the saved catalogue. Only new IDs are added. If no songs or source-count metadata changed, the workflow does not create a commit or trigger a website deployment.
 - **Full reconciliation (weekly):** scan every page from Holodex, refresh source metadata and view counts, and retain historical IDs that are temporarily absent from the index. A 25,000-record safety guard stops an unexpectedly large source response before it can replace the catalogue.
 
-The scheduled workflows run daily at 04:23 UTC and perform the full reconciliation on Sundays at 04:43 UTC. GitHub scheduled jobs can start a little later than their cron time. You can also choose **Actions → Refresh Hololive catalogue → Run workflow** and select incremental or full mode.
+The scheduled workflows run daily at 04:23 UTC and perform the full reconciliation on Sundays at 04:43 UTC. GitHub scheduled jobs can start a little later than their cron time. You can also choose **Actions → Refresh Hololive catalogue → Run workflow** and select incremental or full mode. For an importer/schema change that needs a one-time backfill, include `[full-scan]` in that commit message; ordinary code/config pushes run incrementally.
 
 The importer observes Retry-After on rate-limit responses, backs off on HTTP 429/5xx and timeouts, checks pagination, deduplicates video IDs, and writes through a temporary file before replacing data/songs.json. A failed run leaves the last successful catalogue intact.
 
