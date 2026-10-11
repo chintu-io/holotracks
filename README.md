@@ -57,6 +57,7 @@ node --check scripts/update-catalog.mjs
 HOLODEX_API_KEY=your_key node scripts/update-catalog.mjs --mode=incremental
 HOLODEX_API_KEY=your_key node scripts/update-catalog.mjs --mode=full
 HOLODEX_API_KEY=your_key node scripts/update-catalog.mjs --mode=full --dry-run
+node tools/update-talent-artwork.mjs
 python -m http.server 8080
 ~~~
 
