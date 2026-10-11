@@ -168,66 +168,99 @@
     }
     return result;
   }
-  function pickBannerTalent() {
-    const roster = state.talents.filter(item => item.slug && safeTalentImage(item.bannerImage || item.image));
-    if (!roster.length) return null;
+  function pickBannerTalents(count = 3) {
+    const roster = state.talents.filter(item =>
+      item.slug && (safeTalentImage(item.bannerImage) || safeTalentImage(item.image))
+    );
+    if (!roster.length) return [];
+
     const bySlug = new Map(roster.map(item => [item.slug, item]));
     let deck = readJSON(KEYS.bannerDeck, []);
     if (!Array.isArray(deck)) deck = [];
     deck = deck.filter((slug, index) => bySlug.has(slug) && deck.indexOf(slug) === index);
 
-    // Rotate one featured talent per visit, exhausting the shuffled deck before reshuffling.
-    if (!deck.length) {
-      deck = shuffled(roster.map(item => item.slug));
-      const previous = readJSON(KEYS.lastBanner, []);
-      const previousSlugs = Array.isArray(previous)
-        ? previous
-        : (typeof previous === 'string' ? [previous] : []);
-      if (deck.length > 1 && previousSlugs.includes(deck[0])) {
-        const replacementIndex = deck.findIndex(slug => !previousSlugs.includes(slug));
-        if (replacementIndex > 0) [deck[0], deck[replacementIndex]] = [deck[replacementIndex], deck[0]];
+    // Treat all official talents as one shuffled bag, choosing distinct artists
+    // for each composition before the bag is reshuffled.
+    const previous = readJSON(KEYS.lastBanner, []);
+    const previousSlugs = Array.isArray(previous)
+      ? previous
+      : (typeof previous === 'string' ? [previous] : []);
+
+    if (deck.length < count) {
+      const inDeck = new Set(deck);
+      let refill = shuffled(roster.map(item => item.slug).filter(slug =>
+        !inDeck.has(slug) && !previousSlugs.includes(slug)
+      ));
+      if (refill.length < count - deck.length) {
+        const alreadyQueued = new Set([...deck, ...refill]);
+        refill = refill.concat(shuffled(roster.map(item => item.slug).filter(slug =>
+          !alreadyQueued.has(slug)
+        )));
       }
+      deck.push(...refill);
     }
 
-    const pickedSlug = deck.shift();
+    const pickedSlugs = deck.splice(0, count);
     saveJSON(KEYS.bannerDeck, deck);
-    saveJSON(KEYS.lastBanner, pickedSlug);
-    return bySlug.get(pickedSlug) || roster[0];
+    saveJSON(KEYS.lastBanner, pickedSlugs);
+    return pickedSlugs.map(slug => bySlug.get(slug)).filter(Boolean);
   }
+
   function renderHeroTalentArt({ transition = false } = {}) {
     const stage = el['hero-talent-art'];
     if (!stage) return;
-    const previous = stage.querySelector('.stage-featured:not(.is-exiting)');
-    const talent = pickBannerTalent();
-    if (!talent) return;
+    const previous = stage.querySelector('.stage-ensemble-group:not(.is-exiting)');
+    const talents = pickBannerTalents(3);
+    if (!talents.length) return;
 
-    const image = document.createElement('img');
-    image.className = 'stage-talent stage-featured is-entering';
-    const imageSource = safeTalentImage(talent.bannerImage) ||
-      safeTalentImage(ARTIST_IMAGES[talent.name]) || safeTalentImage(talent.image);
-    image.alt = talent.name + ' — featured Hololive talent';
-    image.loading = 'eager';
-    image.decoding = 'async';
-    image.onerror = () => {
-      image.remove();
-      if (previous) previous.classList.remove('is-exiting');
-    };
-    image.onload = () => {
-      if (!transition || !previous) {
-        image.classList.remove('is-entering');
-        image.classList.add('is-visible');
-        if (previous) previous.remove();
+    const composition = document.createElement('div');
+    composition.className = 'stage-ensemble-group is-entering';
+    composition.setAttribute('aria-label', 'Featured Hololive talents');
+    stage.appendChild(composition);
+
+    const slots = ['ensemble-left', 'ensemble-center', 'ensemble-right'];
+    let settledImages = 0;
+
+    const revealComposition = () => {
+      settledImages += 1;
+      if (settledImages < talents.length) return;
+      if (!composition.querySelector('img')) {
+        composition.remove();
+        if (previous) previous.classList.remove('is-exiting');
         return;
       }
+
       window.requestAnimationFrame(() => {
-        image.classList.remove('is-entering');
-        image.classList.add('is-visible');
-        previous.classList.add('is-exiting');
-        window.setTimeout(() => previous.remove(), 720);
+        composition.classList.remove('is-entering');
+        composition.classList.add('is-visible');
+        if (previous) {
+          previous.classList.add('is-exiting');
+          window.setTimeout(() => previous.remove(), 760);
+        }
       });
     };
-    stage.appendChild(image);
-    image.src = imageSource;
+
+    talents.forEach((talent, index) => {
+      const image = document.createElement('img');
+      image.className = 'stage-talent stage-ensemble ' + slots[index];
+      image.alt = talent.name + ' — featured Hololive talent';
+      image.loading = 'eager';
+      image.decoding = 'async';
+      image.draggable = false;
+      image.onerror = () => {
+        image.remove();
+        revealComposition();
+      };
+      image.onload = revealComposition;
+      const imageSource = safeTalentImage(talent.bannerImage) ||
+        safeTalentImage(ARTIST_IMAGES[talent.name]) || safeTalentImage(talent.image);
+      if (!imageSource) {
+        revealComposition();
+        return;
+      }
+      composition.appendChild(image);
+      image.src = imageSource;
+    });
   }
   let heroRotationTimer = null;
   function startHeroRotation() {
