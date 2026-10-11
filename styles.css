@@ -881,8 +881,8 @@ button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid 
 .stage-talent{
   position:absolute!important;
   top:auto!important;
-  bottom:28px!important;
-  height:calc(100% - 72px)!important;
+  bottom:0!important;
+  height:calc(100% - 44px)!important;
   max-height:none!important;
   width:auto!important;
   max-width:none!important;
@@ -901,9 +901,9 @@ button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid 
   transform-origin:center bottom!important;
   transition:filter .2s ease!important;
 }
-.stage-left{left:1%!important;right:auto!important;max-width:none!important;height:calc(100% - 74px)!important;z-index:2!important;opacity:.99!important}
-.stage-center{left:14%!important;right:auto!important;max-width:none!important;height:calc(100% - 68px)!important;z-index:4!important}
-.stage-right{left:auto!important;right:24%!important;max-width:none!important;height:calc(100% - 74px)!important;z-index:3!important;opacity:1!important}
+.stage-left{left:1%!important;right:auto!important;max-width:none!important;height:calc(100% - 44px)!important;z-index:2!important;opacity:.99!important}
+.stage-center{left:14%!important;right:auto!important;max-width:none!important;height:calc(100% - 44px)!important;z-index:4!important}
+.stage-right{left:auto!important;right:24%!important;max-width:none!important;height:calc(100% - 44px)!important;z-index:3!important;opacity:1!important}
 .stage-ring{left:53%;top:49%;opacity:.42}
 .stage-chip{top:12px;right:10px;z-index:7;white-space:nowrap}
 .hero-stage:before{z-index:6;background:linear-gradient(90deg,#211d4530 0%,transparent 20%,transparent 81%,#172b4430 100%)}
@@ -922,9 +922,9 @@ button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid 
 }
 @media(max-width:1220px) and (min-width:681px){
   .hero-card{grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr)}
-  .stage-left{left:-2%!important;height:calc(100% - 74px)!important}
-  .stage-center{left:12%!important;height:calc(100% - 68px)!important}
-  .stage-right{right:21%!important;height:calc(100% - 74px)!important}
+  .stage-left{left:-2%!important;height:calc(100% - 44px)!important}
+  .stage-center{left:12%!important;height:calc(100% - 44px)!important}
+  .stage-right{right:21%!important;height:calc(100% - 44px)!important}
 }
 @media(max-width:680px){
   .hero-card{display:block;position:relative;min-height:340px}
@@ -933,10 +933,10 @@ button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid 
   .hero-copy p{font-size:11px;max-width:260px}
   .hero-stats{margin-top:16px;gap:7px}
   .hero-stage{position:absolute;z-index:1;top:0;right:0;bottom:0;left:22%;height:auto;min-height:0;opacity:1}
-  .stage-talent{bottom:28px!important;height:calc(100% - 72px)!important;max-height:none!important}
-  .stage-left{left:-4%!important;height:calc(100% - 74px)!important;opacity:.82!important}
-  .stage-center{left:12%!important;height:calc(100% - 68px)!important}
-  .stage-right{right:21%!important;height:calc(100% - 74px)!important;opacity:.9!important}
+  .stage-talent{bottom:0!important;height:calc(100% - 44px)!important;max-height:none!important}
+  .stage-left{left:-4%!important;height:calc(100% - 44px)!important;opacity:.82!important}
+  .stage-center{left:12%!important;height:calc(100% - 44px)!important}
+  .stage-right{right:21%!important;height:calc(100% - 44px)!important;opacity:.9!important}
   .stage-chip{top:9px;right:8px;font-size:6px;padding:6px 7px}
   .hero-stage:before{background:linear-gradient(90deg,#211d45b0 0%,#211d4560 32%,transparent 80%)}
   .hero-footer{position:relative;z-index:9}
