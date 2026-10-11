@@ -1968,3 +1968,65 @@ button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid 
 @media(max-width:560px){
   .talent-picker-dialog .artist-filters{min-height:180px}
 }
+
+
+/* Homepage: slow, manually pausable marquee for the full official talent roster. */
+.talent-section-actions{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:8px;
+  flex:none;
+}
+.talent-marquee-toggle{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+  min-height:38px;
+  padding:8px 11px;
+  border:1px solid #3a3b60;
+  border-radius:11px;
+  background:#16172f;
+  color:#b9bbda;
+  font-size:11px;
+  font-weight:850;
+  white-space:nowrap;
+  transition:border-color .15s,background .15s,color .15s;
+}
+.talent-marquee-toggle span{
+  color:#c9b4ff;
+  font-size:14px;
+  line-height:1;
+}
+.talent-marquee-toggle:hover,
+.talent-marquee-toggle:focus-visible{
+  border-color:#927ee0;
+  background:#22203e;
+  color:#fff;
+  outline:none;
+}
+.talent-strip{
+  overflow-x:auto;
+  overflow-y:hidden;
+  scrollbar-width:none;
+  scroll-behavior:auto;
+  overscroll-behavior-x:contain;
+  cursor:grab;
+}
+.talent-strip:active{cursor:grabbing}
+.talent-strip::-webkit-scrollbar{display:none;width:0;height:0}
+.talent-strip .talent-card[data-talent-duplicate="true"]{user-select:none}
+@media(max-width:760px){
+  .talent-section-actions{gap:6px}
+  .talent-marquee-toggle{min-height:34px;padding:7px 8px;font-size:10px}
+  .talent-marquee-toggle span{font-size:12px}
+}
+@media(max-width:480px){
+  .talent-section-actions{gap:4px}
+  .talent-marquee-toggle{padding:6px 7px;font-size:9px}
+  .talent-section-actions .browse-talents-button{padding:7px 8px;font-size:9px}
+}
+@media(prefers-reduced-motion:reduce){
+  .talent-marquee-toggle{transition:none}
+}
