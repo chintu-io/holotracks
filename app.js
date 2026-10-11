@@ -696,6 +696,8 @@
         '<button class="mini-action ' + (favorite ? 'is-favorite' : '') + '" data-action="favorite" data-id="' +
         escapeHTML(item.id) + '" aria-label="Toggle favourite">' + (favorite ? '♥' : '♡') + ' Save</button>' +
         '<button class="mini-action" data-action="queue" data-id="' + escapeHTML(item.id) + '">＋ Queue</button>' +
+        '<button class="mini-action share-action" data-action="share" data-id="' + escapeHTML(item.id) +
+        '" aria-label="Share ' + escapeHTML(titleOf(item)) + '" title="Share song">↗ Share</button>' +
         '</div></div></article>';
     }).join('');
     el['song-list'].innerHTML = html;
@@ -997,6 +999,68 @@
       window.setTimeout(() => toggleMobilePlayerPanel(true), 0);
     }
   }
+
+  async function shareSong(id) {
+    const item = songById(id);
+    if (!item) return;
+
+    const url = 'https://www.youtube.com/watch?v=' + encodeURIComponent(item.id);
+    const title = titleOf(item);
+    const artistText = artistsOf(item).join(', ');
+    const shareData = {
+      title,
+      text: artistText ? title + ' — ' + artistText : title,
+      url,
+    };
+
+    if (typeof navigator.share === 'function') {
+      try {
+        if (typeof navigator.canShare !== 'function' || navigator.canShare(shareData)) {
+          await navigator.share(shareData);
+          return;
+        }
+      } catch (error) {
+        // Closing the native share sheet is an ordinary cancellation.
+        if (error && error.name === 'AbortError') return;
+      }
+    }
+
+    try {
+      if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
+        await navigator.clipboard.writeText(url);
+        showNotice('Song link copied: ' + title);
+        return;
+      }
+    } catch {
+      // Some browser permissions block the async clipboard API; try the
+      // legacy selection-based copy method below before reporting failure.
+    }
+
+    let copied = false;
+    const field = document.createElement('textarea');
+    field.value = url;
+    field.setAttribute('readonly', '');
+    field.setAttribute('aria-hidden', 'true');
+    field.style.position = 'fixed';
+    field.style.opacity = '0';
+    field.style.pointerEvents = 'none';
+    field.style.left = '-9999px';
+    document.body.appendChild(field);
+    try {
+      field.select();
+      field.setSelectionRange(0, field.value.length);
+      copied = !!document.execCommand('copy');
+    } catch {
+      copied = false;
+    } finally {
+      field.remove();
+    }
+
+    showNotice(copied
+      ? 'Song link copied: ' + title
+      : 'Could not copy automatically. Song link: ' + url);
+  }
+
   function addToQueue(id) {
     if (!songById(id)) return;
     if (!state.queue.includes(id)) state.queue.push(id);
@@ -1539,6 +1603,7 @@
       if (button.dataset.action === 'play') playSong(id);
       if (button.dataset.action === 'queue') addToQueue(id);
       if (button.dataset.action === 'favorite') toggleFavorite(id);
+      if (button.dataset.action === 'share') shareSong(id);
     });
     el['talent-strip'].addEventListener('click', event => {
       const button = event.target.closest('[data-spotlight-artist]');
