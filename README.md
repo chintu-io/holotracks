@@ -80,3 +80,15 @@ Favourites, personal mixtapes, and listening preferences are stored in browser l
 ## Validation
 
 The refresh workflow runs the Node test suite plus syntax checks before querying Holodex. Tests cover normalisation, invalid IDs/statuses, deduplication, artist-credit inference, multi-page full imports, and incremental stopping once a page is fully known.
+
+## Android APK (Capacitor)
+
+HoloTracks also has an Android APK build path that wraps the existing responsive website without changing the GitHub Pages site.
+
+- Run **Actions → Build Android APK** and download the `holotracks-debug-apk` artifact from a successful run.
+- The APK is built with Capacitor 8 and can be installed directly on an Android device.
+- In-app playback continues to use YouTube's official embedded player.
+- For YouTube Premium background playback, use **Watch on YouTube** / **Open this video on YouTube** to hand the selected video to the official YouTube app. The custom HoloTracks player cannot keep YouTube embeds playing in the background under YouTube's developer policies, and the custom queue is not transferred to YouTube.
+
+See [mobile/README.md](mobile/README.md) for build and installation instructions.
+
