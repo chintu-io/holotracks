@@ -1,0 +1,15 @@
+{
+  "name": "holotracks",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A searchable Hololive original-song library with official YouTube playback.",
+  "type": "module",
+  "scripts": {
+    "refresh": "node scripts/update-catalog.mjs",
+    "refresh:dry": "node scripts/update-catalog.mjs --dry-run",
+    "test": "node --test scripts/*.test.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
