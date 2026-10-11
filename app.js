@@ -434,6 +434,21 @@
     applyFilters();
     showNotice('Filters cleared. Happy listening!');
   }
+  function activateAllSongs() {
+    state.selectedArtists.clear();
+    state.query = '';
+    state.artistQuery = '';
+    state.view = 'all';
+    state.activePlaylist = null;
+    el['search-input'].value = '';
+    el['artist-search'].value = '';
+    el['sort-select'].value = 'newest';
+    renderArtists();
+    renderPlaylists();
+    applyFilters();
+    showNotice('Browsing the full library — search a song or choose an oshi to begin.');
+    el['catalogue'].scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
   function selectSpotlightArtist(name) {
     const available = [...new Set(state.songs.flatMap(artistsOf))];
     const wanted = normalized(name);
@@ -503,7 +518,7 @@
       if (state.filtered.length) playSong(state.filtered[0].id, state.filtered.map(item => item.id));
     });
     el['show-newest'].addEventListener('click', activateFreshReleases);
-    el['hero-fresh'].addEventListener('click', activateFreshReleases);
+    el['hero-fresh'].addEventListener('click', activateAllSongs);
     el['play-random'].addEventListener('click', () => {
       if (state.filtered.length) playSong(state.filtered[Math.floor(Math.random() * state.filtered.length)].id);
     });
