@@ -4023,3 +4023,78 @@ body{
     max-width:310px!important;
   }
 }
+
+
+/* Player controls visibility: constrain the iframe before clipping controls. */
+@media (min-width:1221px){
+  .player-column,
+  body.player-docked .player-column{
+    grid-template-rows:minmax(350px,1fr) minmax(330px,1fr)!important;
+    gap:10px!important;
+  }
+  .player-column .player-card,
+  body.player-docked .player-column .player-card{
+    min-height:0!important;
+    overflow:hidden!important;
+  }
+  .player-column .video-frame-wrap,
+  body.player-docked .player-column .video-frame-wrap,
+  body.sidebar-collapsed .player-column .video-frame-wrap,
+  body.sidebar-collapsed.player-docked .player-column .video-frame-wrap{
+    width:min(100%,340px)!important;
+    max-width:340px!important;
+    height:auto!important;
+    min-height:0!important;
+    flex:none!important;
+    aspect-ratio:16/9!important;
+    margin-inline:auto!important;
+  }
+  .player-column .now-playing-meta,
+  body.player-docked .player-column .now-playing-meta{
+    flex:none!important;
+    min-height:max-content!important;
+    overflow:visible!important;
+    padding:6px 10px 7px!important;
+  }
+  .player-column .playing-title-row,
+  body.player-docked .player-column .playing-title-row{
+    min-height:32px!important;
+  }
+  .player-column .player-controls,
+  body.player-docked .player-column .player-controls{
+    display:flex!important;
+    visibility:visible!important;
+    opacity:1!important;
+    flex:none!important;
+    min-height:36px!important;
+    align-items:center!important;
+    justify-content:center!important;
+    margin:5px 0 4px!important;
+  }
+  .player-column .player-controls button,
+  body.player-docked .player-column .player-controls button{
+    visibility:visible!important;
+    opacity:1!important;
+  }
+  .player-column .player-status-row,
+  body.player-docked .player-column .player-status-row{
+    display:flex!important;
+    visibility:visible!important;
+    flex:none!important;
+    min-height:13px!important;
+    margin-top:0!important;
+  }
+}
+@media (min-width:1221px) and (max-height:760px){
+  .player-column,
+  body.player-docked .player-column{
+    grid-template-rows:minmax(320px,1fr) minmax(300px,1fr)!important;
+  }
+  .player-column .video-frame-wrap,
+  body.player-docked .player-column .video-frame-wrap,
+  body.sidebar-collapsed .player-column .video-frame-wrap,
+  body.sidebar-collapsed.player-docked .player-column .video-frame-wrap{
+    width:min(100%,290px)!important;
+    max-width:290px!important;
+  }
+}
