@@ -26,6 +26,8 @@
     playlists: 'holotracks:playlists:v1',
     shuffle: 'holotracks:shuffle:v1',
     repeat: 'holotracks:repeat:v1',
+    volume: 'holotracks:volume:v1',
+    muted: 'holotracks:muted:v1',
     bannerDeck: 'holotracks:banner-deck:v1',
     sidebarCollapsed: 'holotracks:sidebar-collapsed:v2',
     lastBanner: 'holotracks:banner-last:v1',
@@ -41,7 +43,7 @@
     'mobile-player-toggle','sidebar','player-column','player-hide','youtube-player','youtube-fallback',
     'playing-thumb','playing-art-placeholder','playing-title','playing-artist','playing-favorite',
     'player-state','watch-youtube','play-pause','previous-song','next-song','queue-shuffle',
-    'queue-repeat','queue-count','queue-list','clear-queue','create-playlist','playlist-list',
+    'queue-repeat','volume-control','volume-value','volume-mute','queue-count','queue-list','clear-queue','create-playlist','playlist-list',
     'playlist-select','save-queue','play-selected-playlist','playlist-dialog','playlist-form','cancel-playlist',
     'playlist-name','talent-strip','sidebar-collapse','mobile-mini-player','mobile-mini-thumb','mobile-mini-expand','mobile-mini-title','mobile-mini-artist','mobile-mini-toggle','mobile-mini-next','hero-talent-art',
   ];
@@ -75,6 +77,8 @@
     queue: [], currentId: null,
     shuffle: readJSON(KEYS.shuffle, false),
     repeat: readJSON(KEYS.repeat, false),
+    volume: (() => { const saved = Number(readJSON(KEYS.volume, 70)); return Number.isFinite(saved) ? Math.max(0, Math.min(100, saved)) : 70; })(),
+    muted: readJSON(KEYS.muted, false),
     player: null, playerReady: false, pendingVideoId: null,
     usingFreshFallback: false,
   };
@@ -1069,6 +1073,58 @@
       } catch {}
     }
   }
+  function updateVolumeControl() {
+    if (!el['volume-control']) return;
+    const displayedVolume = state.muted ? 0 : state.volume;
+    el['volume-control'].value = String(state.volume);
+    el['volume-control'].style.setProperty('--volume-level', state.volume + '%');
+    el['volume-control'].setAttribute('aria-valuetext', state.volume + '% volume' + (state.muted ? ', muted' : ''));
+    el['volume-value'].textContent = displayedVolume + '%';
+    el['volume-mute'].textContent = state.muted || state.volume === 0 ? '♩×' : (state.volume < 50 ? '♪' : '♫');
+    el['volume-mute'].setAttribute('aria-label', state.muted || state.volume === 0 ? 'Unmute YouTube audio' : 'Mute YouTube audio');
+    el['volume-mute'].title = state.muted || state.volume === 0 ? 'Unmute' : 'Mute';
+    el['volume-mute'].classList.toggle('is-muted', state.muted || state.volume === 0);
+  }
+
+  function applyPlayerVolume() {
+    if (!state.playerReady || !state.player) return;
+    try {
+      state.player.setVolume(state.volume);
+      if (state.muted || state.volume === 0) state.player.mute();
+      else state.player.unMute();
+    } catch {
+      // The slider remains usable if the embedded player has not initialized fully.
+    }
+    updateVolumeControl();
+  }
+
+  function setPlayerVolume(value) {
+    const volume = Math.max(0, Math.min(100, Number(value) || 0));
+    state.volume = volume;
+    state.muted = volume === 0;
+    saveJSON(KEYS.volume, state.volume);
+    saveJSON(KEYS.muted, state.muted);
+    applyPlayerVolume();
+    updateVolumeControl();
+  }
+
+  function togglePlayerMute() {
+    // A zero slider position is a mute state; unmuting restores the last non-zero level.
+    if (state.muted || state.volume === 0) {
+      state.muted = false;
+      if (state.volume === 0) {
+        const rememberedVolume = Number(readJSON(KEYS.volume, 70));
+        state.volume = Math.max(1, Math.min(100, Number.isFinite(rememberedVolume) && rememberedVolume > 0 ? rememberedVolume : 70));
+      }
+    } else {
+      state.muted = true;
+    }
+    saveJSON(KEYS.volume, state.volume);
+    saveJSON(KEYS.muted, state.muted);
+    applyPlayerVolume();
+    updateVolumeControl();
+  }
+
   function togglePlayback() {
     if (!state.playerReady || !state.player) return;
     const playing = state.player.getPlayerState() === window.YT.PlayerState.PLAYING;
@@ -1111,6 +1167,7 @@
       events: {
         onReady: () => {
           state.playerReady = true;
+          applyPlayerVolume();
           if (state.pendingVideoId) {
             const pendingId = state.pendingVideoId;
             state.player.loadVideoById(pendingId);
@@ -1118,6 +1175,7 @@
             startPlaybackStartWatchdog(pendingId);
           }
           updatePlayerButtons();
+          updateVolumeControl();
         },
         onStateChange: event => {
           if (event.data === window.YT.PlayerState.ENDED) {
@@ -1451,6 +1509,8 @@
     el['previous-song'].addEventListener('click', previousSong);
     el['next-song'].addEventListener('click', nextSong);
     el['play-pause'].addEventListener('click', togglePlayback);
+    el['volume-control'].addEventListener('input', event => setPlayerVolume(event.currentTarget.value));
+    el['volume-mute'].addEventListener('click', togglePlayerMute);
     el['mobile-mini-toggle'].addEventListener('click', togglePlayback);
     el['mobile-mini-next'].addEventListener('click', nextSong);
     el['mobile-mini-expand'].addEventListener('click', () => toggleMobilePlayerPanel());
@@ -1593,6 +1653,7 @@
   }
   async function init() {
     initEvents();
+    updateVolumeControl();
     setupDesktopVideoDock();
     setSidebarCollapsed(!!readJSON(KEYS.sidebarCollapsed, false), false);
     await loadTalentRoster();
