@@ -1909,3 +1909,62 @@ button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid 
   .artist-category-filter button:first-child{grid-column:1/-1}
   .artist-category-note{margin-top:-4px;font-size:9px}
 }
+
+
+/* Make the artist directory genuinely usable on short and tall screens. */
+.talent-picker-dialog{
+  max-height:calc(100dvh - 12px);
+  overflow:hidden;
+}
+.talent-picker-shell{
+  height:min(calc(100dvh - 24px),1000px);
+  max-height:calc(100dvh - 12px);
+  min-height:0;
+  gap:11px;
+  padding:clamp(12px,1.6vw,20px) clamp(14px,2vw,24px);
+}
+.talent-picker-dialog .artist-filters{
+  flex:1 1 0;
+  height:auto;
+  min-height:250px;
+  max-height:none;
+  overflow-x:hidden;
+  overflow-y:scroll;
+  scrollbar-width:auto;
+  scrollbar-color:#a99aff #191a32;
+  scrollbar-gutter:stable;
+  overscroll-behavior:contain;
+  scroll-behavior:smooth;
+}
+.talent-picker-dialog .artist-filters::-webkit-scrollbar{width:14px}
+.talent-picker-dialog .artist-filters::-webkit-scrollbar-track{
+  border:3px solid #191a32;
+  border-radius:999px;
+  background:#191a32;
+}
+.talent-picker-dialog .artist-filters::-webkit-scrollbar-thumb{
+  min-height:42px;
+  border:3px solid #191a32;
+  border-radius:999px;
+  background:linear-gradient(180deg,#b5a4ff,#7869c9);
+}
+.talent-picker-dialog .artist-filters::-webkit-scrollbar-thumb:hover{
+  border-color:#23203d;
+  background:linear-gradient(180deg,#d1c4ff,#9988f4);
+}
+@media(max-width:760px){
+  .talent-picker-dialog{
+    width:calc(100vw - 12px);
+    max-height:calc(100dvh - 12px);
+  }
+  .talent-picker-shell{
+    height:calc(100dvh - 18px);
+    max-height:calc(100dvh - 18px);
+    gap:9px;
+    padding:12px;
+  }
+  .talent-picker-dialog .artist-filters{min-height:220px}
+}
+@media(max-width:560px){
+  .talent-picker-dialog .artist-filters{min-height:180px}
+}
