@@ -633,9 +633,16 @@
 
   function toggleMobilePlayerPanel(force) {
     const open = typeof force === 'boolean' ? force : !el['player-column'].classList.contains('mobile-open');
+
+    // This overlay can be minimized without pausing the embedded YouTube player.
+    // Clear compact mode when opening/closing so its hidden-video state cannot stick.
+    document.body.classList.remove('compact-player');
     el['player-column'].classList.toggle('mobile-open', open);
     document.body.classList.toggle('mobile-player-open', open);
     el['mobile-player-toggle'].setAttribute('aria-expanded', String(open));
+    el['player-hide'].setAttribute('aria-expanded', String(open));
+    el['player-hide'].setAttribute('aria-label', open ? 'Minimize player and return to library' : 'Collapse player panel');
+    el['player-hide'].title = open ? 'Minimize player and return to library' : 'Collapse player panel';
   }
 
   function loadYouTubeAPI() {
@@ -929,7 +936,17 @@
       setSidebarCollapsed(!document.body.classList.contains('sidebar-collapsed'));
     });
     el['player-hide'].addEventListener('click', () => {
-      document.body.classList.toggle('compact-player');
+      if (window.matchMedia && window.matchMedia('(max-width: 680px)').matches) {
+        if (el['player-column'].classList.contains('mobile-open')) {
+          // Minimize the overlay to the fixed mini-player; keep playback running.
+          toggleMobilePlayerPanel(false);
+        } else {
+          // If reached in normal page flow, preserve the existing inline compact mode.
+          document.body.classList.toggle('compact-player');
+        }
+      } else {
+        document.body.classList.toggle('compact-player');
+      }
     });
     document.addEventListener('keydown', event => {
       if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') {
