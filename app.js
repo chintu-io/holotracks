@@ -388,13 +388,36 @@
     }
   }
 
+  function sortableCount(value) {
+    if (value === null || value === undefined || value === '') return null;
+    const count = Number(value);
+    return Number.isFinite(count) && count >= 0 ? count : null;
+  }
+
   function sortSongs(items) {
     const mode = el['sort-select'].value;
     const list = [...items];
     list.sort((a, b) => {
       if (mode === 'oldest') return dateValue(a) - dateValue(b);
       if (mode === 'title') return titleOf(a).localeCompare(titleOf(b));
-      if (mode === 'popular') return (Number(b.viewCount) || -1) - (Number(a.viewCount) || -1);
+      if (mode === 'popular') {
+        const viewsA = sortableCount(a.viewCount);
+        const viewsB = sortableCount(b.viewCount);
+        if (viewsA === null && viewsB !== null) return 1;
+        if (viewsB === null && viewsA !== null) return -1;
+        return (viewsB ?? -1) - (viewsA ?? -1) || dateValue(b) - dateValue(a);
+      }
+      if (mode === 'liked') {
+        const likesA = sortableCount(a.likeCount);
+        const likesB = sortableCount(b.likeCount);
+        if (likesA === null && likesB !== null) return 1;
+        if (likesB === null && likesA !== null) return -1;
+        if (likesA !== null && likesB !== null && likesA !== likesB) return likesB - likesA;
+        const viewsA = sortableCount(a.viewCount);
+        const viewsB = sortableCount(b.viewCount);
+        if (viewsA !== null && viewsB !== null && viewsA !== viewsB) return viewsB - viewsA;
+        return dateValue(b) - dateValue(a);
+      }
       return dateValue(b) - dateValue(a);
     });
     return list;
