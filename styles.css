@@ -944,3 +944,74 @@ button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid 
   .music-type-button{flex:none;padding:7px 9px}
   .song-kind{font-size:7px;padding:2px 4px}
 }
+
+/* Single featured-talent banner: poster-like scale, natural proportions, no competing cut-outs. */
+.hero-stage{
+  min-width:0;
+  overflow:hidden;
+  isolation:isolate;
+  background:
+    radial-gradient(ellipse at 70% 58%,#6d8cff22 0%,transparent 52%),
+    radial-gradient(ellipse at 77% 82%,#42d4ed28 0%,transparent 43%);
+}
+.hero-stage:after{
+  content:"";
+  position:absolute;
+  z-index:0;
+  inset:0;
+  pointer-events:none;
+  background:radial-gradient(ellipse at 68% 60%,#8f8eff20 0%,transparent 60%);
+}
+.hero-stage:before{
+  z-index:1!important;
+  background:linear-gradient(90deg,#211d4560 0%,#211d4512 21%,transparent 48%,#172b4418 100%)!important;
+}
+.stage-talent.stage-featured{
+  position:absolute!important;
+  z-index:3!important;
+  left:auto!important;
+  right:4%!important;
+  top:auto!important;
+  bottom:-16px!important;
+  width:auto!important;
+  height:calc(100% - 32px)!important;
+  max-width:none!important;
+  max-height:none!important;
+  object-fit:contain!important;
+  object-position:center bottom!important;
+  opacity:1!important;
+  transform:none!important;
+  transform-origin:center bottom!important;
+  filter:drop-shadow(0 14px 24px #03030bc4) drop-shadow(0 0 24px #85dfff15)!important;
+  -webkit-mask-image:none!important;
+  mask-image:none!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  mix-blend-mode:normal!important;
+}
+.stage-chip{z-index:8!important;top:12px!important;right:10px!important}
+.stage-spark.sparkle-c{display:none!important}
+.sparkle-a{z-index:4!important;top:24%!important;right:13%!important}
+.sparkle-b{z-index:4!important;top:48%!important;left:7%!important}
+.stage-ring{z-index:0!important;left:61%!important;top:55%!important;opacity:.58!important}
+.hero-footer{z-index:9!important}
+
+@media(min-width:1221px){
+  .stage-talent.stage-featured{right:5%!important;height:calc(100% - 28px)!important;bottom:-14px!important}
+}
+@media(max-width:1220px) and (min-width:681px){
+  .stage-talent.stage-featured{right:1%!important;height:calc(100% - 40px)!important;bottom:-12px!important}
+  .stage-chip{max-width:calc(100% - 20px);font-size:7px!important}
+}
+@media(max-width:680px){
+  .hero-stage{left:20%!important;right:0!important;top:0!important;bottom:0!important;opacity:1!important}
+  .stage-talent.stage-featured{right:-2%!important;bottom:-8px!important;height:calc(100% - 52px)!important;max-height:none!important;opacity:.82!important}
+  .stage-chip{top:9px!important;right:8px!important;font-size:6px!important;padding:6px 7px!important}
+  .hero-stage:before{background:linear-gradient(90deg,#211d45b8 0%,#211d4570 34%,transparent 82%)!important}
+}
+@media(max-width:390px){
+  .stage-talent.stage-featured{right:-7%!important;height:calc(100% - 67px)!important;opacity:.75!important}
+  .stage-chip{max-width:calc(100% - 14px);font-size:5.5px!important}
+}
