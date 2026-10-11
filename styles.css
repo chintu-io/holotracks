@@ -2038,3 +2038,49 @@ button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid 
   scroll-behavior:auto!important;
   overflow-x:auto!important;
 }
+
+
+/* Keep the two homepage heading actions aligned at exactly the same height. */
+.talent-section-actions .talent-marquee-toggle,
+.talent-section-actions .browse-talents-button{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  align-self:center!important;
+  box-sizing:border-box!important;
+  height:42px!important;
+  min-height:42px!important;
+  max-height:42px!important;
+  padding:0 13px!important;
+  line-height:1!important;
+  vertical-align:middle;
+}
+.talent-section-actions .talent-marquee-toggle{
+  gap:7px!important;
+}
+.talent-section-actions .talent-marquee-toggle span,
+.talent-section-actions .browse-talents-button span{
+  display:inline-flex;
+  align-items:center;
+  line-height:1!important;
+}
+@media(max-width:760px){
+  .talent-section-actions .talent-marquee-toggle,
+  .talent-section-actions .browse-talents-button{
+    height:38px!important;
+    min-height:38px!important;
+    max-height:38px!important;
+    padding:0 10px!important;
+  }
+}
+@media(max-width:480px){
+  .talent-section-actions .talent-marquee-toggle,
+  .talent-section-actions .browse-talents-button{
+    height:34px!important;
+    min-height:34px!important;
+    max-height:34px!important;
+    padding:0 8px!important;
+  }
+  .talent-section-actions .talent-marquee-toggle{font-size:9px!important}
+  .talent-section-actions .browse-talents-button{font-size:9px!important}
+}
