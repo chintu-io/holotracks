@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-11T13:48:42.119Z",
+  "generatedAt": "2026-10-11T16:41:00.691Z",
   "lastFullReconciledAt": "2026-10-11T09:30:39.795Z",
   "lastMode": "incremental",
   "source": "Holodex API v2",
@@ -14,14 +14,46 @@
       "stream"
     ]
   },
-  "total": 6282,
-  "sourceTotal": 6544,
+  "total": 6284,
+  "sourceTotal": 6546,
   "sourceTotalByTopic": {
-    "Original_Song": 3917,
+    "Original_Song": 3919,
     "Music_Cover": 2627
   },
   "pagesFetched": 132,
   "songs": [
+    {
+      "id": "_Sb7_i3e0sw",
+      "title": "RISING 酸",
+      "artist": "Hakui Koyori",
+      "artists": [
+        "Hakui Koyori"
+      ],
+      "channelName": "Hakui Koyori",
+      "channelId": "UC6eWCld0KwmyHFbAqK3V-Rw",
+      "releaseDate": "2026-10-11T15:00:13.000Z",
+      "publishedAt": "2026-10-11T15:00:13.000Z",
+      "viewCount": 197,
+      "duration": 230,
+      "songType": "original",
+      "source": "Holodex"
+    },
+    {
+      "id": "SMBaRGyq2Qc",
+      "title": "RISING 酸 (Instrumental)",
+      "artist": "Hakui Koyori",
+      "artists": [
+        "Hakui Koyori"
+      ],
+      "channelName": "Hakui Koyori",
+      "channelId": "UC6eWCld0KwmyHFbAqK3V-Rw",
+      "releaseDate": "2026-10-11T15:00:08.000Z",
+      "publishedAt": "2026-10-11T15:00:08.000Z",
+      "viewCount": 27,
+      "duration": 230,
+      "songType": "original",
+      "source": "Holodex"
+    },
     {
       "id": "WOZTqdQ6bnE",
       "title": "RISING 酸 / 博衣こより【 ケンモチヒデフミ 】(Official)",
