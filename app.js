@@ -268,7 +268,6 @@
     strip.querySelectorAll('img').forEach(image => {
       image.addEventListener('error', () => { image.style.display = 'none'; }, { once: true });
     });
-    renderArtists();
   }
 
   function rotateTalentSpotlightSet() {
@@ -314,6 +313,7 @@
     if (talentSpotlightFadeTimer !== null) window.clearTimeout(talentSpotlightFadeTimer);
     el['talent-strip'].classList.remove('is-fading');
     renderTalentSpotlightSet();
+    renderArtists();
 
     talentSpotlightTimer = window.setInterval(rotateTalentSpotlightSet, TALENT_ROTATE_MS);
   }
