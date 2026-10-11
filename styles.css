@@ -1063,3 +1063,43 @@ button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid 
 @media(max-width:390px){
   .stage-talent.stage-featured{right:-8%!important;height:calc(100% - 36px)!important;opacity:.84!important}
 }
+
+
+/* Timed single-talent hero: clean stage with a slow, cinematic cross-fade. */
+.stage-talent.stage-featured{
+  right:1%!important;
+  bottom:-30px!important;
+  height:calc(100% + 34px)!important;
+  transform:scale(1.12)!important;
+  transform-origin:center bottom!important;
+  transition:opacity .68s ease,transform .68s ease,filter .68s ease!important;
+}
+.stage-talent.stage-featured.is-entering{
+  z-index:4!important;
+  opacity:0!important;
+  transform:translateY(12px) scale(1.04)!important;
+}
+.stage-talent.stage-featured.is-visible{
+  z-index:4!important;
+  opacity:1!important;
+  transform:scale(1.12)!important;
+}
+.stage-talent.stage-featured.is-exiting{
+  z-index:3!important;
+  opacity:0!important;
+  transform:translateY(5px) scale(1.07)!important;
+}
+.stage-chip{display:none!important}
+@media(max-width:1220px) and (min-width:681px){
+  .stage-talent.stage-featured{right:-2%!important;bottom:-20px!important;height:calc(100% + 6px)!important;transform:scale(1.07)!important}
+  .stage-talent.stage-featured.is-visible{transform:scale(1.07)!important}
+}
+@media(max-width:680px){
+  .stage-talent.stage-featured{right:-4%!important;bottom:-12px!important;height:calc(100% - 22px)!important;opacity:.9!important;transform:scale(1.04)!important}
+  .stage-talent.stage-featured.is-visible{transform:scale(1.04)!important}
+  .stage-talent.stage-featured.is-entering{transform:translateY(9px) scale(1.01)!important}
+  .stage-talent.stage-featured.is-exiting{transform:translateY(4px) scale(1.02)!important}
+}
+@media(prefers-reduced-motion:reduce){
+  .stage-talent.stage-featured{transition:none!important}
+}
