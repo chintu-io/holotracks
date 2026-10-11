@@ -4536,3 +4536,14 @@ body{
     padding:4px 8px!important;
   }
 }
+
+
+/* Desktop listening room: hide the minimize toggle; keep it on touch layouts. */
+@media (min-width:1221px){
+  .player-column #player-hide{
+    display:none!important;
+  }
+  .player-column .player-head{
+    justify-content:flex-start!important;
+  }
+}
