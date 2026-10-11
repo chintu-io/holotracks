@@ -16,7 +16,7 @@ on:
         type: choice
         options: [incremental, full]
   schedule:
-    - cron: '23 4 * * *'
+    - cron: '*/30 * * * *'
 
 permissions:
   contents: write
@@ -43,17 +43,13 @@ jobs:
         id: mode
         env:
           EVENT_NAME: ${{ github.event_name }}
-          SCHEDULE: ${{ github.event.schedule }}
           DISPATCH_MODE: ${{ inputs.mode }}
-          COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
         shell: bash
         run: |
+          # Scheduled and push-triggered runs are always incremental.
+          # A full reconciliation can only be requested manually via Run workflow.
           MODE="incremental"
           if [[ "$EVENT_NAME" == "workflow_dispatch" && "$DISPATCH_MODE" == "full" ]]; then
-            MODE="full"
-          elif [[ "$EVENT_NAME" == "push" && "$COMMIT_MESSAGE" == *"[full-scan]"* ]]; then
-            # Add [full-scan] to an importer/schema-change commit to reconcile all pages.
-            # Routine workflow/package edits remain incremental and low-traffic.
             MODE="full"
           fi
           echo "mode=$MODE" >> "$GITHUB_OUTPUT"
