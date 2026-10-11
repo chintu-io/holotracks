@@ -33,10 +33,21 @@ jobs:
       - name: Validate site scripts
         run: |
           node --check app.js
+          node --check scripts/artist-directory.mjs
           node --check tools/update-talent-artwork.mjs
+          node --check tools/update-artist-artwork.mjs
           npm test
       - name: Generate official talent artwork manifest
         run: node tools/update-talent-artwork.mjs
+      - name: Restore cached channel avatars
+        uses: actions/cache@v4
+        with:
+          path: assets/artist-avatars
+          key: holotracks-artist-avatars-${{ runner.os }}-${{ hashFiles('data/songs.json') }}
+          restore-keys: |
+            holotracks-artist-avatars-${{ runner.os }}-
+      - name: Generate artwork for every catalogue artist
+        run: node tools/update-artist-artwork.mjs
       - name: Setup Pages
         uses: actions/configure-pages@v5
         with:
