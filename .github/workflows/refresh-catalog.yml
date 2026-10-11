@@ -46,12 +46,17 @@ jobs:
           EVENT_NAME: ${{ github.event_name }}
           SCHEDULE: ${{ github.event.schedule }}
           DISPATCH_MODE: ${{ inputs.mode }}
+          MODIFIED_FILES: ${{ toJSON(github.event.head_commit.modified) }}
         shell: bash
         run: |
           MODE="incremental"
           if [[ "$EVENT_NAME" == "workflow_dispatch" && "$DISPATCH_MODE" == "full" ]]; then
             MODE="full"
           elif [[ "$EVENT_NAME" == "schedule" && "$SCHEDULE" == "43 4 * * 0" ]]; then
+            MODE="full"
+          elif [[ "$EVENT_NAME" == "push" && "$MODIFIED_FILES" == *"scripts/update-catalog.mjs"* ]]; then
+            # Importer/schema changes need one complete reconciliation before returning
+            # to routine incremental mode.
             MODE="full"
           fi
           echo "mode=$MODE" >> "$GITHUB_OUTPUT"
