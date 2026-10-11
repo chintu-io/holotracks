@@ -273,8 +273,7 @@
 
   function rotateTalentSpotlightSet() {
     const strip = el['talent-strip'];
-    if (!strip || document.hidden || strip.matches(':hover') ||
-        strip.contains(document.activeElement) ||
+    if (!strip || document.hidden ||
         (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) {
       return;
     }
