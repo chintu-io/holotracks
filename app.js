@@ -132,6 +132,13 @@
         /\.(?:png|webp|jpe?g|avif)$/i.test(url.pathname) ? url.href : '';
     } catch { return ''; }
   }
+  function safeArtistPortrait(value) {
+    const official = safeTalentImage(value);
+    if (official) return official;
+    return /^assets\/artist-avatars\/UC[A-Za-z0-9_-]{22}\.(?:webp|png|jpe?g)$/i.test(String(value || ''))
+      ? value
+      : '';
+  }
   function fallbackTalentRoster() {
     return Object.entries(ARTIST_IMAGES).map(([name, image]) => ({
       slug: normalized(name).replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''),
@@ -256,6 +263,24 @@
     startHeroRotation();
   }
 
+  async function loadArtistPortraitManifest() {
+    try {
+      const response = await fetch('data/artist-portraits.json', { cache: 'no-cache' });
+      if (!response.ok) throw new Error('HTTP ' + response.status);
+      const data = await response.json();
+      const images = data && data.images && typeof data.images === 'object' ? data.images : {};
+      state.artistPortraits = new Map(
+        Object.entries(images)
+          .map(([name, url]) => [artistKey(name), safeArtistPortrait(url)])
+          .filter(([key, url]) => key && url),
+      );
+    } catch {
+      // Local development and failed optional image syncs should still show
+      // every artist; the UI renders a neutral music icon when no portrait exists.
+      state.artistPortraits = new Map();
+    }
+  }
+
   function sortSongs(items) {
     const mode = el['sort-select'].value;
     const list = [...items];
@@ -320,64 +345,52 @@
 
   function songMatchesSelectedTalents(song) {
     if (!state.selectedArtists.size) return true;
+    const selectedKeys = new Set([...state.selectedArtists].map(name => {
+      const talent = resolveRosterTalent(name);
+      return artistKey(talent?.name || name);
+    }));
     for (const credit of artistsOf(song)) {
-      if (state.selectedArtists.has(credit)) return true;
+      if (selectedKeys.has(artistKey(credit))) return true;
       const talent = resolveRosterTalent(credit);
-      if (talent && state.selectedArtists.has(talent.name)) return true;
+      if (talent && selectedKeys.has(artistKey(talent.name))) return true;
     }
     return false;
   }
 
   function renderArtists() {
-    // "Browse talents" should use the official roster rather than every guest
-    // artist/channel name found in the music catalogue.
-    const roster = [];
+    // Browse every distinct credit from the actual song catalogue, not just
+    // the current official roster. Guests, Holostars, alumni, and credits
+    // without a portrait stay visible and remain filterable.
     const counts = new Map();
-    const seen = new Set();
-
-    for (const talent of state.talents) {
-      if (!talent || typeof talent.name !== 'string' || !safeTalentImage(talent.image)) continue;
-      const key = artistKey(talent.name);
-      if (!key || seen.has(key)) continue;
-      seen.add(key);
-      roster.push(talent);
-      counts.set(talent.name, 0);
-    }
-
-    // Count each catalogue video once per credited talent, resolving known
-    // aliases to the canonical roster name.
     for (const song of state.songs) {
-      const creditedTalents = new Set();
-      for (const credit of new Set(artistsOf(song))) {
-        const talent = resolveRosterTalent(credit);
-        if (talent && counts.has(talent.name)) creditedTalents.add(talent.name);
+      for (const artist of new Set(artistsOf(song))) {
+        counts.set(artist, (counts.get(artist) || 0) + 1);
       }
-      for (const name of creditedTalents) counts.set(name, counts.get(name) + 1);
     }
 
     const query = artistKey(state.artistQuery);
-    const rows = roster
-      .filter(talent => !query || artistKey(talent.name).includes(query))
-      .sort((a, b) => a.name.localeCompare(b.name));
+    const rows = [...counts.entries()]
+      .sort((a, b) => a[0].localeCompare(b[0], undefined, { sensitivity: 'base' }))
+      .filter(([artist]) => !query || artistKey(artist).includes(query));
 
-    el['artist-count'].textContent = roster.length.toLocaleString();
-    el['artist-filters'].innerHTML = rows.map(talent => {
-      const artist = talent.name;
-      const count = counts.get(artist) || 0;
-      const portrait = safeTalentImage(talent.image);
+    el['artist-count'].textContent = counts.size.toLocaleString();
+    el['artist-filters'].innerHTML = rows.map(([artist, count]) => {
+      const officialTalent = resolveRosterTalent(artist);
+      const portrait = safeTalentImage(officialTalent?.image) ||
+        safeTalentImage(ARTIST_IMAGES[artist]) ||
+        safeArtistPortrait(state.artistPortraits.get(artistKey(artist)));
       const portraitMarkup = portrait
         ? '<span class="artist-avatar-frame"><img class="artist-avatar" src="' + escapeHTML(portrait) +
           '" alt="" loading="lazy" decoding="async"><span class="artist-avatar-fallback" aria-hidden="true">♫</span></span>'
         : '<span class="artist-avatar-frame image-unavailable"><span class="artist-avatar-fallback" aria-hidden="true">♫</span></span>';
-      return '<label class="artist-check" title="Browse songs by ' + escapeHTML(artist) + '">' +
+      return '<label class="artist-check" title="Browse songs credited to ' + escapeHTML(artist) + '">' +
         '<input type="checkbox" data-artist="' + escapeHTML(artist) + '"' +
         (state.selectedArtists.has(artist) ? ' checked' : '') + '>' + portraitMarkup +
         '<span class="artist-name">' + escapeHTML(artist) + '</span><small title="' + count.toLocaleString() +
         ' matching catalogue videos">' + count.toLocaleString() + '</small></label>';
-    }).join('') || '<p class="filter-empty">No talents match that search. Try a different name.</p>';
+    }).join('') || '<p class="filter-empty">No artists match that search. Try a different name.</p>';
 
-    // If the official host changes an image URL, keep a tidy fallback instead
-    // of letting a broken image spill outside the card.
+    // A broken official or cached image never removes its artist from the list.
     el['artist-filters'].querySelectorAll('.artist-avatar').forEach(image => {
       image.addEventListener('error', () => {
         image.closest('.artist-avatar-frame')?.classList.add('image-unavailable');
@@ -388,12 +401,12 @@
     const selectedCount = state.selectedArtists.size;
     el['talent-picker-count'].textContent = selectedCount ? String(selectedCount) : 'Browse';
     el['talent-picker-selected'].textContent = selectedCount
-      ? selectedCount + ' talent' + (selectedCount === 1 ? '' : 's') + ' selected · matching songs are shown together'
-      : 'All talents · no filters applied';
+      ? selectedCount + ' artist' + (selectedCount === 1 ? '' : 's') + ' selected · matching songs are shown together'
+      : 'All artists · no filters applied';
     el['talent-picker-toggle'].classList.toggle('has-selection', selectedCount > 0);
     el['talent-picker-toggle'].setAttribute('aria-label', selectedCount
-      ? 'Browse talents; ' + selectedCount + ' selected'
-      : 'Browse talent filters');
+      ? 'Browse artists; ' + selectedCount + ' selected'
+      : 'Browse artist filters');
     document.querySelectorAll('[data-spotlight-artist]').forEach(button => {
       const wanted = normalized(button.dataset.spotlightArtist);
       const selectedName = [...state.selectedArtists].some(name => normalized(name) === wanted);
@@ -1143,6 +1156,7 @@
     initEvents();
     setSidebarCollapsed(!!readJSON(KEYS.sidebarCollapsed, false), false);
     await loadTalentRoster();
+    await loadArtistPortraitManifest();
     try {
       const response = await fetch('data/songs.json', { cache: 'no-cache' });
       if (!response.ok) throw new Error('HTTP ' + response.status);
