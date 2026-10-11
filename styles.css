@@ -4699,3 +4699,67 @@ body{
     font-size:9.5px!important;
   }
 }
+
+
+/* Make Share unmistakable and ensure all four song actions occupy the grid. */
+.song-card-actions{
+  display:grid!important;
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  align-items:stretch!important;
+  gap:5px!important;
+}
+.song-card-actions > .mini-action{
+  display:flex!important;
+  width:100%!important;
+  min-width:0!important;
+  align-self:stretch!important;
+  border:1px solid #363653!important;
+  background:#17182d!important;
+  color:#c0c3e1!important;
+  font-size:10px!important;
+  font-weight:800!important;
+  line-height:1.2!important;
+  padding:7px 2px!important;
+  border-radius:8px!important;
+  white-space:nowrap!important;
+}
+.song-card-actions > .mini-action:hover,
+.song-card-actions > .mini-action:focus-visible{
+  border-color:#7666ad!important;
+  background:#27213f!important;
+  color:#fff!important;
+}
+.song-card-actions > .mini-action.is-favorite{
+  color:#ff91d0!important;
+  border-color:#69405f!important;
+  background:#2c1b36!important;
+}
+.song-card-actions > .mini-action.share-action{
+  color:#e0d4ff!important;
+  border-color:#62528d!important;
+  background:linear-gradient(135deg,#292344,#20203a)!important;
+  box-shadow:inset 0 0 0 1px #b59cff12!important;
+}
+.song-card-actions > .mini-action.share-action:hover,
+.song-card-actions > .mini-action.share-action:focus-visible{
+  border-color:#b59cff!important;
+  background:linear-gradient(135deg,#41315e,#292748)!important;
+  color:#fff!important;
+}
+@media(max-width:680px){
+  .song-card-actions{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:5px!important;
+  }
+  .song-card-actions > .mini-action{
+    min-height:32px!important;
+    font-size:10px!important;
+    padding:6px 4px!important;
+  }
+}
+@media(max-width:390px){
+  .song-card-actions > .mini-action{
+    min-height:30px!important;
+    font-size:9.5px!important;
+  }
+}
