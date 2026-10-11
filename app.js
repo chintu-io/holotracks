@@ -1399,6 +1399,14 @@
     state.activePlaylist = null;
     renderPlaylists();
     applyFilters();
+
+    // Favourites is a library destination, not just a hidden filter change.
+    // Scroll the updated catalogue into view so the user immediately sees the
+    // favourites heading, count, and matching song cards instead of the hero.
+    if (view === 'favorites') {
+      const target = document.getElementById('music-library') || el['song-list'];
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   }
   function activateFreshReleases() {
     state.view = 'fresh';
