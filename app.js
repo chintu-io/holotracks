@@ -618,6 +618,16 @@
     button.setAttribute('aria-pressed', String(isOpen));
     if (persist) saveJSON(KEYS.sidebarOpen, isOpen);
   }
+  function applyTheme(theme) {
+    const light = theme !== 'dark';
+    document.body.classList.toggle('theme-light', light);
+    const themeColor = document.querySelector('meta[name="theme-color"]');
+    if (themeColor) themeColor.content = light ? '#f5f7fa' : '#101025';
+    el['theme-toggle'].innerHTML = '<span aria-hidden="true">' + (light ? '☾' : '☼') +
+      '</span><b>' + (light ? 'Dark' : 'Light') + '</b>';
+    el['theme-toggle'].setAttribute('aria-label', light ? 'Switch to dark theme' : 'Switch to light theme');
+    el['theme-toggle'].title = light ? 'Switch to dark theme' : 'Switch to light theme';
+  }
   function resolveRosterTalent(name) {
     const target = artistKey(name);
     if (!target) return null;
