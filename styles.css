@@ -6190,3 +6190,45 @@ body.theme-light #player-column.queue-expanded .queue-panel-minimize:hover {
     white-space:nowrap!important;
   }
 }
+
+
+/* Queue panel header actions remain visible on mobile and desktop. */
+.queue-heading-actions {
+  display:flex!important;
+  align-items:center!important;
+  justify-content:flex-end!important;
+  gap:8px!important;
+  flex:none!important;
+}
+.queue-panel-minimize {
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  min-height:30px!important;
+  padding:0 9px!important;
+  border:1px solid #3a3e55!important;
+  border-radius:8px!important;
+  background:#22263a!important;
+  color:#d7dbee!important;
+  font:800 10px/1 'Nunito',system-ui,sans-serif!important;
+  white-space:nowrap!important;
+}
+.queue-panel-minimize:hover {
+  border-color:#8d6895!important;
+  background:#30263e!important;
+  color:#fff!important;
+}
+body.theme-light .queue-panel-minimize {
+  border-color:#dbe2ec!important;
+  background:#f5f7fb!important;
+  color:#5a687f!important;
+}
+body.theme-light .queue-panel-minimize:hover {
+  border-color:#d8c2d7!important;
+  background:#fbf0f7!important;
+  color:#93517b!important;
+}
+@media (max-width:420px) {
+  .queue-heading-actions { gap:4px!important; }
+  .queue-panel-minimize { padding-inline:6px!important; font-size:9px!important; }
+}
