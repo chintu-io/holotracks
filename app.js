@@ -129,7 +129,7 @@
     'type-all-count','type-original-count','type-cover-count','nav-original-total','nav-cover-total',
     'song-list','selected-artist-filters','pagination','empty-state','empty-title','empty-copy','empty-reset','notice',
     'play-all','play-random','favorites-shortcut','mobile-filter-toggle','theme-toggle',
-    'mobile-player-toggle','sidebar','player-column','player-hide','room-minimize','room-maximize','room-close','youtube-player','youtube-fallback',
+    'mobile-player-toggle','sidebar','player-column','player-hide','player-expand','room-minimize','room-maximize','room-close','youtube-player','youtube-fallback',
     'playing-thumb','playing-art-placeholder','playing-title','playing-artist','playing-favorite',
     'player-state','watch-youtube','play-pause','previous-song','next-song','queue-shuffle',
     'queue-repeat','player-share','volume-toggle','volume-popover','volume-control','volume-value','volume-mute','queue-count','queue-list','clear-queue','create-playlist','playlist-list',
@@ -2063,6 +2063,14 @@
       }
       setListeningRoomOpen(!el['player-column'].classList.contains('queue-expanded'));
     });
+    el['player-expand'].addEventListener('click', () => {
+      if (window.matchMedia && window.matchMedia('(max-width: 680px)').matches) {
+        toggleMobilePlayerPanel(true);
+        return;
+      }
+      setListeningRoomOpen(true);
+    });
+
     document.addEventListener('keydown', event => {
       if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') {
         event.preventDefault();
