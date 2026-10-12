@@ -5403,3 +5403,194 @@ body{
   .hero-artist-name{transform:translateY(-50%) rotate(-5deg)!important}
   .hero-artist-name.is-visible{transform:translateY(-50%) rotate(-5deg)!important}
 }
+
+
+/* HoloTracks layout refresh — preview branch only. */
+:root {
+  --bg:#f5f6fb; --bg-2:#eef0f8; --panel:#fff; --panel-raised:#fbfbfe; --panel-hover:#f0eff9;
+  --line:#e2e4ef; --line-bright:#d4d8e9; --text:#25253a; --muted:#62677c; --dim:#858ba0;
+  --pink:#c64a93; --pink-hot:#b83280; --violet:#7862c5; --cyan:#347f9c; --blue:#5369b7;
+  --mint:#267d68; --yellow:#99721d; --radius:16px; color-scheme:light;
+}
+html { scroll-padding-top:92px; }
+body { color:var(--text); background:radial-gradient(ellipse at 4% 0%,#ede6fb 0%,transparent 28%),radial-gradient(ellipse at 100% 20%,#e5f2f8 0%,transparent 26%),var(--bg); }
+.topbar { grid-template-columns:245px minmax(260px,680px) 1fr; gap:22px; height:76px; padding-inline:clamp(18px,3vw,40px); background:#ffffffed; border-bottom-color:var(--line); box-shadow:0 3px 18px #35365b08; }
+.brand-copy small { color:#777d92; }
+.global-search { background:#f8f9fd; border-color:#e0e3f0; box-shadow:0 1px 2px #26305a05; }
+.global-search:focus-within { border-color:#ad9be3; box-shadow:0 0 0 3px #a78bfa20; }
+.global-search input { color:var(--text); } .global-search input::placeholder { color:#9298ab; }
+.global-search kbd { border-color:#dce0ee; color:#7e8499; background:white; }
+.talent-picker-toggle,.global-search-button { border-color:#e4d9ef; background:#f5effb; color:#6d4d8a; }
+.global-search-button { background:#f8eaf3; color:#9f3d78; border-color:#efd5e5; }
+.top-actions { gap:12px; } .favorite-shortcut { color:#575d73; } .favorite-shortcut:hover { color:#27243b; }
+.top-live { background:#eff7f3; border-color:#d2e9df; color:#347663; }
+.theme-toggle { display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:35px;padding:7px 11px;white-space:nowrap;border:1px solid #dedfed;border-radius:10px;background:#fafaff;color:#4d5269;font-size:11px;font-weight:800;transition:background .16s,border-color .16s,color .16s; }
+.theme-toggle:hover { background:#f0edfa; border-color:#cfc4ec; } .theme-toggle .theme-icon { font-size:15px;color:#8e6cbe; }
+.theme-toggle:focus-visible { outline:2px solid var(--violet); outline-offset:3px; }
+
+.app-layout { max-width:1880px; grid-template-columns:218px minmax(0,1fr) 320px; gap:20px; padding:22px clamp(18px,2.3vw,36px) 56px; }
+.sidebar { top:92px;padding:14px 11px 12px;border-color:var(--line);border-radius:16px;background:#ffffffdf;box-shadow:0 8px 30px #30365b09; }
+.sidebar-topline { padding:3px 3px 15px; }
+.sidebar-orb { width:36px;height:36px;border-radius:11px;color:#8067ba;border-color:#e0d7f2;background:linear-gradient(135deg,#f1e9fc,#e8f4f7);box-shadow:none; }
+.sidebar-topline strong { color:#303148;font-size:12px; } .sidebar-topline small { color:#858ba0;font-size:10px; }
+.sidebar-collapse { border-color:#e2e4ef;background:#f8f9fd;color:#747a90; }
+.main-nav { gap:3px; } .nav-item { color:#626980;padding:9px 8px;border-radius:9px;font-size:11px; }
+.nav-item:hover { background:#f4f2fa;color:#38354d; }
+.nav-item.active { border-color:#ead8e7;background:linear-gradient(100deg,#f9edf5,#f4effb);color:#593f62;box-shadow:inset 3px 0 #c66eaa; }
+.nav-symbol { color:#82889d; } .nav-item.active .nav-symbol { color:#bd5c9d; } .nav-count { color:#8d93a5; }
+.sidebar-rule { color:#969bae; } .sidebar-rule i { background:#e5e7f0; }
+.playlist-section { border-top-color:var(--line); } .playlist-section h2,.filter-section h2 { color:#3f4359; }
+.add-playlist { border-color:#e6d8ed;background:#f5effa;color:#8c5b9d; }
+.playlist-row { color:#656b80; } .playlist-row:hover,.playlist-row.active { background:#f3f1f9;color:#37364c; }
+.playlist-row-smart { border-color:#eadff4;background:#f8f4fc; }
+.playlist-row-smart:hover,.playlist-row-smart.active { border-color:#d9c4ec;background:#f0e8f9; }
+.playlist-row-smart .playlist-smart-badge { color:#855ca7; }
+.sidebar-footer { border-top-color:var(--line); } .catalogue-status { color:#4f8879; }
+.live-dot { background:#4ca58a;box-shadow:0 0 0 3px #4ca58a1c; } .sidebar-footer p { color:#9297a9; }
+
+.hero-card { min-height:330px;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);border:1px solid #e2d9ef;border-radius:18px;background:radial-gradient(ellipse at 90% 6%,#edf3ff 0%,transparent 38%),linear-gradient(115deg,#fcf7ff 0%,#f4f0fc 52%,#eef8fb 100%);box-shadow:0 10px 32px #37345d0a; }
+.hero-card:before { background:linear-gradient(100deg,#ffffff3d 0%,transparent 80%); }
+.hero-card:after { background:radial-gradient(ellipse,#b1a1e426,transparent 67%); }
+.hero-eyebrow { color:#77728d; } .hero-eyebrow-dot { background:#4caa8a;box-shadow:0 0 0 3px #4caa8a20; }
+.hero-card h1 { color:#333148;font-size:clamp(31px,2.6vw,43px); } .hero-card h1 span { color:#7761bc;text-shadow:none; } .hero-card h1 em { color:#c14e94;text-shadow:none; }
+.hero-copy p { color:#777b8f; } .hero-stats strong { color:#36354c; } .hero-stats span { color:#8a8fa1; } .hero-stats>i { background:#dfd9ed; }
+.hero-stage { background:radial-gradient(ellipse at 75% 57%,#d4c8f14d 0%,transparent 53%),radial-gradient(ellipse at 70% 85%,#b6e6ed60 0%,transparent 43%); }
+.hero-stage:after { background:radial-gradient(ellipse at 68% 60%,#b6a6ee26 0%,transparent 60%); }
+.hero-stage:before { background:linear-gradient(90deg,#f7f0fc80 0%,#f7f0fc19 25%,transparent 52%,#eaf7fa30 100%)!important; }
+.stage-ring { border-color:#a08fc23a; } .stage-ring.ring-c { background:radial-gradient(circle,#b6e1e83d,transparent 65%); }
+.stage-spark { filter:none; } .sparkle-a { color:#b28c39; } .sparkle-b { color:#bf6da8; }
+.sparkle-c { background:#ffffff80;border-color:#ffffffbd;color:#8e73b2; }
+.stage-talent { filter:drop-shadow(0 8px 14px #4f42671c); } .hero-artist-name { filter:drop-shadow(0 2px 3px #fff8)!important; }
+.section-heading h2,.library-top h2 { color:#302f45; } .section-heading p,.library-top p { color:#80869a; } .section-kicker { color:#8a8fa2; }
+.browse-talents-button { border-color:#e0dbea;background:#fff;color:#6f6088; } .browse-talents-button:hover { border-color:#cfc2e4;background:#f8f4fc; }
+.talent-strip { scrollbar-color:#d8cde8 transparent; } .talent-card { color:#525870; }
+.talent-card:hover,.talent-card.selected { border-color:#e2d4ed;background:#fff; }
+.talent-image { border-color:#e2e5ef;background:radial-gradient(ellipse at 50% 35%,var(--talent,#e2d8f1),#e6e8f2 78%); }
+.talent-image:after { background:linear-gradient(transparent,#1d203022); } .talent-card strong { color:#51566c; }
+.quick-discovery { margin-bottom:20px; }
+.discovery-card { border-color:#e4e5ef;border-radius:12px;background:linear-gradient(110deg,#fff,#fbfaff);box-shadow:0 3px 10px #28274a04; }
+.discovery-card:hover { border-color:#d1c2e8; } .discovery-symbol { border-color:#e7dcef;background:#f7f0fb;color:#a44c8b; }
+.discovery-random .discovery-symbol { border-color:#d7e8ea;background:#eef8f8;color:#3e8492; }
+.discovery-card strong { color:#46445c; } .discovery-card small { color:#8c91a3; } .discovery-card>i { color:#9074ad; }
+
+.library-section { border-top-color:var(--line); } .library-top h2 { font-size:24px; }
+.result-count { border-color:#e0e3ef;background:#fafbff;color:#767c91; }
+.library-controls { gap:8px; } .sort-control { color:#858a9b; }
+.sort-control select,.playlist-select-row select { border-color:#dfe2ef;background:#fff;color:#4d5268; }
+.play-all-button,.soft-action { border-color:#e7d5e5;background:#f9edf6;color:#a24583; }
+.play-all-button:hover,.soft-action:hover { border-color:#d7aaca;background:#f4e1ee; }
+.music-type-filter { border-color:#e7e8f0;background:#fff; } .music-type-button { color:#7a8093; }
+.music-type-button.active { border-color:#ead7e8;background:#f9edf5;color:#9f467f; } .music-type-button.active span { color:#b05f95; }
+.selected-artist-filters { border-color:#e7ddec;background:linear-gradient(110deg,#fffbfe,#f8f4fc); }
+.selected-filter-caption { color:#89859c; } .selected-artist-chip { border-color:#e5d4e5;background:#f9eff8;color:#8e4b80; }
+.selected-artist-clear { border-color:#e0dfef;background:#fff;color:#6d7186; }
+.notice { border-color:#e8dcbf;background:#fffaf0;color:#796332; }
+.song-grid { gap:12px; } .song-card { border-color:#e4e6f0;border-radius:13px;background:#fff;box-shadow:0 4px 16px #2025440a; }
+.song-card:hover { border-color:#d5cae9;box-shadow:0 12px 24px #36305012; }
+.song-art { background:linear-gradient(135deg,#ede7fb,#dceef3); } .song-card-body { background:transparent; } .song-title { color:#32344b; }
+.song-card .song-artist,.song-meta,.song-card small { color:#858ba0; }
+.mini-action { border-color:#e2e4ef;background:#fafaff;color:#777c91; }
+.song-card-actions>.mini-action[data-action="play"] { border-color:#ead2e5!important;background:#f7e8f2!important;color:#a34680!important; }
+.song-card-actions>.mini-action[data-action="play"]:hover { border-color:#d6a6ca!important;background:#f2dce9!important;color:#863366!important; }
+.song-card-actions>.mini-action.share-action,.song-card-actions>.mini-action.share-action:hover { color:#74798e!important;border-color:#e1e3ef!important;background:#fafbff!important; }
+.pagination button { border-color:#e0e3ef;background:#fff;color:#777c91; }
+.pagination button.active { border-color:#d9c1e8;background:#f5edf9;color:#8b4d9e; }
+
+.player-column { position:static;display:grid;gap:13px;align-self:start;min-width:0; }
+.player-card,.queue-card { border-color:#e1e4ef;border-radius:16px;background:#fff;box-shadow:0 8px 28px #2b31550a; }
+.player-head,.queue-heading { border-bottom-color:#edf0f6; } .player-kicker { color:#9094a7; }
+.player-kicker>i,.queue-light { background:#4da78b;box-shadow:0 0 0 3px #4da78b1c; }
+.player-head h2,.queue-heading h2 { color:#34334a; }
+.panel-collapse,.clear-queue { border-color:#e1e3ef;background:#fafaff;color:#787d92; }
+.video-frame-wrap { background:#f0eff8; } .player-placeholder { color:#7b7f94; }
+.placeholder-record { border-color:#d7c6ec;background:linear-gradient(145deg,#f6eafa,#e9f4f6);color:#9b70b6;box-shadow:none; }
+.now-playing-meta { background:#fff; } .playing-text strong { color:#34354b; } .playing-text span { color:#82879b; }
+.playing-art { border-color:#e1e3ef;background:#f2eff9;color:#9172b4; } .player-heart { color:#af4b88; }
+.player-controls { border-top-color:#eceef5; } .control-button { border-color:#e0e3ef;background:#fafbff;color:#777d91; }
+.control-button.active,.control-button:hover { border-color:#d3c5e9;background:#f1ebfa;color:#795ca6; }
+.play-toggle { background:#a84e91;color:#fff;border-color:#a84e91; } .player-status-row { color:#858ba0; }
+.watch-youtube,.youtube-fallback { color:#8d4e9b; } .queue-track { border-color:transparent; }
+.queue-track:hover { background:#f7f5fc; } .queue-track.current { border-color:#e8d2e7;background:#fcf0f8; }
+.queue-track-number { border-color:#ded7ec!important;background:#f5effa!important;color:#8e659f!important; }
+.queue-track.current .queue-track-number { border-color:#d4b4e1!important;background:#f0e3f7!important;color:#ad589c!important; }
+.queue-track-info strong { color:#48485e; } .queue-track-info span { color:#8a8fa0; }
+.queue-track-play,.queue-track-remove { border-color:#e0e3ef;background:#fff;color:#777c90; }
+.queue-actions { border-top-color:#eceef5; } .playlist-select-label { color:#8a8fa1; }
+.save-button,.playlist-play { border-color:#e1d5eb;background:#f7f1fb;color:#805c9b; }
+.player-footnote { color:#989caf; } .empty-state { border-color:#e2e4ef;background:#fff;color:#81869a; }
+.empty-state h3 { color:#34334a; } .page-footer { color:#858a9d;border-top-color:var(--line); } .page-footer a { color:#875da5; }
+.talent-picker-dialog { color:var(--text); } .talent-picker-shell { background:#fff;border-color:var(--line); }
+.talent-picker-head h2 { color:#34334a; } .talent-picker-head p,.artist-category-note { color:#82879a; }
+.artist-search { border-color:#e1e3ef;background:#fafbff; } .artist-search input { color:#33364b; }
+.artist-category-filter { border-color:#e5e6f0;background:#f8f8fc; } .artist-category-filter button { color:#747a8e; }
+.artist-category-filter button.is-active { border-color:#e3d1e8;background:#f7edf8;color:#9d4c90; }
+.talent-picker-toolbar { border-top-color:#eef0f6;border-bottom-color:#eef0f6; }
+.clear-filters { border-color:#e0e2ee;background:#fff;color:#777c90; }
+.artist-check { background:#fff;border-color:#e3e5ef;color:#3e4057; }
+.artist-check:hover { border-color:#d6c3e8;background:#faf7fd; }
+.artist-check[aria-pressed="true"],.artist-check.selected { border-color:#cdb9e5;background:#f5effb; }
+.artist-check .artist-avatar { background:#f0eaf8; }
+.talent-picker-footer { border-top-color:#e9ebf4; } .talent-picker-footer span { color:#858ba0; }
+.talent-picker-done { background:#7d66bb;color:white; }
+body.compact-player .player-card .video-frame-wrap,body.compact-player .player-card .now-playing-meta { display:none; }
+body.compact-player .player-head { padding-bottom:12px; }
+body.filters-open .sidebar { background:#fff; }
+.sidebar-collapse:hover { border-color:#d5c7e8;background:#f0eaf8;color:#6c5497; }
+body.sidebar-collapsed .app-layout { grid-template-columns:70px minmax(0,1fr) 320px; }
+body.sidebar-collapsed .sidebar { padding:12px 7px; }
+body.sidebar-collapsed .sidebar-topline { justify-content:center;padding-inline:0; }
+body.sidebar-collapsed .sidebar-brand-copy,body.sidebar-collapsed .playlist-section,body.sidebar-collapsed .sidebar-footer { display:none!important; }
+body.sidebar-collapsed .sidebar-collapse { position:absolute;top:-5px;right:-4px; }
+body.sidebar-collapsed .nav-item { justify-content:center;padding-inline:5px; }
+body.sidebar-collapsed .nav-label,body.sidebar-collapsed .nav-count,body.sidebar-collapsed .nav-short-label { display:none!important; }
+body.sidebar-collapsed .nav-symbol { font-size:18px; }
+body.player-docked .player-column { position:static!important;max-height:none; }
+body.player-docked .player-column .queue-card,body.player-docked .player-column .player-footnote { display:block!important; }
+
+@media (min-width:1700px) { .app-layout { grid-template-columns:220px minmax(0,1fr) 330px;gap:22px; } }
+@media (max-width:1510px) and (min-width:1221px) { .app-layout { grid-template-columns:205px minmax(0,1fr) 305px;gap:14px;padding-inline:16px; } .topbar { grid-template-columns:225px minmax(180px,1fr) auto;gap:14px;padding-inline:20px; } }
+@media (max-width:1220px) and (min-width:971px) { .app-layout { grid-template-columns:210px minmax(0,1fr); } .player-column { grid-column:2;position:static;display:grid;grid-template-columns:minmax(0,1fr) minmax(250px,1fr); } }
+@media (max-width:970px) and (min-width:681px) { .app-layout { grid-template-columns:180px minmax(0,1fr);gap:12px;padding:12px; } .player-column { grid-column:2;grid-template-columns:1fr; } .topbar { grid-template-columns:190px minmax(180px,1fr) auto;gap:10px;padding-inline:13px; } .brand-copy small { font-size:7px; } .top-live { display:none; } .theme-toggle { padding:7px 9px; } }
+@media (max-width:680px) {
+  .topbar { background:#fffffffa;border-bottom-color:var(--line); }
+  .top-live { display:none; } .theme-toggle { min-height:32px;padding:6px 8px;font-size:10px; }
+  .mobile-toolbar { background:#fffffff0;border-bottom-color:var(--line); }
+  .mobile-tool { border-color:#e2e4ef;background:#fff;color:#60657b; } .mobile-tool span { color:#986cb9; }
+  .app-layout { gap:14px;padding:11px 10px 32px; }
+  .sidebar { box-shadow:0 10px 28px #2829430b; } .player-column { position:static;width:100%;grid-template-columns:minmax(0,1fr); }
+  .player-card,.queue-card { box-shadow:0 5px 18px #2b31550a; } .song-grid { gap:9px; }
+  .song-card { border-radius:11px; } .song-card-body { padding:9px; } .hero-card { border-radius:16px; }
+  .hero-copy { max-width:80%; } .talent-card { color:#575b70; }
+  .mobile-mini-player { background:#ffffffef;border-color:#e2e4ef;color:#3e4057;box-shadow:0 -5px 25px #25243c12; }
+  .mobile-mini-info strong { color:#34354b; } .mobile-mini-info small { color:#81869a; }
+  .mobile-mini-control { background:#f6effa;border-color:#e4d7ed;color:#80599e; }
+}
+@media (max-width:390px) { .theme-toggle .theme-label { display:none; } .app-layout { padding-inline:8px; } .hero-card h1 { font-size:clamp(29px,8vw,35px); } }
+@media (prefers-reduced-motion:reduce) { .theme-toggle { transition:none; } }
+
+:root[data-theme="dark"] {
+  color-scheme:dark;
+  --bg:#0b0d18;--bg-2:#111426;--panel:#15182a;--panel-raised:#1b1f33;--panel-hover:#242940;
+  --line:#2b3047;--line-bright:#414966;--text:#f0f2fa;--muted:#abb2c5;--dim:#828ba2;
+  --pink:#f08ac4;--pink-hot:#f05bab;--violet:#b6a1f3;--cyan:#83d8ed;--blue:#91a5f2;--mint:#8bd6bd;--yellow:#e7ca85;
+}
+:root[data-theme="dark"] body { background:radial-gradient(ellipse at 12% 0%,#30234d 0%,transparent 28%),#0b0d18;color:var(--text); }
+:root[data-theme="dark"] .topbar { background:#0b0d18ed;border-color:#282d43; }
+:root[data-theme="dark"] .global-search,:root[data-theme="dark"] .sidebar,:root[data-theme="dark"] .song-card,:root[data-theme="dark"] .player-card,:root[data-theme="dark"] .queue-card,:root[data-theme="dark"] .music-type-filter,:root[data-theme="dark"] .discovery-card,:root[data-theme="dark"] .sort-control select,:root[data-theme="dark"] .playlist-select-row select,:root[data-theme="dark"] .result-count { background:#141829;border-color:var(--line); }
+:root[data-theme="dark"] .global-search input,:root[data-theme="dark"] .sort-control select,:root[data-theme="dark"] .playlist-select-row select,:root[data-theme="dark"] .song-title,:root[data-theme="dark"] .sidebar-topline strong,:root[data-theme="dark"] .main-nav .nav-item,:root[data-theme="dark"] .playlist-row,:root[data-theme="dark"] .library-top h2,:root[data-theme="dark"] .section-heading h2,:root[data-theme="dark"] .player-head h2,:root[data-theme="dark"] .queue-heading h2,:root[data-theme="dark"] .playing-text strong,:root[data-theme="dark"] .queue-track-info strong { color:var(--text); }
+:root[data-theme="dark"] .brand-copy small,:root[data-theme="dark"] .section-kicker,:root[data-theme="dark"] .hero-copy p,:root[data-theme="dark"] .hero-eyebrow,:root[data-theme="dark"] .hero-stats span,:root[data-theme="dark"] .sidebar-topline small,:root[data-theme="dark"] .sidebar-footer p,:root[data-theme="dark"] .section-heading p,:root[data-theme="dark"] .library-top p,:root[data-theme="dark"] .player-kicker,:root[data-theme="dark"] .player-status-row,:root[data-theme="dark"] .player-footnote { color:var(--muted); }
+:root[data-theme="dark"] .hero-card { border-color:#34314f;background:linear-gradient(115deg,#211c35 0%,#252340 55%,#162b35 100%); }
+:root[data-theme="dark"] .hero-card h1 { color:#f6f2ff; } :root[data-theme="dark"] .hero-card h1 span { color:#b6a5f3; } :root[data-theme="dark"] .hero-card h1 em { color:#f08ac4; }
+:root[data-theme="dark"] .hero-stats strong { color:#f4f2ff; } :root[data-theme="dark"] .hero-stats>i { background:#ffffff24; }
+:root[data-theme="dark"] .hero-stage { background:radial-gradient(ellipse at 72% 55%,#7866b333,transparent 58%); }
+:root[data-theme="dark"] .nav-item.active { background:#2e263b;border-color:#4a3b55;color:#fff; } :root[data-theme="dark"] .nav-item.active .nav-symbol { color:var(--pink); }
+:root[data-theme="dark"] .playlist-row-smart { background:#211b32;border-color:#3b3152; }
+:root[data-theme="dark"] .playlist-row-smart:hover,:root[data-theme="dark"] .playlist-row-smart.active { background:#30243c;border-color:#695080; }
+:root[data-theme="dark"] .song-card:hover { border-color:#55506b; } :root[data-theme="dark"] .player-placeholder { color:#aeb3c6; }
+:root[data-theme="dark"] .placeholder-record { background:linear-gradient(145deg,#302540,#1c3039);border-color:#4f4065;color:#d8b1e8; }
+:root[data-theme="dark"] .control-button { background:#171b2e;border-color:#343a52;color:#bbc3d7; }
+:root[data-theme="dark"] .play-toggle { background:#bf5c9b;border-color:#bf5c9b;color:#fff; }
+:root[data-theme="dark"] .queue-track.current { background:#2b2036;border-color:#4d354c; }
+:root[data-theme="dark"] .queue-track-number { background:#25213a!important;border-color:#48405f!important;color:#d4b8eb!important; }
+:root[data-theme="dark"] .theme-toggle { background:#171b2e;border-color:#373d56;color:#d7dced; }
+:root[data-theme="dark"] .theme-toggle .theme-icon { color:#d9c07a; }
