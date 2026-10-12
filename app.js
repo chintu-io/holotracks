@@ -117,6 +117,7 @@
     muted: 'holotracks:muted:v1',
     bannerDeck: 'holotracks:banner-deck:v2',
     sidebarCollapsed: 'holotracks:sidebar-collapsed:v2',
+    theme: 'holotracks:theme:v1',
     lastBanner: 'holotracks:banner-last:v2',
   };
   const ids = [
@@ -126,7 +127,7 @@
     'source-status','catalogue-title-text','results-count','results-caption','sort-select',
     'type-all-count','type-original-count','type-cover-count','nav-original-total','nav-cover-total',
     'song-list','selected-artist-filters','pagination','empty-state','empty-title','empty-copy','empty-reset','notice',
-    'play-all','play-random','favorites-shortcut','mobile-filter-toggle',
+    'play-all','play-random','favorites-shortcut','theme-toggle','mobile-filter-toggle',
     'mobile-player-toggle','sidebar','player-column','player-hide','youtube-player','youtube-fallback',
     'playing-thumb','playing-art-placeholder','playing-title','playing-artist','playing-favorite',
     'player-state','watch-youtube','play-pause','previous-song','next-song','queue-shuffle',
@@ -606,6 +607,25 @@
     fauna: 'Ceres Fauna', mumei: 'Nanashi Mumei', ame: 'Watson Amelia',
     chloe: 'Sakamata Chloe', sana: 'Tsukumo Sana',
   };
+  function setTheme(theme, persist = true) {
+    const value = theme === 'dark' ? 'dark' : 'light';
+    document.documentElement.dataset.theme = value;
+    const button = el['theme-toggle'];
+    if (button) {
+      const isDark = value === 'dark';
+      button.setAttribute('aria-pressed', String(isDark));
+      button.setAttribute('aria-label', isDark ? 'Switch to light theme' : 'Switch to dark theme');
+      button.title = isDark ? 'Switch to light theme' : 'Switch to dark theme';
+      const icon = button.querySelector('.theme-icon');
+      const label = button.querySelector('.theme-label');
+      if (icon) icon.textContent = isDark ? '☀' : '☾';
+      if (label) label.textContent = isDark ? 'Light mode' : 'Dark mode';
+    }
+    const meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.content = value === 'dark' ? '#0b0d18' : '#f5f6fb';
+    if (persist) saveJSON(KEYS.theme, value);
+  }
+
   function setSidebarCollapsed(collapsed, persist = true) {
     document.body.classList.toggle('sidebar-collapsed', !!collapsed);
     el['sidebar-collapse'].textContent = collapsed ? '›' : '‹';
@@ -1685,6 +1705,10 @@
   }
 
   function initEvents() {
+    el['theme-toggle']?.addEventListener('click', () => {
+      const current = document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light';
+      setTheme(current === 'dark' ? 'light' : 'dark');
+    });
     document.querySelectorAll('[data-view]').forEach(button => {
       button.addEventListener('click', () => setView(button.dataset.view));
     });
@@ -2036,6 +2060,7 @@
     initEvents();
     updateVolumeControl();
     setupDesktopVideoDock();
+    setTheme(readJSON(KEYS.theme, 'light'), false);
     setSidebarCollapsed(!!readJSON(KEYS.sidebarCollapsed, false), false);
     await loadTalentRoster();
     await loadArtistPortraitManifest();
