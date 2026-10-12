@@ -129,7 +129,7 @@
     'type-all-count','type-original-count','type-cover-count','nav-original-total','nav-cover-total',
     'song-list','selected-artist-filters','pagination','empty-state','empty-title','empty-copy','empty-reset','notice',
     'play-all','play-random','favorites-shortcut','mobile-filter-toggle','theme-toggle',
-    'mobile-player-toggle','sidebar','player-column','player-hide','youtube-player','youtube-fallback',
+    'mobile-player-toggle','sidebar','player-column','player-hide','queue-panel-minimize','youtube-player','youtube-fallback',
     'playing-thumb','playing-art-placeholder','playing-title','playing-artist','playing-favorite',
     'player-state','watch-youtube','play-pause','previous-song','next-song','queue-shuffle',
     'queue-repeat','player-share','volume-toggle','volume-popover','volume-control','volume-value','volume-mute','queue-count','queue-list','clear-queue','create-playlist','playlist-list',
@@ -1165,6 +1165,18 @@
     playbackStartTimer = window.setTimeout(inspectPlayer, PLAYBACK_START_TIMEOUT_MS);
   }
 
+  function setListeningRoomOpen(open) {
+    const isOpen = !!open;
+    el['player-column'].classList.toggle('queue-expanded', isOpen);
+    document.body.classList.toggle('listening-room-open', isOpen);
+    const button = el['player-hide'];
+    button.textContent = isOpen ? 'Close room' : 'Queue & playlists';
+    button.setAttribute('aria-expanded', String(isOpen));
+    button.setAttribute('aria-pressed', String(isOpen));
+    button.setAttribute('aria-label', isOpen ? 'Minimize listening room' : 'Open listening room and playlists');
+    button.title = isOpen ? 'Minimize listening room' : 'Open listening room and playlists';
+  }
+
   function playSong(id, queue = null) {
     if (!songById(id)) return;
     clearPlaybackStartWatchdog();
@@ -1193,11 +1205,12 @@
       loadYouTubeAPI();
     }
 
-    // On phones, make the video/player visible as soon as a track is started.
-    // Defer until click bubbling completes so the outside-click listener cannot
-    // immediately close the panel that this interaction just opened.
+    // Playing a song is a video-watching action: reveal the embedded player
+    // after click bubbling so the outside-click listener does not close it.
     if (window.matchMedia && window.matchMedia('(max-width: 680px)').matches) {
       window.setTimeout(() => toggleMobilePlayerPanel(true), 0);
+    } else {
+      window.setTimeout(() => setListeningRoomOpen(true), 0);
     }
   }
 
@@ -1970,24 +1983,11 @@
         if (pickedNavigation || clickedOutsideSidebar) setSidebarCollapsed(true);
       }
       if (el['player-column'].classList.contains('queue-expanded') && !event.target.closest('#player-column')) {
-        el['player-column'].classList.remove('queue-expanded');
-        document.body.classList.remove('listening-room-open');
-        el['player-hide'].textContent = 'Queue & playlists';
-        el['player-hide'].setAttribute('aria-expanded', 'false');
-        el['player-hide'].setAttribute('aria-label', 'Open listening room and playlists');
-        el['player-hide'].title = 'Open listening room and playlists';
+        setListeningRoomOpen(false);
       }
       if (document.body.classList.contains('mobile-player-open') &&
           !event.target.closest('#player-column, #mobile-mini-player, #mobile-player-toggle')) {
         toggleMobilePlayerPanel(false);
-      }
-      if (el['player-column'].classList.contains('queue-expanded') && !event.target.closest('#player-column')) {
-        el['player-column'].classList.remove('queue-expanded');
-        document.body.classList.remove('listening-room-open');
-        el['player-hide'].textContent = 'Queue & playlists';
-        el['player-hide'].setAttribute('aria-expanded', 'false');
-        el['player-hide'].setAttribute('aria-label', 'Open listening room and playlists');
-        el['player-hide'].title = 'Open listening room and playlists';
       }
       if (document.body.classList.contains('filters-open')) {
         const pickedDestination = event.target.closest(
@@ -2000,6 +2000,7 @@
         }
       }
     });
+
     document.addEventListener('keydown', event => {
       if (event.key !== 'Escape') return;
       toggleVolumePopover(false);
@@ -2009,13 +2010,15 @@
         el['mobile-filter-toggle'].setAttribute('aria-expanded', 'false');
       }
       if (document.body.classList.contains('sidebar-open')) setSidebarCollapsed(true);
-      if (el['player-column'].classList.contains('queue-expanded')) {
-        el['player-column'].classList.remove('queue-expanded');
-        el['player-hide'].textContent = '⌃';
-        el['player-hide'].setAttribute('aria-expanded', 'false');
-        el['player-hide'].setAttribute('aria-label', 'Show queue and playlist controls');
-        el['player-hide'].title = 'Show queue and playlist controls';
+      if (el['player-column'].classList.contains('queue-expanded')) setListeningRoomOpen(false);
+    });
+    el['queue-panel-minimize'].addEventListener('click', () => {
+      if (window.matchMedia && window.matchMedia('(max-width: 680px)').matches &&
+          document.body.classList.contains('mobile-player-open')) {
+        toggleMobilePlayerPanel(false);
+        return;
       }
+      setListeningRoomOpen(false);
     });
     el['sidebar-collapse'].addEventListener('click', () => {
       setSidebarCollapsed(document.body.classList.contains('sidebar-open'));
@@ -2026,16 +2029,11 @@
           toggleMobilePlayerPanel(false);
         } else {
           document.body.classList.toggle('compact-player');
+          if (document.body.classList.contains('mobile-player-open')) toggleMobilePlayerPanel(false);
         }
         return;
       }
-      const expanded = !el['player-column'].classList.contains('queue-expanded');
-      el['player-column'].classList.toggle('queue-expanded', expanded);
-      document.body.classList.toggle('listening-room-open', expanded);
-      el['player-hide'].textContent = expanded ? 'Close room' : 'Queue & playlists';
-      el['player-hide'].setAttribute('aria-expanded', String(expanded));
-      el['player-hide'].setAttribute('aria-label', expanded ? 'Close listening room' : 'Open listening room and playlists');
-      el['player-hide'].title = expanded ? 'Close listening room' : 'Open listening room and playlists';
+      setListeningRoomOpen(!el['player-column'].classList.contains('queue-expanded'));
     });
     document.addEventListener('keydown', event => {
       if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') {
