@@ -9,8 +9,8 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://hololive.hololivepro.com" crossorigin>
   <link rel="preconnect" href="https://i.ytimg.com" crossorigin>
-  <link rel="stylesheet" href="styles.css?v=20261013-modern-listening-room-7">
-  <script defer src="app.js?v=20261013-modern-listening-room-7"></script>
+  <link rel="stylesheet" href="styles.css?v=20261013-video-first-dock-8">
+  <script defer src="app.js?v=20261013-video-first-dock-8"></script>
 </head>
 <body>
   <a class="skip-link" href="#catalogue">Skip to music library</a>
@@ -187,7 +187,7 @@
         </div>
       </section>
       <section class="queue-card">
-        <div class="queue-heading"><div><span class="player-kicker"><i class="queue-light"></i> COMING UP NEXT</span><h2>Up next <span id="queue-count" class="result-count">0</span></h2></div><button id="clear-queue" class="clear-queue" type="button">Clear</button></div>
+        <div class="queue-heading"><div><span class="player-kicker"><i class="queue-light"></i> COMING UP NEXT</span><h2>Up next <span id="queue-count" class="result-count">0</span></h2></div><div class="queue-heading-actions"><button id="queue-panel-minimize" class="queue-panel-minimize" type="button" title="Minimize listening room" aria-label="Minimize listening room">− Minimize</button><button id="clear-queue" class="clear-queue" type="button">Clear</button></div></div>
         <div id="queue-list" class="queue-list"><div class="queue-empty"><span>≋</span><p>Your queue is empty.<br><small>Play or queue songs to start a mixtape.</small></p></div></div>
         <div class="queue-actions"><label class="playlist-select-label" for="playlist-select">Save your queue as a playlist</label><div class="playlist-select-row"><select id="playlist-select" aria-label="Choose a playlist"><option value="">Choose a playlist…</option></select><button id="save-queue" class="save-button" type="button">Save</button></div><button id="play-selected-playlist" class="playlist-play" type="button">Play selected playlist ↗</button></div>
       </section>
