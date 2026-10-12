@@ -7245,3 +7245,12 @@ body.theme-light #player-column.player-column:not(.queue-expanded) .dock-action-
     flex-basis:31px!important; width:31px!important; min-width:31px!important; height:31px!important; min-height:31px!important;
   }
 }
+
+
+/* The dock-only action cluster must not leave a duplicate Expand button under the full video. */
+@media (min-width:681px) {
+  #player-column.queue-expanded .dock-action-row { display:none!important; }
+  #player-column.queue-expanded .now-playing-meta {
+    gap:0!important;
+  }
+}
