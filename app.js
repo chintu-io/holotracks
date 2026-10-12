@@ -28,9 +28,9 @@
     repeat: 'holotracks:repeat:v1',
     volume: 'holotracks:volume:v1',
     muted: 'holotracks:muted:v1',
-    bannerDeck: 'holotracks:banner-deck:v1',
+    bannerDeck: 'holotracks:banner-deck:v2',
     sidebarCollapsed: 'holotracks:sidebar-collapsed:v2',
-    lastBanner: 'holotracks:banner-last:v1',
+    lastBanner: 'holotracks:banner-last:v2',
   };
   const ids = [
     'search-input','search-button','global-search-form','artist-search','artist-filters','artist-count','show-all-artists',
@@ -67,7 +67,7 @@
   let lastUnavailableNoticeAt = 0;
 
   const state = {
-    songs: [], filtered: [], currentPage: 1, talents: [], artistPortraits: new Map(),
+    songs: [], filtered: [], currentPage: 1, talents: [], bannerArtwork: [], artistPortraits: new Map(),
     selectedArtists: new Set(),
     query: '', artistQuery: '', artistCategory: 'all',
     view: 'all', songType: 'all',
@@ -168,43 +168,85 @@
     }
     return result;
   }
-  function pickBannerTalent() {
-    const roster = state.talents.filter(item =>
-      item && item.slug && (safeTalentImage(item.bannerImage) || safeTalentImage(item.image))
-    );
-    if (!roster.length) return null;
+  function buildBannerDeck(roster, previousSlug = '') {
+    const remaining = roster.map(item => ({
+      slug: item.slug,
+      name: item.name,
+      images: shuffled([...new Set((Array.isArray(item.images) ? item.images : [])
+        .map(safeTalentImage).filter(Boolean))]),
+    })).filter(item => item.images.length);
+    if (!remaining.length) return [];
 
-    const bySlug = new Map(roster.map(item => [item.slug, item]));
-    let deck = readJSON(KEYS.bannerDeck, []);
-    if (!Array.isArray(deck)) deck = [];
-    deck = deck.filter((slug, index) => bySlug.has(slug) && deck.indexOf(slug) === index);
-
-    // Keep any existing valid rotation order, but append every artist newly
-    // added to the official manifest. This guarantees the full current roster
-    // gets a turn instead of silently cycling only an older saved subset.
-    const queuedSlugs = new Set(deck);
-    const newlyAvailable = shuffled(roster.map(item => item.slug).filter(slug => !queuedSlugs.has(slug)));
-    deck.push(...newlyAvailable);
-
-    const previous = readJSON(KEYS.lastBanner, []);
-    const previousSlugs = Array.isArray(previous)
-      ? previous
-      : (typeof previous === 'string' ? [previous] : []);
-
-    // A fresh cycle contains every eligible official artist once. Avoid
-    // starting on an artist shown in the immediately preceding frame.
-    if (!deck.length) {
-      deck = shuffled(roster.map(item => item.slug));
-      if (deck.length > 1 && previousSlugs.includes(deck[0])) {
-        const replacementIndex = deck.findIndex(slug => !previousSlugs.includes(slug));
-        if (replacementIndex > 0) [deck[0], deck[replacementIndex]] = [deck[replacementIndex], deck[0]];
-      }
+    // Round one contains exactly one randomly selected image for every artist.
+    // This guarantees every represented artist appears before anyone gets a
+    // second turn, regardless of how many image variants that artist has.
+    const firstPass = shuffled(remaining.map(artist => ({
+      slug: artist.slug,
+      image: artist.images.pop(),
+    })));
+    if (firstPass.length > 1 && previousSlug && firstPass[0].slug === previousSlug) {
+      const swapIndex = firstPass.findIndex((item, index) => index > 0 && item.slug !== previousSlug);
+      if (swapIndex > 0) [firstPass[0], firstPass[swapIndex]] = [firstPass[swapIndex], firstPass[0]];
     }
 
-    const pickedSlug = deck.shift();
+    const deck = firstPass.map(item => item.image);
+    let previousSlugInDeck = firstPass[firstPass.length - 1]?.slug || '';
+
+    // Randomize the remaining variants across artists instead of keeping each
+    // artist's scraped URLs together. Prefer the most available artist other
+    // than the one just shown, preventing back-to-back repeats where possible.
+    while (remaining.some(artist => artist.images.length)) {
+      let candidates = remaining.filter(artist =>
+        artist.images.length && artist.slug !== previousSlugInDeck
+      );
+      if (!candidates.length) candidates = remaining.filter(artist => artist.images.length);
+      const highestRemaining = Math.max(...candidates.map(artist => artist.images.length));
+      const leaders = candidates.filter(artist => artist.images.length === highestRemaining);
+      const next = leaders[Math.floor(Math.random() * leaders.length)];
+      deck.push(next.images.pop());
+      previousSlugInDeck = next.slug;
+    }
+    return deck;
+  }
+
+  function pickBannerTalent() {
+    const fallbackRoster = state.talents
+      .filter(item => item && item.slug && item.name &&
+        (safeTalentImage(item.bannerImage) || safeTalentImage(item.image)))
+      .map(item => ({
+        slug: item.slug,
+        name: item.name,
+        images: [safeTalentImage(item.bannerImage) || safeTalentImage(item.image)].filter(Boolean),
+      }));
+    const roster = state.bannerArtwork.length ? state.bannerArtwork : fallbackRoster;
+    if (!roster.length) return null;
+
+    const byImage = new Map();
+    const cleanRoster = [];
+    for (const artist of roster) {
+      const images = [...new Set((Array.isArray(artist.images) ? artist.images : [])
+        .map(safeTalentImage).filter(Boolean))];
+      if (!artist.slug || !artist.name || !images.length) continue;
+      cleanRoster.push({ slug: artist.slug, name: artist.name, images });
+      for (const image of images) {
+        if (!byImage.has(image)) byImage.set(image, { slug: artist.slug, name: artist.name, image });
+      }
+    }
+    if (!cleanRoster.length || !byImage.size) return null;
+
+    let deck = readJSON(KEYS.bannerDeck, []);
+    if (!Array.isArray(deck)) deck = [];
+    deck = deck.filter((url, index) => byImage.has(url) && deck.indexOf(url) === index);
+
+    const previousImage = readJSON(KEYS.lastBanner, '');
+    const previousSlug = byImage.get(previousImage)?.slug || '';
+    if (!deck.length) deck = buildBannerDeck(cleanRoster, previousSlug);
+
+    const pickedImage = deck.shift();
+    if (!pickedImage) return null;
     saveJSON(KEYS.bannerDeck, deck);
-    saveJSON(KEYS.lastBanner, pickedSlug);
-    return bySlug.get(pickedSlug) || null;
+    saveJSON(KEYS.lastBanner, pickedImage);
+    return byImage.get(pickedImage) || null;
   }
 
   function renderHeroTalentArt({ transition = false } = {}) {
@@ -240,8 +282,8 @@
       });
     };
 
-    const imageSource = safeTalentImage(talent.bannerImage) ||
-      safeTalentImage(ARTIST_IMAGES[talent.name]) || safeTalentImage(talent.image);
+    const imageSource = safeTalentImage(talent.image) ||
+      safeTalentImage(talent.bannerImage) || safeTalentImage(ARTIST_IMAGES[talent.name]);
     if (!imageSource) return;
     stage.appendChild(image);
     image.src = imageSource;
@@ -365,6 +407,24 @@
     }
     if (!state.talents.length) state.talents = fallbackTalentRoster();
     for (const talent of state.talents) ARTIST_IMAGES[talent.name] = talent.image;
+
+    try {
+      const response = await fetch('data/banner-artwork.json', { cache: 'no-cache' });
+      if (!response.ok) throw new Error('HTTP ' + response.status);
+      const data = await response.json();
+      const entries = Array.isArray(data.artists) ? data.artists : [];
+      state.bannerArtwork = entries.map(item => ({
+        slug: typeof item.slug === 'string' ? item.slug : '',
+        name: typeof item.name === 'string' ? item.name : '',
+        images: Array.isArray(item.images)
+          ? [...new Set(item.images.map(safeTalentImage).filter(Boolean))]
+          : [],
+      })).filter(item => item.slug && item.name && item.images.length);
+    } catch {
+      // Keep the original official-roster fallback if the curated image list
+      // cannot be loaded or validated.
+      state.bannerArtwork = [];
+    }
     renderHeroTalentArt();
     renderTalentSpotlight();
     startHeroRotation();
