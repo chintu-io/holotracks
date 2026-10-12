@@ -1879,7 +1879,17 @@
     });
     el['previous-song'].addEventListener('click', previousSong);
     el['next-song'].addEventListener('click', nextSong);
-    el['play-pause'].addEventListener('click', togglePlayback);
+    el['play-pause'].addEventListener('click', () => {
+      const wasPlaying = state.playerReady && state.player &&
+        state.player.getPlayerState() === window.YT.PlayerState.PLAYING;
+      togglePlayback();
+      // If Play/Resume is pressed from the compact dock, bring the actual
+      // YouTube video back into view. Pausing from the dock keeps it minimized.
+      if (!wasPlaying && state.currentId &&
+          !(window.matchMedia && window.matchMedia('(max-width: 680px)').matches)) {
+        window.setTimeout(() => setListeningRoomOpen(true), 0);
+      }
+    });
     el['volume-toggle'].addEventListener('click', () => toggleVolumePopover());
     el['volume-control'].addEventListener('input', event => setPlayerVolume(event.currentTarget.value));
     el['volume-mute'].addEventListener('click', togglePlayerMute);
