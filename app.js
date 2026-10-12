@@ -127,7 +127,7 @@
     'source-status','catalogue-title-text','results-count','results-caption','sort-select',
     'type-all-count','type-original-count','type-cover-count','nav-original-total','nav-cover-total',
     'song-list','selected-artist-filters','pagination','empty-state','empty-title','empty-copy','empty-reset','notice',
-    'play-all','play-random','favorites-shortcut','theme-toggle','mobile-filter-toggle',
+    'play-all','play-random','favorites-shortcut','mobile-filter-toggle','theme-toggle',
     'mobile-player-toggle','sidebar','player-column','player-hide','youtube-player','youtube-fallback',
     'playing-thumb','playing-art-placeholder','playing-title','playing-artist','playing-favorite',
     'player-state','watch-youtube','play-pause','previous-song','next-song','queue-shuffle',
@@ -607,32 +607,25 @@
     fauna: 'Ceres Fauna', mumei: 'Nanashi Mumei', ame: 'Watson Amelia',
     chloe: 'Sakamata Chloe', sana: 'Tsukumo Sana',
   };
-  function setTheme(theme, persist = true) {
-    const value = theme === 'dark' ? 'dark' : 'light';
-    document.documentElement.dataset.theme = value;
-    const button = el['theme-toggle'];
-    if (button) {
-      const isDark = value === 'dark';
-      button.setAttribute('aria-pressed', String(isDark));
-      button.setAttribute('aria-label', isDark ? 'Switch to light theme' : 'Switch to dark theme');
-      button.title = isDark ? 'Switch to light theme' : 'Switch to dark theme';
-      const icon = button.querySelector('.theme-icon');
-      const label = button.querySelector('.theme-label');
-      if (icon) icon.textContent = isDark ? '☀' : '☾';
-      if (label) label.textContent = isDark ? 'Light mode' : 'Dark mode';
-    }
-    const meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.content = value === 'dark' ? '#0b0d18' : '#f5f6fb';
-    if (persist) saveJSON(KEYS.theme, value);
-  }
-
   function setSidebarCollapsed(collapsed, persist = true) {
     document.body.classList.toggle('sidebar-collapsed', !!collapsed);
-    el['sidebar-collapse'].textContent = collapsed ? '›' : '‹';
-    el['sidebar-collapse'].title = collapsed ? 'Expand sidebar' : 'Collapse sidebar';
-    el['sidebar-collapse'].setAttribute('aria-label', collapsed ? 'Expand sidebar' : 'Collapse sidebar');
+    const isMobile = window.matchMedia && window.matchMedia('(max-width: 680px)').matches;
+    const expanded = isMobile ? document.body.classList.contains('filters-open') : !collapsed;
+    el['sidebar-collapse'].title = expanded ? 'Hide navigation' : 'Show navigation';
+    el['sidebar-collapse'].setAttribute('aria-label', expanded ? 'Hide navigation' : 'Show navigation');
+    el['sidebar-collapse'].setAttribute('aria-expanded', String(expanded));
     el['sidebar-collapse'].setAttribute('aria-pressed', String(!!collapsed));
     if (persist) saveJSON(KEYS.sidebarCollapsed, !!collapsed);
+  }
+  function applyTheme(theme) {
+    const light = theme === 'light';
+    document.body.classList.toggle('theme-light', light);
+    const themeColor = document.querySelector('meta[name="theme-color"]');
+    if (themeColor) themeColor.content = light ? '#f5f7fa' : '#101025';
+    el['theme-toggle'].innerHTML = '<span aria-hidden="true">' + (light ? '☾' : '☼') +
+      '</span><b>' + (light ? 'Dark' : 'Light') + '</b>';
+    el['theme-toggle'].setAttribute('aria-label', light ? 'Switch to dark theme' : 'Switch to light theme');
+    el['theme-toggle'].title = light ? 'Switch to dark theme' : 'Switch to light theme';
   }
   function resolveRosterTalent(name) {
     const target = artistKey(name);
@@ -1664,50 +1657,18 @@
     el['catalogue'].scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
   function setupDesktopVideoDock() {
-    const column = el['player-column'];
-    const playerCard = column?.querySelector('.player-card');
-    if (!column || !playerCard) return;
-
-    let dockThreshold = Infinity;
-    let scheduledFrame = 0;
-
-    const isWideDesktop = () =>
-      !!(window.matchMedia && window.matchMedia('(min-width: 1221px)').matches);
-
-    const applyDockState = () => {
-      scheduledFrame = 0;
-      const shouldDock = isWideDesktop() && window.scrollY >= dockThreshold;
-      document.body.classList.toggle('player-docked', shouldDock);
+    const updateDockMode = () => {
+      const isWideDesktop = !!(window.matchMedia && window.matchMedia('(min-width: 1221px)').matches);
+      document.body.classList.toggle('player-docked', isWideDesktop);
     };
-
-    const scheduleDockUpdate = () => {
-      if (scheduledFrame) return;
-      scheduledFrame = window.requestAnimationFrame(applyDockState);
-    };
-
-    const measureDockThreshold = () => {
-      // Measure only while in normal document flow, then pin the player only
-      // when its full-size card would otherwise have scrolled mostly away.
-      document.body.classList.remove('player-docked');
-      if (!isWideDesktop()) {
-        dockThreshold = Infinity;
-        applyDockState();
-        return;
-      }
-      const rect = playerCard.getBoundingClientRect();
-      dockThreshold = Math.max(0, rect.top + window.scrollY + playerCard.offsetHeight - 110);
-      applyDockState();
-    };
-
-    window.addEventListener('scroll', scheduleDockUpdate, { passive: true });
-    window.addEventListener('resize', measureDockThreshold, { passive: true });
-    measureDockThreshold();
+    window.addEventListener('resize', updateDockMode, { passive: true });
+    updateDockMode();
   }
-
   function initEvents() {
-    el['theme-toggle']?.addEventListener('click', () => {
-      const current = document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light';
-      setTheme(current === 'dark' ? 'light' : 'dark');
+    el['theme-toggle'].addEventListener('click', () => {
+      const theme = document.body.classList.contains('theme-light') ? 'dark' : 'light';
+      applyTheme(theme);
+      saveJSON(KEYS.theme, theme);
     });
     document.querySelectorAll('[data-view]').forEach(button => {
       button.addEventListener('click', () => setView(button.dataset.view));
@@ -2060,8 +2021,8 @@
     initEvents();
     updateVolumeControl();
     setupDesktopVideoDock();
-    setTheme(readJSON(KEYS.theme, 'light'), false);
     setSidebarCollapsed(!!readJSON(KEYS.sidebarCollapsed, false), false);
+    applyTheme(readJSON(KEYS.theme, 'light'));
     await loadTalentRoster();
     await loadArtistPortraitManifest();
     try {
