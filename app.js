@@ -2004,6 +2004,8 @@
         el['player-column'].classList.remove('queue-expanded');
         el['player-hide'].textContent = '⌃';
         el['player-hide'].setAttribute('aria-expanded', 'false');
+        el['player-hide'].setAttribute('aria-label', 'Show queue and playlist controls');
+        el['player-hide'].title = 'Show queue and playlist controls';
       }
     });
     el['sidebar-collapse'].addEventListener('click', () => {
