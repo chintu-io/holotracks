@@ -5406,7 +5406,7 @@ body{
 
 
 /* Light palette from the supplied reference; original HoloTracks layout is preserved. */
-body.theme-light{color-scheme:light;--text:#252938;--muted:#667083;--dim:#858d9c;--pink:#b64c82;--purple:#7057ad;--cyan:#277b8d;--mint:#32866b;background:radial-gradient(ellipse at 50% -25%,#e8e7f5 0,transparent 48%),#f5f7fa;color:#252938}
+body.theme-light{color-scheme:light;--bg:#f5f7fa;--bg-2:#eef1f6;--panel:#fff;--panel-raised:#fff;--panel-hover:#f3f1f8;--line:#e1e5ed;--line-bright:#d4dae5;--text:#252938;--muted:#667083;--dim:#858d9c;--pink:#b64c82;--pink-hot:#a93b75;--purple:#7057ad;--cyan:#277b8d;--blue:#5369b7;--mint:#32866b;--yellow:#99721d;--radius:16px;background:radial-gradient(ellipse at 50% -25%,#e8e7f5 0,transparent 48%),#f5f7fa;color:#252938}
 body.theme-light .topbar{background:#ffffffed;border-color:#e1e5ed;box-shadow:0 5px 20px #28344c0b}
 body.theme-light .brand-copy strong{color:#272b39}body.theme-light .brand-copy small{color:#737c8b}
 body.theme-light .topbar>.sidebar-collapse,body.theme-light .theme-toggle{border-color:#dce1e9;background:#fff;color:#4d5668}
@@ -5713,4 +5713,47 @@ body.theme-light .theme-toggle:hover { background:#f8eff5!important; border-colo
 }
 @media (prefers-reduced-motion:reduce) {
   #sidebar.sidebar { transition:none; }
+}
+
+
+/* Responsive header widths: preserve the spacious desktop proportions without overflow. */
+@media (min-width:1401px) {
+  .topbar {
+    grid-template-columns:40px 267px minmax(220px,620px) minmax(180px,1fr)!important;
+    gap:22px!important;
+    padding-inline:clamp(22px,3vw,58px)!important;
+  }
+}
+@media (max-width:1400px) and (min-width:971px) {
+  .topbar {
+    grid-template-columns:34px 220px minmax(150px,1fr) auto!important;
+    gap:13px!important;
+    padding-inline:20px!important;
+  }
+  .topbar>.sidebar-collapse {width:34px!important;height:34px!important}
+  .top-actions {gap:8px!important}
+  .top-live {display:none!important}
+  .theme-toggle b {display:none!important}
+}
+@media (max-width:970px) and (min-width:681px) {
+  .topbar {
+    grid-template-columns:32px 175px minmax(140px,1fr) auto!important;
+    gap:9px!important;
+    padding-inline:12px!important;
+  }
+  .topbar>.sidebar-collapse {width:31px!important;height:31px!important}
+  .top-actions {gap:6px!important}
+  .top-live {display:none!important}
+  .favorite-shortcut b,.theme-toggle b {display:none!important}
+  .theme-toggle {padding:5px 7px!important}
+}
+@media (max-width:680px) {
+  .topbar {padding-inline:12px!important}
+}
+
+/* Keep clear breathing room between the artist rail, library, and fixed player. */
+@media (min-width:681px) {
+  .talent-section {margin-top:30px!important}
+  .quick-discovery {margin-bottom:28px!important}
+  .library-section {padding-top:22px!important}
 }
