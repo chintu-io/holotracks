@@ -1971,14 +1971,23 @@
       }
       if (el['player-column'].classList.contains('queue-expanded') && !event.target.closest('#player-column')) {
         el['player-column'].classList.remove('queue-expanded');
-        el['player-hide'].textContent = '⌃';
+        document.body.classList.remove('listening-room-open');
+        el['player-hide'].textContent = 'Queue & playlists';
         el['player-hide'].setAttribute('aria-expanded', 'false');
-        el['player-hide'].setAttribute('aria-label', 'Show queue and playlist controls');
-        el['player-hide'].title = 'Show queue and playlist controls';
+        el['player-hide'].setAttribute('aria-label', 'Open listening room and playlists');
+        el['player-hide'].title = 'Open listening room and playlists';
       }
       if (document.body.classList.contains('mobile-player-open') &&
           !event.target.closest('#player-column, #mobile-mini-player, #mobile-player-toggle')) {
         toggleMobilePlayerPanel(false);
+      }
+      if (el['player-column'].classList.contains('queue-expanded') && !event.target.closest('#player-column')) {
+        el['player-column'].classList.remove('queue-expanded');
+        document.body.classList.remove('listening-room-open');
+        el['player-hide'].textContent = 'Queue & playlists';
+        el['player-hide'].setAttribute('aria-expanded', 'false');
+        el['player-hide'].setAttribute('aria-label', 'Open listening room and playlists');
+        el['player-hide'].title = 'Open listening room and playlists';
       }
       if (document.body.classList.contains('filters-open')) {
         const pickedDestination = event.target.closest(
@@ -2022,10 +2031,11 @@
       }
       const expanded = !el['player-column'].classList.contains('queue-expanded');
       el['player-column'].classList.toggle('queue-expanded', expanded);
-      el['player-hide'].textContent = expanded ? '⌄' : '⌃';
+      document.body.classList.toggle('listening-room-open', expanded);
+      el['player-hide'].textContent = expanded ? 'Close room' : 'Queue & playlists';
       el['player-hide'].setAttribute('aria-expanded', String(expanded));
-      el['player-hide'].setAttribute('aria-label', expanded ? 'Hide queue and playlist controls' : 'Show queue and playlist controls');
-      el['player-hide'].title = expanded ? 'Hide queue and playlist controls' : 'Show queue and playlist controls';
+      el['player-hide'].setAttribute('aria-label', expanded ? 'Close listening room' : 'Open listening room and playlists');
+      el['player-hide'].title = expanded ? 'Close listening room' : 'Open listening room and playlists';
     });
     document.addEventListener('keydown', event => {
       if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') {
