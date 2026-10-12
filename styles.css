@@ -6971,3 +6971,277 @@ body.theme-light #player-column.player-column:not(.queue-expanded) .panel-collap
   #player-column.mobile-open .room-window-button.room-maximize { display:none!important; }
   body.theme-light #player-column.mobile-open .room-window-button { border-color:#dce3ed!important; background:#f5f7fb!important; color:#56647a!important; }
 }
+
+
+/* === Video-first listening room: controls on the right, queue and playlist below === */
+@media (min-width:681px) {
+  /* The room has one short title row; the redundant "Now playing" heading is gone. */
+  #player-column.queue-expanded {
+    grid-template-columns:minmax(0,1fr) minmax(265px,.34fr)!important;
+    grid-template-rows:34px minmax(0,1fr)!important;
+    gap:8px 12px!important;
+    padding:12px!important;
+  }
+  #player-column.queue-expanded.room-maximized {
+    grid-template-columns:minmax(0,1fr) minmax(280px,.34fr)!important;
+    grid-template-rows:36px minmax(0,1fr)!important;
+    gap:8px 12px!important;
+    padding:14px!important;
+  }
+  #player-column.queue-expanded .room-titlebar {
+    grid-column:1/-1!important;
+    grid-row:1!important;
+    min-height:0!important;
+    height:32px!important;
+    padding:0 2px!important;
+    align-self:center!important;
+  }
+  #player-column.queue-expanded .room-title-copy {
+    justify-content:center!important;
+    min-height:0!important;
+  }
+  #player-column.queue-expanded .room-title-copy .player-kicker {
+    font-size:10px!important;
+    line-height:1!important;
+  }
+  #player-column.queue-expanded .room-title-copy h2 { display:none!important; }
+
+  /* Video keeps the full left pane; only the track details and status sit beneath it. */
+  #player-column.queue-expanded .player-card {
+    grid-column:1!important;
+    grid-row:2!important;
+    min-height:0!important;
+    height:100%!important;
+    padding:10px!important;
+  }
+  #player-column.queue-expanded .video-frame-wrap {
+    flex:1 1 auto!important;
+    width:100%!important;
+    height:auto!important;
+    min-height:0!important;
+    max-height:none!important;
+    aspect-ratio:16/9!important;
+  }
+  #player-column.queue-expanded .now-playing-meta {
+    flex:0 0 auto!important;
+    min-height:0!important;
+    height:auto!important;
+    overflow:visible!important;
+    padding:8px 2px 0!important;
+  }
+  #player-column.queue-expanded .playing-title-row {
+    min-height:36px!important;
+    gap:9px!important;
+  }
+  #player-column.queue-expanded .playing-art { width:38px!important; height:36px!important; }
+  #player-column.queue-expanded .player-status-row {
+    margin:5px 0 0!important;
+    padding:0!important;
+    min-height:14px!important;
+    font-size:10px!important;
+    justify-content:flex-start!important;
+    text-align:left!important;
+  }
+
+  /* Playback controls are now the first compact row in the right-hand panel. */
+  #player-column.queue-expanded .queue-card {
+    grid-column:2!important;
+    grid-row:2!important;
+    gap:0!important;
+    padding:10px!important;
+  }
+  #player-column.queue-expanded .room-controls-slot {
+    display:block!important;
+    flex:none!important;
+    min-width:0!important;
+    width:100%!important;
+    margin:0 0 12px!important;
+    padding:0 0 12px!important;
+    border-bottom:1px solid #343750!important;
+  }
+  #player-column.queue-expanded .room-controls-slot .player-controls {
+    display:flex!important;
+    position:relative!important;
+    flex-direction:row!important;
+    flex-wrap:wrap!important;
+    align-items:center!important;
+    justify-content:flex-start!important;
+    gap:6px!important;
+    width:100%!important;
+    min-width:0!important;
+    min-height:0!important;
+    height:auto!important;
+    margin:0!important;
+    padding:0!important;
+    grid-column:auto!important;
+    grid-row:auto!important;
+    visibility:visible!important;
+    opacity:1!important;
+  }
+  #player-column.queue-expanded .room-controls-slot .player-controls button {
+    display:grid!important;
+    flex:0 0 34px!important;
+    place-items:center!important;
+    width:34px!important;
+    min-width:34px!important;
+    height:34px!important;
+    min-height:34px!important;
+    margin:0!important;
+    padding:0!important;
+    visibility:visible!important;
+    opacity:1!important;
+  }
+  #player-column.queue-expanded .room-controls-slot .player-controls .play-toggle {
+    flex-basis:40px!important;
+    width:40px!important;
+    min-width:40px!important;
+    height:40px!important;
+    min-height:40px!important;
+  }
+  #player-column.queue-expanded .room-controls-slot .player-controls .volume-control {
+    flex:0 0 34px!important;
+    width:34px!important;
+    min-width:34px!important;
+  }
+  #player-column.queue-expanded .room-controls-slot .player-controls .volume-control > .control-button {
+    width:34px!important;
+    min-width:34px!important;
+  }
+  #player-column.queue-expanded .queue-heading {
+    flex:none!important;
+    padding:0 0 8px!important;
+    margin:0!important;
+  }
+  #player-column.queue-expanded .queue-list {
+    flex:1 1 auto!important;
+    min-height:40px!important;
+    overflow-y:auto!important;
+  }
+  #player-column.queue-expanded .queue-actions {
+    flex:none!important;
+    margin-top:8px!important;
+    padding-top:9px!important;
+  }
+  #player-column.queue-expanded .queue-actions .playlist-play {
+    width:100%!important;
+    justify-content:center!important;
+  }
+
+  /* Compact dock: controls stay in one cluster, with one icon-only expand action. */
+  #player-column.player-column:not(.queue-expanded) {
+    width:min(940px,calc(100vw - 32px))!important;
+    height:106px!important;
+  }
+  #player-column.player-column:not(.queue-expanded) .now-playing-meta {
+    grid-template-columns:minmax(90px,1fr) max-content!important;
+    gap:0 8px!important;
+  }
+  #player-column.player-column:not(.queue-expanded) .dock-action-row {
+    grid-column:2!important;
+    grid-row:1/span 2!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:flex-end!important;
+    gap:7px!important;
+    width:max-content!important;
+    max-width:100%!important;
+    min-width:0!important;
+    overflow:visible!important;
+  }
+  #player-column.player-column:not(.queue-expanded) .dock-controls-slot {
+    display:flex!important;
+    align-items:center!important;
+    justify-content:flex-end!important;
+    width:max-content!important;
+    min-width:0!important;
+  }
+  #player-column.player-column:not(.queue-expanded) .dock-controls-slot .player-controls {
+    display:flex!important;
+    flex-direction:row!important;
+    flex-wrap:nowrap!important;
+    align-items:center!important;
+    justify-content:flex-end!important;
+    gap:4px!important;
+    width:max-content!important;
+    min-width:0!important;
+    margin:0!important;
+    padding:0!important;
+    grid-column:auto!important;
+    grid-row:auto!important;
+  }
+  #player-column.player-column:not(.queue-expanded) .dock-controls-slot .player-controls .control-button {
+    flex:0 0 29px!important;
+    width:29px!important;
+    min-width:29px!important;
+    height:32px!important;
+    min-height:32px!important;
+  }
+  #player-column.player-column:not(.queue-expanded) .dock-controls-slot .player-controls .play-toggle {
+    flex-basis:36px!important;
+    width:36px!important;
+    min-width:36px!important;
+    height:36px!important;
+    min-height:36px!important;
+  }
+  #player-column.player-column:not(.queue-expanded) .player-expand {
+    display:grid!important;
+    flex:0 0 32px!important;
+    place-items:center!important;
+    width:32px!important;
+    min-width:32px!important;
+    height:32px!important;
+    min-height:32px!important;
+    padding:0!important;
+    border:1px solid #5a4a69!important;
+    border-radius:9px!important;
+    background:#292239!important;
+    color:#f1d9ef!important;
+  }
+  #player-column.player-column:not(.queue-expanded) .player-expand-label { display:none!important; }
+  #player-column.player-column:not(.queue-expanded) .player-room-toggle { display:none!important; }
+}
+
+/* A white theme means white controls too—not inherited near-black transport buttons. */
+body.theme-light #player-column.queue-expanded .room-controls-slot {
+  border-bottom-color:#e3e8f0!important;
+}
+body.theme-light #player-column.queue-expanded .room-controls-slot .player-controls .control-button:not(.play-toggle) {
+  border:1px solid #dce3ed!important;
+  background:#f5f7fb!important;
+  color:#5a687d!important;
+  box-shadow:none!important;
+}
+body.theme-light #player-column.queue-expanded .room-controls-slot .player-controls .control-button:not(.play-toggle):hover,
+body.theme-light #player-column.queue-expanded .room-controls-slot .player-controls .control-button:not(.play-toggle).active {
+  border-color:#dcc6dd!important;
+  background:#fbf0f7!important;
+  color:#9e4f80!important;
+}
+body.theme-light #player-column.queue-expanded .room-controls-slot .player-controls .play-toggle {
+  border:0!important;
+  background:linear-gradient(135deg,#cb73a6,#9476c6)!important;
+  color:#fff!important;
+}
+body.theme-light #player-column.queue-expanded .room-controls-slot .player-controls .volume-popover {
+  border-color:#dce2ec!important;
+  background:#fff!important;
+  color:#303b51!important;
+  box-shadow:0 12px 30px rgba(42,53,75,.18)!important;
+}
+body.theme-light #player-column.player-column:not(.queue-expanded) .dock-action-row .player-expand {
+  border-color:#d8c2d7!important;
+  background:#fbf0f7!important;
+  color:#905078!important;
+}
+@media (min-width:681px) and (max-width:1000px) {
+  #player-column.player-column:not(.queue-expanded) { width:calc(100vw - 24px)!important; }
+  #player-column.player-column:not(.queue-expanded) .player-card { grid-template-columns:150px minmax(0,1fr)!important; }
+  #player-column.player-column:not(.queue-expanded) .dock-action-row { gap:4px!important; }
+  #player-column.player-column:not(.queue-expanded) .dock-controls-slot .player-controls { gap:2px!important; }
+  #player-column.player-column:not(.queue-expanded) .dock-controls-slot .player-controls .control-button {
+    flex-basis:25px!important; width:25px!important; min-width:25px!important;
+  }
+  #player-column.player-column:not(.queue-expanded) .dock-controls-slot .player-controls .play-toggle {
+    flex-basis:31px!important; width:31px!important; min-width:31px!important; height:31px!important; min-height:31px!important;
+  }
+}
