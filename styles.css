@@ -5757,3 +5757,17 @@ body.theme-light .theme-toggle:hover { background:#f8eff5!important; border-colo
   .quick-discovery {margin-bottom:28px!important}
   .library-section {padding-top:22px!important}
 }
+
+
+/* Narrow desktop/tablet: keep the transport bar compact rather than letting controls collide. */
+@media (min-width:681px) and (max-width:900px) {
+  #player-column.player-column { height:104px!important; left:10px!important; right:10px!important; }
+  #player-column .player-card { grid-template-columns:120px minmax(0,1fr)!important; gap:8px!important; padding:7px 9px!important; }
+  #player-column .now-playing-meta { grid-template-columns:minmax(70px,1fr) auto!important; column-gap:4px!important; padding:6px 25px 4px 0!important; }
+  #player-column .playing-art { display:none!important; }
+  #player-column .player-status-row { padding-left:0!important; }
+  #player-column .player-controls { gap:4px!important; }
+  #player-column .control-button { width:30px!important; height:30px!important; }
+  #player-column .play-toggle { width:36px!important; height:36px!important; }
+  #player-column .player-heart { width:26px!important; height:26px!important; }
+}
