@@ -6094,3 +6094,99 @@ body.theme-light #player-column.queue-expanded .playlist-play { border-color:#dc
   .song-grid { grid-template-columns:repeat(2,minmax(0,1fr))!important; }
   body.theme-light .hero-card { background:linear-gradient(140deg,#fff,#eef4f8)!important; }
 }
+
+
+/* Video-first refinement: compact centered dock; playing a song opens the room automatically. */
+@media (min-width:681px) {
+  #player-column.player-column:not(.queue-expanded) {
+    left:50%!important;
+    right:auto!important;
+    width:min(1080px,calc(100vw - 40px))!important;
+    height:84px!important;
+    bottom:14px!important;
+    transform:translateX(-50%)!important;
+  }
+  #player-column.queue-expanded {
+    width:min(1360px,calc(100vw - 48px))!important;
+    height:min(78vh,760px)!important;
+    max-height:calc(100dvh - 48px)!important;
+    bottom:16px!important;
+  }
+  #player-column.queue-expanded .video-frame-wrap {
+    max-height:min(48vh,500px)!important;
+  }
+  #player-column.queue-expanded .queue-heading {
+    gap:10px!important;
+  }
+  #player-column.queue-expanded .queue-heading-actions {
+    display:flex!important;
+    flex:none!important;
+    align-items:center!important;
+    justify-content:flex-end!important;
+    gap:9px!important;
+  }
+  #player-column.queue-expanded .queue-panel-minimize {
+    display:inline-flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    min-height:30px!important;
+    padding:0 10px!important;
+    border:1px solid #3a3e55!important;
+    border-radius:8px!important;
+    background:#22263a!important;
+    color:#d7dbee!important;
+    font:800 10px/1 'Nunito',system-ui,sans-serif!important;
+    white-space:nowrap!important;
+  }
+  #player-column.queue-expanded .queue-panel-minimize:hover {
+    border-color:#8d6895!important;
+    background:#30263e!important;
+    color:#fff!important;
+  }
+  #player-column.queue-expanded .clear-queue {
+    min-height:30px!important;
+    padding:0 5px!important;
+    white-space:nowrap!important;
+  }
+}
+
+/* Compact dock should feel like a video app's transport, not a full-width music bar. */
+@media (min-width:1101px) {
+  #player-column.player-column:not(.queue-expanded) .now-playing-meta {
+    grid-template-columns:minmax(0,1fr) auto!important;
+    padding:6px 12px!important;
+  }
+}
+body.theme-light #player-column.queue-expanded .queue-panel-minimize {
+  border-color:#dbe2ec!important;
+  background:#f5f7fb!important;
+  color:#5a687f!important;
+}
+body.theme-light #player-column.queue-expanded .queue-panel-minimize:hover {
+  border-color:#d8c2d7!important;
+  background:#fbf0f7!important;
+  color:#93517b!important;
+}
+
+/* Small screens still get a visible, icon-sized minimize control inside the room. */
+@media (max-width:680px) {
+  #player-column.queue-expanded .queue-heading-actions {
+    display:flex!important;
+    gap:6px!important;
+    align-items:center!important;
+  }
+  #player-column.queue-expanded .queue-panel-minimize {
+    display:inline-flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    min-height:30px!important;
+    padding:0 8px!important;
+    border:1px solid #3a3e55!important;
+    border-radius:8px!important;
+    background:#22263a!important;
+    color:#d7dbee!important;
+    font-size:10px!important;
+    font-weight:800!important;
+    white-space:nowrap!important;
+  }
+}
