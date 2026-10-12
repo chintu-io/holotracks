@@ -6690,3 +6690,258 @@ body.theme-light #player-column:not(.queue-expanded) .play-toggle {
   #player-column:not(.queue-expanded) .control-button { width:28px!important; }
   #player-column:not(.queue-expanded) .panel-collapse.player-room-toggle { width:98px!important; min-width:98px!important; font-size:9px!important; }
 }
+
+
+/* Final room layout: one shared title bar, standard window chrome, compact dock and queue. */
+@media (min-width:681px) {
+  body { padding-bottom:145px!important; }
+  #player-column.player-column:not(.queue-expanded) {
+    position:fixed!important; left:50%!important; right:auto!important; top:auto!important; bottom:14px!important;
+    width:min(1000px,calc(100vw - 32px))!important; height:112px!important; max-height:none!important; min-height:0!important;
+    transform:translateX(-50%)!important; padding:0!important; display:block!important; overflow:visible!important; z-index:70!important;
+  }
+  #player-column.player-column:not(.queue-expanded) .room-titlebar { display:none!important; }
+  #player-column.player-column:not(.queue-expanded) .player-card {
+    display:grid!important; grid-template-columns:184px minmax(0,1fr)!important; grid-template-rows:minmax(0,1fr)!important;
+    align-items:stretch!important; gap:10px!important; width:100%!important; height:100%!important;
+    min-height:0!important; margin:0!important; padding:6px!important; overflow:hidden!important;
+    border:0!important; border-radius:16px!important; background:#111426!important; color:#f3f4fb!important; box-shadow:none!important;
+  }
+  #player-column.player-column:not(.queue-expanded) .video-frame-wrap {
+    grid-column:1!important; grid-row:1!important; position:relative!important; inset:auto!important; display:block!important;
+    width:100%!important; height:100%!important; min-height:0!important; max-height:none!important; max-width:none!important;
+    aspect-ratio:16/9!important; margin:0!important; padding:0!important; overflow:hidden!important;
+    border:1px solid #393d55!important; border-radius:10px!important; opacity:1!important; visibility:visible!important; pointer-events:auto!important;
+  }
+  #player-column.player-column:not(.queue-expanded) .youtube-player,
+  #player-column.player-column:not(.queue-expanded) .youtube-player iframe {
+    position:absolute!important; inset:0!important; display:block!important; width:100%!important; height:100%!important;
+    min-width:0!important; min-height:0!important; max-width:none!important; border:0!important; opacity:1!important; visibility:visible!important;
+  }
+  #player-column.player-column:not(.queue-expanded) .now-playing-meta {
+    grid-column:2!important; grid-row:1!important; display:grid!important;
+    grid-template-columns:minmax(120px,1fr) max-content!important; grid-template-rows:minmax(0,1fr) 14px!important;
+    justify-content:start!important; align-items:center!important; align-content:center!important; gap:0 8px!important;
+    width:100%!important; min-width:0!important; height:100%!important; min-height:0!important; margin:0!important;
+    padding:2px 4px 2px 0!important; overflow:hidden!important; background:transparent!important;
+  }
+  #player-column.player-column:not(.queue-expanded) .playing-title-row {
+    grid-column:1!important; grid-row:1!important; display:flex!important; align-items:center!important;
+    justify-content:flex-start!important; min-width:0!important; min-height:0!important; gap:8px!important;
+    align-self:center!important; text-align:left!important;
+  }
+  #player-column.player-column:not(.queue-expanded) .playing-art { display:none!important; }
+  #player-column.player-column:not(.queue-expanded) .playing-text {
+    display:flex!important; flex-direction:column!important; align-items:flex-start!important; justify-content:center!important;
+    text-align:left!important; min-width:0!important;
+  }
+  #player-column.player-column:not(.queue-expanded) .playing-text strong,
+  #player-column.player-column:not(.queue-expanded) .playing-text span {
+    display:block!important; max-width:250px!important; overflow:hidden!important; text-overflow:ellipsis!important; white-space:nowrap!important;
+  }
+  #player-column.player-column:not(.queue-expanded) .playing-text strong { color:#f0f1fa!important; font-size:12px!important; line-height:1.35!important; }
+  #player-column.player-column:not(.queue-expanded) .playing-text span { color:#a7aec4!important; font-size:10px!important; }
+  #player-column.player-column:not(.queue-expanded) .player-controls {
+    grid-column:2!important; grid-row:1/span 2!important; align-self:center!important; display:flex!important;
+    flex-wrap:nowrap!important; justify-content:flex-end!important; align-items:center!important; gap:5px!important;
+    width:max-content!important; min-height:0!important; margin:0!important; padding:0!important; visibility:visible!important; opacity:1!important;
+  }
+  #player-column.player-column:not(.queue-expanded) .player-controls button { flex:none!important; visibility:visible!important; opacity:1!important; }
+  #player-column.player-column:not(.queue-expanded) .control-button {
+    display:grid!important; place-items:center!important; flex:none!important; width:30px!important; min-width:30px!important;
+    height:33px!important; min-height:33px!important; padding:0!important; border:1px solid #353950!important;
+    border-radius:9px!important; background:#1b1e31!important; color:#c5cbe0!important; font-size:14px!important;
+  }
+  #player-column.player-column:not(.queue-expanded) .play-toggle {
+    width:38px!important; min-width:38px!important; height:38px!important; min-height:38px!important; border:0!important;
+    border-radius:50%!important; background:linear-gradient(135deg,#ca6ea4,#8e75c2)!important; color:#fff!important;
+  }
+  #player-column.player-column:not(.queue-expanded) .player-expand {
+    display:inline-flex!important; align-items:center!important; justify-content:center!important; gap:5px!important;
+    width:auto!important; min-width:80px!important; height:33px!important; padding:0 8px!important;
+    border-color:#5a4a69!important; background:#292239!important; color:#f1d9ef!important;
+    white-space:nowrap!important; font-size:10px!important; font-weight:800!important;
+  }
+  #player-column.player-column:not(.queue-expanded) .player-expand-label { display:inline!important; }
+  #player-column.player-column:not(.queue-expanded) .panel-collapse.player-room-toggle {
+    display:inline-flex!important; align-items:center!important; justify-content:center!important;
+    width:96px!important; min-width:96px!important; height:33px!important; padding:0 6px!important;
+    border:1px solid #5a4a69!important; border-radius:9px!important; background:#292239!important;
+    color:#f1d9ef!important; font:800 10px/1 'Nunito',system-ui,sans-serif!important; white-space:nowrap!important;
+  }
+  #player-column.player-column:not(.queue-expanded) .player-status-row {
+    grid-column:1!important; grid-row:2!important; display:flex!important; align-items:center!important;
+    justify-content:flex-start!important; gap:7px!important; margin:0!important; padding:0!important;
+    min-height:0!important; overflow:hidden!important; color:#8f97b0!important; font-size:8px!important; white-space:nowrap!important;
+  }
+  #player-column.player-column:not(.queue-expanded) #watch-youtube { display:none!important; }
+
+  /* The shared title bar spans the complete room, so window controls are truly top-right. */
+  #player-column.queue-expanded {
+    position:fixed!important; left:50%!important; right:auto!important; top:50%!important; bottom:auto!important;
+    width:min(1260px,calc(100vw - 56px))!important; height:min(86vh,760px)!important; max-height:calc(100dvh - 28px)!important;
+    min-height:0!important; transform:translate(-50%,-50%)!important; display:grid!important;
+    grid-template-columns:minmax(0,1.72fr) minmax(280px,.72fr)!important; grid-template-rows:44px minmax(0,1fr)!important;
+    gap:10px 14px!important; padding:12px!important; overflow:hidden!important; border-radius:20px!important; z-index:70!important;
+  }
+  #player-column.queue-expanded .room-titlebar {
+    grid-column:1/-1!important; grid-row:1!important; position:relative!important; display:flex!important;
+    flex-direction:row!important; align-items:center!important; justify-content:space-between!important; gap:16px!important;
+    width:100%!important; min-width:0!important; min-height:0!important; margin:0!important; padding:0 2px 4px!important;
+    transform:none!important; background:transparent!important; z-index:2!important;
+  }
+  #player-column.queue-expanded .room-title-copy {
+    position:static!important; display:flex!important; flex-direction:column!important; align-items:flex-start!important;
+    flex:1 1 auto!important; width:auto!important; min-width:0!important; margin:0!important; padding:0!important; transform:none!important;
+  }
+  #player-column.queue-expanded .room-title-copy .player-kicker { margin:0!important; line-height:1.2!important; }
+  #player-column.queue-expanded .room-title-copy h2 {
+    margin:3px 0 0!important; padding:0!important; color:#f0f1fa!important; font-size:18px!important;
+    line-height:1.1!important; font-weight:850!important; white-space:nowrap!important;
+  }
+  #player-column.queue-expanded .room-window-controls {
+    position:static!important; inset:auto!important; display:flex!important; flex-direction:row!important; align-items:center!important;
+    justify-content:flex-end!important; gap:6px!important; flex:0 0 auto!important; width:auto!important; min-width:0!important;
+    height:auto!important; margin:0 0 0 auto!important; padding:0!important; transform:none!important; visibility:visible!important; opacity:1!important;
+  }
+  #player-column.queue-expanded .room-window-button {
+    position:static!important; inset:auto!important; float:none!important; display:grid!important; flex:0 0 34px!important;
+    place-items:center!important; width:34px!important; min-width:34px!important; max-width:34px!important; height:30px!important;
+    min-height:30px!important; max-height:30px!important; margin:0!important; padding:0!important; transform:none!important;
+    border:1px solid #3a3e55!important; border-radius:7px!important; background:#22263a!important; color:#dce1ef!important;
+    font:500 19px/1 'Segoe UI',system-ui,sans-serif!important; box-shadow:none!important; cursor:pointer!important;
+  }
+  #player-column.queue-expanded .room-window-button.room-maximize { font-size:15px!important; }
+  #player-column.queue-expanded .room-window-button:hover { border-color:#656b83!important; background:#30354a!important; color:#fff!important; }
+  #player-column.queue-expanded .room-window-button.room-close:hover { border-color:#e66c83!important; background:#a93650!important; color:#fff!important; }
+
+  #player-column.queue-expanded .player-card {
+    grid-column:1!important; grid-row:2!important; position:relative!important; display:flex!important; flex-direction:column!important;
+    align-items:stretch!important; gap:0!important; width:100%!important; height:100%!important; min-width:0!important; min-height:0!important;
+    max-width:none!important; margin:0!important; padding:12px!important; overflow:hidden!important;
+    border:1px solid #343750!important; border-radius:15px!important; background:linear-gradient(160deg,#191b31,#121524)!important;
+    color:#f3f4fb!important; box-shadow:none!important;
+  }
+  #player-column.queue-expanded .player-head { display:none!important; }
+  #player-column.queue-expanded .video-frame-wrap {
+    position:relative!important; inset:auto!important; display:block!important; flex:0 0 auto!important;
+    width:100%!important; height:auto!important; min-height:0!important; max-height:none!important; max-width:none!important;
+    aspect-ratio:16/9!important; margin:0!important; padding:0!important; overflow:hidden!important;
+    border:1px solid #343750!important; border-radius:12px!important; background:#070911!important;
+  }
+  #player-column.queue-expanded .youtube-player,
+  #player-column.queue-expanded .youtube-player iframe {
+    position:absolute!important; inset:0!important; display:block!important; width:100%!important; height:100%!important;
+    min-width:0!important; min-height:0!important; max-width:none!important; border:0!important;
+  }
+  #player-column.queue-expanded .now-playing-meta {
+    position:relative!important; flex:1 1 auto!important; display:flex!important; flex-direction:column!important;
+    align-items:stretch!important; width:100%!important; height:auto!important; min-height:0!important; margin:0!important;
+    padding:10px 2px 0!important; overflow:hidden!important; background:transparent!important;
+  }
+  #player-column.queue-expanded .playing-title-row { display:flex!important; flex:none!important; align-items:center!important; gap:10px!important; min-width:0!important; }
+  #player-column.queue-expanded .playing-art { width:44px!important; height:40px!important; flex:none!important; }
+  #player-column.queue-expanded .playing-text { min-width:0!important; text-align:left!important; }
+  #player-column.queue-expanded .playing-text strong { color:#f0f1fa!important; font-size:13px!important; }
+  #player-column.queue-expanded .playing-text span { color:#adb4c9!important; font-size:11px!important; }
+  #player-column.queue-expanded .player-controls {
+    display:flex!important; flex:none!important; flex-wrap:wrap!important; justify-content:flex-start!important; align-items:center!important;
+    gap:7px!important; width:100%!important; margin:10px 0 5px!important; padding:0!important; min-height:0!important;
+    visibility:visible!important; opacity:1!important;
+  }
+  #player-column.queue-expanded .player-controls button { flex:none!important; visibility:visible!important; opacity:1!important; }
+  #player-column.queue-expanded .player-status-row {
+    display:flex!important; flex:none!important; align-items:center!important; justify-content:flex-start!important; gap:10px!important;
+    width:100%!important; margin:auto 0 0!important; padding:6px 0 0!important; overflow:hidden!important; text-align:left!important; white-space:nowrap!important;
+  }
+  #player-column.queue-expanded .player-status-row #watch-youtube:not([hidden]) {
+    display:inline-flex!important; align-items:center!important; align-self:center!important; margin:0!important; padding:0!important; white-space:nowrap!important;
+  }
+  /* Queue and playlist actions get a slim side column instead of half the window. */
+  #player-column.queue-expanded .queue-card {
+    grid-column:2!important; grid-row:2!important; position:relative!important; inset:auto!important; display:flex!important;
+    flex-direction:column!important; width:100%!important; height:100%!important; min-width:0!important; min-height:0!important;
+    max-height:none!important; margin:0!important; padding:12px!important; overflow:hidden!important;
+    border:1px solid #343750!important; border-radius:15px!important; background:#171a2c!important; color:#f3f4fb!important; box-shadow:none!important;
+  }
+  #player-column.queue-expanded .queue-heading {
+    display:flex!important; flex:none!important; align-items:center!important; justify-content:space-between!important;
+    gap:8px!important; margin:0!important; padding:0 0 10px!important;
+  }
+  #player-column.queue-expanded .queue-list { flex:1 1 auto!important; min-height:0!important; max-height:none!important; overflow-x:hidden!important; overflow-y:auto!important; }
+  #player-column.queue-expanded .queue-actions { flex:none!important; margin-top:8px!important; padding-top:10px!important; border-top:1px solid #343750!important; }
+  #player-column.queue-expanded .queue-panel-minimize,
+  #player-column.queue-expanded .panel-collapse.player-room-toggle { display:none!important; }
+
+  /* Maximize uses the whole viewport but retains the same shared title bar and side-column proportions. */
+  #player-column.queue-expanded.room-maximized {
+    left:12px!important; right:12px!important; top:12px!important; bottom:12px!important; width:auto!important; height:auto!important;
+    max-height:none!important; transform:none!important; grid-template-columns:minmax(0,1.85fr) minmax(290px,.72fr)!important;
+    grid-template-rows:46px minmax(0,1fr)!important; gap:10px 14px!important; padding:14px!important;
+  }
+  #player-column.queue-expanded.room-maximized .video-frame-wrap { max-height:none!important; }
+}
+
+/* Shared title bar has Windows-style chrome at the far right, separate from both content panels. */
+#player-column.queue-expanded .room-titlebar { color:#f0f1fa!important; }
+#player-column.queue-expanded .room-window-button { border-color:#3a3e55!important; background:#22263a!important; color:#dce1ef!important; }
+#player-column.queue-expanded .room-window-button.room-close:hover { border-color:#e66c83!important; background:#a93650!important; color:#fff!important; }
+
+/* Light mode explicitly restyles the window controls and every transport/queue action. */
+body.theme-light #player-column.player-column:not(.queue-expanded) .player-card { background:#fff!important; color:#29354b!important; }
+body.theme-light #player-column.player-column:not(.queue-expanded) .playing-text strong { color:#303b51!important; }
+body.theme-light #player-column.queue-expanded { border-color:#dbe2ed!important; background:#f7f9fc!important; color:#29354b!important; }
+body.theme-light #player-column.queue-expanded .room-titlebar { color:#303b51!important; }
+body.theme-light #player-column.queue-expanded .room-title-copy h2 { color:#303b51!important; }
+body.theme-light #player-column.queue-expanded .room-title-copy .player-kicker { color:#758198!important; }
+body.theme-light #player-column.queue-expanded .room-window-button { border:1px solid #dce3ed!important; background:#f5f7fb!important; color:#56647a!important; }
+body.theme-light #player-column.queue-expanded .room-window-button:hover { border-color:#d1d8e5!important; background:#e9edf4!important; color:#303b51!important; }
+body.theme-light #player-column.queue-expanded .room-window-button.room-close:hover { border-color:#e66c83!important; background:#a93650!important; color:#fff!important; }
+body.theme-light #player-column.queue-expanded .player-card,
+body.theme-light #player-column.queue-expanded .queue-card { border-color:#dfe5ed!important; background:#fff!important; color:#303b51!important; }
+body.theme-light #player-column.queue-expanded .playing-text strong,
+body.theme-light #player-column.queue-expanded .queue-heading h2,
+body.theme-light #player-column.queue-expanded .queue-track-info strong { color:#303b51!important; }
+body.theme-light #player-column.queue-expanded .playing-text span,
+body.theme-light #player-column.queue-expanded .player-status-row,
+body.theme-light #player-column.queue-expanded .queue-track-info span,
+body.theme-light #player-column.queue-expanded .playlist-select-label { color:#718096!important; }
+body.theme-light #player-column.queue-expanded .control-button:not(.play-toggle),
+body.theme-light #player-column.queue-expanded .queue-track-play,
+body.theme-light #player-column.queue-expanded .queue-track-remove {
+  border:1px solid #dce3ed!important; background:#f5f7fb!important; color:#5a687d!important; box-shadow:none!important;
+}
+body.theme-light #player-column.queue-expanded .control-button:not(.play-toggle):hover,
+body.theme-light #player-column.queue-expanded .control-button:not(.play-toggle).active { border-color:#dcc6dd!important; background:#fbf0f7!important; color:#9e4f80!important; }
+body.theme-light #player-column.queue-expanded .play-toggle { border:0!important; background:linear-gradient(135deg,#cb73a6,#9476c6)!important; color:#fff!important; }
+body.theme-light #player-column.queue-expanded .queue-heading,
+body.theme-light #player-column.queue-expanded .queue-actions { border-color:#e6eaf0!important; }
+body.theme-light #player-column.queue-expanded .queue-track { border-color:#e8ecf2!important; }
+body.theme-light #player-column.queue-expanded .queue-track:hover { background:#f4f6fa!important; }
+body.theme-light #player-column.queue-expanded .queue-track.current { background:#f9eff6!important; }
+body.theme-light #player-column.queue-expanded .queue-empty p { color:#49576e!important; }
+body.theme-light #player-column.queue-expanded .playlist-select-row select { border-color:#dce2ec!important; background:#fff!important; color:#46536a!important; }
+body.theme-light #player-column.queue-expanded .save-button { border-color:#dfc9dc!important; background:#fbf0f7!important; color:#8e4f77!important; }
+body.theme-light #player-column.queue-expanded .playlist-play { border-color:#dce2ec!important; background:#f5f7fa!important; color:#5e6a80!important; }
+body.theme-light #player-column.player-column:not(.queue-expanded) .control-button { border-color:#dce2ec!important; background:#f5f7fa!important; color:#5c687d!important; }
+body.theme-light #player-column.player-column:not(.queue-expanded) .play-toggle { background:linear-gradient(135deg,#cb73a6,#9476c6)!important; color:#fff!important; }
+body.theme-light #player-column.player-column:not(.queue-expanded) .player-expand { border-color:#d8c2d7!important; background:#fbf0f7!important; color:#905078!important; }
+body.theme-light #player-column.player-column:not(.queue-expanded) .panel-collapse.player-room-toggle { border-color:#dfc8dc!important; background:#f9eef6!important; color:#8b4e76!important; }
+
+/* On narrow viewports, keep the same window controls aligned and shrink the dock to fit. */
+@media (min-width:681px) and (max-width:1000px) {
+  #player-column.player-column:not(.queue-expanded) { width:calc(100vw - 24px)!important; }
+  #player-column.player-column:not(.queue-expanded) .player-card { grid-template-columns:165px minmax(0,1fr)!important; }
+  #player-column.player-column:not(.queue-expanded) .now-playing-meta { grid-template-columns:minmax(80px,1fr) max-content!important; gap:0 4px!important; }
+  #player-column.player-column:not(.queue-expanded) .player-controls { gap:3px!important; }
+  #player-column.player-column:not(.queue-expanded) .control-button { width:27px!important; min-width:27px!important; }
+  #player-column.player-column:not(.queue-expanded) .play-toggle { width:34px!important; min-width:34px!important; height:34px!important; }
+  #player-column.player-column:not(.queue-expanded) .player-expand-label { display:none!important; }
+}
+@media (max-width:680px) {
+  #player-column.queue-expanded .room-titlebar { display:flex!important; flex-direction:row!important; align-items:center!important; justify-content:space-between!important; gap:8px!important; min-width:0!important; }
+  #player-column.queue-expanded .room-title-copy { display:flex!important; flex-direction:column!important; flex:1 1 auto!important; min-width:0!important; }
+  #player-column.queue-expanded .room-title-copy h2 { font-size:15px!important; }
+  #player-column.queue-expanded .room-window-controls { display:flex!important; flex-direction:row!important; flex:none!important; gap:4px!important; margin-left:auto!important; }
+  #player-column.queue-expanded .room-window-button { display:grid!important; flex:0 0 30px!important; width:30px!important; min-width:30px!important; height:28px!important; margin:0!important; padding:0!important; transform:none!important; }
+}
