@@ -129,7 +129,7 @@
     'type-all-count','type-original-count','type-cover-count','nav-original-total','nav-cover-total',
     'song-list','selected-artist-filters','pagination','empty-state','empty-title','empty-copy','empty-reset','notice',
     'play-all','play-random','favorites-shortcut','mobile-filter-toggle','theme-toggle',
-    'mobile-player-toggle','sidebar','player-column','player-hide','room-minimize','room-close','youtube-player','youtube-fallback',
+    'mobile-player-toggle','sidebar','player-column','player-hide','room-minimize','room-maximize','room-close','youtube-player','youtube-fallback',
     'playing-thumb','playing-art-placeholder','playing-title','playing-artist','playing-favorite',
     'player-state','watch-youtube','play-pause','previous-song','next-song','queue-shuffle',
     'queue-repeat','player-share','volume-toggle','volume-popover','volume-control','volume-value','volume-mute','queue-count','queue-list','clear-queue','create-playlist','playlist-list',
@@ -1176,6 +1176,13 @@
     button.setAttribute('aria-pressed', String(isOpen));
     button.setAttribute('aria-label', 'Open listening room and playlists');
     button.title = 'Open listening room and playlists';
+    if (!isOpen) {
+      el['player-column'].classList.remove('room-maximized');
+      el['room-maximize'].textContent = '□';
+      el['room-maximize'].setAttribute('aria-pressed', 'false');
+      el['room-maximize'].setAttribute('aria-label', 'Maximize listening room');
+      el['room-maximize'].title = 'Maximize';
+    }
   }
 
   function playSong(id, queue = null) {
@@ -2026,6 +2033,13 @@
     el['room-minimize'].addEventListener('click', () => {
       // Minimize leaves the active YouTube video playing in the compact dock.
       setListeningRoomOpen(false);
+    });
+    el['room-maximize'].addEventListener('click', () => {
+      const maximized = el['player-column'].classList.toggle('room-maximized');
+      el['room-maximize'].textContent = maximized ? '❐' : '□';
+      el['room-maximize'].setAttribute('aria-pressed', String(maximized));
+      el['room-maximize'].setAttribute('aria-label', maximized ? 'Restore listening room' : 'Maximize listening room');
+      el['room-maximize'].title = maximized ? 'Restore' : 'Maximize';
     });
     el['room-close'].addEventListener('click', () => {
       // Close pauses the video but keeps the queue/current track available in the dock.
