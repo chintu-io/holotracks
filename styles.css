@@ -6945,3 +6945,29 @@ body.theme-light #player-column.player-column:not(.queue-expanded) .panel-collap
   #player-column.queue-expanded .room-window-controls { display:flex!important; flex-direction:row!important; flex:none!important; gap:4px!important; margin-left:auto!important; }
   #player-column.queue-expanded .room-window-button { display:grid!important; flex:0 0 30px!important; width:30px!important; min-width:30px!important; height:28px!important; margin:0!important; padding:0!important; transform:none!important; }
 }
+
+
+/* Default: no room title bar in the compact dock. It appears only inside the viewing room. */
+#player-column .room-titlebar { display:none!important; }
+@media (max-width:680px) {
+  #player-column.mobile-open .room-titlebar {
+    display:flex!important; flex-direction:row!important; align-items:center!important; justify-content:space-between!important;
+    gap:8px!important; width:100%!important; min-width:0!important; min-height:40px!important;
+    margin:0!important; padding:2px 2px 10px!important; position:relative!important; inset:auto!important; transform:none!important;
+  }
+  #player-column.mobile-open .room-title-copy {
+    display:flex!important; flex-direction:column!important; align-items:flex-start!important; flex:1 1 auto!important; min-width:0!important;
+  }
+  #player-column.mobile-open .room-title-copy h2 { margin:3px 0 0!important; font-size:15px!important; }
+  #player-column.mobile-open .room-window-controls {
+    display:flex!important; flex-direction:row!important; align-items:center!important; justify-content:flex-end!important;
+    flex:none!important; gap:4px!important; margin:0 0 0 auto!important; position:static!important; transform:none!important;
+  }
+  #player-column.mobile-open .room-window-button {
+    display:grid!important; position:static!important; flex:0 0 30px!important; place-items:center!important;
+    width:30px!important; min-width:30px!important; height:28px!important; margin:0!important; padding:0!important; transform:none!important;
+    border:1px solid #3a3e55!important; border-radius:7px!important; background:#22263a!important; color:#dce1ef!important;
+  }
+  #player-column.mobile-open .room-window-button.room-maximize { display:none!important; }
+  body.theme-light #player-column.mobile-open .room-window-button { border-color:#dce3ed!important; background:#f5f7fb!important; color:#56647a!important; }
+}
