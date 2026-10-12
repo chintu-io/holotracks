@@ -6232,3 +6232,191 @@ body.theme-light .queue-panel-minimize:hover {
   .queue-heading-actions { gap:4px!important; }
   .queue-panel-minimize { padding-inline:6px!important; font-size:9px!important; }
 }
+
+
+/* Visible-video dock: the real YouTube iframe remains on-screen when the room is minimized. */
+@media (min-width:681px) {
+  #player-column.player-column:not(.queue-expanded) {
+    left:50%!important; right:auto!important; top:auto!important; bottom:14px!important;
+    width:min(1120px,calc(100vw - 36px))!important; height:100px!important;
+    max-height:none!important; min-height:0!important; padding:0!important;
+    transform:translateX(-50%)!important; display:block!important; overflow:visible!important;
+  }
+  #player-column.player-column:not(.queue-expanded) .player-card {
+    position:relative!important; display:grid!important;
+    grid-template-columns:148px minmax(0,1fr)!important; grid-template-rows:minmax(0,1fr)!important;
+    align-items:stretch!important; gap:10px!important;
+    width:100%!important; height:100%!important; min-height:0!important; max-width:none!important;
+    margin:0!important; padding:8px!important; overflow:hidden!important;
+    border:0!important; border-radius:16px!important;
+    background:#111426!important; color:#f3f4fb!important; box-shadow:none!important;
+  }
+  #player-column:not(.queue-expanded) .player-head { display:none!important; }
+  #player-column.player-column:not(.queue-expanded) .video-frame-wrap {
+    position:relative!important; inset:auto!important; left:auto!important; top:auto!important;
+    grid-column:1!important; grid-row:1!important; display:block!important; visibility:visible!important;
+    width:100%!important; height:100%!important; min-height:0!important; max-height:none!important;
+    max-width:none!important; aspect-ratio:16/9!important; margin:0!important; padding:0!important;
+    overflow:hidden!important; border:1px solid #393d55!important; border-radius:10px!important;
+    background:#080b14!important; opacity:1!important; pointer-events:auto!important;
+  }
+  #player-column:not(.queue-expanded) .youtube-player,
+  #player-column:not(.queue-expanded) .youtube-player iframe {
+    position:absolute!important; inset:0!important; display:block!important;
+    width:100%!important; height:100%!important; min-width:0!important; min-height:0!important;
+    max-width:none!important; border:0!important; opacity:1!important; visibility:visible!important;
+  }
+  #player-column:not(.queue-expanded) .player-placeholder {
+    background:radial-gradient(circle at 50% 35%,#282541,#101426 78%)!important;
+  }
+  #player-column:not(.queue-expanded) .now-playing-meta {
+    position:relative!important; grid-column:2!important; grid-row:1!important;
+    display:grid!important; grid-template-columns:minmax(130px,1fr) auto!important;
+    grid-template-rows:minmax(0,1fr) 15px!important;
+    align-items:center!important; align-content:center!important; gap:0 12px!important;
+    width:100%!important; height:100%!important; min-height:0!important; margin:0!important;
+    padding:2px 3px 0 2px!important; overflow:visible!important; background:transparent!important;
+  }
+  #player-column:not(.queue-expanded) .playing-title-row {
+    grid-column:1!important; grid-row:1!important; display:flex!important;
+    align-items:center!important; min-width:0!important; min-height:0!important;
+    gap:8px!important; align-self:center!important;
+  }
+  #player-column:not(.queue-expanded) .playing-art { display:none!important; }
+  #player-column:not(.queue-expanded) .playing-text { min-width:0!important; }
+  #player-column:not(.queue-expanded) .playing-text strong {
+    display:block!important; overflow:hidden!important; text-overflow:ellipsis!important;
+    white-space:nowrap!important; color:#f0f1fa!important; font-size:13px!important;
+  }
+  #player-column:not(.queue-expanded) .playing-text span {
+    display:block!important; overflow:hidden!important; text-overflow:ellipsis!important;
+    white-space:nowrap!important; color:#a7aec4!important; font-size:11px!important;
+  }
+  #player-column:not(.queue-expanded) .player-controls {
+    grid-column:2!important; grid-row:1 / span 2!important; align-self:center!important;
+    display:flex!important; flex-wrap:nowrap!important; align-items:center!important; justify-content:flex-end!important;
+    gap:6px!important; margin:0!important; padding:0!important; min-height:0!important;
+    visibility:visible!important; opacity:1!important;
+  }
+  #player-column:not(.queue-expanded) .player-controls button {
+    flex:none!important; visibility:visible!important; opacity:1!important;
+  }
+  #player-column:not(.queue-expanded) .control-button {
+    display:grid!important; place-items:center!important;
+    width:32px!important; height:34px!important; padding:0!important;
+    border:1px solid #353950!important; border-radius:9px!important;
+    background:#1b1e31!important; color:#c5cbe0!important; font-size:14px!important;
+  }
+  #player-column:not(.queue-expanded) .play-toggle {
+    width:40px!important; height:40px!important; border:0!important; border-radius:50%!important;
+    background:linear-gradient(135deg,#ca6ea4,#8e75c2)!important; color:#fff!important;
+  }
+  #player-column:not(.queue-expanded) .panel-collapse.player-room-toggle {
+    display:inline-flex!important; align-items:center!important; justify-content:center!important;
+    width:112px!important; min-width:112px!important; height:34px!important; padding:0 8px!important;
+    border:1px solid #5a4a69!important; border-radius:9px!important; background:#292239!important;
+    color:#f1d9ef!important; font:800 10px/1 'Nunito',system-ui,sans-serif!important;
+    white-space:nowrap!important;
+  }
+  #player-column:not(.queue-expanded) .player-status-row {
+    grid-column:1!important; grid-row:2!important; align-self:start!important;
+    display:flex!important; justify-content:flex-start!important; gap:8px!important;
+    min-height:0!important; margin:0!important; padding:0!important; overflow:hidden!important;
+    color:#8f97b0!important; font-size:8px!important; white-space:nowrap!important;
+  }
+  #player-column:not(.queue-expanded) #watch-youtube { display:none!important; }
+  #player-column:not(.queue-expanded) .player-footnote { display:none!important; }
+
+  /* Familiar window controls in the expanded listening room's title bar. */
+  #player-column.queue-expanded .player-head {
+    display:flex!important; align-items:center!important; justify-content:space-between!important;
+  }
+  #player-column.queue-expanded .room-window-controls {
+    display:flex!important; align-items:center!important; gap:6px!important;
+    margin-left:auto!important; flex:none!important;
+  }
+  #player-column.queue-expanded .room-window-button {
+    display:grid!important; place-items:center!important;
+    width:32px!important; height:30px!important; padding:0!important;
+    border:1px solid #3a3e55!important; border-radius:7px!important;
+    background:#22263a!important; color:#dce1ef!important;
+    font:500 19px/1 'Segoe UI',system-ui,sans-serif!important;
+  }
+  #player-column.queue-expanded .room-window-button:hover {
+    border-color:#656b83!important; background:#30354a!important; color:#fff!important;
+  }
+  #player-column.queue-expanded .room-window-button.room-close:hover {
+    border-color:#e66c83!important; background:#a93650!important; color:#fff!important;
+  }
+  #player-column.queue-expanded .player-room-toggle { display:none!important; }
+
+  /* Keep the external-video action directly under the video, aligned left. */
+  #player-column.queue-expanded .player-status-row {
+    justify-content:flex-start!important; align-items:center!important; gap:12px!important;
+    width:100%!important; padding-top:8px!important; text-align:left!important;
+  }
+  #player-column.queue-expanded .player-status-row #watch-youtube:not([hidden]) {
+    display:inline-flex!important; align-items:center!important; margin:0!important;
+    padding:0!important; white-space:nowrap!important; align-self:center!important;
+  }
+
+  /* Share glyph is a standard upload/share symbol, not a diagonal launch arrow. */
+  #player-column .share-icon { display:block!important; width:17px!important; height:17px!important; }
+  #player-column .player-share { align-items:center!important; justify-content:center!important; }
+  #player-column.queue-expanded .queue-panel-minimize { display:none!important; }
+  #player-column.queue-expanded .queue-heading-actions { justify-content:flex-end!important; }
+}
+
+/* In light mode the visible iframe dock and title-bar controls use the same pale surface. */
+@media (min-width:681px) {
+  body.theme-light #player-column.player-column:not(.queue-expanded) {
+    border-color:#dce2ec!important; background:#fff!important;
+    box-shadow:0 12px 38px rgba(44,57,79,.15)!important;
+  }
+  body.theme-light #player-column.player-column:not(.queue-expanded) .player-card {
+    background:#fff!important; color:#29354b!important;
+  }
+  body.theme-light #player-column:not(.queue-expanded) .video-frame-wrap {
+    border-color:#dce2ec!important; background:#f0f2f7!important;
+  }
+  body.theme-light #player-column:not(.queue-expanded) .playing-text strong { color:#2f3b51!important; }
+  body.theme-light #player-column:not(.queue-expanded) .playing-text span { color:#6c7a90!important; }
+  body.theme-light #player-column:not(.queue-expanded) .control-button {
+    border-color:#dce2ec!important; background:#f5f7fa!important; color:#5c687d!important;
+  }
+  body.theme-light #player-column:not(.queue-expanded) .play-toggle {
+    background:linear-gradient(135deg,#cb73a6,#9476c6)!important; color:#fff!important;
+  }
+  body.theme-light #player-column:not(.queue-expanded) .panel-collapse.player-room-toggle {
+    border-color:#dfc8dc!important; background:#f9eef6!important; color:#8b4e76!important;
+  }
+  body.theme-light #player-column.queue-expanded .room-window-button {
+    border-color:#dce2ec!important; background:#f5f7fb!important; color:#5c687d!important;
+  }
+  body.theme-light #player-column.queue-expanded .room-window-button.room-close:hover {
+    border-color:#e66c83!important; background:#a93650!important; color:#fff!important;
+  }
+}
+
+/* Responsive dock: reduce non-essential labels on narrower screens but keep the video visible. */
+@media (min-width:681px) and (max-width:900px) {
+  #player-column.player-column:not(.queue-expanded) {
+    left:10px!important; right:10px!important; width:auto!important;
+    height:92px!important; transform:none!important; bottom:8px!important;
+  }
+  #player-column.player-card:not(.queue-expanded) { grid-template-columns:124px minmax(0,1fr)!important; }
+  #player-column.player-column:not(.queue-expanded) .player-card {
+    grid-template-columns:124px minmax(0,1fr)!important; gap:7px!important; padding:6px!important;
+  }
+  #player-column:not(.queue-expanded) .playing-text span,
+  #player-column:not(.queue-expanded) .playing-art,
+  #player-column:not(.queue-expanded) .player-heart { display:none!important; }
+  #player-column:not(.queue-expanded) .player-controls { gap:3px!important; }
+  #player-column:not(.queue-expanded) .control-button { width:27px!important; height:29px!important; }
+  #player-column:not(.queue-expanded) .play-toggle { width:34px!important; height:34px!important; }
+  #player-column:not(.queue-expanded) .panel-collapse.player-room-toggle { width:92px!important; min-width:92px!important; font-size:9px!important; }
+}
+@media (max-width:680px) {
+  #player-column.queue-expanded .room-window-controls { display:flex!important; align-items:center!important; gap:5px!important; }
+  #player-column.queue-expanded .room-window-button { width:30px!important; height:28px!important; }
+}
