@@ -2033,6 +2033,9 @@
     el['room-minimize'].addEventListener('click', () => {
       // Minimize leaves the active YouTube video playing in the compact dock.
       setListeningRoomOpen(false);
+      if (window.matchMedia && window.matchMedia('(max-width: 680px)').matches) {
+        toggleMobilePlayerPanel(false);
+      }
     });
     el['room-maximize'].addEventListener('click', () => {
       const maximized = el['player-column'].classList.toggle('room-maximized');
@@ -2047,6 +2050,9 @@
         try { state.player.pauseVideo(); } catch {}
       }
       setListeningRoomOpen(false);
+      if (window.matchMedia && window.matchMedia('(max-width: 680px)').matches) {
+        toggleMobilePlayerPanel(false);
+      }
     });
     el['sidebar-collapse'].addEventListener('click', () => {
       setSidebarCollapsed(document.body.classList.contains('sidebar-open'));
