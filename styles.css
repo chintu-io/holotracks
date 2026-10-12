@@ -5533,7 +5533,7 @@ body.filters-open #sidebar.sidebar {
 body.sidebar-open::before {
   content:"";
   position:fixed;
-  inset:72px 0 0;
+  inset:82px 0 0;
   z-index:65;
   background:rgba(35,39,55,.22);
   backdrop-filter:blur(2px);
@@ -5708,8 +5708,8 @@ body.theme-light .theme-toggle:hover { background:#f8eff5!important; border-colo
   .topbar>.brand { grid-column:2!important; grid-row:1!important; }
   .topbar>.global-search { grid-column:1/-1!important; grid-row:2!important; }
   .topbar>.top-actions { grid-column:3!important; grid-row:1!important; gap:5px!important; }
-  #sidebar.sidebar { left:10px!important; top:75px!important; bottom:10px!important; width:min(280px,calc(100vw - 20px))!important; }
-  body.sidebar-open::before { inset:64px 0 0; }
+  #sidebar.sidebar { left:10px!important; top:112px!important; bottom:10px!important; width:min(280px,calc(100vw - 20px))!important; }
+  body.sidebar-open::before { inset:108px 0 0; }
 }
 @media (prefers-reduced-motion:reduce) {
   #sidebar.sidebar { transition:none; }
