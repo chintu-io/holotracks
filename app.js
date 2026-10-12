@@ -117,6 +117,7 @@
     muted: 'holotracks:muted:v1',
     bannerDeck: 'holotracks:banner-deck:v2',
     sidebarCollapsed: 'holotracks:sidebar-collapsed:v2',
+    sidebarOpen: 'holotracks:sidebar-open:v1',
     theme: 'holotracks:theme:v1',
     lastBanner: 'holotracks:banner-last:v2',
   };
@@ -608,24 +609,14 @@
     chloe: 'Sakamata Chloe', sana: 'Tsukumo Sana',
   };
   function setSidebarCollapsed(collapsed, persist = true) {
-    document.body.classList.toggle('sidebar-collapsed', !!collapsed);
-    const isMobile = window.matchMedia && window.matchMedia('(max-width: 680px)').matches;
-    const expanded = isMobile ? document.body.classList.contains('filters-open') : !collapsed;
-    el['sidebar-collapse'].title = expanded ? 'Hide navigation' : 'Show navigation';
-    el['sidebar-collapse'].setAttribute('aria-label', expanded ? 'Hide navigation' : 'Show navigation');
-    el['sidebar-collapse'].setAttribute('aria-expanded', String(expanded));
-    el['sidebar-collapse'].setAttribute('aria-pressed', String(!!collapsed));
-    if (persist) saveJSON(KEYS.sidebarCollapsed, !!collapsed);
-  }
-  function applyTheme(theme) {
-    const light = theme === 'light';
-    document.body.classList.toggle('theme-light', light);
-    const themeColor = document.querySelector('meta[name="theme-color"]');
-    if (themeColor) themeColor.content = light ? '#f5f7fa' : '#101025';
-    el['theme-toggle'].innerHTML = '<span aria-hidden="true">' + (light ? '☾' : '☼') +
-      '</span><b>' + (light ? 'Dark' : 'Light') + '</b>';
-    el['theme-toggle'].setAttribute('aria-label', light ? 'Switch to dark theme' : 'Switch to light theme');
-    el['theme-toggle'].title = light ? 'Switch to dark theme' : 'Switch to light theme';
+    const isOpen = !collapsed;
+    document.body.classList.toggle('sidebar-open', isOpen);
+    const button = el['sidebar-collapse'];
+    button.title = isOpen ? 'Close navigation' : 'Open navigation';
+    button.setAttribute('aria-label', isOpen ? 'Close navigation' : 'Open navigation');
+    button.setAttribute('aria-expanded', String(isOpen));
+    button.setAttribute('aria-pressed', String(isOpen));
+    if (persist) saveJSON(KEYS.sidebarOpen, isOpen);
   }
   function resolveRosterTalent(name) {
     const target = artistKey(name);
@@ -1963,6 +1954,18 @@
     });
     document.addEventListener('click', event => {
       if (!event.target.closest('.volume-control, #volume-popover')) toggleVolumePopover(false);
+      if (document.body.classList.contains('sidebar-open')) {
+        const pickedNavigation = event.target.closest('#sidebar [data-view], #sidebar [data-sidebar-song-type], #sidebar [data-playlist]');
+        const clickedOutsideSidebar = !event.target.closest('#sidebar, #sidebar-collapse');
+        if (pickedNavigation || clickedOutsideSidebar) setSidebarCollapsed(true);
+      }
+      if (el['player-column'].classList.contains('queue-expanded') && !event.target.closest('#player-column')) {
+        el['player-column'].classList.remove('queue-expanded');
+        el['player-hide'].textContent = '⌃';
+        el['player-hide'].setAttribute('aria-expanded', 'false');
+        el['player-hide'].setAttribute('aria-label', 'Show queue and playlist controls');
+        el['player-hide'].title = 'Show queue and playlist controls';
+      }
       if (document.body.classList.contains('mobile-player-open') &&
           !event.target.closest('#player-column, #mobile-mini-player, #mobile-player-toggle')) {
         toggleMobilePlayerPanel(false);
@@ -1986,28 +1989,31 @@
         document.body.classList.remove('filters-open');
         el['mobile-filter-toggle'].setAttribute('aria-expanded', 'false');
       }
+      if (document.body.classList.contains('sidebar-open')) setSidebarCollapsed(true);
+      if (el['player-column'].classList.contains('queue-expanded')) {
+        el['player-column'].classList.remove('queue-expanded');
+        el['player-hide'].textContent = '⌃';
+        el['player-hide'].setAttribute('aria-expanded', 'false');
+      }
     });
     el['sidebar-collapse'].addEventListener('click', () => {
-      if (window.matchMedia && window.matchMedia('(max-width: 680px)').matches &&
-          document.body.classList.contains('filters-open')) {
-        document.body.classList.remove('filters-open');
-        el['mobile-filter-toggle'].setAttribute('aria-expanded', 'false');
-        return;
-      }
-      setSidebarCollapsed(!document.body.classList.contains('sidebar-collapsed'));
+      setSidebarCollapsed(document.body.classList.contains('sidebar-open'));
     });
     el['player-hide'].addEventListener('click', () => {
       if (window.matchMedia && window.matchMedia('(max-width: 680px)').matches) {
         if (el['player-column'].classList.contains('mobile-open')) {
-          // Minimize the overlay to the fixed mini-player; keep playback running.
           toggleMobilePlayerPanel(false);
         } else {
-          // If reached in normal page flow, preserve the existing inline compact mode.
           document.body.classList.toggle('compact-player');
         }
-      } else {
-        document.body.classList.toggle('compact-player');
+        return;
       }
+      const expanded = !el['player-column'].classList.contains('queue-expanded');
+      el['player-column'].classList.toggle('queue-expanded', expanded);
+      el['player-hide'].textContent = expanded ? '⌄' : '⌃';
+      el['player-hide'].setAttribute('aria-expanded', String(expanded));
+      el['player-hide'].setAttribute('aria-label', expanded ? 'Hide queue and playlist controls' : 'Show queue and playlist controls');
+      el['player-hide'].title = expanded ? 'Hide queue and playlist controls' : 'Show queue and playlist controls';
     });
     document.addEventListener('keydown', event => {
       if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') {
@@ -2021,7 +2027,7 @@
     initEvents();
     updateVolumeControl();
     setupDesktopVideoDock();
-    setSidebarCollapsed(!!readJSON(KEYS.sidebarCollapsed, false), false);
+    setSidebarCollapsed(!readJSON(KEYS.sidebarOpen, false), false);
     applyTheme(readJSON(KEYS.theme, 'light'));
     await loadTalentRoster();
     await loadArtistPortraitManifest();
