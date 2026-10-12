@@ -3,19 +3,20 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f5f6fb">
+  <meta name="theme-color" content="#f5f7fa">
   <meta name="description" content="Discover Hololive original songs and covers. Browse artist credits, build queues and play official YouTube music videos in HoloTracks.">
   <title>HoloTracks — Hololive Music Universe</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://hololive.hololivepro.com" crossorigin>
   <link rel="preconnect" href="https://i.ytimg.com" crossorigin>
-  <link rel="stylesheet" href="styles.css?v=20261013-light-layout-1">
-  <script defer src="app.js?v=20261013-light-layout-1"></script>
+  <link rel="stylesheet" href="styles.css?v=20261013-scoped-light-bottom-2">
+  <script defer src="app.js?v=20261013-scoped-light-bottom-2"></script>
 </head>
 <body>
   <a class="skip-link" href="#catalogue">Skip to music library</a>
 
   <header class="topbar">
+    <button id="sidebar-collapse" class="sidebar-collapse" type="button" aria-label="Show navigation" aria-expanded="true" aria-pressed="false" title="Hide navigation"><span class="hamburger-icon" aria-hidden="true"><i></i><i></i><i></i></span></button>
     <a class="brand" href="./" aria-label="HoloTracks home">
       <span class="brand-mark" aria-hidden="true"><i>♫</i><b>✦</b></span>
       <span class="brand-copy"><strong>HoloTracks<span>★</span></strong><small>THE HOLOLIVE MUSIC UNIVERSE</small></span>
@@ -29,7 +30,8 @@
     </form>
     <div class="top-actions">
       <button id="favorites-shortcut" class="favorite-shortcut" type="button" aria-label="Show favourites"><span>♥</span><b>Favourites</b></button>
-      <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Switch to dark theme" aria-pressed="false" title="Switch to dark theme"><span class="theme-icon" aria-hidden="true">☾</span><span class="theme-label">Dark mode</span></button><span class="top-live"><i></i> FAN MUSIC ARCHIVE</span>
+      <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Switch to light theme" title="Switch to light theme"><span aria-hidden="true">☼</span><b>Light</b></button>
+      <span class="top-live"><i></i> FAN MUSIC ARCHIVE</span>
     </div>
   </header>
 
@@ -80,7 +82,7 @@
 
   <main class="app-layout">
     <aside id="sidebar" class="sidebar" aria-label="Music navigation and artist filters">
-      <div class="sidebar-topline"><span class="sidebar-orb">✦</span><span class="sidebar-brand-copy"><strong>Your music lounge</strong><small>Pick a vibe. Find a voice.</small></span><button id="sidebar-collapse" class="sidebar-collapse" type="button" aria-label="Collapse sidebar" aria-pressed="false" title="Collapse sidebar">‹</button></div>
+      <div class="sidebar-topline"><span class="sidebar-orb">✦</span><span class="sidebar-brand-copy"><strong>Your music lounge</strong><small>Pick a vibe. Find a voice.</small></span></div>
       <nav class="main-nav" aria-label="Music filters and library views">
         <button class="nav-item active" data-view="all" data-sidebar-song-type="all" data-tooltip="All songs" title="All songs" aria-label="All songs" type="button" aria-pressed="true"><span class="nav-symbol" aria-hidden="true">▦</span><span class="nav-label">All songs</span><span class="nav-short-label" aria-hidden="true">ALL</span><span id="nav-total" class="nav-count">—</span></button>
         <button class="nav-item" data-sidebar-song-type="original" data-tooltip="Original songs" title="Original songs" aria-label="Original songs" type="button" aria-pressed="false"><span class="nav-symbol" aria-hidden="true">♪</span><span class="nav-label">Originals</span><span class="nav-short-label" aria-hidden="true">ORIG</span><span id="nav-original-total" class="nav-count">—</span></button>
