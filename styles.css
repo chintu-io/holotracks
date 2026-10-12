@@ -5405,7 +5405,7 @@ body{
 }
 
 
-/* HoloTracks layout refresh — preview branch only. */
+/* HoloTracks light-first layout refresh. */
 :root {
   --bg:#f5f6fb; --bg-2:#eef0f8; --panel:#fff; --panel-raised:#fbfbfe; --panel-hover:#f0eff9;
   --line:#e2e4ef; --line-bright:#d4d8e9; --text:#25253a; --muted:#62677c; --dim:#858ba0;
