@@ -21,6 +21,93 @@
     'Nakiri Ayame': 'https://hololive.hololivepro.com/wp-content/uploads/2020/06/Nakiri-Ayame_pr-img_01.webp',
     'Tokoyami Towa': 'https://hololive.hololivepro.com/wp-content/uploads/2020/06/Tokoyami-Towa_pr-img_01.webp',
   };
+  // Representative character/outfit accent colours for the banner name glow.
+  // The image URLs identify the talent but do not encode the exact pixels of each outfit.
+  const BANNER_ACCENT_COLORS = {
+    'achichi-mela': '#ffad8a',
+    'airani-iofifteen': '#79e8ef',
+    'akai-haato': '#ff788f',
+    'aki-rosenthal': '#f39bc3',
+    'amane-kanata': '#9cddff',
+    'anya-melfissa': '#91e4cd',
+    'ayunda-risu': '#d9a17c',
+    'azki': '#ff789a',
+    'cecilia-immergreen': '#b4e9ad',
+    'ceres-fauna': '#a8e9b0',
+    'elizabeth-rose-bloodflame': '#ff7d91',
+    'friend-a': '#f5d58c',
+    'fuwawa-abyssgard': '#9cddff',
+    'gawr-gura': '#79d8ff',
+    'gigi-murin': '#ffb57f',
+    'hakos-baelz': '#ff8297',
+    'hakui-koyori': '#ffa0d2',
+    'hanazono-sayaka': '#ffaad2',
+    'harusaki-nodoka': '#f5a9d1',
+    'himemori-luna': '#f1a8ff',
+    'hiodoshi-ao': '#83caff',
+    'hoshimachi-suisei': '#76dfff',
+    'houshou-marine': '#ff8a86',
+    'hyakuto-kyoko': '#e9a6f2',
+    'ichijou-ririka': '#ffb17c',
+    'inugami-korone': '#ffc078',
+    'irys': '#e9a0f4',
+    'isaki-riona': '#ff879e',
+    'izuki-michiru': '#86e6dc',
+    'juufuutei-raden': '#e4b886',
+    'kaela-kovalskia': '#ff898e',
+    'kazama-iroha': '#a3e8be',
+    'kazeshiro-yuki': '#a6e2ff',
+    'kikirara-vivi': '#f4a3da',
+    'kiryu-coco': '#ffad91',
+    'kobo-kanaeru': '#7ce0f1',
+    'koganei-niko': '#b5a4ff',
+    'koseki-bijou': '#ff9dc9',
+    'kureiji-ollie': '#ff8fb0',
+    'la-darknesss': '#b9a5ff',
+    'minato-aqua': '#98e7ff',
+    'mizumiya-su': '#86e9df',
+    'mococo-abyssgard': '#ffaddd',
+    'momosuzu-nene': '#ffc17e',
+    'moona-hoshinova': '#d0a8ff',
+    'mori-calliope': '#ff8eaa',
+    'murasaki-shion': '#c3a6ff',
+    'nakiri-ayame': '#ff9cb0',
+    'nanashi-mumei': '#d8c58d',
+    'natsuiro-matsuri': '#ffe18c',
+    'nekomata-okayu': '#c5adff',
+    'nerissa-ravencroft': '#b9a6ff',
+    'ninomae-inanis': '#b9a6ff',
+    'omaru-polka': '#ffc17d',
+    'ookami-mio': '#ffa18b',
+    'oozora-subaru': '#ffc17d',
+    'otonose-kanade': '#c3e4f2',
+    'ouro-kronii': '#90d0ff',
+    'pavolia-reine': '#e7a8e2',
+    'raora-panthera': '#ffb49b',
+    'rindo-chihaya': '#9dd7ff',
+    'robocosan': '#ffa2bc',
+    'sakamata-chloe': '#c4d6e8',
+    'sakura-miko': '#ffa2d2',
+    'shiori-novella': '#c2b2ff',
+    'shirakami-fubuki': '#b5efff',
+    'shiranui-flare': '#ffc18a',
+    'shirogane-noel': '#ffe0a0',
+    'shishiro-botan': '#d4deea',
+    'sorashina-sopia': '#a5dcff',
+    'suzuna-tsuzuri': '#9fd8ff',
+    'takanashi-kiara': '#ffc08a',
+    'takane-lui': '#ff9aa8',
+    'todoroki-hajime': '#ff94b3',
+    'tokino-sora': '#a3e5ff',
+    'tokoyami-towa': '#c0a5ff',
+    'tsukumo-sana': '#ffb1dd',
+    'tsunomaki-watame': '#ffe38b',
+    'usada-pekora': '#a0caff',
+    'vestia-zeta': '#b5a9ff',
+    'watson-amelia': '#f2d0a0',
+    'yukihana-lamy': '#a9d4ff',
+    'yuzuki-choco': '#c7aaff',
+  };
   const KEYS = {
     favorites: 'holotracks:favorites:v1',
     playlists: 'holotracks:playlists:v1',
@@ -45,7 +132,7 @@
     'player-state','watch-youtube','play-pause','previous-song','next-song','queue-shuffle',
     'queue-repeat','player-share','volume-toggle','volume-popover','volume-control','volume-value','volume-mute','queue-count','queue-list','clear-queue','create-playlist','playlist-list',
     'playlist-select','save-queue','play-selected-playlist','playlist-dialog','playlist-form','cancel-playlist',
-    'playlist-name','talent-strip','sidebar-collapse','mobile-mini-player','mobile-mini-thumb','mobile-mini-expand','mobile-mini-title','mobile-mini-artist','mobile-mini-toggle','mobile-mini-next','hero-talent-art',
+    'playlist-name','talent-strip','sidebar-collapse','mobile-mini-player','mobile-mini-thumb','mobile-mini-expand','mobile-mini-title','mobile-mini-artist','mobile-mini-toggle','mobile-mini-next','hero-talent-art','hero-artist-name',
   ];
   const el = Object.fromEntries(ids.map(id => [id, document.getElementById(id)]));
   const readJSON = (key, fallback) => {
@@ -249,6 +336,24 @@
     return byImage.get(pickedImage) || null;
   }
 
+  function revealBannerArtistName(talent) {
+    const label = el['hero-artist-name'];
+    if (!label || !talent || !talent.name) return;
+
+    const accent = BANNER_ACCENT_COLORS[talent.slug] || '#d2b6ff';
+    const nameLength = Array.from(talent.name).length;
+    const fontSize = Math.round(Math.max(14, Math.min(24, 330 / Math.max(1, nameLength))));
+
+    label.classList.remove('is-visible');
+    label.textContent = talent.name;
+    label.title = talent.name;
+    label.style.setProperty('--artist-accent', accent);
+    label.style.fontSize = fontSize + 'px';
+    window.requestAnimationFrame(() => {
+      if (label.textContent === talent.name) label.classList.add('is-visible');
+    });
+  }
+
   function renderHeroTalentArt({ transition = false } = {}) {
     const stage = el['hero-talent-art'];
     if (!stage) return;
@@ -268,6 +373,7 @@
       if (previous) previous.classList.remove('is-exiting');
     };
     image.onload = () => {
+      revealBannerArtistName(talent);
       if (!transition || !previous) {
         image.classList.remove('is-entering');
         image.classList.add('is-visible');

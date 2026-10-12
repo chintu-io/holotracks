@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Nunito:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=DM+Mono:wght@400;500&family=Nunito:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap');
 
 :root{
   color-scheme:dark;
@@ -5256,4 +5256,76 @@ body{
   .selected-filter-caption{width:100%;font-size:8.5px}
   .selected-artist-chip{font-size:10px;padding:6px 8px}
   .selected-artist-clear{margin-left:0;font-size:9.5px}
+}
+
+
+/* Featured artist signature: handwritten, costume-themed glow in the open side of the hero stage. */
+.hero-artist-name{
+  position:absolute!important;
+  z-index:2!important;
+  left:1.5%!important;
+  top:53%!important;
+  width:44%!important;
+  max-width:260px!important;
+  margin:0!important;
+  padding:4px 2px!important;
+  color:color-mix(in srgb,var(--artist-accent,#d2b6ff) 64%,#fff)!important;
+  font-family:'Caveat','Segoe Script','Bradley Hand',cursive!important;
+  font-weight:700!important;
+  font-size:21px;
+  line-height:1!important;
+  letter-spacing:.1px!important;
+  text-align:center!important;
+  white-space:nowrap!important;
+  text-overflow:clip!important;
+  opacity:0;
+  pointer-events:none!important;
+  user-select:none!important;
+  transform:translateY(-50%) rotate(-7deg) scale(.96);
+  transform-origin:center;
+  text-shadow:
+    0 0 1px #fff,
+    0 0 4px var(--artist-accent,#d2b6ff),
+    0 0 10px var(--artist-accent,#d2b6ff),
+    0 0 22px color-mix(in srgb,var(--artist-accent,#d2b6ff) 58%,transparent);
+  filter:drop-shadow(0 2px 3px #101026aa);
+  transition:opacity .45s ease,color .35s ease,text-shadow .35s ease,transform .45s ease;
+}
+.hero-artist-name::after{
+  content:'✦';
+  position:absolute;
+  top:-.43em;
+  right:4%;
+  color:var(--artist-accent,#d2b6ff);
+  font-family:'Nunito',sans-serif;
+  font-size:.58em;
+  text-shadow:0 0 7px var(--artist-accent,#d2b6ff),0 0 15px var(--artist-accent,#d2b6ff);
+}
+.hero-artist-name.is-visible{
+  opacity:1;
+  transform:translateY(-50%) rotate(-7deg) scale(1);
+}
+@media(max-width:1220px) and (min-width:681px){
+  .hero-artist-name{left:1%!important;width:43%!important;top:54%!important}
+}
+@media(max-width:680px){
+  .hero-artist-name{
+    left:2%!important;
+    top:49%!important;
+    width:49%!important;
+    max-width:49%!important;
+    padding-inline:0!important;
+    text-shadow:
+      0 0 1px #fff,
+      0 0 4px var(--artist-accent,#d2b6ff),
+      0 0 8px var(--artist-accent,#d2b6ff),
+      0 0 16px color-mix(in srgb,var(--artist-accent,#d2b6ff) 58%,transparent);
+  }
+}
+@media(max-width:390px){
+  .hero-artist-name{left:1%!important;width:50%!important;max-width:50%!important}
+}
+@media(prefers-reduced-motion:reduce){
+  .hero-artist-name{transition:none!important;transform:translateY(-50%) rotate(-7deg)!important}
+  .hero-artist-name.is-visible{transform:translateY(-50%) rotate(-7deg)!important}
 }
