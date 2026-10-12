@@ -129,7 +129,7 @@
     'type-all-count','type-original-count','type-cover-count','nav-original-total','nav-cover-total',
     'song-list','selected-artist-filters','pagination','empty-state','empty-title','empty-copy','empty-reset','notice',
     'play-all','play-random','favorites-shortcut','mobile-filter-toggle','theme-toggle',
-    'mobile-player-toggle','sidebar','player-column','player-hide','queue-panel-minimize','youtube-player','youtube-fallback',
+    'mobile-player-toggle','sidebar','player-column','player-hide','room-minimize','room-close','youtube-player','youtube-fallback',
     'playing-thumb','playing-art-placeholder','playing-title','playing-artist','playing-favorite',
     'player-state','watch-youtube','play-pause','previous-song','next-song','queue-shuffle',
     'queue-repeat','player-share','volume-toggle','volume-popover','volume-control','volume-value','volume-mute','queue-count','queue-list','clear-queue','create-playlist','playlist-list',
@@ -1170,11 +1170,12 @@
     el['player-column'].classList.toggle('queue-expanded', isOpen);
     document.body.classList.toggle('listening-room-open', isOpen);
     const button = el['player-hide'];
-    button.textContent = isOpen ? 'Close room' : 'Queue & playlists';
+    // The compact dock keeps one consistent action; window controls live in the room title bar.
+    button.textContent = 'Queue & playlists';
     button.setAttribute('aria-expanded', String(isOpen));
     button.setAttribute('aria-pressed', String(isOpen));
-    button.setAttribute('aria-label', isOpen ? 'Minimize listening room' : 'Open listening room and playlists');
-    button.title = isOpen ? 'Minimize listening room' : 'Open listening room and playlists';
+    button.setAttribute('aria-label', 'Open listening room and playlists');
+    button.title = 'Open listening room and playlists';
   }
 
   function playSong(id, queue = null) {
@@ -2022,11 +2023,14 @@
       if (document.body.classList.contains('sidebar-open')) setSidebarCollapsed(true);
       if (el['player-column'].classList.contains('queue-expanded')) setListeningRoomOpen(false);
     });
-    el['queue-panel-minimize'].addEventListener('click', () => {
-      if (window.matchMedia && window.matchMedia('(max-width: 680px)').matches &&
-          document.body.classList.contains('mobile-player-open')) {
-        toggleMobilePlayerPanel(false);
-        return;
+    el['room-minimize'].addEventListener('click', () => {
+      // Minimize leaves the active YouTube video playing in the compact dock.
+      setListeningRoomOpen(false);
+    });
+    el['room-close'].addEventListener('click', () => {
+      // Close pauses the video but keeps the queue/current track available in the dock.
+      if (state.playerReady && state.player) {
+        try { state.player.pauseVideo(); } catch {}
       }
       setListeningRoomOpen(false);
     });
