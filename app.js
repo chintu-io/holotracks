@@ -129,7 +129,7 @@
     'type-all-count','type-original-count','type-cover-count','nav-original-total','nav-cover-total',
     'song-list','selected-artist-filters','pagination','empty-state','empty-title','empty-copy','empty-reset','notice',
     'play-all','play-random','favorites-shortcut','mobile-filter-toggle','theme-toggle',
-    'mobile-player-toggle','sidebar','player-column','player-hide','player-expand','room-minimize','room-maximize','room-close','youtube-player','youtube-fallback',
+    'mobile-player-toggle','sidebar','player-column','player-expand','dock-controls-slot','room-controls-slot','room-minimize','room-maximize','room-close','youtube-player','youtube-fallback',
     'playing-thumb','playing-art-placeholder','playing-title','playing-artist','playing-favorite',
     'player-state','watch-youtube','play-pause','previous-song','next-song','queue-shuffle',
     'queue-repeat','player-share','volume-toggle','volume-popover','volume-control','volume-value','volume-mute','queue-count','queue-list','clear-queue','create-playlist','playlist-list',
@@ -1167,17 +1167,17 @@
 
   function setListeningRoomOpen(open) {
     const isOpen = !!open;
-    el['player-column'].classList.toggle('queue-expanded', isOpen);
+    const playerColumn = el['player-column'];
+    playerColumn.classList.toggle('queue-expanded', isOpen);
     document.body.classList.toggle('listening-room-open', isOpen);
-    const button = el['player-hide'];
-    // The compact dock keeps one consistent action; window controls live in the room title bar.
-    button.textContent = 'Queue & playlists';
-    button.setAttribute('aria-expanded', String(isOpen));
-    button.setAttribute('aria-pressed', String(isOpen));
-    button.setAttribute('aria-label', 'Open listening room and playlists');
-    button.title = 'Open listening room and playlists';
+
+    // Move the same controls between dock and side panel; listeners and playback state remain intact.
+    const controls = playerColumn.querySelector('.player-controls');
+    const targetSlot = isOpen ? el['room-controls-slot'] : el['dock-controls-slot'];
+    if (controls && targetSlot && controls.parentElement !== targetSlot) targetSlot.appendChild(controls);
+
     if (!isOpen) {
-      el['player-column'].classList.remove('room-maximized');
+      playerColumn.classList.remove('room-maximized');
       el['room-maximize'].textContent = '□';
       el['room-maximize'].setAttribute('aria-pressed', 'false');
       el['room-maximize'].setAttribute('aria-label', 'Maximize listening room');
@@ -1522,9 +1522,6 @@
     el['player-column'].classList.toggle('mobile-open', open);
     document.body.classList.toggle('mobile-player-open', open);
     el['mobile-player-toggle'].setAttribute('aria-expanded', String(open));
-    el['player-hide'].setAttribute('aria-expanded', String(open));
-    el['player-hide'].setAttribute('aria-label', open ? 'Minimize player and return to library' : 'Collapse player panel');
-    el['player-hide'].title = open ? 'Minimize player and return to library' : 'Collapse player panel';
     if (open) el['player-column'].scrollTop = 0;
   }
 
@@ -2056,18 +2053,6 @@
     });
     el['sidebar-collapse'].addEventListener('click', () => {
       setSidebarCollapsed(document.body.classList.contains('sidebar-open'));
-    });
-    el['player-hide'].addEventListener('click', () => {
-      if (window.matchMedia && window.matchMedia('(max-width: 680px)').matches) {
-        if (el['player-column'].classList.contains('mobile-open')) {
-          toggleMobilePlayerPanel(false);
-        } else {
-          document.body.classList.toggle('compact-player');
-          if (document.body.classList.contains('mobile-player-open')) toggleMobilePlayerPanel(false);
-        }
-        return;
-      }
-      setListeningRoomOpen(!el['player-column'].classList.contains('queue-expanded'));
     });
     el['player-expand'].addEventListener('click', () => {
       if (window.matchMedia && window.matchMedia('(max-width: 680px)').matches) {
