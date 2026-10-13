@@ -939,3 +939,51 @@ body.theme-light #selected-artist-filters .selected-artist-chip { border:1px sol
 body.theme-light #selected-artist-filters .selected-artist-chip-remove { color:#a85d8b!important; }
 body.theme-light #selected-artist-filters .selected-artist-clear { border:1px solid #dfe3eb!important;background:#fff!important;color:#5d697d!important; }
 body.theme-light #selected-artist-filters .selected-artist-clear:hover { border-color:#dfcbdc!important;background:#fbf1f7!important;color:#814d6d!important; }
+
+
+/* Keep the library heading anchored to the left at tablet and variable widths. */
+@media (max-width: 970px) {
+  #music-library.library-top { align-items: flex-start !important; }
+  #music-library.library-top > div:first-child {
+    align-self: flex-start !important;
+    width: 100% !important;
+    text-align: left !important;
+  }
+  #music-library.library-top h2,
+  #music-library.library-top p,
+  #music-library.library-top .section-kicker { text-align: left !important; }
+  #music-library.library-top h2 { justify-content: flex-start !important; }
+}
+
+/* Use a centered, quiet music mark in the idle compact dock instead of the
+   full-size listening-room placeholder squeezed into the thumbnail. */
+@media (min-width: 681px) {
+  body:not(.has-current-track) #player-column:not(.queue-expanded) .video-frame-wrap {
+    background: #24243c !important;
+  }
+  body:not(.has-current-track) #player-column:not(.queue-expanded) .player-placeholder {
+    gap: 0 !important;
+    background: transparent !important;
+  }
+  body:not(.has-current-track) #player-column:not(.queue-expanded) .player-placeholder strong,
+  body:not(.has-current-track) #player-column:not(.queue-expanded) .player-placeholder small,
+  body:not(.has-current-track) #player-column:not(.queue-expanded) .placeholder-record i {
+    display: none !important;
+  }
+  body:not(.has-current-track) #player-column:not(.queue-expanded) .placeholder-record {
+    width: 36px !important;
+    height: 36px !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    font-size: 25px !important;
+    line-height: 1 !important;
+  }
+  body.theme-light:not(.has-current-track) #player-column:not(.queue-expanded) .video-frame-wrap {
+    background: #f0f2f7 !important;
+  }
+  body.theme-light:not(.has-current-track) #player-column:not(.queue-expanded) .player-placeholder {
+    color: #b75d91 !important;
+  }
+}
