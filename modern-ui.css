@@ -564,3 +564,25 @@ body.theme-light .talent-picker-dialog .talent-picker-toolbar {
     -webkit-overflow-scrolling:touch!important;
   }
 }
+
+
+/* Specific contrast fixes for nested pills and compact spotlight labels. */
+body.theme-light .music-type-filter .music-type-button span,
+body.theme-light .music-type-filter .music-type-button.active span {
+  border:1px solid #e3dce7!important;
+  background:#f3f2f6!important;
+  color:#665b70!important;
+}
+body.theme-light .talent-section #talent-strip .talent-card strong,
+body.theme-light #talent-strip .talent-card strong {
+  color:#465269!important;
+}
+body.theme-light .talent-section #talent-strip .talent-card:hover strong,
+body.theme-light #talent-strip .talent-card:hover strong,
+body.theme-light #talent-strip .talent-card.selected strong {
+  color:#3e344a!important;
+}
+body.theme-light .talent-section #talent-strip .talent-card small,
+body.theme-light #talent-strip .talent-card small {
+  color:#667287!important;
+}
