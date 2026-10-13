@@ -7254,3 +7254,61 @@ body.theme-light #player-column.player-column:not(.queue-expanded) .dock-action-
     gap:0!important;
   }
 }
+
+
+/* Dock poster keeps the minimized player intentional while the YouTube video continues. */
+@media (min-width:681px) {
+  body.player-docked.has-current-track #player-column:not(.queue-expanded) .video-frame-wrap {
+    isolation:isolate;
+    background-color:#15162f;
+  }
+  body.player-docked.has-current-track #player-column:not(.queue-expanded) .video-frame-wrap::after {
+    content:"♪  NOW PLAYING";
+    position:absolute;
+    z-index:5;
+    inset:0;
+    display:flex;
+    align-items:flex-end;
+    padding:10px 11px;
+    border-radius:inherit;
+    background:
+      linear-gradient(180deg,transparent 34%,#080913d9 100%),
+      var(--track-art, radial-gradient(circle at 50% 42%,#3b2d64,#1a2545 50%,#0e1728 100%));
+    background-position:center;
+    background-size:cover;
+    color:#fff;
+    font:700 9px/1.2 'DM Mono',monospace;
+    letter-spacing:.08em;
+    text-shadow:0 1px 3px #000;
+    pointer-events:none;
+  }
+}
+
+/* Lift small supporting copy above the dark panels for easier reading. */
+:root { --dim:#a3a9c8; }
+body:not(.theme-light) .filter-hint,
+body:not(.theme-light) .filter-empty,
+body:not(.theme-light) .sidebar-footer p,
+body:not(.theme-light) .player-kicker,
+body:not(.theme-light) .player-status-row,
+body:not(.theme-light) .player-footnote,
+body:not(.theme-light) .song-card-meta,
+body:not(.theme-light) .queue-empty small {
+  color:#a3a9c8;
+}
+
+/* Keep the compact layout usable on narrow 320px screens. */
+@media (max-width:360px) {
+  .topbar { padding-inline:8px; gap:7px; }
+  .app-layout { padding-inline:8px; }
+  .brand-copy small { display:none; }
+  .hero-card h1 { font-size:31px; }
+  .library-controls { grid-template-columns:minmax(0,1fr) 34px auto; gap:5px; }
+  .sort-control select { min-width:0; padding-inline:6px; font-size:9px; }
+  .play-all-button { padding-inline:7px; }
+  .song-grid { gap:7px; }
+  .song-card-body { padding:8px 7px; }
+  .talent-card { flex-basis:58px; }
+  .talent-image { width:50px; height:54px; }
+  .mobile-mini-player:not([hidden]) { left:6px; right:6px; }
+}
