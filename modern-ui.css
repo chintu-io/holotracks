@@ -996,7 +996,7 @@ body.theme-light #selected-artist-filters .selected-artist-clear:hover { border-
 
 /* Keep the idle desktop dock to a centered music mark, with no fallback copy. */
 @media (min-width:681px) {
-  #player-column:not(.queue-expanded) .youtube-fallback { display:none!important; }
+  body:not(.has-current-track) #player-column:not(.queue-expanded) .youtube-fallback { display:none!important; }
 }
 
 /* Give the mobile mini player a clear track row, independent EQ, and explicit
