@@ -1823,6 +1823,7 @@
       (document.getElementById('music-library') || el['song-list'])
         .scrollIntoView({ behavior: 'smooth', block: 'start' });
     };
+    el['talent-picker-dialog'].addEventListener('close', commitArtistSelection);
     const openTalentPicker = () => {
       const dialog = el['talent-picker-dialog'];
       document.body.classList.add('talent-picker-open');
