@@ -839,9 +839,13 @@
       el['results-caption'].textContent = 'Songs saved in this browser mixtape.';
     } else if (state.view === 'fresh') {
       el['catalogue-title-text'].textContent = 'Fresh releases';
+      const sortCopy = {
+        newest: 'newest releases first', oldest: 'oldest releases first',
+        title: 'title A–Z', popular: 'most viewed first', liked: 'most liked first',
+      }[el['sort-select'].value] || 'newest releases first';
       el['results-caption'].textContent = state.usingFreshFallback
-        ? 'Showing the newest indexed songs because no dates fell inside the recent-release window.'
-        : 'Videos published in the last ' + FRESH_WINDOW_DAYS + ' days, newest first.';
+        ? 'No indexed videos fall inside the last ' + FRESH_WINDOW_DAYS + ' days; showing songs sorted by ' + sortCopy + '.'
+        : 'Videos published in the last ' + FRESH_WINDOW_DAYS + ' days, sorted by ' + sortCopy + '.';
     } else {
       el['catalogue-title-text'].textContent = state.songType === 'cover'
         ? 'Hololive cover songs'
@@ -850,7 +854,7 @@
         ? 'Holodex videos tagged as Music_Cover, ready to explore.'
         : state.songType === 'original'
           ? 'Holodex videos tagged as Original_Song, ready to explore.'
-          : 'Original songs and fan-performed covers from across the Hololive universe.';
+          : 'Original songs and covers from across the Hololive universe.';
     }
     document.querySelectorAll('[data-view]').forEach(button => {
       button.classList.toggle('active', button.dataset.view === state.view);
@@ -1027,23 +1031,27 @@
       return;
     }
     const code = encodePlaylistShare({ ...playlist, songIds: ids });
-    const url = new URL(window.location.href);
+    const url = new URL(window.location.origin + window.location.pathname);
     url.searchParams.set('mix', code);
     url.hash = 'catalogue';
     const shareData = { title: playlist.name, text: 'Listen to my HoloTracks playlist: ' + playlist.name, url: url.toString() };
-    if (typeof navigator.share === 'function') {
+    const useNativeShare = window.matchMedia('(max-width: 680px)').matches && typeof navigator.share === 'function';
+    if (useNativeShare) {
       try {
         if (typeof navigator.canShare !== 'function' || navigator.canShare(shareData)) {
           await navigator.share(shareData);
+          showNotice('Playlist shared. Recipients can save a copy to their own My Mixtapes.');
           return;
         }
       } catch (error) { if (error?.name === 'AbortError') return; }
     }
     try {
+      if (!navigator.clipboard?.writeText) throw new Error('Clipboard unavailable');
       await navigator.clipboard.writeText(url.toString());
       showNotice('Playlist link copied. Anyone with the link can open and save a copy.');
     } catch {
       window.prompt('Copy this playlist link:', url.toString());
+      showNotice('Copy the playlist link from the prompt to share this playlist.');
     }
   }
   function importSharedPlaylist() {
@@ -1089,7 +1097,7 @@
         (isSmart ? ' playlist-row-smart' : '') + '" data-playlist="' + escapeHTML(playlist.id) +
         '"><span class="playlist-row-label">♫ ' + escapeHTML(playlist.name) + '</span>' +
         (isSmart ? '<i class="playlist-smart-badge">AUTO</i>' : '') +
-        '<small>' + count + '</small></button><button type="button" class="playlist-share-button" data-share-playlist="' + escapeHTML(playlist.id) + '" aria-label="Share ' + escapeHTML(playlist.name) + '" title="Share playlist">↗</button></div>';
+        '<small>' + count + '</small></button><button type="button" class="playlist-share-button" data-share-playlist="' + escapeHTML(playlist.id) + '" aria-label="Share ' + escapeHTML(playlist.name) + '" title="Copy playlist share link"><svg class="playlist-share-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="2.5"></circle><circle cx="6" cy="12" r="2.5"></circle><circle cx="18" cy="19" r="2.5"></circle><path d="m8.2 10.8 7.5-4.6M8.2 13.2l7.5 4.6"></path></svg></button></div>';
     }).join('') || '<p class="filter-empty">No mixtapes yet. Use + to create one.</p>';
     el['playlist-select'].innerHTML = '<option value="">Choose playlist…</option>' + state.playlists.map(playlist =>
       '<option value="' + escapeHTML(playlist.id) + '">' + escapeHTML(playlist.name) + '</option>'
@@ -1897,7 +1905,10 @@
         renderSongs();
       }
     });
-    el['sort-select'].addEventListener('change', applyFilters);
+    el['sort-select'].addEventListener('change', () => {
+      applyFilters();
+      showNotice('');
+    });
     el['clear-filters'].addEventListener('click', resetFilters);
     el['empty-reset'].addEventListener('click', resetFilters);
     el['show-all-artists'].addEventListener('click', () => {
