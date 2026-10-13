@@ -1013,15 +1013,83 @@
     return playlist;
   }
 
+  function encodePlaylistShare(playlist) {
+    const payload = { name: playlist.name, ids: (playlist.songIds || []).filter(id => typeof id === 'string') };
+    const bytes = new TextEncoder().encode(JSON.stringify(payload));
+    let binary = '';
+    for (const byte of bytes) binary += String.fromCharCode(byte);
+    return btoa(binary).replace(/\\+/g, '-').replace(/\\//g, '_').replace(/=+$/g, '');
+  }
+  async function sharePlaylist(playlist) {
+    const ids = Array.isArray(playlist?.songIds) ? playlist.songIds.filter(id => songById(id)) : [];
+    if (!playlist || !ids.length) {
+      showNotice('Add songs to this playlist before sharing it.');
+      return;
+    }
+    const code = encodePlaylistShare({ ...playlist, songIds: ids });
+    const url = new URL(window.location.href);
+    url.searchParams.set('mix', code);
+    url.hash = 'catalogue';
+    const shareData = { title: playlist.name, text: 'Listen to my HoloTracks playlist: ' + playlist.name, url: url.toString() };
+    if (typeof navigator.share === 'function') {
+      try {
+        if (typeof navigator.canShare !== 'function' || navigator.canShare(shareData)) {
+          await navigator.share(shareData);
+          return;
+        }
+      } catch (error) { if (error?.name === 'AbortError') return; }
+    }
+    try {
+      await navigator.clipboard.writeText(url.toString());
+      showNotice('Playlist link copied. Anyone with the link can open and save a copy.');
+    } catch {
+      window.prompt('Copy this playlist link:', url.toString());
+    }
+  }
+  function importSharedPlaylist() {
+    const url = new URL(window.location.href);
+    const code = url.searchParams.get('mix');
+    if (!code) return false;
+    try {
+      const normalized = code.replace(/-/g, '+').replace(/_/g, '/');
+      const padded = normalized + '='.repeat((4 - normalized.length % 4) % 4);
+      const bytes = Uint8Array.from(atob(padded), character => character.charCodeAt(0));
+      const payload = JSON.parse(new TextDecoder().decode(bytes));
+      const ids = [...new Set((Array.isArray(payload.ids) ? payload.ids : []).filter(id => typeof id === 'string' && songById(id)))];
+      if (!ids.length) throw new Error('No songs from this playlist are in the current catalogue.');
+      const name = (typeof payload.name === 'string' ? payload.name : 'Shared playlist').trim().slice(0, 72) || 'Shared playlist';
+      const importedId = 'shared-' + code.slice(0, 20);
+      let playlist = state.playlists.find(item => item.id === importedId);
+      if (playlist) {
+        playlist.name = name;
+        playlist.songIds = ids;
+      } else {
+        playlist = { id: importedId, name, songIds: ids };
+        state.playlists.push(playlist);
+      }
+      state.activePlaylist = importedId;
+      state.view = 'all';
+      state.songType = 'all';
+      state.query = '';
+      state.selectedArtists.clear();
+      el['search-input'].value = '';
+      saveJSON(KEYS.playlists, state.playlists);
+      showNotice('Shared playlist added to My Mixtapes.');
+      return true;
+    } catch (error) {
+      showNotice('Could not open this shared playlist: ' + error.message);
+      return false;
+    }
+  }
   function renderPlaylists() {
     el['playlist-list'].innerHTML = state.playlists.map(playlist => {
       const isSmart = playlist.smartType === LATEST_MIX_PLAYLIST_KIND;
       const count = Array.isArray(playlist.songIds) ? playlist.songIds.length : 0;
-      return '<button type="button" class="playlist-row ' + (playlist.id === state.activePlaylist ? 'active' : '') +
+      return '<div class="playlist-row-wrap"><button type="button" class="playlist-row ' + (playlist.id === state.activePlaylist ? 'active' : '') +
         (isSmart ? ' playlist-row-smart' : '') + '" data-playlist="' + escapeHTML(playlist.id) +
         '"><span class="playlist-row-label">♫ ' + escapeHTML(playlist.name) + '</span>' +
         (isSmart ? '<i class="playlist-smart-badge">AUTO</i>' : '') +
-        '<small>' + count + '</small></button>';
+        '<small>' + count + '</small></button><button type="button" class="playlist-share-button" data-share-playlist="' + escapeHTML(playlist.id) + '" aria-label="Share ' + escapeHTML(playlist.name) + '" title="Share playlist">↗</button></div>';
     }).join('') || '<p class="filter-empty">No mixtapes yet. Use + to create one.</p>';
     el['playlist-select'].innerHTML = '<option value="">Choose playlist…</option>' + state.playlists.map(playlist =>
       '<option value="' + escapeHTML(playlist.id) + '">' + escapeHTML(playlist.name) + '</option>'
@@ -1115,7 +1183,7 @@
         showNotice('A video is unavailable in the embedded player, so HoloTracks skipped to the next queued song.');
         lastUnavailableNoticeAt = Date.now();
       }
-      playSong(nextId);
+      playSong(nextId, null, true);
       return;
     }
 
@@ -1185,7 +1253,7 @@
     }
   }
 
-  function playSong(id, queue = null) {
+  function playSong(id, queue = null, preserveRoomMode = false) {
     if (!songById(id)) return;
     clearPlaybackStartWatchdog();
     playbackAttemptToken += 1;
@@ -1215,10 +1283,12 @@
 
     // Playing a song is a video-watching action: reveal the embedded player
     // after click bubbling so the outside-click listener does not close it.
-    if (window.matchMedia && window.matchMedia('(max-width: 680px)').matches) {
-      window.setTimeout(() => toggleMobilePlayerPanel(true), 0);
-    } else {
-      window.setTimeout(() => setListeningRoomOpen(true), 0);
+    if (!preserveRoomMode) {
+      if (window.matchMedia && window.matchMedia('(max-width: 680px)').matches) {
+        window.setTimeout(() => toggleMobilePlayerPanel(true), 0);
+      } else {
+        window.setTimeout(() => setListeningRoomOpen(true), 0);
+      }
     }
   }
 
@@ -1297,9 +1367,9 @@
         id !== state.currentId && !unavailableTrackIds.has(id)
       );
       if (candidates.length) {
-        playSong(candidates[Math.floor(Math.random() * candidates.length)]);
+        playSong(candidates[Math.floor(Math.random() * candidates.length)], null, true);
       } else if (state.repeat && state.currentId && !unavailableTrackIds.has(state.currentId)) {
-        playSong(state.currentId);
+        playSong(state.currentId, null, true);
       } else {
         if (state.playerReady && state.player) state.player.pauseVideo();
         el['player-state'].textContent = 'Queue finished · no playable songs left';
@@ -1310,19 +1380,19 @@
 
     for (let i = currentIndex + 1; i < state.queue.length; i += 1) {
       if (!unavailableTrackIds.has(state.queue[i])) {
-        playSong(state.queue[i]);
+        playSong(state.queue[i], null, true);
         return;
       }
     }
     if (state.repeat) {
       for (let i = 0; i < Math.max(0, currentIndex); i += 1) {
         if (!unavailableTrackIds.has(state.queue[i])) {
-          playSong(state.queue[i]);
+          playSong(state.queue[i], null, true);
           return;
         }
       }
       if (currentIndex >= 0 && !unavailableTrackIds.has(state.currentId)) {
-        playSong(state.currentId);
+        playSong(state.currentId, null, true);
         return;
       }
     }
@@ -1339,8 +1409,8 @@
       state.player.seekTo(0, true);
       return;
     }
-    if (index > 0) playSong(state.queue[index - 1]);
-    else if (state.repeat && state.queue.length) playSong(state.queue[state.queue.length - 1]);
+    if (index > 0) playSong(state.queue[index - 1], null, true);
+    else if (state.repeat && state.queue.length) playSong(state.queue[state.queue.length - 1], null, true);
   }
   function renderQueue() {
     el['queue-count'].textContent = state.queue.length.toLocaleString();
@@ -1738,18 +1808,21 @@
     });
     const closeTalentPicker = () => {
       const dialog = el['talent-picker-dialog'];
-      document.body.classList.remove('talent-picker-open');
       if (typeof dialog.close === 'function' && dialog.open) {
-        try {
-          dialog.close();
-          return;
-        } catch { /* Fall back to the non-modal open state below. */ }
+        try { dialog.close(); return; } catch { /* Use the fallback open state. */ }
       }
       dialog.removeAttribute('open');
+      commitArtistSelection();
     };
-    el['talent-picker-dialog'].addEventListener('close', () => {
+    const commitArtistSelection = () => {
       document.body.classList.remove('talent-picker-open');
-    });
+      state.view = 'all';
+      state.activePlaylist = null;
+      renderPlaylists();
+      applyFilters();
+      (document.getElementById('music-library') || el['song-list'])
+        .scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
     const openTalentPicker = () => {
       const dialog = el['talent-picker-dialog'];
       document.body.classList.add('talent-picker-open');
@@ -1793,16 +1866,8 @@
       const input = event.target.closest('input[data-artist]');
       if (!input) return;
       input.checked ? state.selectedArtists.add(input.dataset.artist) : state.selectedArtists.delete(input.dataset.artist);
+      // Stage the filter in the directory; the catalogue changes only when the dialog closes.
       renderArtists();
-      state.view = 'all';
-      state.activePlaylist = null;
-      renderPlaylists();
-      applyFilters();
-      (document.getElementById('music-library') || el['song-list'])
-        .scrollIntoView({ behavior: 'smooth', block: 'start' });
-      if (window.matchMedia && window.matchMedia('(max-width: 680px)').matches) {
-        document.body.classList.remove('filters-open');
-      }
     });
     el['selected-artist-filters'].addEventListener('click', event => {
       const removeButton = event.target.closest('[data-remove-selected-artist]');
@@ -1962,6 +2027,12 @@
       el['playlist-dialog'].close();
     });
     el['playlist-list'].addEventListener('click', event => {
+      const shareButton = event.target.closest('[data-share-playlist]');
+      if (shareButton) {
+        const playlistToShare = state.playlists.find(item => item.id === shareButton.dataset.sharePlaylist);
+        sharePlaylist(playlistToShare);
+        return;
+      }
       const button = event.target.closest('[data-playlist]');
       if (!button) return;
       const playlist = state.playlists.find(item => item.id === button.dataset.playlist);
@@ -2133,10 +2204,12 @@
       el['source-status'].textContent = 'Catalogue load failed';
       showNotice('Could not load the song catalogue (' + error.message + '). Refresh the page to retry.');
     }
+    const hasSharedPlaylist = importSharedPlaylist();
     refreshLatest50Playlist();
     renderArtists();
     renderPlaylists();
     applyFilters();
+    if (hasSharedPlaylist) (document.getElementById('music-library') || el['song-list']).scrollIntoView({ behavior: 'smooth', block: 'start' });
     renderQueue();
     renderPlayerMeta();
     renderCounts();
