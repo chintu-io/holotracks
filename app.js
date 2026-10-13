@@ -1380,11 +1380,15 @@
     el['mobile-mini-title'].textContent = item ? titleOf(item) : 'Nothing playing yet';
     el['mobile-mini-artist'].textContent = item ? artistsOf(item).join(', ') : 'Choose a song to start listening';
     if (item) el['mobile-mini-thumb'].src = thumbnail(item);
-    const dockPoster = el['youtube-player'].parentElement;
-    dockPoster.style.setProperty(
-      '--track-art',
-      item ? 'url("' + thumbnail(item) + '")' : 'none'
-    );
+    // The YouTube API replaces its target div with an iframe, so use the
+    // stable frame wrapper rather than the cached player node.
+    const dockPoster = document.querySelector('#player-column .video-frame-wrap');
+    if (dockPoster) {
+      dockPoster.style.setProperty(
+        '--track-art',
+        item ? 'url("' + thumbnail(item) + '")' : 'none'
+      );
+    }
     el['mobile-mini-thumb'].hidden = !item;
   }
   function updatePlayerButtons() {
@@ -1538,15 +1542,18 @@
     script.id = 'youtube-api-script';
     script.src = 'https://www.youtube.com/iframe_api';
     document.head.appendChild(script);
-    window.onYouTubeIframeAPIReady = () => createYouTubePlayer();
+    window.onYouTubeIframeAPIReady = () => {
+      // Preload the API, but don't create an empty player before a song is picked.
+      if (state.pendingVideoId) createYouTubePlayer();
+    };
   }
   function createYouTubePlayer() {
-    if (state.player) return;
+    if (state.player || !state.pendingVideoId) return;
     state.player = new window.YT.Player('youtube-player', {
       width: '100%',
       height: '100%',
       videoId: state.pendingVideoId || undefined,
-      playerVars: { playsinline: 1, rel: 0, origin: location.origin },
+      playerVars: { playsinline: 1, rel: 0, autoplay: 1, origin: location.origin },
       events: {
         onReady: () => {
           state.playerReady = true;
@@ -1604,9 +1611,6 @@
     renderPlaylists();
     applyFilters();
 
-    // Favourites is a library destination, not just a hidden filter change.
-    // Scroll the updated catalogue into view so the user immediately sees the
-    // favourites heading, count, and matching song cards instead of the hero.
     const target = document.getElementById('music-library') || el['song-list'];
     target.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
@@ -1624,7 +1628,8 @@
     showNotice(state.usingFreshFallback
       ? 'No indexed dates fell inside the recent-release window, so we are showing the newest songs we could sort.'
       : 'Fresh releases selected — recently published songs first.');
-    el['catalogue'].scrollIntoView({ behavior: 'smooth', block: 'start' });
+    (document.getElementById('music-library') || el['song-list'])
+      .scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
   function resetFilters() {
     state.songType = 'all';
