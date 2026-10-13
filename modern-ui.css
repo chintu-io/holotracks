@@ -821,3 +821,30 @@ body.theme-light #talent-picker-dialog #artist-filters::-webkit-scrollbar-thumb 
   border-radius: 99px !important;
   background: #c5cbd6 !important;
 }
+
+
+/* Compact discovery cards; keep both shortcuts aligned to their content. */
+@media (min-width:681px) { .quick-discovery { display:flex!important; align-items:stretch!important; justify-content:flex-start!important; width:100%!important; max-width:1080px!important; gap:12px!important; } .quick-discovery > button { flex:0 1 360px!important; width:auto!important; max-width:360px!important; min-width:260px!important; } }
+@media (max-width:680px) { .quick-discovery > button { width:100%!important; } }
+
+/* Enlarge featured figures into the open stage height without cropping. */
+@media (min-width:971px) { .stage-talent.stage-featured,.stage-talent.stage-featured.is-visible,.stage-talent.stage-featured.is-entering,.stage-talent.stage-featured.is-exiting { right:8%!important;bottom:8px!important;height:calc(100% - 14px)!important;max-height:460px!important;max-width:48%!important;object-fit:contain!important;object-position:center bottom!important;transform:none!important; } }
+@media (min-width:681px) and (max-width:970px) { .stage-talent.stage-featured,.stage-talent.stage-featured.is-visible,.stage-talent.stage-featured.is-entering,.stage-talent.stage-featured.is-exiting { bottom:8px!important;height:calc(100% - 14px)!important;max-height:400px!important;max-width:48%!important; } }
+@media (max-width:680px) { .stage-talent.stage-featured,.stage-talent.stage-featured.is-visible,.stage-talent.stage-featured.is-entering,.stage-talent.stage-featured.is-exiting { top:8px!important;right:4%!important;bottom:8px!important;height:calc(100% - 16px)!important;max-width:58%!important; } }
+
+/* Highlight the active queue item clearly in light mode. */
+body.theme-light #player-column #queue-list .queue-track.current { border-color:#d9b6ce!important;background:linear-gradient(100deg,#fbf0f6 0%,#f8f3fa 100%)!important;color:#48364a!important;box-shadow:inset 3px 0 #b85d91,0 5px 16px rgba(100,62,91,.09)!important; }
+body.theme-light #player-column #queue-list .queue-track.current .queue-track-info strong { color:#713f62!important; }
+body.theme-light #player-column #queue-list .queue-track.current .queue-track-number { border-color:#ddb9d0!important;background:#f7e7f0!important;color:#8e456e!important; }
+
+/* Playback activity badge for minimized video and mobile mini player. */
+#player-column:not(.queue-expanded) .video-frame-wrap,.mobile-mini-player { position:relative; }
+.dock-equalizer { position:absolute;z-index:5;left:8px;bottom:8px;display:flex;align-items:flex-end;justify-content:center;gap:2px;width:27px;height:24px;padding:5px 6px;border:1px solid rgba(255,255,255,.2);border-radius:7px;background:rgba(15,17,30,.78);opacity:0;transform:translateY(3px);transition:opacity .18s ease,transform .18s ease;pointer-events:none; }
+.dock-equalizer i { display:block;width:3px;height:5px;border-radius:3px;background:#e8a9cf;transform-origin:center bottom; }
+body.dock-playing .dock-equalizer { opacity:1;transform:translateY(0); }
+body.dock-playing .dock-equalizer i { animation:dock-eq .72s ease-in-out infinite alternate; }
+body.dock-playing .dock-equalizer i:nth-child(2) { animation-delay:-.24s; }
+body.dock-playing .dock-equalizer i:nth-child(3) { animation-delay:-.48s; }
+@keyframes dock-eq { 0%{height:4px}35%{height:9px}70%{height:14px}100%{height:7px} }
+@media (max-width:680px) { .mobile-mini-player .dock-equalizer { left:14px;bottom:13px; } }
+@media (prefers-reduced-motion:reduce) { body.dock-playing .dock-equalizer i { animation:none!important;height:8px; } }
