@@ -631,3 +631,166 @@ body.theme-light .discovery-card strong {
 body.theme-light .discovery-card small {
   color:#667287!important;
 }
+
+
+
+/* Final polish: preserve the artwork, remove hard-to-read native-looking controls,
+   and keep artist/queue scrolling inside their own panels. */
+@media (min-width: 971px) {
+  .stage-talent.stage-featured,
+  .stage-talent.stage-featured.is-visible,
+  .stage-talent.stage-featured.is-entering,
+  .stage-talent.stage-featured.is-exiting {
+    right: 10% !important;
+    top: auto !important;
+    bottom: 30px !important;
+    height: calc(100% - 58px) !important;
+    max-height: 420px !important;
+    max-width: 43% !important;
+    object-fit: contain !important;
+    object-position: center bottom !important;
+    transform: none !important;
+  }
+}
+@media (min-width: 681px) and (max-width: 970px) {
+  .stage-talent.stage-featured,
+  .stage-talent.stage-featured.is-visible,
+  .stage-talent.stage-featured.is-entering,
+  .stage-talent.stage-featured.is-exiting {
+    top: auto !important;
+    bottom: 26px !important;
+    height: calc(100% - 48px) !important;
+    max-height: 360px !important;
+    max-width: 42% !important;
+    object-fit: contain !important;
+    object-position: center bottom !important;
+    transform: none !important;
+  }
+}
+@media (max-width: 680px) {
+  .hero-stage { overflow: hidden !important; }
+  .stage-talent.stage-featured,
+  .stage-talent.stage-featured.is-visible,
+  .stage-talent.stage-featured.is-entering,
+  .stage-talent.stage-featured.is-exiting {
+    top: 18px !important;
+    right: 6% !important;
+    bottom: 26px !important;
+    width: auto !important;
+    height: calc(100% - 50px) !important;
+    max-height: none !important;
+    max-width: 54% !important;
+    object-fit: contain !important;
+    object-position: center bottom !important;
+    transform: none !important;
+  }
+}
+
+/* Let the system picker remain native, while making its closed control intentional. */
+#sort-select {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  min-height: 42px;
+  padding: 0 42px 0 14px !important;
+  border: 1px solid var(--layout-border, rgba(173,180,225,.2)) !important;
+  border-radius: 12px !important;
+  background-color: var(--panel, #171a2a) !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23a99ad1' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 14px center !important;
+  color: var(--text, #f5f4fa) !important;
+  font: inherit !important;
+  font-weight: 650 !important;
+  box-shadow: 0 3px 12px rgba(15,18,35,.08) !important;
+}
+#sort-select:focus-visible {
+  outline: 3px solid rgba(177,145,217,.35) !important;
+  outline-offset: 2px;
+}
+#sort-select option {
+  background: #191c2a;
+  color: #f5f4fa;
+}
+body.theme-light #sort-select {
+  border-color: #dce1e9 !important;
+  background-color: #fff !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23776683' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") !important;
+  color: #465168 !important;
+  box-shadow: 0 3px 12px rgba(46,55,74,.06) !important;
+}
+body.theme-light #sort-select option { background: #fff; color: #39445a; }
+
+/* Calm, themed scrollbars and legible category counts in the artist directory. */
+#talent-picker-dialog .artist-filters,
+#player-column #queue-list {
+  scrollbar-width: thin;
+  scrollbar-color: #77718d transparent;
+}
+#talent-picker-dialog .artist-filters::-webkit-scrollbar,
+#player-column #queue-list::-webkit-scrollbar { width: 8px; }
+#talent-picker-dialog .artist-filters::-webkit-scrollbar-track,
+#player-column #queue-list::-webkit-scrollbar-track { background: transparent; }
+#talent-picker-dialog .artist-filters::-webkit-scrollbar-thumb,
+#player-column #queue-list::-webkit-scrollbar-thumb {
+  border: 2px solid transparent;
+  border-radius: 99px;
+  background: #77718d;
+  background-clip: padding-box;
+}
+body.theme-light #talent-picker-dialog .artist-filters,
+body.theme-light #player-column #queue-list {
+  scrollbar-color: #c5cbd6 transparent !important;
+}
+body.theme-light #talent-picker-dialog .artist-filters::-webkit-scrollbar-thumb,
+body.theme-light #player-column #queue-list::-webkit-scrollbar-thumb {
+  background: #c5cbd6;
+  background-clip: padding-box;
+}
+body.theme-light #talent-picker-dialog .artist-category-filter button span[data-category-count] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 28px;
+  min-height: 24px;
+  margin-left: 5px;
+  padding: 2px 7px;
+  border: 1px solid #e0dfe7;
+  border-radius: 999px;
+  background: #f2f1f5;
+  color: #665875 !important;
+  font-size: 12px;
+  font-weight: 750;
+}
+body.theme-light #talent-picker-dialog .artist-category-filter button.is-active span[data-category-count] {
+  border-color: #e5cedd;
+  background: #f8eaf2;
+  color: #8b4d71 !important;
+}
+body.theme-light #talent-picker-dialog .artist-filters .artist-check small {
+  color: #647187 !important;
+  background: #edf0f5 !important;
+}
+
+/* Artist and queue panels own their scroll gestures; opening a modal locks page scroll. */
+#talent-picker-dialog { overscroll-behavior: contain; }
+body.talent-picker-open {
+  overflow: hidden !important;
+  overscroll-behavior: none !important;
+}
+body.theme-light #player-column #queue-list {
+  background: transparent !important;
+  color: #465168 !important;
+}
+body.theme-light #player-column #queue-list .queue-track {
+  border-color: #e1e5ec !important;
+  background: #fff !important;
+  color: #465168 !important;
+  box-shadow: 0 3px 12px rgba(46,55,74,.045) !important;
+}
+body.theme-light #player-column #queue-list .queue-track-info strong { color: #354056 !important; }
+body.theme-light #player-column #queue-list .queue-track-info span { color: #69768b !important; }
+body.theme-light #player-column #queue-list .queue-track-actions button {
+  border-color: #e1e5ec !important;
+  background: #f6f7f9 !important;
+  color: #626e82 !important;
+}
