@@ -853,3 +853,46 @@ body.dock-playing .dock-equalizer i:nth-child(3) { animation-delay:-.48s; }
 /* Keep the activity meter above the compact dock metadata, outside the video iframe. */
 #player-column:not(.queue-expanded) .playing-title-row .dock-equalizer-meta { position:relative;left:auto;bottom:auto;flex:0 0 27px;align-self:center;opacity:0;transform:none;margin-left:4px; }
 body.dock-playing #player-column:not(.queue-expanded) .playing-title-row .dock-equalizer-meta { opacity:1; }
+
+
+/* Align discovery copy directly after its icon instead of spreading it across the card. */
+.quick-discovery > button.discovery-card { justify-content:flex-start!important;gap:14px!important;text-align:left!important; }
+.quick-discovery > button.discovery-card > span:nth-of-type(2) { flex:1 1 auto!important;min-width:0!important;text-align:left!important; }
+.quick-discovery > button.discovery-card > span:nth-of-type(2) strong,
+.quick-discovery > button.discovery-card > span:nth-of-type(2) small { display:block!important;text-align:left!important; }
+
+/* Keep the banner character's feet above the stage footer rule. */
+@media (min-width:681px) {
+ .stage-talent.stage-featured,.stage-talent.stage-featured.is-visible,.stage-talent.stage-featured.is-entering,.stage-talent.stage-featured.is-exiting { bottom:24px!important;height:calc(100% - 36px)!important; }
+}
+@media (max-width:680px) {
+ .stage-talent.stage-featured,.stage-talent.stage-featured.is-visible,.stage-talent.stage-featured.is-entering,.stage-talent.stage-featured.is-exiting { bottom:20px!important;height:calc(100% - 28px)!important; }
+}
+
+/* Match the equalizer footprint to its neighboring transport controls. */
+#player-column:not(.queue-expanded) .playing-title-row .dock-equalizer-meta {
+ box-sizing:border-box!important;flex:0 0 34px!important;width:34px!important;height:34px!important;padding:0 8px!important;
+ align-items:center!important;align-self:center!important;gap:2px!important;border-radius:9px!important;margin:0 4px!important;
+}
+body.theme-light #player-column .dock-equalizer,
+body.theme-light .mobile-mini-player .dock-equalizer { background:#f6f7fa!important;border-color:#dce2ec!important; }
+body.theme-light #player-column .dock-equalizer i,
+body.theme-light .mobile-mini-player .dock-equalizer i { background:#b75d91!important; }
+
+/* Give every light-theme page button the same soft palette as the inactive buttons. */
+body.theme-light #pagination .pagination-button { border-color:#dce2ec!important;background:#fff!important;color:#59667a!important;box-shadow:0 2px 8px rgba(43,55,74,.045)!important; }
+body.theme-light #pagination .pagination-button.active,
+body.theme-light #pagination .pagination-button.active:disabled { border-color:#e1ccdc!important;background:#f8edf4!important;color:#8c4b70!important;box-shadow:0 3px 10px rgba(119,68,101,.10)!important; }
+body.theme-light #pagination .pagination-button:hover:not(:disabled) { border-color:#ddc8dc!important;background:#fbf3f8!important;color:#804c6c!important; }
+body.theme-light #play-all.play-all-button { border-color:#d6c2df!important;background:linear-gradient(135deg,#f4eaf6,#eeeafb)!important;color:#714476!important;box-shadow:0 4px 12px rgba(103,70,120,.12)!important; }
+body.theme-light #play-all.play-all-button:hover { border-color:#c9aed5!important;background:linear-gradient(135deg,#eddef0,#e5e1fa)!important;color:#60366b!important; }
+
+/* Add a compact share action beside each locally saved playlist. */
+.playlist-row-wrap { display:flex!important;align-items:stretch!important;gap:6px!important;width:100%!important;min-width:0!important; }
+.playlist-row-wrap > .playlist-row { flex:1 1 auto!important;width:auto!important;min-width:0!important; }
+.playlist-row-label { overflow:hidden;text-overflow:ellipsis;white-space:nowrap; }
+.playlist-share-button { flex:0 0 34px!important;width:34px!important;min-width:34px!important;padding:0!important;border:1px solid rgba(159,147,202,.22)!important;border-radius:10px!important;background:rgba(129,117,173,.12)!important;color:var(--text,#eceaf8)!important; }
+.playlist-share-button:hover { border-color:rgba(190,146,198,.55)!important;background:rgba(168,128,184,.2)!important; }
+body.theme-light .playlist-share-button { border-color:#dfe3eb!important;background:#f6f7fa!important;color:#70496a!important; }
+body.theme-light .playlist-share-button:hover { border-color:#dfcbdc!important;background:#fbf1f7!important;color:#814d6d!important; }
+body.theme-light .quick-discovery > button.discovery-card { color:#344056!important; }
