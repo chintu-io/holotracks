@@ -838,14 +838,10 @@
       el['catalogue-title-text'].textContent = selectedPlaylist.name;
       el['results-caption'].textContent = 'Songs saved in this browser mixtape.';
     } else if (state.view === 'fresh') {
-      el['catalogue-title-text'].textContent = 'Fresh releases';
-      const sortCopy = {
-        newest: 'newest releases first', oldest: 'oldest releases first',
-        title: 'title A–Z', popular: 'most viewed first', liked: 'most liked first',
-      }[el['sort-select'].value] || 'newest releases first';
-      el['results-caption'].textContent = state.usingFreshFallback
-        ? 'No indexed videos fall inside the last ' + FRESH_WINDOW_DAYS + ' days; showing songs sorted by ' + sortCopy + '.'
-        : 'Videos published in the last ' + FRESH_WINDOW_DAYS + ' days, sorted by ' + sortCopy + '.';
+      // Keep the library heading and description stable; Fresh Releases filters
+      // the cards below without replacing the user's All music context.
+      el['catalogue-title-text'].textContent = 'All music';
+      el['results-caption'].textContent = 'Original songs and covers from across the Hololive universe.';
     } else {
       el['catalogue-title-text'].textContent = state.songType === 'cover'
         ? 'Hololive cover songs'
