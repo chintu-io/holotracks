@@ -896,3 +896,46 @@ body.theme-light #play-all.play-all-button:hover { border-color:#c9aed5!importan
 body.theme-light .playlist-share-button { border-color:#dfe3eb!important;background:#f6f7fa!important;color:#70496a!important; }
 body.theme-light .playlist-share-button:hover { border-color:#dfcbdc!important;background:#fbf1f7!important;color:#814d6d!important; }
 body.theme-light .quick-discovery > button.discovery-card { color:#344056!important; }
+
+
+/* Keep the activity meter confined to the minimized dock, never the video room. */
+#player-column.queue-expanded .dock-equalizer-meta { display:none!important; }
+#player-column:not(.queue-expanded) .playing-title-row .dock-equalizer-meta {
+ box-sizing:border-box!important;flex:0 0 36px!important;width:36px!important;height:36px!important;min-height:36px!important;
+ margin:0 6px 0 2px!important;padding:0 8px!important;align-items:center!important;align-self:center!important;justify-content:center!important;
+ border-radius:8px!important;
+}
+#player-column:not(.queue-expanded) .playing-title-row .dock-equalizer-meta i { align-self:center!important; }
+
+/* Keep selected artist chips legible in the white theme. */
+body.theme-light #selected-artist-filters {
+ border:1px solid #e1e5ec!important;border-radius:14px!important;background:#f5f6f9!important;color:#68758a!important;
+ box-shadow:0 3px 12px rgba(45,55,74,.04)!important;
+}
+body.theme-light #selected-artist-filters .selected-artist-chip,
+body.theme-light #selected-artist-filters button {
+ border-color:#e4d3e2!important;background:#fff!important;color:#77516f!important;
+}
+body.theme-light #selected-artist-filters .selected-artist-chip button,
+body.theme-light #selected-artist-filters button:hover { background:#fbf1f7!important;color:#8c4b70!important; }
+
+/* Use the requested library description consistently in all music views. */
+body.theme-light #results-caption { color:#60718a!important; }
+
+.playlist-share-icon { width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round; }
+.playlist-share-button { display:inline-grid!important;place-items:center!important; }
+
+
+/* Compact desktop dock; preserve enough room for all transport controls. */
+@media (min-width:901px) {
+ #player-column.player-column:not(.queue-expanded) { width:min(800px,calc(100vw - 32px))!important;left:50%!important;right:auto!important;transform:translateX(-50%)!important; }
+}
+#mobile-mini-player .dock-equalizer {
+ box-sizing:border-box!important;width:34px!important;height:34px!important;padding:0 8px!important;align-items:center!important;justify-content:center!important;
+}
+#player-column.queue-expanded .dock-equalizer-meta { display:none!important; }
+body.theme-light #selected-artist-filters { border:1px solid #e1e5ec!important;border-radius:14px!important;background:#f3f5f8!important;color:#68758a!important; }
+body.theme-light #selected-artist-filters .selected-artist-chip { border:1px solid #e5d2e1!important;background:#fff!important;color:#744a6b!important; }
+body.theme-light #selected-artist-filters .selected-artist-chip-remove { color:#a85d8b!important; }
+body.theme-light #selected-artist-filters .selected-artist-clear { border:1px solid #dfe3eb!important;background:#fff!important;color:#5d697d!important; }
+body.theme-light #selected-artist-filters .selected-artist-clear:hover { border-color:#dfcbdc!important;background:#fbf1f7!important;color:#814d6d!important; }
