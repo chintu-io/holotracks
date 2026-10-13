@@ -163,3 +163,11 @@
     transition: none !important;
   }
 }
+
+/* Keep the first visit focused on discovery; show the dock when there is a track to control. */
+@media (min-width: 681px) {
+  body.player-docked:not(.has-current-track) #player-column.player-column:not(.queue-expanded) {
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
+}
