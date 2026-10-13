@@ -622,3 +622,12 @@ body.theme-light #player-column .queue-track.current .queue-track-number {
   background:#fbf0f6!important;
   color:#98547b!important;
 }
+
+
+/* Keep discovery card titles readable on the white surface. */
+body.theme-light .discovery-card strong {
+  color:#374158!important;
+}
+body.theme-light .discovery-card small {
+  color:#667287!important;
+}
