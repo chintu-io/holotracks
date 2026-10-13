@@ -1,0 +1,165 @@
+/* Focused layout refinements for the HoloTracks catalogue. */
+:root {
+  --layout-accent: #9c83f4;
+  --layout-border: rgba(173, 180, 225, .16);
+}
+
+/* Give quick discovery the same deliberate rhythm as the full-width sections. */
+@media (min-width: 681px) {
+  .quick-discovery {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    align-items: stretch;
+    width: 100%;
+    max-width: 1080px;
+    gap: 12px !important;
+    margin-top: 18px;
+  }
+
+  .quick-discovery > button {
+    width: 100% !important;
+    max-width: none !important;
+    min-width: 0;
+    min-height: 68px;
+    flex: initial !important;
+    justify-content: space-between;
+    padding: 13px 16px;
+    border: 1px solid var(--layout-border);
+    border-radius: 15px;
+    transition: border-color .18s ease, background-color .18s ease, transform .18s ease;
+  }
+
+  .quick-discovery > button:hover {
+    border-color: rgba(174, 144, 255, .48);
+    transform: translateY(-2px);
+  }
+
+  .quick-discovery > button:focus-visible {
+    outline: 3px solid rgba(158, 131, 244, .7);
+    outline-offset: 3px;
+  }
+}
+
+/* Keep the compact dock useful without taking over the lower third of the page. */
+@media (min-width: 681px) {
+  #player-column.player-column:not(.queue-expanded) {
+    height: 86px !important;
+    min-height: 86px !important;
+    padding: 4px !important;
+    border: 1px solid rgba(174, 164, 229, .22) !important;
+    border-radius: 18px !important;
+    background: rgba(17, 18, 36, .97) !important;
+    box-shadow: 0 16px 48px rgba(4, 5, 16, .48), 0 0 0 1px rgba(255,255,255,.025) inset !important;
+    backdrop-filter: blur(18px);
+  }
+
+  #player-column.player-column:not(.queue-expanded) .player-card {
+    height: 76px !important;
+    min-height: 0 !important;
+    grid-template-columns: 128px minmax(0, 1fr) !important;
+    gap: 10px !important;
+    padding: 3px !important;
+    border-radius: 13px !important;
+  }
+
+  #player-column.player-column:not(.queue-expanded) .video-frame-wrap {
+    width: 128px !important;
+    height: 72px !important;
+    min-height: 0 !important;
+    aspect-ratio: 16 / 9 !important;
+    border-radius: 10px !important;
+    overflow: hidden !important;
+  }
+
+  #player-column.player-column:not(.queue-expanded) .now-playing-meta {
+    min-height: 0 !important;
+    height: 68px !important;
+  }
+
+  #player-column.player-column:not(.queue-expanded) .playing-title-row {
+    min-height: 34px !important;
+  }
+
+  #player-column.player-column:not(.queue-expanded) .dock-action-row {
+    align-items: center !important;
+  }
+
+  #player-column.player-column:not(.queue-expanded) .dock-controls-slot .player-controls {
+    gap: 6px !important;
+  }
+
+  #player-column.player-column:not(.queue-expanded) .dock-controls-slot .control-button,
+  #player-column.player-column:not(.queue-expanded) .dock-controls-slot .play-toggle {
+    width: 34px !important;
+    min-width: 34px !important;
+    height: 34px !important;
+    min-height: 34px !important;
+  }
+}
+
+/* Let the header breathe on tablet widths where the full wordmark used to collide with search. */
+@media (min-width: 681px) and (max-width: 900px) {
+  .topbar {
+    gap: 9px !important;
+    padding-inline: 12px !important;
+  }
+
+  .topbar .brand {
+    flex: 0 0 154px !important;
+    min-width: 0 !important;
+    gap: 7px !important;
+  }
+
+  .topbar .brand-copy {
+    min-width: 0;
+  }
+
+  .topbar .brand-copy strong {
+    font-size: 19px;
+    white-space: nowrap;
+  }
+
+  .topbar .brand-copy small,
+  .topbar .top-live,
+  .topbar .favorite-shortcut b,
+  .topbar .talent-picker-toggle b {
+    display: none !important;
+  }
+
+  .topbar .global-search {
+    flex: 1 1 0 !important;
+    min-width: 0 !important;
+    gap: 6px !important;
+  }
+
+  .topbar .global-search input {
+    min-width: 0 !important;
+  }
+
+  .topbar .talent-picker-toggle {
+    flex: 0 0 auto;
+    padding-inline: 9px;
+  }
+
+  .topbar .global-search-button {
+    flex: 0 0 auto;
+    padding-inline: 11px;
+  }
+
+  .topbar .top-actions {
+    flex: 0 0 auto !important;
+    gap: 7px !important;
+  }
+
+  .topbar .favorite-shortcut,
+  .topbar .theme-toggle {
+    min-width: 36px;
+    padding-inline: 8px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .quick-discovery > button {
+    transition: none !important;
+  }
+}
