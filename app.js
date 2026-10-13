@@ -1376,7 +1376,7 @@
     el['playing-favorite'].textContent = item && state.favorites.has(item.id) ? '♥' : '♡';
     el['mobile-mini-player'].hidden = !item;
     document.body.classList.toggle('has-mobile-player', !!item);
-    document.body.classList.toggle('has-current-track', !!item); document.body.classList.remove('dock-playing');
+    document.body.classList.toggle('has-current-track', !!item);
     el['mobile-mini-title'].textContent = item ? titleOf(item) : 'Nothing playing yet';
     el['mobile-mini-artist'].textContent = item ? artistsOf(item).join(', ') : 'Choose a song to start listening';
     if (item) el['mobile-mini-thumb'].src = thumbnail(item);
@@ -1404,6 +1404,7 @@
     if (state.playerReady && state.player) {
       try {
         const playing = state.player.getPlayerState() === window.YT.PlayerState.PLAYING;
+        document.body.classList.toggle('dock-playing', playing);
         el['play-pause'].textContent = playing ? 'Ⅱ' : '▶';
         el['play-pause'].setAttribute('aria-label', playing ? 'Pause' : 'Play');
         el['play-pause'].title = playing ? 'Pause' : 'Play';
