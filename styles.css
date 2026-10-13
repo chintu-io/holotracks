@@ -7312,3 +7312,22 @@ body:not(.theme-light) .queue-empty small {
   .talent-image { width:50px; height:54px; }
   .mobile-mini-player:not([hidden]) { left:6px; right:6px; }
 }
+
+
+/* Show the real embedded YouTube video in the compact desktop dock.
+   The track-art poster overlay obscured the iframe during minimized playback. */
+@media (min-width:681px) {
+  body.player-docked.has-current-track #player-column:not(.queue-expanded) .video-frame-wrap::after {
+    content:none!important;
+    display:none!important;
+  }
+  body.player-docked.has-current-track #player-column:not(.queue-expanded) #youtube-player,
+  body.player-docked.has-current-track #player-column:not(.queue-expanded) #youtube-player iframe {
+    display:block!important;
+    visibility:visible!important;
+    opacity:1!important;
+  }
+  #player-column:not(.queue-expanded) .playing-title-row .dock-equalizer-meta {
+    transform:translateY(3px)!important;
+  }
+}
