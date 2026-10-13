@@ -1734,6 +1734,7 @@
     });
     const closeTalentPicker = () => {
       const dialog = el['talent-picker-dialog'];
+      document.body.classList.remove('talent-picker-open');
       if (typeof dialog.close === 'function' && dialog.open) {
         try {
           dialog.close();
@@ -1742,8 +1743,12 @@
       }
       dialog.removeAttribute('open');
     };
+    el['talent-picker-dialog'].addEventListener('close', () => {
+      document.body.classList.remove('talent-picker-open');
+    });
     const openTalentPicker = () => {
       const dialog = el['talent-picker-dialog'];
+      document.body.classList.add('talent-picker-open');
       // Refresh the roster before opening so both entry points always show the
       // latest catalogue, including when the user opens the picker quickly.
       renderArtists();
