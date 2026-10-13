@@ -170,3 +170,143 @@
     display: none !important;
   }
 }
+
+
+/* Focused fixes from the production UI review. */
+:root {
+  --layout-border: rgba(141, 126, 188, .2);
+}
+
+/* Keep navigation results in view when a filter or playlist is selected. */
+@media (min-width: 681px) {
+  .app-layout { padding-bottom: 132px !important; }
+  body { padding-bottom: 0 !important; }
+  body.player-docked:not(.has-current-track) .app-layout { padding-bottom: 28px !important; }
+  body.player-docked:not(.has-current-track) { padding-bottom: 0 !important; }
+}
+
+/* Keep the maximized video inside the viewport, including on wide monitors. */
+@media (min-width: 681px) {
+  #player-column.queue-expanded.room-maximized {
+    inset: 10px !important;
+    width: auto !important;
+    height: auto !important;
+    max-height: calc(100dvh - 20px) !important;
+    overflow: hidden !important;
+    grid-template-rows: 36px minmax(0, 1fr) !important;
+  }
+  #player-column.queue-expanded.room-maximized .player-card {
+    min-height: 0 !important;
+    overflow: hidden !important;
+  }
+  #player-column.queue-expanded.room-maximized .video-frame-wrap {
+    min-height: 0 !important;
+    max-height: calc(100dvh - 240px) !important;
+    aspect-ratio: 16 / 9 !important;
+  }
+}
+
+/* Give playlist names room while keeping Save visible. */
+#player-column .playlist-select-row {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) auto !important;
+  align-items: stretch;
+  gap: 8px !important;
+}
+#player-column .playlist-select-row select {
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  padding-inline: 10px !important;
+  font-size: 13px !important;
+  text-overflow: ellipsis;
+}
+
+/* Reduce dock width and avoid a second, oversized footer spacer. */
+@media (min-width: 681px) {
+  #player-column.player-column:not(.queue-expanded) { width: min(840px, calc(100vw - 32px)) !important; }
+}
+
+/* Keep keyboard focus visible without the cyan rectangle around the whole search. */
+.global-search:focus-within {
+  border-color: #9b83c6 !important;
+  box-shadow: 0 0 0 2px rgba(155, 131, 198, .16) !important;
+}
+#search-input:focus-visible { outline: none !important; }
+body.theme-light .global-search:focus-within {
+  border-color: #a58bb4 !important;
+  box-shadow: 0 0 0 2px rgba(165, 139, 180, .18) !important;
+}
+
+/* Pull the featured artwork toward the center to close the dead gap in the hero. */
+@media (min-width: 971px) {
+  .stage-talent.stage-featured { right: 16% !important; }
+  .stage-talent.stage-featured.is-visible { transform: scale(1.08) translateX(-8px) !important; }
+  .stage-talent.stage-featured.is-entering { transform: translateY(8px) scale(1.08) translateX(-8px) !important; }
+  .stage-talent.stage-featured.is-exiting { transform: translateY(5px) scale(1.08) translateX(-8px) !important; }
+}
+
+/* Light theme uses soft surfaces throughout navigation and controls. */
+body.theme-light #sidebar .nav-item.active {
+  border-color: #e4d3df !important;
+  background: #fbf2f8 !important;
+  color: #633d58 !important;
+  box-shadow: inset 3px 0 #bd6695 !important;
+}
+body.theme-light #sidebar .clear-filters,
+body.theme-light #sidebar .playlist-row,
+body.theme-light #sidebar .add-playlist {
+  border-color: #e0e4ec !important;
+  background: #fff !important;
+  color: #596477 !important;
+  box-shadow: none !important;
+}
+body.theme-light #sidebar .playlist-row:hover,
+body.theme-light #sidebar .playlist-row.active,
+body.theme-light #sidebar .clear-filters:hover,
+body.theme-light #sidebar .add-playlist:hover {
+  border-color: #dfcbdc !important;
+  background: #f9f1f7 !important;
+  color: #734c68 !important;
+}
+body.theme-light .music-type-button {
+  border-color: #dfe4ec !important;
+  background: #fff !important;
+  color: #596477 !important;
+}
+body.theme-light .music-type-button.active {
+  border-color: #dfcbdc !important;
+  background: #f9f1f7 !important;
+  color: #734c68 !important;
+  box-shadow: none !important;
+}
+body.theme-light .quick-discovery > button {
+  border-color: #e0e4ec !important;
+  background: #fff !important;
+  color: #343b4d !important;
+}
+body.theme-light .play-all-button,
+body.theme-light .mini-action,
+body.theme-light .save-button,
+body.theme-light .playlist-play,
+body.theme-light .control-button:not(.play-toggle) {
+  border-color: #dfe3eb !important;
+  background: #f7f8fb !important;
+  color: #596477 !important;
+  box-shadow: none !important;
+}
+body.theme-light .play-all-button:hover,
+body.theme-light .mini-action:hover,
+body.theme-light .save-button:hover,
+body.theme-light .playlist-play:hover,
+body.theme-light .control-button:not(.play-toggle):hover {
+  border-color: #dfcbdc !important;
+  background: #fbf1f7 !important;
+  color: #814d6d !important;
+}
+body.theme-light .hero-card:before {
+  background: linear-gradient(90deg, rgba(255,255,255,.22), rgba(255,255,255,.04) 55%, transparent 86%) !important;
+}
+body.theme-light .hero-card {
+  background: linear-gradient(120deg, #fbf8ff 0%, #f3f3fb 52%, #e8f4f6 100%) !important;
+}
