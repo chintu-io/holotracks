@@ -337,3 +337,8 @@ body.theme-light .hero-card {
   white-space: nowrap;
   text-overflow: clip !important;
 }
+
+#player-column .queue-actions .playlist-play {
+  grid-row: auto !important;
+  width: 100% !important;
+}
