@@ -1045,11 +1045,26 @@
         }
       } catch (error) { if (error?.name === 'AbortError') return; }
     }
+    let copied = false;
     try {
       if (!navigator.clipboard?.writeText) throw new Error('Clipboard unavailable');
-      await navigator.clipboard.writeText(url.toString());
-      showNotice('Playlist link copied. Anyone with the link can open and save a copy.');
+      await Promise.race([
+        navigator.clipboard.writeText(url.toString()).then(() => { copied = true; }),
+        new Promise((_, reject) => window.setTimeout(() => reject(new Error('Clipboard timed out')), 900)),
+      ]);
     } catch {
+      const input = document.createElement('textarea');
+      input.value = url.toString();
+      input.setAttribute('readonly', '');
+      input.style.position = 'fixed';
+      input.style.opacity = '0';
+      document.body.appendChild(input);
+      input.select();
+      try { copied = document.execCommand('copy'); } catch { copied = false; }
+      input.remove();
+    }
+    if (copied) showNotice('Playlist link copied. Anyone with the link can open and save a copy.');
+    else {
       window.prompt('Copy this playlist link:', url.toString());
       showNotice('Copy the playlist link from the prompt to share this playlist.');
     }
@@ -1102,6 +1117,14 @@
     el['playlist-select'].innerHTML = '<option value="">Choose playlist…</option>' + state.playlists.map(playlist =>
       '<option value="' + escapeHTML(playlist.id) + '">' + escapeHTML(playlist.name) + '</option>'
     ).join('');
+    el['playlist-list'].querySelectorAll('[data-share-playlist]').forEach(button => {
+      button.addEventListener('click', event => {
+        event.preventDefault();
+        event.stopPropagation();
+        const playlist = state.playlists.find(item => item.id === button.dataset.sharePlaylist);
+        sharePlaylist(playlist);
+      });
+    });
   }
 
   function playLatest50Playlist(playlist) {
