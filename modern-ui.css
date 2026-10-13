@@ -1062,3 +1062,24 @@ body.theme-light #selected-artist-filters .selected-artist-clear:hover { border-
     width:34px!important;min-width:34px!important;height:34px!important;min-height:34px!important;
   }
 }
+
+
+/* Balance the compact tablet-width desktop layout (including browser zoom).
+   Let the featured talent use more of its narrow stage and keep the idle dock
+   from covering the artist strip before playback starts. */
+@media (min-width:681px) and (max-width:970px) {
+  .stage-talent.stage-featured,
+  .stage-talent.stage-featured.is-visible,
+  .stage-talent.stage-featured.is-entering,
+  .stage-talent.stage-featured.is-exiting {
+    right:5%!important;
+    max-width:66%!important;
+    object-fit:contain!important;
+    object-position:center bottom!important;
+  }
+}
+@media (min-width:681px) {
+  body:not(.has-current-track) #player-column.player-column:not(.queue-expanded) {
+    display:none!important;
+  }
+}
