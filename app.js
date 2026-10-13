@@ -1376,7 +1376,7 @@
     el['playing-favorite'].textContent = item && state.favorites.has(item.id) ? '♥' : '♡';
     el['mobile-mini-player'].hidden = !item;
     document.body.classList.toggle('has-mobile-player', !!item);
-    document.body.classList.toggle('has-current-track', !!item);
+    document.body.classList.toggle('has-current-track', !!item); document.body.classList.remove('dock-playing');
     el['mobile-mini-title'].textContent = item ? titleOf(item) : 'Nothing playing yet';
     el['mobile-mini-artist'].textContent = item ? artistsOf(item).join(', ') : 'Choose a song to start listening';
     if (item) el['mobile-mini-thumb'].src = thumbnail(item);
@@ -1575,9 +1575,11 @@
           } else if (event.data === window.YT.PlayerState.PLAYING) {
             clearPlaybackStartWatchdog();
             el['player-state'].textContent = 'Playing on YouTube';
+            document.body.classList.add('dock-playing');
           } else if (event.data === window.YT.PlayerState.PAUSED) {
             clearPlaybackStartWatchdog();
             el['player-state'].textContent = 'Paused';
+            document.body.classList.remove('dock-playing');
           } else if (event.data === window.YT.PlayerState.BUFFERING) {
             el['player-state'].textContent = 'Loading your song…';
           }
@@ -1594,6 +1596,7 @@
           clearPlaybackStartWatchdog();
           playbackAttemptToken += 1;
           el['player-state'].textContent = 'Video unavailable';
+          document.body.classList.remove('dock-playing');
           showNotice('This video cannot play in the embedded player. Try "Watch on YouTube".');
           updatePlayerButtons();
         },
@@ -1882,6 +1885,7 @@
       renderPlayerMeta();
       updatePlayerButtons();
       el['player-state'].textContent = 'Queue cleared';
+      document.body.classList.remove('dock-playing');
     });
     el['queue-list'].addEventListener('click', event => {
       const playButton = event.target.closest('[data-queue-play]');
