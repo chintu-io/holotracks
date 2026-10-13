@@ -1607,10 +1607,8 @@
     // Favourites is a library destination, not just a hidden filter change.
     // Scroll the updated catalogue into view so the user immediately sees the
     // favourites heading, count, and matching song cards instead of the hero.
-    if (view === 'favorites') {
-      const target = document.getElementById('music-library') || el['song-list'];
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+    const target = document.getElementById('music-library') || el['song-list'];
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
   function activateFreshReleases() {
     state.view = 'fresh';
@@ -1711,6 +1709,8 @@
         state.activePlaylist = null;
         renderPlaylists();
         applyFilters();
+        (document.getElementById('music-library') || el['song-list'])
+          .scrollIntoView({ behavior: 'smooth', block: 'start' });
       });
     });
     el['search-input'].addEventListener('input', event => {
@@ -1784,6 +1784,8 @@
       state.activePlaylist = null;
       renderPlaylists();
       applyFilters();
+      (document.getElementById('music-library') || el['song-list'])
+        .scrollIntoView({ behavior: 'smooth', block: 'start' });
       if (window.matchMedia && window.matchMedia('(max-width: 680px)').matches) {
         document.body.classList.remove('filters-open');
       }
@@ -1851,7 +1853,12 @@
       if (state.filtered.length) playSong(state.filtered[0].id, state.filtered.map(item => item.id));
     });
     el['play-random'].addEventListener('click', () => {
-      if (state.filtered.length) playSong(state.filtered[Math.floor(Math.random() * state.filtered.length)].id);
+      const candidates = state.filtered.length ? state.filtered : state.songs;
+      if (!candidates.length) {
+        showNotice('The song library is still loading. Try Surprise me again in a moment.');
+        return;
+      }
+      playSong(candidates[Math.floor(Math.random() * candidates.length)].id);
     });
     el['favorites-shortcut'].addEventListener('click', () => setView('favorites'));
     el['playing-favorite'].addEventListener('click', () => {
@@ -1952,6 +1959,8 @@
       state.view = 'all';
       renderPlaylists();
       applyFilters();
+      (document.getElementById('music-library') || el['song-list'])
+        .scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
     el['save-queue'].addEventListener('click', () => {
       const playlist = state.playlists.find(item => item.id === el['playlist-select'].value);
@@ -2079,6 +2088,9 @@
     mountVolumePopover();
     initEvents();
     updateVolumeControl();
+    // Warm the YouTube API before the first song click so playback starts
+    // inside the user's click gesture instead of waiting for a later callback.
+    loadYouTubeAPI();
     setupDesktopVideoDock();
     setSidebarCollapsed(!readJSON(KEYS.sidebarOpen, false), false);
     applyTheme(readJSON(KEYS.theme, 'light'));
