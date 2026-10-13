@@ -1376,9 +1376,15 @@
     el['playing-favorite'].textContent = item && state.favorites.has(item.id) ? '♥' : '♡';
     el['mobile-mini-player'].hidden = !item;
     document.body.classList.toggle('has-mobile-player', !!item);
+    document.body.classList.toggle('has-current-track', !!item);
     el['mobile-mini-title'].textContent = item ? titleOf(item) : 'Nothing playing yet';
     el['mobile-mini-artist'].textContent = item ? artistsOf(item).join(', ') : 'Choose a song to start listening';
     if (item) el['mobile-mini-thumb'].src = thumbnail(item);
+    const dockPoster = el['youtube-player'].parentElement;
+    dockPoster.style.setProperty(
+      '--track-art',
+      item ? 'url("' + thumbnail(item) + '")' : 'none'
+    );
     el['mobile-mini-thumb'].hidden = !item;
   }
   function updatePlayerButtons() {
