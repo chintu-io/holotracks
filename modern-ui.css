@@ -312,15 +312,6 @@ body.theme-light .hero-card {
 }
 
 
-/* Center the featured talent more confidently in the hero stage. */
-@media (min-width: 971px) {
-  .stage-talent.stage-featured { right: 30% !important; }
-  .stage-talent.stage-featured.is-visible { transform: scale(1.18) translateX(-14px) !important; }
-  .stage-talent.stage-featured.is-entering { transform: translateY(8px) scale(1.18) translateX(-14px) !important; }
-  .stage-talent.stage-featured.is-exiting { transform: translateY(5px) scale(1.18) translateX(-14px) !important; }
-}
-
-
 /* Let the selected playlist name use the queue panel width. */
 #player-column .queue-actions {
   grid-template-columns: minmax(0, 1fr) !important;
@@ -341,4 +332,235 @@ body.theme-light .hero-card {
 #player-column .queue-actions .playlist-play {
   grid-row: auto !important;
   width: 100% !important;
+}
+
+
+/* Responsive refinement: mobile navigation is a true drawer, not a second toolbar action. */
+@media (max-width:680px) {
+  #mobile-filter-toggle { display:none!important; }
+  .mobile-toolbar { gap:8px!important; }
+  #mobile-player-toggle { flex:1 1 100%!important; width:100%!important; }
+  .sidebar { display:none!important; }
+  body.sidebar-open #sidebar.sidebar,
+  body.filters-open #sidebar.sidebar {
+    display:block!important;
+    position:fixed!important;
+    z-index:90!important;
+    top:116px!important;
+    bottom:calc(12px + env(safe-area-inset-bottom))!important;
+    left:10px!important;
+    right:auto!important;
+    width:min(320px,calc(100vw - 20px))!important;
+    max-width:calc(100vw - 20px)!important;
+    max-height:none!important;
+    min-width:0!important;
+    margin:0!important;
+    padding:15px 13px!important;
+    overflow-x:hidden!important;
+    overflow-y:auto!important;
+    overscroll-behavior:contain!important;
+    -webkit-overflow-scrolling:touch!important;
+    border-radius:18px!important;
+    transform:translateX(0)!important;
+    visibility:visible!important;
+    pointer-events:auto!important;
+  }
+  body.sidebar-open::before,
+  body.filters-open::before {
+    content:""!important;
+    position:fixed!important;
+    inset:108px 0 0!important;
+    z-index:65!important;
+    background:rgba(17,20,31,.48)!important;
+    backdrop-filter:blur(3px);
+  }
+  body.theme-light.sidebar-open::before,
+  body.theme-light.filters-open::before { background:rgba(42,49,63,.22)!important; }
+  #player-column .player-expand { display:none!important; }
+  #player-column .room-maximize { display:none!important; }
+}
+
+/* Keep the featured character fully inside the hero stage on desktop.
+   The empty stage space gets useful copy instead of enlarging or shifting artwork. */
+@media (min-width:681px) {
+  .stage-talent.stage-featured,
+  .stage-talent.stage-featured.is-visible,
+  .stage-talent.stage-featured.is-entering,
+  .stage-talent.stage-featured.is-exiting {
+    right:3%!important;
+    top:auto!important;
+    bottom:30px!important;
+    width:auto!important;
+    height:calc(100% - 58px)!important;
+    max-height:420px!important;
+    max-width:43%!important;
+    object-fit:contain!important;
+    object-position:center bottom!important;
+    transform:none!important;
+  }
+  .hero-stage-note {
+    position:absolute;
+    z-index:6;
+    left:3%;
+    top:49%;
+    width:clamp(150px,24%,220px);
+    transform:translateY(-50%);
+    padding:15px 16px;
+    border:1px solid rgba(202,198,255,.24);
+    border-radius:16px;
+    background:rgba(19,21,49,.52);
+    color:#f7f5ff;
+    box-shadow:0 12px 35px rgba(4,7,26,.15);
+    backdrop-filter:blur(12px);
+  }
+  .hero-stage-note span { display:block;color:#9ca7d1;font:9px 'DM Mono',monospace;letter-spacing:.1em; }
+  .hero-stage-note strong { display:block;margin:8px 0 5px;font:800 17px/1.2 'Space Grotesk',sans-serif; }
+  .hero-stage-note small { display:block;color:#bfc4df;font-size:11px;line-height:1.5; }
+  body.theme-light .hero-stage-note {
+    border-color:#e0dce8;
+    background:rgba(255,255,255,.78);
+    color:#39425a;
+    box-shadow:0 12px 35px rgba(58,67,87,.10);
+  }
+  body.theme-light .hero-stage-note span { color:#7d718d; }
+  body.theme-light .hero-stage-note small { color:#667186; }
+  body.theme-light .hero-stage-note strong { color:#443950; }
+}
+@media (max-width:970px) {
+  .hero-stage-note { display:none!important; }
+}
+
+/* Rebalance white theme controls and artwork overlays for consistent contrast. */
+body.theme-light .hero-stage::before,
+body.theme-light .hero-stage::after {
+  background:none!important;
+  opacity:.24!important;
+}
+body.theme-light .hero-stage {
+  background:radial-gradient(ellipse at 72% 72%,rgba(144,180,209,.18),transparent 58%)!important;
+}
+body.theme-light .hero-card:before {
+  background:linear-gradient(110deg,rgba(255,255,255,.10),rgba(255,255,255,0) 72%)!important;
+}
+body.theme-light .hero-card,
+body.theme-light .hero-stage {
+  box-shadow:inset 0 0 0 1px rgba(99,113,138,.05)!important;
+}
+body.theme-light .result-count,
+body.theme-light .nav-count,
+body.theme-light .muted-count,
+body.theme-light .queue-track-number {
+  color:#6b6076!important;
+}
+body.theme-light .result-count {
+  border-color:#e5dce8!important;
+  background:#faf7fb!important;
+}
+body.theme-light .queue-track-number {
+  border:1px solid #e5e1e9!important;
+  border-radius:8px!important;
+  background:#f7f5f9!important;
+}
+body.theme-light .music-type-button,
+body.theme-light .mini-action,
+body.theme-light .song-card-actions .mini-action,
+body.theme-light .queue-track-play,
+body.theme-light .queue-track-remove,
+body.theme-light .play-all-button,
+body.theme-light .soft-action,
+body.theme-light .save-button,
+body.theme-light .playlist-play {
+  border-color:#dfe3eb!important;
+  background:#f6f7fa!important;
+  color:#58667b!important;
+  box-shadow:none!important;
+}
+body.theme-light .mini-action[data-action="play"],
+body.theme-light .song-card-actions .mini-action[data-action="play"] {
+  color:#8f5278!important;
+}
+body.theme-light .music-type-button.active,
+body.theme-light .pagination-button.active {
+  border-color:#e4d5e3!important;
+  background:#fbf2f8!important;
+  color:#96527b!important;
+}
+body.theme-light .talent-card {
+  border-color:#e4e6ed!important;
+  background:#fff!important;
+}
+body.theme-light .talent-card:hover,
+body.theme-light .talent-card.selected {
+  border-color:#d9c9dc!important;
+  background:#fbf8fc!important;
+  box-shadow:0 8px 20px rgba(58,67,87,.10)!important;
+}
+body.theme-light .talent-card::before {
+  background:linear-gradient(90deg,transparent,#d8c5db,transparent)!important;
+}
+body.theme-light .talent-image::after {
+  background:linear-gradient(transparent 76%,rgba(255,255,255,.68))!important;
+}
+body.theme-light .talent-card strong { color:#455269!important; }
+body.theme-light .talent-card:hover strong { color:#40364b!important; }
+body.theme-light .talent-picker-dialog::backdrop {
+  background:rgba(37,43,57,.44)!important;
+  backdrop-filter:blur(4px);
+}
+body.theme-light .talent-picker-dialog .artist-filters {
+  max-height:min(52vh,460px)!important;
+  overflow-y:auto!important;
+  overscroll-behavior:contain!important;
+  -webkit-overflow-scrolling:touch!important;
+}
+body.theme-light .talent-picker-dialog .artist-check {
+  background:#f7f8fb!important;
+  color:#46536a!important;
+}
+body.theme-light .talent-picker-dialog .artist-check:hover {
+  background:#fff!important;
+  border-color:#d8c4da!important;
+  color:#45354b!important;
+}
+body.theme-light .talent-picker-dialog .artist-check span { color:inherit!important; }
+body.theme-light .talent-picker-dialog .artist-check small { color:#748095!important; }
+body.theme-light .talent-picker-dialog .artist-category-filter button {
+  background:#f5f6f9!important;
+  border-color:#e0e4ec!important;
+  color:#5d697d!important;
+}
+body.theme-light .talent-picker-dialog .artist-category-filter button.is-active {
+  background:#fbf1f7!important;
+  border-color:#e1ccdd!important;
+  color:#8a4e70!important;
+}
+body.theme-light .talent-picker-dialog .talent-picker-toolbar {
+  background:#fff!important;
+  color:#58657a!important;
+}
+@media (max-width:680px) {
+  #talent-picker-dialog.talent-picker-dialog {
+    inset:0!important;
+    width:100vw!important;
+    max-width:100vw!important;
+    max-height:100dvh!important;
+    height:100dvh!important;
+    margin:0!important;
+    padding:12px!important;
+    border-radius:0!important;
+  }
+  #talent-picker-dialog .talent-picker-shell {
+    max-height:calc(100dvh - 24px)!important;
+    overflow:hidden!important;
+    display:flex!important;
+    flex-direction:column!important;
+  }
+  #talent-picker-dialog .artist-filters {
+    flex:1 1 auto!important;
+    min-height:0!important;
+    max-height:none!important;
+    overflow-y:auto!important;
+    overscroll-behavior:contain!important;
+    -webkit-overflow-scrolling:touch!important;
+  }
 }
