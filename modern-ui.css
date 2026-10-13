@@ -310,3 +310,12 @@ body.theme-light .hero-card:before {
 body.theme-light .hero-card {
   background: linear-gradient(120deg, #fbf8ff 0%, #f3f3fb 52%, #e8f4f6 100%) !important;
 }
+
+
+/* Center the featured talent more confidently in the hero stage. */
+@media (min-width: 971px) {
+  .stage-talent.stage-featured { right: 30% !important; }
+  .stage-talent.stage-featured.is-visible { transform: scale(1.18) translateX(-14px) !important; }
+  .stage-talent.stage-featured.is-entering { transform: translateY(8px) scale(1.18) translateX(-14px) !important; }
+  .stage-talent.stage-featured.is-exiting { transform: translateY(5px) scale(1.18) translateX(-14px) !important; }
+}
