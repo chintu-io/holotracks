@@ -134,7 +134,7 @@
     'player-state','watch-youtube','play-pause','previous-song','next-song','queue-shuffle',
     'queue-repeat','player-share','volume-toggle','volume-popover','volume-control','volume-value','volume-mute','queue-count','queue-list','clear-queue','create-playlist','playlist-list',
     'playlist-select','save-queue','play-selected-playlist','playlist-dialog','playlist-form','cancel-playlist',
-    'playlist-name','talent-strip','sidebar-collapse','mobile-mini-player','mobile-mini-thumb','mobile-mini-expand','mobile-mini-title','mobile-mini-artist','mobile-mini-toggle','mobile-mini-next','hero-talent-art','hero-artist-name',
+    'playlist-name','talent-strip','sidebar-collapse','mobile-mini-player','mobile-mini-thumb','mobile-mini-expand','mobile-mini-title','mobile-mini-artist','mobile-mini-toggle','mobile-mini-next','mobile-mini-room','hero-talent-art','hero-artist-name',
   ];
   const el = Object.fromEntries(ids.map(id => [id, document.getElementById(id)]));
   const readJSON = (key, fallback) => {
@@ -2027,6 +2027,7 @@
     el['mobile-mini-toggle'].addEventListener('click', togglePlayback);
     el['mobile-mini-next'].addEventListener('click', nextSong);
     el['mobile-mini-expand'].addEventListener('click', () => toggleMobilePlayerPanel());
+    el['mobile-mini-room'].addEventListener('click', () => toggleMobilePlayerPanel(true));
     el['queue-shuffle'].addEventListener('click', () => {
       state.shuffle = !state.shuffle;
       saveJSON(KEYS.shuffle, state.shuffle);
