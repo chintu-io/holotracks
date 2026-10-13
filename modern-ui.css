@@ -794,3 +794,30 @@ body.theme-light #player-column #queue-list .queue-track-actions button {
   background: #f6f7f9 !important;
   color: #626e82 !important;
 }
+
+
+/* High-specificity finishing overrides for legacy decorative treatments. */
+.hero-stage-note { display: none !important; }
+.discovery-fresh > i { display: none !important; }
+body.theme-light #talent-picker-dialog .artist-category-filter button[data-artist-category] > span[data-category-count] {
+  border: 1px solid #e0dfe7 !important;
+  background: #f2f1f5 !important;
+  color: #665875 !important;
+  box-shadow: none !important;
+}
+body.theme-light #talent-picker-dialog .artist-category-filter button.is-active[data-artist-category] > span[data-category-count] {
+  border-color: #e5cedd !important;
+  background: #f8eaf2 !important;
+  color: #8b4d71 !important;
+}
+body.theme-light #talent-picker-dialog #artist-filters {
+  scrollbar-color: #c5cbd6 #f4f6f9 !important;
+}
+body.theme-light #talent-picker-dialog #artist-filters::-webkit-scrollbar-track {
+  background: #f4f6f9 !important;
+}
+body.theme-light #talent-picker-dialog #artist-filters::-webkit-scrollbar-thumb {
+  border: 2px solid #f4f6f9 !important;
+  border-radius: 99px !important;
+  background: #c5cbd6 !important;
+}
