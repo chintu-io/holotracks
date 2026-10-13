@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-12T15:47:13.969Z",
+  "generatedAt": "2026-10-13T17:49:47.114Z",
   "lastFullReconciledAt": "2026-10-11T17:38:28.555Z",
   "lastMode": "incremental",
   "source": "Holodex API v2",
@@ -14,14 +14,32 @@
       "stream"
     ]
   },
-  "total": 6288,
-  "sourceTotal": 6547,
+  "total": 6289,
+  "sourceTotal": 6548,
   "sourceTotalByTopic": {
-    "Original_Song": 3921,
+    "Original_Song": 3922,
     "Music_Cover": 2626
   },
   "pagesFetched": 132,
   "songs": [
+    {
+      "id": "i5GP5VRzB4E",
+      "title": "【Animation MV】PON-DERFUL!!! / さくらみこ (official)",
+      "artist": "Sakura Miko",
+      "artists": [
+        "Sakura Miko"
+      ],
+      "channelName": "Sakura Miko",
+      "channelId": "UC-hM6YJuNYVAmUWxeIr9FeA",
+      "releaseDate": "2026-10-13T13:00:11.000Z",
+      "publishedAt": "2026-10-13T13:00:11.000Z",
+      "viewCount": 150387,
+      "likeCount": 14054,
+      "duration": 226,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-10-13T17:50:01.024Z"
+    },
     {
       "id": "WRC4rUL5ghw",
       "title": "アイシカケ (Instrumental)",
