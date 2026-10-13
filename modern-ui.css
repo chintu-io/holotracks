@@ -987,3 +987,52 @@ body.theme-light #selected-artist-filters .selected-artist-clear:hover { border-
     color: #b75d91 !important;
   }
 }
+
+
+/* The fallback link is only for expanded playback failures; its author display
+   must not defeat the native hidden attribute in the compact desktop dock. */
+.youtube-fallback[hidden],
+#player-column:not(.queue-expanded) .youtube-fallback[hidden] { display:none!important; }
+
+/* Keep the idle desktop dock to a centered music mark, with no fallback copy. */
+@media (min-width:681px) {
+  #player-column:not(.queue-expanded) .youtube-fallback { display:none!important; }
+}
+
+/* Give the mobile mini player a clear track row, independent EQ, and explicit
+   expand action so the meter never sits on top of the artwork or controls. */
+@media (max-width:680px) {
+  #mobile-mini-player:not([hidden]) {
+    grid-template-columns:45px minmax(0,1fr) 38px 32px 32px!important;
+    gap:5px!important;
+  }
+  #mobile-mini-player .mobile-mini-info {
+    grid-template-columns:minmax(0,1fr) 18px!important;
+    grid-template-rows:auto auto!important;
+    align-items:center!important;
+  }
+  #mobile-mini-player .mobile-mini-info strong { grid-column:1!important;grid-row:1!important; }
+  #mobile-mini-player .mobile-mini-info small { grid-column:1!important;grid-row:2!important; }
+  #mobile-mini-player .mobile-mini-info .mobile-mini-equalizer {
+    position:static!important;left:auto!important;bottom:auto!important;z-index:auto!important;
+    grid-column:2!important;grid-row:1 / span 2!important;
+    width:18px!important;height:22px!important;min-width:18px!important;min-height:22px!important;
+    margin:0!important;padding:0!important;border:0!important;border-radius:0!important;
+    background:transparent!important;opacity:0;transform:none!important;
+    align-self:center!important;align-items:center!important;justify-content:center!important;
+  }
+  body.dock-playing #mobile-mini-player .mobile-mini-equalizer { opacity:1!important; }
+  #mobile-mini-player .mobile-mini-equalizer i { width:2px!important; }
+  #mobile-mini-player .mobile-mini-room svg {
+    display:block;width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.8;
+    stroke-linecap:round;stroke-linejoin:round;
+  }
+}
+@media (max-width:390px) {
+  #mobile-mini-player:not([hidden]) {
+    grid-template-columns:40px minmax(0,1fr) 34px 28px 28px!important;
+    gap:4px!important;padding:6px!important;
+  }
+  #mobile-mini-player .mobile-mini-thumb { width:40px!important;height:40px!important; }
+  #mobile-mini-player .mobile-mini-room svg { width:14px;height:14px; }
+}
