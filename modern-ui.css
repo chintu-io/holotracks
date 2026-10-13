@@ -586,3 +586,19 @@ body.theme-light .talent-section #talent-strip .talent-card small,
 body.theme-light #talent-strip .talent-card small {
   color:#667287!important;
 }
+
+
+/* Separate the animated artist signature from the discovery callout. */
+@media (min-width:971px) {
+  .hero-stage-note {
+    left:2%!important;
+    width:clamp(134px,22%,190px)!important;
+    padding:13px!important;
+  }
+  .hero-stage-note strong { font-size:15px!important; }
+  .hero-artist-name {
+    left:25%!important;
+    width:30%!important;
+    max-width:180px!important;
+  }
+}
