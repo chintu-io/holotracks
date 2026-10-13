@@ -1036,3 +1036,29 @@ body.theme-light #selected-artist-filters .selected-artist-clear:hover { border-
   #mobile-mini-player .mobile-mini-thumb { width:40px!important;height:40px!important; }
   #mobile-mini-player .mobile-mini-room svg { width:14px;height:14px; }
 }
+
+
+/* Smaller desktop mini dock: give the talent strip more visible room while keeping controls easy to use. */
+@media (min-width:681px) {
+  #player-column.player-column:not(.queue-expanded) {
+    height:72px!important;min-height:72px!important;padding:3px!important;border-radius:15px!important;
+  }
+  #player-column.player-column:not(.queue-expanded) .player-card {
+    height:64px!important;min-height:0!important;grid-template-columns:104px minmax(0,1fr)!important;gap:9px!important;padding:2px!important;
+  }
+  #player-column.player-column:not(.queue-expanded) .video-frame-wrap {
+    width:104px!important;height:58px!important;min-height:0!important;aspect-ratio:16/9!important;
+  }
+  #player-column.player-column:not(.queue-expanded) .now-playing-meta {height:58px!important;min-height:0!important;}
+  #player-column.player-column:not(.queue-expanded) .playing-title-row {min-height:30px!important;}
+  #player-column:not(.queue-expanded) .playing-title-row .dock-equalizer-meta {
+    flex-basis:30px!important;width:30px!important;height:30px!important;min-height:30px!important;margin-inline:1px 4px!important;
+  }
+  #player-column.player-column:not(.queue-expanded) .dock-controls-slot .player-controls {gap:5px!important;}
+  #player-column.player-column:not(.queue-expanded) .dock-controls-slot .control-button {
+    width:30px!important;min-width:30px!important;height:30px!important;min-height:30px!important;
+  }
+  #player-column.player-column:not(.queue-expanded) .dock-controls-slot .play-toggle {
+    width:34px!important;min-width:34px!important;height:34px!important;min-height:34px!important;
+  }
+}
