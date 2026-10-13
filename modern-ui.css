@@ -319,3 +319,21 @@ body.theme-light .hero-card {
   .stage-talent.stage-featured.is-entering { transform: translateY(8px) scale(1.18) translateX(-14px) !important; }
   .stage-talent.stage-featured.is-exiting { transform: translateY(5px) scale(1.18) translateX(-14px) !important; }
 }
+
+
+/* Let the selected playlist name use the queue panel width. */
+#player-column .queue-actions {
+  grid-template-columns: minmax(0, 1fr) !important;
+}
+#player-column .queue-actions .playlist-select-label,
+#player-column .queue-actions .playlist-select-row,
+#player-column .queue-actions .playlist-play {
+  grid-column: 1 / -1 !important;
+}
+#player-column .playlist-select-row {
+  grid-template-columns: minmax(0, 1fr) auto !important;
+}
+#player-column .playlist-select-row select {
+  white-space: nowrap;
+  text-overflow: clip !important;
+}
