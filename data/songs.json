@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-14T10:40:26.698Z",
+  "generatedAt": "2026-10-14T15:34:08.118Z",
   "lastFullReconciledAt": "2026-10-11T17:38:28.555Z",
   "lastMode": "incremental",
   "source": "Holodex API v2",
@@ -14,14 +14,68 @@
       "stream"
     ]
   },
-  "total": 6290,
-  "sourceTotal": 6551,
+  "total": 6293,
+  "sourceTotal": 6553,
   "sourceTotalByTopic": {
-    "Original_Song": 3923,
+    "Original_Song": 3925,
     "Music_Cover": 2628
   },
   "pagesFetched": 132,
   "songs": [
+    {
+      "id": "qPjGg6jxfus",
+      "title": "Candy Candy Midnight (Instrumental)",
+      "artist": "Yuzuki Choco",
+      "artists": [
+        "Yuzuki Choco"
+      ],
+      "channelName": "Yuzuki Choco",
+      "channelId": "UC1suqwovbL1kzsoaZgFZLKg",
+      "releaseDate": "2026-10-14T15:04:19.000Z",
+      "publishedAt": "2026-10-14T15:04:19.000Z",
+      "viewCount": 0,
+      "likeCount": 0,
+      "duration": 224,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-10-14T15:34:26.850Z"
+    },
+    {
+      "id": "pF9Z04db2xY",
+      "title": "Candy Candy Midnight",
+      "artist": "Yuzuki Choco",
+      "artists": [
+        "Yuzuki Choco"
+      ],
+      "channelName": "Yuzuki Choco",
+      "channelId": "UC1suqwovbL1kzsoaZgFZLKg",
+      "releaseDate": "2026-10-14T15:04:09.000Z",
+      "publishedAt": "2026-10-14T15:04:09.000Z",
+      "viewCount": 16,
+      "likeCount": 7,
+      "duration": 225,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-10-14T15:34:26.850Z"
+    },
+    {
+      "id": "FSDwet-B1P8",
+      "title": "【original】Candy Candy Midnight/癒月ちょこ【ホロライブ】",
+      "artist": "Yuzuki Choco",
+      "artists": [
+        "Yuzuki Choco"
+      ],
+      "channelName": "Yuzuki Choco",
+      "channelId": "UC1suqwovbL1kzsoaZgFZLKg",
+      "releaseDate": "2026-10-14T11:00:11.000Z",
+      "publishedAt": "2026-10-14T11:00:11.000Z",
+      "viewCount": 31333,
+      "likeCount": 4653,
+      "duration": 225,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-10-14T15:34:26.850Z"
+    },
     {
       "id": "i5GP5VRzB4E",
       "title": "【Animation MV】PON-DERFUL!!! / さくらみこ (official)",
