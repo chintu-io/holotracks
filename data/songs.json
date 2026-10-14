@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-13T17:49:47.114Z",
+  "generatedAt": "2026-10-14T10:40:26.698Z",
   "lastFullReconciledAt": "2026-10-11T17:38:28.555Z",
   "lastMode": "incremental",
   "source": "Holodex API v2",
@@ -14,11 +14,11 @@
       "stream"
     ]
   },
-  "total": 6289,
-  "sourceTotal": 6548,
+  "total": 6290,
+  "sourceTotal": 6551,
   "sourceTotalByTopic": {
-    "Original_Song": 3922,
-    "Music_Cover": 2626
+    "Original_Song": 3923,
+    "Music_Cover": 2628
   },
   "pagesFetched": 132,
   "songs": [
@@ -93,6 +93,25 @@
       "songType": "original",
       "source": "Holodex",
       "statisticsCheckedAt": "2026-10-12T15:47:25.486Z"
+    },
+    {
+      "id": "pXRUA_a4Ot4",
+      "title": "【歌ってみた】打上花火/DAOKO×米津玄師 (Covered by 朝ノ瑠璃&夜十神封魔)",
+      "artist": "Asano Ninja Sisters",
+      "artists": [
+        "Asano Ninja Sisters",
+        "Yatogami Fuma"
+      ],
+      "channelName": "Asano Ninja Sisters",
+      "channelId": "UCODNLyn3L83wEmC0DLL0cxA",
+      "releaseDate": "2026-10-12T09:00:39.000Z",
+      "publishedAt": "2026-10-12T09:00:39.000Z",
+      "viewCount": 387,
+      "likeCount": 94,
+      "duration": 288,
+      "songType": "cover",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-10-14T10:40:46.214Z"
     },
     {
       "id": "_Sb7_i3e0sw",
