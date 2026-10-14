@@ -1,38 +1,31 @@
 # HoloTracks
 
-**Your Hololive music universe.** 🎵
+**A music discovery and listening hub for Hololive.**
 
-HoloTracks is a fan-made music discovery website for exploring Hololive original songs and covers in one searchable library. Find tracks by song title, talent, or Japanese text, discover new favourites, and build your own listening queue and mixtapes.
+HoloTracks brings Hololive original songs and covers into one searchable library. Discover music by song or talent, explore the catalogue, and build a listening session around the tracks you love.
 
-🎧 **[Open HoloTracks](https://chintu-io.github.io/holotracks/)**
+**[Open HoloTracks](https://holotracks.pages.dev/)**
 
-## Discover your next favourite
+## Highlights
 
-- **Explore a huge catalogue** of Hololive original songs and music covers.
-- **Search your way** with song titles, artist names, alternate titles, and Japanese text.
-- **Browse by talent** with artist artwork, multi-select filters, and talent spotlights.
-- **Find something fresh** with recent releases, newest and oldest sorting, title sorting, most-viewed, and most-liked sorting.
-- **Choose your vibe** by filtering Originals and Covers separately.
-- **Play and queue songs** with previous/next controls, shuffle, and repeat.
-- **Make it yours** with favourites and custom playlists (mixtapes) saved in your browser.
-- **Enjoy it on mobile or desktop** with a responsive dark, stage-inspired interface, a mobile mini-player, and an expandable player and queue.
+- **Search the catalogue** by song title, talent name, alternate titles, and Japanese text.
+- **Browse by talent** with artist artwork, talent selection, and featured talent banners.
+- **Discover music your way** with filters for originals and covers, plus sorting by newest, oldest, title, views, and likes.
+- **Play continuously** with a YouTube player, queue, previous/next controls, shuffle, and repeat.
+- **Personalise your library** with favourites and custom playlists (mixtapes).
+- **Keep control of playback** with an expandable listening room, playlist queue, and responsive player controls.
+- **Use it across devices** with layouts designed for desktop and mobile.
 
-## Made for music discovery
+## Catalogue updates
 
-HoloTracks brings catalogue browsing and listening tools together in one place. Use search and artist filters to narrow the library, queue tracks for a listening session, or save a collection of favourites as a personal mixtape.
+HoloTracks uses catalogue data sourced from [Holodex](https://holodex.net/). A GitHub Actions workflow refreshes the catalogue automatically, with a manual workflow option for an on-demand refresh.
 
-Your favourites and mixtapes are stored locally in your browser. They are not tied to an account and do not automatically sync between devices.
+## Playback and saved data
 
-## Playback
+Music videos are played through YouTube's embedded player. Playback availability depends on each video's YouTube settings; some videos may be unavailable due to removal, regional restrictions, or disabled embedding.
 
-Videos play using **YouTube's official embedded player**. Some videos may be unavailable because they are removed, restricted, region-limited, or do not allow embedding.
+Favourites and mixtapes are saved in your browser. They do not require an account, and they do not automatically sync between browsers or devices.
 
-## Sources and fan-project note
+## Data and rights
 
-The music catalogue is sourced from [Holodex](https://holodex.net/), and tracks are played through YouTube. Talent artwork and character rights belong to COVER Corporation and their respective rights holders.
-
-HoloTracks is an independent fan-made project. It is not affiliated with, endorsed by, or officially connected to COVER Corporation or Hololive Production.
-
----
-
-**Made for the music. Powered by fans.** ✨
+Holodex provides the catalogue data, and videos are played from YouTube. Hololive, talent names, artwork, and other related intellectual property remain the property of their respective rights holders.
