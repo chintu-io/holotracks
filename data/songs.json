@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-14T15:34:08.118Z",
+  "generatedAt": "2026-10-14T19:45:54.881Z",
   "lastFullReconciledAt": "2026-10-11T17:38:28.555Z",
   "lastMode": "incremental",
   "source": "Holodex API v2",
@@ -14,10 +14,10 @@
       "stream"
     ]
   },
-  "total": 6293,
-  "sourceTotal": 6553,
+  "total": 6294,
+  "sourceTotal": 6554,
   "sourceTotalByTopic": {
-    "Original_Song": 3925,
+    "Original_Song": 3926,
     "Music_Cover": 2628
   },
   "pagesFetched": 132,
@@ -75,6 +75,24 @@
       "songType": "original",
       "source": "Holodex",
       "statisticsCheckedAt": "2026-10-14T15:34:26.850Z"
+    },
+    {
+      "id": "hpfbbvQvB-E",
+      "title": "【ホロドリ】『PARADISE!』hololive IDOL PROJECT (Full ver.)",
+      "artist": "Hololive Official",
+      "artists": [
+        "Hololive Official"
+      ],
+      "channelName": "hololive Dreams",
+      "channelId": "UCawGfU44CZxd2ZVf_VGijbA",
+      "releaseDate": "2026-10-14T10:03:39.000Z",
+      "publishedAt": "2026-10-14T10:03:39.000Z",
+      "viewCount": 10592,
+      "likeCount": 972,
+      "duration": 243,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-10-14T19:46:05.664Z"
     },
     {
       "id": "i5GP5VRzB4E",
