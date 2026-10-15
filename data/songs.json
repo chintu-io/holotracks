@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-15T10:24:09.825Z",
+  "generatedAt": "2026-10-15T15:08:50.695Z",
   "lastFullReconciledAt": "2026-10-11T17:38:28.555Z",
   "lastMode": "incremental",
   "source": "Holodex API v2",
@@ -14,14 +14,230 @@
       "stream"
     ]
   },
-  "total": 6295,
-  "sourceTotal": 6553,
+  "total": 6307,
+  "sourceTotal": 6565,
   "sourceTotalByTopic": {
-    "Original_Song": 3926,
+    "Original_Song": 3938,
     "Music_Cover": 2627
   },
   "pagesFetched": 132,
   "songs": [
+    {
+      "id": "ju_pVIrgmHg",
+      "title": "Grave of Halo (Instrumental)",
+      "artist": "Aki Rosenthal",
+      "artists": [
+        "Aki Rosenthal"
+      ],
+      "channelName": "Aki Rosenthal",
+      "channelId": "UCFTLzh12_nrtzqBPsTCqenA",
+      "releaseDate": "2026-10-15T15:04:38.000Z",
+      "publishedAt": "2026-10-15T15:04:38.000Z",
+      "viewCount": 3,
+      "likeCount": 0,
+      "duration": 205,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-10-15T15:09:02.338Z"
+    },
+    {
+      "id": "AVm4T7YA_x0",
+      "title": "Grave of Halo",
+      "artist": "Aki Rosenthal",
+      "artists": [
+        "Aki Rosenthal"
+      ],
+      "channelName": "Aki Rosenthal",
+      "channelId": "UCFTLzh12_nrtzqBPsTCqenA",
+      "releaseDate": "2026-10-15T15:03:55.000Z",
+      "publishedAt": "2026-10-15T15:03:55.000Z",
+      "viewCount": 7,
+      "likeCount": 2,
+      "duration": 205,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-10-15T15:09:02.338Z"
+    },
+    {
+      "id": "CWpmwecQJiY",
+      "title": "64.",
+      "artist": "Anya Melfissa",
+      "artists": [
+        "Anya Melfissa"
+      ],
+      "channelName": "Anya Melfissa",
+      "channelId": "UC727SQYUvx5pDDGQpTICNWg",
+      "releaseDate": "2026-10-15T15:00:37.000Z",
+      "publishedAt": "2026-10-15T15:00:37.000Z",
+      "viewCount": 1,
+      "likeCount": 2,
+      "duration": 182,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-10-15T15:09:02.338Z"
+    },
+    {
+      "id": "6PalG3AatAg",
+      "title": "PARADISE! (Instrumental)",
+      "artist": "Hololive Official",
+      "artists": [
+        "Hololive Official"
+      ],
+      "channelName": "hololive VTuber Group",
+      "channelId": "UCJFZiqLMntJufDCHc6bQixg",
+      "releaseDate": "2026-10-15T15:00:37.000Z",
+      "publishedAt": "2026-10-15T15:00:37.000Z",
+      "viewCount": 0,
+      "likeCount": 0,
+      "duration": 242,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-10-15T15:09:02.338Z"
+    },
+    {
+      "id": "mUPBmmasvaY",
+      "title": "三位一体♡ラブシステム",
+      "artist": "Takane Lui",
+      "artists": [
+        "Takane Lui"
+      ],
+      "channelName": "Takane Lui",
+      "channelId": "UCs9_O1tRPMQTHQ-N_L6FU2g",
+      "releaseDate": "2026-10-15T15:00:34.000Z",
+      "publishedAt": "2026-10-15T15:00:34.000Z",
+      "viewCount": 10,
+      "likeCount": 7,
+      "duration": 160,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-10-15T15:09:02.338Z"
+    },
+    {
+      "id": "-crCH7pO4DA",
+      "title": "リーサルドーズ・パラノイド",
+      "artist": "La+ Darknesss",
+      "artists": [
+        "La+ Darknesss"
+      ],
+      "channelName": "La+ Darknesss",
+      "channelId": "UCENwRMx5Yh42zWpzURebzTw",
+      "releaseDate": "2026-10-15T15:00:22.000Z",
+      "publishedAt": "2026-10-15T15:00:22.000Z",
+      "viewCount": 6,
+      "likeCount": 3,
+      "duration": 184,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-10-15T15:09:02.338Z"
+    },
+    {
+      "id": "QE3xHPM14OU",
+      "title": "Glitch Through (Instrumental)",
+      "artist": "Shiori Novella",
+      "artists": [
+        "Shiori Novella"
+      ],
+      "channelName": "Shiori Novella",
+      "channelId": "UCgnfPPb9JI3e9A4cXHnWbyg",
+      "releaseDate": "2026-10-15T15:00:20.000Z",
+      "publishedAt": "2026-10-15T15:00:20.000Z",
+      "viewCount": 0,
+      "likeCount": 5,
+      "duration": 178,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-10-15T15:09:02.338Z"
+    },
+    {
+      "id": "H6HLlUWShrQ",
+      "title": "PARADISE!",
+      "artist": "Hololive Official",
+      "artists": [
+        "Hololive Official"
+      ],
+      "channelName": "hololive VTuber Group",
+      "channelId": "UCJFZiqLMntJufDCHc6bQixg",
+      "releaseDate": "2026-10-15T15:00:19.000Z",
+      "publishedAt": "2026-10-15T15:00:19.000Z",
+      "viewCount": 10,
+      "likeCount": 2,
+      "duration": 242,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-10-15T15:09:02.338Z"
+    },
+    {
+      "id": "GelHsQGQnlY",
+      "title": "三位一体♡ラブシステム (Instrumental)",
+      "artist": "Takane Lui",
+      "artists": [
+        "Takane Lui"
+      ],
+      "channelName": "Takane Lui",
+      "channelId": "UCs9_O1tRPMQTHQ-N_L6FU2g",
+      "releaseDate": "2026-10-15T15:00:19.000Z",
+      "publishedAt": "2026-10-15T15:00:19.000Z",
+      "viewCount": 1,
+      "likeCount": 1,
+      "duration": 160,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-10-15T15:09:02.338Z"
+    },
+    {
+      "id": "__cHmEg8N50",
+      "title": "64. (Instrumental)",
+      "artist": "Anya Melfissa",
+      "artists": [
+        "Anya Melfissa"
+      ],
+      "channelName": "Anya Melfissa",
+      "channelId": "UC727SQYUvx5pDDGQpTICNWg",
+      "releaseDate": "2026-10-15T15:00:17.000Z",
+      "publishedAt": "2026-10-15T15:00:17.000Z",
+      "viewCount": 0,
+      "likeCount": 1,
+      "duration": 182,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-10-15T15:09:02.338Z"
+    },
+    {
+      "id": "pjHzp3oNG0o",
+      "title": "Glitch Through",
+      "artist": "Shiori Novella",
+      "artists": [
+        "Shiori Novella"
+      ],
+      "channelName": "Shiori Novella",
+      "channelId": "UCgnfPPb9JI3e9A4cXHnWbyg",
+      "releaseDate": "2026-10-15T15:00:12.000Z",
+      "publishedAt": "2026-10-15T15:00:12.000Z",
+      "viewCount": 27,
+      "likeCount": 16,
+      "duration": 178,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-10-15T15:09:02.338Z"
+    },
+    {
+      "id": "oSVhYGRbDyY",
+      "title": "リーサルドーズ・パラノイド (Instrumental)",
+      "artist": "La+ Darknesss",
+      "artists": [
+        "La+ Darknesss"
+      ],
+      "channelName": "La+ Darknesss",
+      "channelId": "UCENwRMx5Yh42zWpzURebzTw",
+      "releaseDate": "2026-10-15T15:00:07.000Z",
+      "publishedAt": "2026-10-15T15:00:07.000Z",
+      "viewCount": 5,
+      "likeCount": 1,
+      "duration": 184,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-10-15T15:09:02.338Z"
+    },
     {
       "id": "ZNlovMQZ83g",
       "title": "革命道中 / 澤村光彩×鷹嶺ルイ (cover)",
