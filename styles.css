@@ -7348,3 +7348,19 @@ body:not(.theme-light) .queue-empty small {
     transform-origin:center bottom!important;
   }
 }
+
+/* Light theme only: replace the dark character shadow with a soft white/pink halo. */
+body.theme-light .stage-talent.stage-featured {
+  filter:
+    drop-shadow(0 10px 20px rgba(219, 141, 186, .22))
+    drop-shadow(0 0 16px rgba(255, 255, 255, .82))
+    drop-shadow(0 0 27px rgba(255, 180, 218, .20))!important;
+}
+body.theme-light .hero-stage:after {
+  background:
+    radial-gradient(ellipse at 74% 61%,rgba(191,166,239,.12) 0%,transparent 53%),
+    linear-gradient(180deg,rgba(255,255,255,0) 45%,rgba(250,224,240,.24) 100%)!important;
+}
+body.theme-light .hero-stage:before {
+  background:linear-gradient(90deg,rgba(255,255,255,.32) 0%,transparent 48%,rgba(250,225,241,.12) 100%)!important;
+}
