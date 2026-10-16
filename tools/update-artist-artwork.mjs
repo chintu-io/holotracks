@@ -13,7 +13,7 @@
 import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { collectArtistDirectory } from '../scripts/artist-directory.mjs';
+import { collectArtistDirectory, normalizeArtistKey } from '../scripts/artist-directory.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const SONGS_PATH = path.join(ROOT, 'data', 'songs.json');
@@ -194,6 +194,15 @@ if (missingPortraits.length) {
         ? 'channel avatar was not downloaded or cached'
         : 'channel avatar exists but no name mapping was generated';
     console.log('[Artist artwork] MISSING: ' + artist.name + ' — ' + reason);
+    const credits = catalogue.songs.filter(song =>
+      Array.isArray(song?.artists) &&
+      song.artists.some(credit => normalizeArtistKey(credit) === normalizeArtistKey(artist.name))
+    ).slice(0, 3);
+    for (const song of credits) {
+      console.log('[Artist artwork] CONTEXT: ' + artist.name + ' appears on "' +
+        String(song.title || song.id || 'Untitled').slice(0, 140) + '"; uploader=' +
+        String(song.channelName || 'unknown') + '; video=' + String(song.id || 'unknown'));
+    }
   }
 } else {
   console.log('[Artist artwork] All non-official artist credits have a portrait mapping.');
