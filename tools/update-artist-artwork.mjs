@@ -200,8 +200,11 @@ if (missingPortraits.length) {
     ).slice(0, 3);
     for (const song of credits) {
       console.log('[Artist artwork] CONTEXT: ' + artist.name + ' appears on "' +
-        String(song.title || song.id || 'Untitled').slice(0, 140) + '"; uploader=' +
-        String(song.channelName || 'unknown') + '; video=' + String(song.id || 'unknown'));
+        String(song.title || song.id || 'Untitled').slice(0, 140) + '"; song.artist=' +
+        String(song.artist || 'unknown') + '; credits=' +
+        (Array.isArray(song.artists) ? song.artists.join(' | ') : 'no artists[]') +
+        '; uploader=' + String(song.channelName || 'unknown') +
+        '; video=' + String(song.id || 'unknown'));
     }
   }
 } else {
