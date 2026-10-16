@@ -28,6 +28,18 @@ test('filters generic labels without excluding real people or artist collaborati
   }
 });
 
+test('maps known abbreviated credits to their actual YouTube uploader channels', () => {
+  const directory = collectArtistDirectory([
+    { artists: ['Peanuts'], channelName: 'Peanuts-kun', channelId: channelA },
+    { artists: ['Seiten'], channelName: 'Seiten Channel', channelId: channelB },
+    { artists: ['UNIT B [Pre'], channelName: 'UNIT B [Pre-Debut]', channelId: channelA },
+  ]);
+
+  assert.equal(directory.find(item => item.name === 'Peanuts').channelId, channelA);
+  assert.equal(directory.find(item => item.name === 'Seiten').channelId, channelB);
+  assert.equal(directory.find(item => item.name === 'UNIT B [Pre').channelId, channelA);
+});
+
 test('prefers the most frequently associated valid uploader channel ID', () => {
   const directory = collectArtistDirectory([
     { artists: ['Guest Singer'], channelName: 'Guest Singer', channelId: channelA },
