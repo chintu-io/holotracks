@@ -129,8 +129,8 @@
     'type-all-count','type-original-count','type-cover-count','nav-original-total','nav-cover-total',
     'song-list','selected-artist-filters','pagination','empty-state','empty-title','empty-copy','empty-reset','notice',
     'play-all','play-random','favorites-shortcut','mobile-filter-toggle','theme-toggle',
-    'mobile-player-toggle','sidebar','player-column','player-expand','player-fullscreen','dock-controls-slot','room-controls-slot','room-title-slot','desktop-room-controls-slot','room-minimize','room-maximize','room-close','youtube-player','youtube-fallback',
-    'playing-thumb','playing-art-placeholder','playing-title','playing-artist','playing-favorite','control-favorite',
+    'mobile-player-toggle','sidebar','player-column','player-expand','dock-controls-slot','room-controls-slot','room-title-slot','desktop-room-controls-slot','room-minimize','room-maximize','room-close','youtube-player','youtube-fallback',
+    'playing-thumb','playing-art-placeholder','playing-title','playing-artist','playing-favorite',
     'player-state','watch-youtube','play-pause','previous-song','next-song','queue-shuffle',
     'queue-repeat','player-share','volume-toggle','volume-popover','volume-control','volume-value','volume-mute','queue-count','queue-list','clear-queue','create-playlist','playlist-list',
     'playlist-select','save-queue','play-selected-playlist','playlist-dialog','playlist-form','cancel-playlist',
@@ -1629,17 +1629,9 @@
     const url = item ? 'https://www.youtube.com/watch?v=' + encodeURIComponent(item.id) : 'https://www.youtube.com/';
     el['watch-youtube'].href = url;
     el['youtube-fallback'].href = url;
-    const isFavorite = !!item && state.favorites.has(item.id);
     el['playing-favorite'].disabled = !item;
-    el['playing-favorite'].classList.toggle('is-favorite', isFavorite);
-    el['playing-favorite'].textContent = isFavorite ? '♥' : '♡';
-    el['playing-favorite'].setAttribute('aria-pressed', String(isFavorite));
-    el['control-favorite'].disabled = !item;
-    el['control-favorite'].classList.toggle('is-favorite', isFavorite);
-    el['control-favorite'].textContent = isFavorite ? '♥' : '♡';
-    el['control-favorite'].setAttribute('aria-pressed', String(isFavorite));
-    el['control-favorite'].setAttribute('aria-label', isFavorite ? 'Remove from favourites' : 'Add to favourites');
-    el['control-favorite'].title = isFavorite ? 'Remove from favourites' : 'Add to favourites';
+    el['playing-favorite'].classList.toggle('is-favorite', !!item && state.favorites.has(item.id));
+    el['playing-favorite'].textContent = item && state.favorites.has(item.id) ? '♥' : '♡';
     el['mobile-mini-player'].hidden = !item;
     document.body.classList.toggle('has-mobile-player', !!item);
     document.body.classList.toggle('has-current-track', !!item);
@@ -1665,8 +1657,6 @@
     el['previous-song'].disabled = !hasCurrent;
     el['next-song'].disabled = !hasCurrent;
     el['player-share'].disabled = !hasCurrent;
-    el['control-favorite'].disabled = !hasCurrent;
-    el['player-fullscreen'].disabled = !hasCurrent;
     el['queue-shuffle'].classList.toggle('active', state.shuffle);
     el['queue-repeat'].classList.toggle('active', state.repeat);
     if (state.playerReady && state.player) {
@@ -1784,107 +1774,11 @@
     updateVolumeControl();
   }
 
-  function currentFullscreenElement() {
-    return document.fullscreenElement || document.webkitFullscreenElement || null;
+  function togglePlayback() {
+    if (!state.playerReady || !state.player) return;
+    const playing = state.player.getPlayerState() === window.YT.PlayerState.PLAYING;
+    playing ? state.player.pauseVideo() : state.player.playVideo();
   }
-
-  function videoFrameElement() {
-    return el['player-column']?.querySelector('.video-frame-wrap') || null;
-  }
-
-  function isVideoFrameFullscreen() {
-    const frame = videoFrameElement();
-    const fullscreen = currentFullscreenElement();
-    return !!(frame && fullscreen && (fullscreen === frame || frame.contains(fullscreen)));
-  }
-
-  async function exitVideoFullscreen() {
-    try {
-      if (document.exitFullscreen && currentFullscreenElement()) {
-        await document.exitFullscreen();
-      } else if (document.webkitExitFullscreen && currentFullscreenElement()) {
-        document.webkitExitFullscreen();
-      }
-    } catch {
-      // Browsers can reject exit requests if the user already exited through their own UI.
-    }
-  }
-
-  function syncVideoFullscreenButton() {
-    const button = el['player-fullscreen'];
-    const frame = videoFrameElement();
-    const active = isVideoFrameFullscreen();
-    if (button) {
-      button.classList.toggle('active', active);
-      button.setAttribute('aria-pressed', String(active));
-      button.setAttribute('aria-label', active ? 'Exit video fullscreen' : 'Fullscreen video · 16:9');
-      button.title = active ? 'Exit fullscreen' : 'Fullscreen video · 16:9';
-    }
-
-    if (frame && active && !frame.querySelector('.video-fullscreen-exit')) {
-      const exitButton = document.createElement('button');
-      exitButton.type = 'button';
-      exitButton.className = 'video-fullscreen-exit';
-      exitButton.setAttribute('aria-label', 'Exit fullscreen');
-      exitButton.title = 'Exit fullscreen';
-      exitButton.textContent = '×';
-      exitButton.addEventListener('click', exitVideoFullscreen);
-      frame.appendChild(exitButton);
-    } else if (frame && !active) {
-      frame.querySelector('.video-fullscreen-exit')?.remove();
-      try {
-        if (screen.orientation && typeof screen.orientation.unlock === 'function') {
-          screen.orientation.unlock();
-        }
-      } catch {
-        // Orientation locking is optional and browser-dependent.
-      }
-    }
-  }
-
-  async function toggleVideoFullscreen() {
-    const frame = videoFrameElement();
-    if (!frame) return;
-    if (isVideoFrameFullscreen()) {
-      await exitVideoFullscreen();
-      return;
-    }
-
-    try {
-      if (typeof frame.requestFullscreen === 'function') {
-        await frame.requestFullscreen({ navigationUI: 'hide' });
-      } else if (typeof frame.webkitRequestFullscreen === 'function') {
-        frame.webkitRequestFullscreen();
-      } else {
-        const iframe = state.player && typeof state.player.getIframe === 'function'
-          ? state.player.getIframe()
-          : frame.querySelector('iframe');
-        if (iframe && typeof iframe.requestFullscreen === 'function') {
-          await iframe.requestFullscreen({ navigationUI: 'hide' });
-        } else {
-          showNotice('Fullscreen is not supported by this browser. Use YouTube’s fullscreen control instead.');
-          return;
-        }
-      }
-
-      // On Android Chrome this can rotate the display after fullscreen begins.
-      // iOS Safari and some desktop browsers do not support orientation locking.
-      if (window.matchMedia && window.matchMedia('(max-width: 680px)').matches &&
-          screen.orientation && typeof screen.orientation.lock === 'function') {
-        try {
-          await screen.orientation.lock('landscape');
-        } catch {
-          // Fullscreen still works when the browser refuses an orientation lock.
-        }
-      }
-      syncVideoFullscreenButton();
-    } catch {
-      showNotice('Could not open fullscreen video. Try the fullscreen control in YouTube.');
-    }
-  }
-
-  document.addEventListener('fullscreenchange', syncVideoFullscreenButton);
-  document.addEventListener('webkitfullscreenchange', syncVideoFullscreenButton);
 
   function toggleMobilePlayerPanel(force) {
     const open = typeof force === 'boolean' ? force : !el['player-column'].classList.contains('mobile-open');
@@ -2244,10 +2138,6 @@
     el['playing-favorite'].addEventListener('click', () => {
       if (state.currentId) toggleFavorite(state.currentId);
     });
-    el['control-favorite'].addEventListener('click', () => {
-      if (state.currentId) toggleFavorite(state.currentId);
-    });
-    el['player-fullscreen'].addEventListener('click', toggleVideoFullscreen);
     el['clear-queue'].addEventListener('click', () => {
       state.queue = [];
       state.currentId = null;
