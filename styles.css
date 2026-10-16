@@ -7331,3 +7331,12 @@ body:not(.theme-light) .queue-empty small {
     transform:translateY(3px)!important;
   }
 }
+
+/* Compact-desktop featured talent sizing: reduce headroom without letting feet sit under the footer. */
+@media (min-width:681px) and (max-width:970px) {
+  .stage-talent.stage-featured {
+    bottom:32px!important;
+    height:calc(100% - 28px)!important;
+    transform-origin:center bottom!important;
+  }
+}
