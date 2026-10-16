@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {
   normalizeRecord, assignArtistCredits, deduplicateSongs, buildCatalogue, fetchAllHolodexResults,
-  fetchYouTubeVideoStatistics, selectYouTubeStatisticsIds,
+  fetchYouTubeVideoStatistics, selectYouTubeStatisticsIds, applyKnownArtistCreditCorrections,
 } from './update-catalog.mjs';
 
 const idA = 'abcdefghijk';
@@ -16,6 +16,20 @@ function record(id, overrides = {}) {
     ...overrides,
   };
 }
+
+test('removes a stale non-performer credit from the Kiichan and Kobo cover', () => {
+  const source = {
+    id: '2V3Fp5-xFpU',
+    artist: 'Aoi Nabi',
+    artists: ['Aoi Nabi', 'Kitsui Akira', 'Kobo Kanaeru'],
+    channelName: 'Kitsui Akira',
+  };
+  const [corrected] = applyKnownArtistCreditCorrections([source]);
+
+  assert.equal(corrected.artist, 'Kitsui Akira');
+  assert.deepEqual(corrected.artists, ['Kitsui Akira', 'Kobo Kanaeru']);
+  assert.equal(source.artists.includes('Aoi Nabi'), true, 'does not mutate the input');
+});
 
 test('normalizeRecord maps video fields and prefers YouTube publication date', () => {
   const song = normalizeRecord(record(idA, { view_count: '12450', like_count: '820', duration: 181 }));
