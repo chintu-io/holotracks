@@ -40,7 +40,7 @@ test('prefers the most frequently associated valid uploader channel ID', () => {
 });
 
 test('normalizes punctuation and validates YouTube channel IDs', () => {
-  assert.equal(normalizeArtistKey('ASOBI★MAWARI-TAI!'), 'asobimaw aritai'.replaceAll(' ', ''));
+  assert.equal(normalizeArtistKey('ASOBI★MAWARI-TAI!'), 'asobimawaritai');
   assert.equal(validYoutubeChannelId(channelA), true);
   assert.equal(validYoutubeChannelId('UC-short'), false);
 });
