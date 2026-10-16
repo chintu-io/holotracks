@@ -1,11 +1,17 @@
 /**
- * Helpers shared by the static artist-avatar builder and its unit tests.
- * Artist credits come from songs.json; official talent artwork is preferred
- * separately in the browser, while other artists can use their own channel ID.
+ * Shared artist directory rules for the browser and artwork manifest builder.
+ * Credits from channel metadata can be people, groups, organizations or projects.
+ * Keep genuine credits even when no portrait is available.
  */
 const CHANNEL_LABEL_ALIASES = new Map([
-  // The catalogue credit omits the official channel suffix.
   ['asobimawaritai', 'asobimawari'],
+]);
+
+const NON_ARTIST_LABELS = new Set([
+  'hololiveofficial', 'hololiveproduction', 'hololive', 'hololiveenglish',
+  'hololiveindonesia', 'hololiveregloss', 'hololiveflowglow',
+  'hololiveofficialchannel', 'covercorp', 'covercorporation', 'holoearth',
+  'hololivealternative', 'holostars', 'holostarsenglish', 'holostarsofficial',
 ]);
 
 export function normalizeArtistKey(value) {
@@ -15,6 +21,13 @@ export function normalizeArtistKey(value) {
     .replace(/[\s·・•_\-‐‑–—|｜()[\]{}「」『』【】<>《》]+/g, ' ')
     .trim()
     .replace(/[^\p{L}\p{N}]/gu, '');
+}
+
+export function isNonArtistLabel(value) {
+  const key = normalizeArtistKey(value);
+  if (!key) return true;
+  return NON_ARTIST_LABELS.has(key) ||
+    /^(?:hololive|holostars|covercorp|covercorporation)(?:official|production|english|indonesia|regloss|flowglow|channel|ch)?$/.test(key);
 }
 
 export function validYoutubeChannelId(value) {
@@ -29,9 +42,8 @@ function creditsFor(song) {
 }
 
 /**
- * Build an alphabetical directory of every distinct catalogue credit.
- * Channel IDs are only associated with the same channel-name identity (plus
- * explicit aliases), never with unrelated artists from a collaboration.
+ * Build an alphabetical directory of distinct catalogue artist credits.
+ * Organization-wide/channel/project labels are omitted from the artist list.
  */
 export function collectArtistDirectory(songs, talents = []) {
   const counts = new Map();
@@ -46,14 +58,13 @@ export function collectArtistDirectory(songs, talents = []) {
   const catalogueSongs = Array.isArray(songs) ? songs : [];
   for (const song of catalogueSongs) {
     for (const name of creditsFor(song)) {
+      if (isNonArtistLabel(name)) continue;
       counts.set(name, (counts.get(name) || 0) + 1);
       const key = normalizeArtistKey(name);
       if (key && !namesByKey.has(key)) namesByKey.set(key, name);
     }
   }
 
-  // Resolve channels in a second pass so the first uploader occurrence can
-  // still map to a canonical credit that appears later in the catalogue.
   for (const song of catalogueSongs) {
     const channelKey = normalizeArtistKey(song?.channelName);
     const channelId = song?.channelId;
@@ -61,7 +72,7 @@ export function collectArtistDirectory(songs, talents = []) {
 
     const creditKey = CHANNEL_LABEL_ALIASES.get(channelKey) || channelKey;
     const canonicalName = namesByKey.get(creditKey);
-    if (!canonicalName) continue;
+    if (!canonicalName || isNonArtistLabel(canonicalName)) continue;
 
     let candidates = channelVotes.get(canonicalName);
     if (!candidates) {
