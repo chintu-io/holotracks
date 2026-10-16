@@ -1403,11 +1403,15 @@
       el['room-maximize'].setAttribute('aria-pressed', 'false');
       el['room-maximize'].setAttribute('aria-label', 'Maximize listening room');
       el['room-maximize'].title = 'Maximize';
+    } else {
+      scrollCurrentQueueTrackIntoView('auto');
     }
   }
 
   function playSong(id, queue = null, preserveRoomMode = false) {
     if (!songById(id)) return;
+    const roomAlreadyOpen = el['player-column'].classList.contains('queue-expanded');
+    const mobilePlayerAlreadyOpen = el['player-column'].classList.contains('mobile-open');
     clearPlaybackStartWatchdog();
     playbackAttemptToken += 1;
 
@@ -1436,7 +1440,7 @@
 
     // Playing a song is a video-watching action: reveal the embedded player
     // after click bubbling so the outside-click listener does not close it.
-    if (!preserveRoomMode) {
+    if (!preserveRoomMode && !roomAlreadyOpen && !mobilePlayerAlreadyOpen) {
       if (window.matchMedia && window.matchMedia('(max-width: 680px)').matches) {
         window.setTimeout(() => toggleMobilePlayerPanel(true), 0);
       } else {
@@ -1565,6 +1569,35 @@
     if (index > 0) playSong(state.queue[index - 1], null, true);
     else if (state.repeat && state.queue.length) playSong(state.queue[state.queue.length - 1], null, true);
   }
+  function scrollCurrentQueueTrackIntoView(behavior = 'smooth') {
+    const list = el['queue-list'];
+    const playerColumn = el['player-column'];
+    if (!list || !playerColumn) return;
+    const roomIsVisible = playerColumn.classList.contains('queue-expanded') ||
+      playerColumn.classList.contains('mobile-open');
+    if (!roomIsVisible) return;
+
+    window.requestAnimationFrame(() => {
+      const currentTrack = list.querySelector('.queue-track.current');
+      if (!currentTrack) return;
+
+      const listRect = list.getBoundingClientRect();
+      const trackRect = currentTrack.getBoundingClientRect();
+      const edgePadding = 8;
+      let nextScrollTop = list.scrollTop;
+
+      if (trackRect.top < listRect.top + edgePadding) {
+        nextScrollTop += trackRect.top - listRect.top - edgePadding;
+      } else if (trackRect.bottom > listRect.bottom - edgePadding) {
+        nextScrollTop += trackRect.bottom - listRect.bottom + edgePadding;
+      }
+
+      if (Math.abs(nextScrollTop - list.scrollTop) > 1) {
+        list.scrollTo({ top: Math.max(0, nextScrollTop), behavior });
+      }
+    });
+  }
+
   function renderQueue() {
     el['queue-count'].textContent = state.queue.length.toLocaleString();
     el['queue-list'].innerHTML = state.queue.length ? state.queue.map((id, index) => {
@@ -1581,6 +1614,8 @@
         '</div></div>';
     }).join('') : '<div class="queue-empty"><span>≋</span><p>Your queue is empty.<br><small>Add songs and your mini mixtape will appear here.</small></p></div>';
     updatePlayerButtons();
+    // Rebuilding the queue resets its scroll position; bring the current song back into view.
+    scrollCurrentQueueTrackIntoView();
   }
   function renderPlayerMeta() {
     const item = songById(state.currentId);
@@ -1756,7 +1791,10 @@
     el['player-column'].classList.toggle('mobile-open', open);
     document.body.classList.toggle('mobile-player-open', open);
     el['mobile-player-toggle'].setAttribute('aria-expanded', String(open));
-    if (open) el['player-column'].scrollTop = 0;
+    if (open) {
+      el['player-column'].scrollTop = 0;
+      scrollCurrentQueueTrackIntoView('auto');
+    }
   }
 
   function loadYouTubeAPI() {
@@ -2114,7 +2152,7 @@
       const playButton = event.target.closest('[data-queue-play]');
       const removeButton = event.target.closest('[data-queue-remove]');
       if (playButton) {
-        playSong(playButton.dataset.queuePlay);
+        playSong(playButton.dataset.queuePlay, null, true);
         return;
       }
       if (removeButton) {
@@ -2130,7 +2168,7 @@
         return;
       }
       const track = event.target.closest('[data-queue-track]');
-      if (track) playSong(track.dataset.queueTrack);
+      if (track) playSong(track.dataset.queueTrack, null, true);
     });
     el['previous-song'].addEventListener('click', previousSong);
     el['next-song'].addEventListener('click', nextSong);
@@ -2256,7 +2294,12 @@
         const clickedOutsideSidebar = !event.target.closest('#sidebar, #sidebar-collapse');
         if (pickedNavigation || clickedOutsideSidebar) setSidebarCollapsed(true);
       }
-      if (el['player-column'].classList.contains('queue-expanded') && !event.target.closest('#player-column')) {
+      // A queue click can rebuild #queue-list before this document handler runs.
+      // Use the original event path so that detached click targets are still recognised as inside the player.
+      const clickPath = typeof event.composedPath === 'function' ? event.composedPath() : [];
+      const clickedInsidePlayer = clickPath.includes(el['player-column']) ||
+        !!event.target.closest('#player-column');
+      if (el['player-column'].classList.contains('queue-expanded') && !clickedInsidePlayer) {
         setListeningRoomOpen(false);
       }
       if (document.body.classList.contains('mobile-player-open') &&
