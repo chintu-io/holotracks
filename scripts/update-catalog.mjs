@@ -16,6 +16,32 @@ const PAGE_DELAY_INCREMENTAL_MS = 250;
 const MAX_INCREMENTAL_STATS_BACKFILL = 250;
 const TOPIC_TYPES = Object.freeze({ Original_Song: 'original', Music_Cover: 'cover' });
 
+// Correct a stale historical credit where the stored artist field conflicts with
+// the video's own credits. The uploader's description lists vocals by Kiichan
+// and Kobo Kanaeru; Aoi Nabi is not credited on this video.
+// Source: https://www.youtube.com/watch?v=2V3Fp5-xFpU
+const KNOWN_ARTIST_CREDIT_CORRECTIONS = new Map([
+  ['2V3Fp5-xFpU', { remove: ['Aoi Nabi'], artist: 'Kitsui Akira' }],
+]);
+
+export function applyKnownArtistCreditCorrections(songs) {
+  if (!Array.isArray(songs)) return [];
+  return songs.map(song => {
+    const correction = KNOWN_ARTIST_CREDIT_CORRECTIONS.get(song?.id);
+    if (!correction) return song;
+
+    const sourceArtists = Array.isArray(song.artists) && song.artists.length
+      ? song.artists
+      : [song.artist || song.channelName || 'Unknown artist'];
+    const artists = [...new Set(sourceArtists.filter(name => !correction.remove.includes(name)))];
+    return {
+      ...song,
+      artist: correction.artist || song.artist,
+      artists,
+    };
+  });
+}
+
 function requireEnv(name) {
   const value = process.env[name]?.trim();
   if (!value) throw new Error('Missing required environment variable: ' + name);
@@ -454,6 +480,7 @@ async function main() {
     ? mergeSongs(oldSongs, scannedSongs, { preserveMissing: true })
     : mergeSongs(oldSongs, incomingSongs, { preserveMissing: true });
 
+  mergedSongs = applyKnownArtistCreditCorrections(mergedSongs);
   const youtubeKey = process.env.YOUTUBE_DATA_API_KEY?.trim();
   if (youtubeKey) {
     const idsToRefresh = selectYouTubeStatisticsIds({
