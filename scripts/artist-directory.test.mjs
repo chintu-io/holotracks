@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { collectArtistDirectory, isNonArtistLabel, normalizeArtistKey, validYoutubeChannelId } from './artist-directory.mjs';
+import { collectArtistDirectory, expandKnownArtistCredits, isNonArtistLabel, normalizeArtistKey, validYoutubeChannelId } from './artist-directory.mjs';
 
 const channelA = 'UC' + 'a'.repeat(22);
 const channelB = 'UC' + 'b'.repeat(22);
@@ -17,6 +17,30 @@ test('keeps real artist credits and excludes generic channel/project labels', ()
   assert.deepEqual(directory.map(item => item.name), ['Guest Singer', 'Hoshimachi Suisei']);
   assert.equal(directory.find(item => item.name === 'Guest Singer').count, 2);
   assert.equal(directory.find(item => item.name === 'Hoshimachi Suisei').official, true);
+});
+
+test('splits Fuwawa and Mococo duo credits into their official roster entries', () => {
+  const talents = [
+    { name: 'Fuwawa Abyssgard', image: 'https://hololive.hololivepro.com/wp-content/uploads/fuwawa.webp' },
+    { name: 'Mococo Abyssgard', image: 'https://hololive.hololivepro.com/wp-content/uploads/mococo.webp' },
+  ];
+  assert.deepEqual(
+    expandKnownArtistCredits('Fuwawa & Mococo Abyssgard', talents),
+    ['Fuwawa Abyssgard', 'Mococo Abyssgard'],
+  );
+  assert.deepEqual(expandKnownArtistCredits('FUWAMOCO', talents), ['Fuwawa Abyssgard', 'Mococo Abyssgard']);
+  assert.deepEqual(
+    expandKnownArtistCredits('Fuwawa & Mococo Abyssgard', [{ name: 'Fuwawa Abyssgard' }]),
+    ['Fuwawa & Mococo Abyssgard'],
+    'preserves source credits if the scraped roster is incomplete',
+  );
+
+  const directory = collectArtistDirectory([
+    { artists: ['Fuwawa & Mococo Abyssgard'], channelName: 'FUWAMOCO Ch. hololive-EN', channelId: channelA },
+  ], talents);
+  assert.equal(directory.length, 2);
+  assert.ok(directory.every(item => item.official));
+  assert.deepEqual(directory.map(item => item.name), ['Fuwawa Abyssgard', 'Mococo Abyssgard']);
 });
 
 test('filters generic labels without excluding real people or artist collaborations', () => {
