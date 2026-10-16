@@ -687,6 +687,13 @@
       '<button class="selected-artist-clear" type="button" data-clear-selected-artists>Reset artists</button>';
   }
 
+  function isGenericArtistCredit(value) {
+    const key = artistKey(value);
+    if (!key) return true;
+    return /^(?:hololiveofficial|hololiveproduction|hololive|hololiveenglish|hololiveindonesia|hololiveregloss|hololiveflowglow|hololiveofficialchannel|covercorp|covercorporation|holoearth|hololivealternative|holostars|holostarsenglish|holostarsofficial)$/.test(key) ||
+      /^(?:hololive|holostars|covercorp|covercorporation)(?:official|production|english|indonesia|regloss|flowglow|channel|ch)?$/.test(key);
+  }
+
   function renderArtists() {
     // Include every current official talent, even with zero catalogue songs,
     // then add every distinct non-roster artist credit.
@@ -702,6 +709,7 @@
     for (const song of state.songs) {
       const creditedThisSong = new Set();
       for (const credit of new Set(artistsOf(song))) {
+        if (isGenericArtistCredit(credit)) continue;
         const talent = resolveRosterTalent(credit);
         const name = talent?.name || credit;
         const key = artistKey(name);
