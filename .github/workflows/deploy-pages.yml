@@ -34,6 +34,7 @@ jobs:
         run: |
           node --check app.js
           node --check scripts/artist-directory.mjs
+          node --check scripts/artist-directory.test.mjs
           node --check tools/update-talent-artwork.mjs
           node --check tools/update-artist-artwork.mjs
           npm test
