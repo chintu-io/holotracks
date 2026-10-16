@@ -1315,3 +1315,198 @@ body.theme-light .song-card-actions > .mini-action.share-action:focus-visible {
   color:#814d6d!important;
   box-shadow:0 3px 9px rgba(137,82,119,.09)!important;
 }
+
+
+/* Uniform hover feedback for every All Music action in both themes. */
+body:not(.theme-light) .song-card-actions > .mini-action[data-action="play"]:hover,
+body:not(.theme-light) .song-card-actions > .mini-action[data-action="play"]:focus-visible,
+body:not(.theme-light) .song-card-actions > .mini-action[data-action="favorite"]:hover,
+body:not(.theme-light) .song-card-actions > .mini-action[data-action="favorite"]:focus-visible,
+body:not(.theme-light) .song-card-actions > .mini-action[data-action="queue"]:hover,
+body:not(.theme-light) .song-card-actions > .mini-action[data-action="queue"]:focus-visible,
+body:not(.theme-light) .song-card-actions > .mini-action.share-action:hover,
+body:not(.theme-light) .song-card-actions > .mini-action.share-action:focus-visible {
+  border-color:#a998ef!important;background:linear-gradient(135deg,#3d315e,#272541)!important;
+  color:#fff!important;box-shadow:0 4px 12px rgba(5,4,18,.26),inset 0 0 0 1px rgba(181,156,255,.08)!important;
+}
+body.theme-light .song-card-actions > .mini-action[data-action="play"]:hover,
+body.theme-light .song-card-actions > .mini-action[data-action="play"]:focus-visible,
+body.theme-light .song-card-actions > .mini-action[data-action="favorite"]:hover,
+body.theme-light .song-card-actions > .mini-action[data-action="favorite"]:focus-visible,
+body.theme-light .song-card-actions > .mini-action[data-action="queue"]:hover,
+body.theme-light .song-card-actions > .mini-action[data-action="queue"]:focus-visible,
+body.theme-light .song-card-actions > .mini-action.share-action:hover,
+body.theme-light .song-card-actions > .mini-action.share-action:focus-visible {
+  border-color:#b8d5ef!important;background:linear-gradient(135deg,#edf7ff,#e7f0ff)!important;
+  color:#356e9e!important;box-shadow:0 3px 10px rgba(73,137,196,.15)!important;
+}
+.song-card-actions > .mini-action { transition:border-color .16s ease,background .16s ease,color .16s ease,box-shadow .16s ease; }
+
+/* A light listening room must never show the dark heart-hover pill. */
+body.theme-light #player-column .player-heart:hover,
+body.theme-light #player-column .player-heart:focus-visible,
+body.theme-light #player-column .player-heart.is-favorite {
+  border:1px solid #dfc7df!important;background:#fbf0f7!important;color:#a34f80!important;
+  box-shadow:0 3px 9px rgba(137,82,119,.10)!important;
+}
+body.theme-light #player-column .player-heart:focus-visible { outline:2px solid #b8d5ef!important;outline-offset:2px!important; }
+
+/* Four buttons on the left, Play/Pause in the exact centre, four on the right. */
+#player-column .player-controls,
+#player-column.queue-expanded .desktop-room-controls-slot .player-controls,
+#player-column.queue-expanded .room-controls-slot .player-controls,
+#player-column.player-column:not(.queue-expanded) .dock-controls-slot .player-controls,
+body.player-docked #player-column.player-column:not(.queue-expanded) .dock-controls-slot .player-controls {
+  display:grid!important;
+  grid-template-columns:repeat(4,minmax(20px,28px)) minmax(38px,42px) repeat(4,minmax(20px,28px))!important;
+  grid-template-rows:44px!important;justify-content:center!important;justify-items:center!important;align-items:center!important;
+  column-gap:clamp(0px,.3vw,3px)!important;row-gap:0!important;width:100%!important;max-width:300px!important;min-width:0!important;
+  height:44px!important;min-height:44px!important;margin:8px auto!important;padding:0!important;overflow:visible!important;
+}
+#player-column .player-controls > #player-favorite-control,
+#player-column .player-controls > .volume-control,
+#player-column .player-controls > #queue-shuffle,
+#player-column .player-controls > #previous-song,
+#player-column .player-controls > #play-pause,
+#player-column .player-controls > #next-song,
+#player-column .player-controls > #queue-repeat,
+#player-column .player-controls > #player-share,
+#player-column .player-controls > #player-fullscreen {
+  grid-row:1!important;place-self:center!important;inset:auto!important;position:static!important;
+  margin:0!important;transform:none!important;flex:none!important;
+}
+#player-column .player-controls > #player-favorite-control {grid-column:1!important}
+#player-column .player-controls > .volume-control {
+  grid-column:2!important;display:flex!important;align-items:center!important;justify-content:center!important;
+  width:100%!important;max-width:28px!important;min-width:0!important;height:30px!important;min-height:0!important;
+}
+#player-column .player-controls > #queue-shuffle {grid-column:3!important}
+#player-column .player-controls > #previous-song {grid-column:4!important}
+#player-column .player-controls > #play-pause {
+  grid-column:5!important;width:42px!important;min-width:42px!important;height:42px!important;min-height:42px!important;max-width:42px!important;z-index:2!important;
+}
+#player-column .player-controls > #next-song {grid-column:6!important}
+#player-column .player-controls > #queue-repeat {grid-column:7!important}
+#player-column .player-controls > #player-share {grid-column:8!important}
+#player-column .player-controls > #player-fullscreen {grid-column:9!important}
+#player-column .player-controls > #player-favorite-control,
+#player-column .player-controls > #queue-shuffle,
+#player-column .player-controls > #previous-song,
+#player-column .player-controls > #next-song,
+#player-column .player-controls > #queue-repeat,
+#player-column .player-controls > #player-share,
+#player-column .player-controls > #player-fullscreen {
+  display:grid!important;place-items:center!important;width:100%!important;max-width:28px!important;min-width:20px!important;
+  height:30px!important;min-height:30px!important;padding:0!important;border-radius:9px!important;font-size:15px!important;
+}
+#player-column .player-controls .volume-control > #volume-toggle {
+  display:grid!important;place-items:center!important;width:100%!important;max-width:28px!important;min-width:20px!important;
+  height:30px!important;min-height:30px!important;padding:0!important;border-radius:9px!important;
+}
+body:not(.theme-light) #player-column .player-controls .control-button:not(.play-toggle) {
+  border:1px solid #3b3d60!important;background:#1b1c32!important;color:#a9afd0!important;box-shadow:none!important;
+}
+body:not(.theme-light) #player-column .player-controls .control-button:not(.play-toggle):hover:not(:disabled),
+body:not(.theme-light) #player-column .player-controls .control-button:not(.play-toggle):focus-visible,
+body:not(.theme-light) #player-column .player-controls .control-button:not(.play-toggle).active {
+  border-color:#7563ad!important;background:#30264a!important;color:#fff!important;
+}
+body.theme-light #player-column .player-controls .control-button:not(.play-toggle) {
+  border:1px solid #dce2ec!important;background:#f5f7fa!important;color:#5c687d!important;box-shadow:none!important;
+}
+body.theme-light #player-column .player-controls .control-button:not(.play-toggle):hover:not(:disabled),
+body.theme-light #player-column .player-controls .control-button:not(.play-toggle):focus-visible,
+body.theme-light #player-column .player-controls .control-button:not(.play-toggle).active {
+  border-color:#b8d5ef!important;background:#edf6ff!important;color:#3c75a4!important;
+}
+#player-column .player-controls > #player-favorite-control.is-favorite {color:#ff8bc8!important}
+body.theme-light #player-column .player-controls > #player-favorite-control.is-favorite {color:#b64c82!important}
+#player-column .player-controls .control-button:disabled {opacity:.35!important;cursor:not-allowed!important}
+
+@media (min-width:681px) {
+  #player-column.player-column:not(.queue-expanded) .dock-controls-slot .player-controls {
+    grid-template-columns:repeat(4,minmax(17px,24px)) minmax(34px,38px) repeat(4,minmax(17px,24px))!important;
+    column-gap:1px!important;max-width:250px!important;
+  }
+  #player-column.player-column:not(.queue-expanded) .dock-controls-slot .player-controls > #player-favorite-control,
+  #player-column.player-column:not(.queue-expanded) .dock-controls-slot .player-controls > #queue-shuffle,
+  #player-column.player-column:not(.queue-expanded) .dock-controls-slot .player-controls > #previous-song,
+  #player-column.player-column:not(.queue-expanded) .dock-controls-slot .player-controls > #next-song,
+  #player-column.player-column:not(.queue-expanded) .dock-controls-slot .player-controls > #queue-repeat,
+  #player-column.player-column:not(.queue-expanded) .dock-controls-slot .player-controls > #player-share,
+  #player-column.player-column:not(.queue-expanded) .dock-controls-slot .player-controls > #player-fullscreen,
+  #player-column.player-column:not(.queue-expanded) .dock-controls-slot .player-controls .volume-control > #volume-toggle {max-width:24px!important}
+  #player-column.player-column:not(.queue-expanded) .dock-controls-slot .player-controls > #play-pause {
+    width:38px!important;min-width:38px!important;height:38px!important;min-height:38px!important;
+  }
+}
+@media (max-width:390px) {
+  #player-column .player-controls {
+    grid-template-columns:repeat(4,minmax(16px,24px)) minmax(34px,38px) repeat(4,minmax(16px,24px))!important;
+    column-gap:1px!important;max-width:250px!important;
+  }
+  #player-column .player-controls > #play-pause {width:38px!important;min-width:38px!important;height:38px!important;min-height:38px!important}
+}
+
+/* Native 16:9/fullscreen YouTube frame plus a rotated fallback for mobile browsers that cannot lock orientation. */
+.video-frame-wrap:fullscreen,.video-frame-wrap:-webkit-full-screen {
+  position:relative!important;width:100vw!important;height:100dvh!important;min-height:0!important;max-width:none!important;
+  max-height:none!important;aspect-ratio:auto!important;margin:0!important;border:0!important;border-radius:0!important;
+  overflow:hidden!important;background:#000!important;
+}
+.video-frame-wrap:fullscreen #youtube-player,.video-frame-wrap:fullscreen iframe,
+.video-frame-wrap:-webkit-full-screen #youtube-player,.video-frame-wrap:-webkit-full-screen iframe {
+  position:absolute!important;inset:0!important;width:100%!important;height:100%!important;max-width:none!important;max-height:none!important;
+}
+.video-fullscreen-exit {
+  position:absolute!important;z-index:20!important;top:12px!important;right:12px!important;display:grid;place-items:center;
+  width:42px!important;height:42px!important;padding:0!important;border:1px solid rgba(255,255,255,.34)!important;
+  border-radius:50%!important;background:rgba(12,15,24,.72)!important;color:#fff!important;font-size:30px!important;
+  line-height:1!important;box-shadow:0 5px 20px rgba(0,0,0,.28)!important;cursor:pointer!important;backdrop-filter:blur(8px);
+}
+.video-fullscreen-exit:hover,.video-fullscreen-exit:focus-visible {
+  border-color:rgba(255,255,255,.8)!important;background:rgba(38,44,60,.94)!important;color:#fff!important;
+  outline:2px solid rgba(164,211,255,.7)!important;outline-offset:2px!important;
+}
+.video-fullscreen-exit[hidden] {display:none!important}
+body.video-fullscreen-fallback {overflow:hidden!important}
+body.video-fullscreen-fallback #player-column .video-frame-wrap {
+  position:fixed!important;z-index:2147483647!important;left:50vw!important;top:50dvh!important;width:100vw!important;height:100dvh!important;
+  min-height:0!important;max-width:none!important;max-height:none!important;aspect-ratio:auto!important;margin:0!important;
+  border:0!important;border-radius:0!important;overflow:hidden!important;transform:translate(-50%,-50%)!important;background:#000!important;
+}
+body.video-fullscreen-fallback #player-column .video-frame-wrap #youtube-player,
+body.video-fullscreen-fallback #player-column .video-frame-wrap iframe {
+  position:absolute!important;inset:0!important;width:100%!important;height:100%!important;max-width:none!important;max-height:none!important;
+}
+body.video-fullscreen-fallback #player-column .video-frame-wrap.video-rotate-fallback,
+.video-frame-wrap:fullscreen.video-rotate-fallback,.video-frame-wrap:-webkit-full-screen.video-rotate-fallback {
+  position:fixed!important;left:50vw!important;top:50dvh!important;width:100dvh!important;height:100vw!important;
+  transform:translate(-50%,-50%) rotate(90deg)!important;
+}
+@media (orientation:landscape) {
+  body.video-fullscreen-fallback #player-column .video-frame-wrap.video-rotate-fallback,
+  .video-frame-wrap:fullscreen.video-rotate-fallback,.video-frame-wrap:-webkit-full-screen.video-rotate-fallback {
+    width:100vw!important;height:100dvh!important;transform:translate(-50%,-50%)!important;
+  }
+}
+
+/* Ice-blue white-theme banner glow for both the character artwork and handwritten artist name. */
+body.theme-light .stage-talent.stage-featured {
+  filter:drop-shadow(0 10px 20px rgba(91,157,224,.25)) drop-shadow(0 0 16px rgba(247,252,255,.94)) drop-shadow(0 0 28px rgba(112,184,244,.28))!important;
+}
+body.theme-light .hero-stage:after {
+  background:radial-gradient(ellipse at 74% 61%,rgba(139,198,245,.18) 0%,transparent 53%),
+    linear-gradient(180deg,rgba(255,255,255,0) 45%,rgba(218,238,255,.32) 100%)!important;
+}
+body.theme-light .hero-stage:before {
+  background:linear-gradient(90deg,rgba(255,255,255,.38) 0%,transparent 48%,rgba(207,231,255,.22) 100%)!important;
+}
+body.theme-light .hero-artist-name,body.theme-light .hero-artist-name.is-visible {
+  color:#eaf6ff!important;
+  text-shadow:0 0 1px #fff,0 0 3px rgba(87,151,210,.95),0 0 9px rgba(105,177,238,.9),0 0 20px rgba(104,176,239,.63)!important;
+  filter:drop-shadow(0 2px 4px rgba(52,104,158,.32))!important;
+}
+body.theme-light .hero-artist-name::after {
+  color:#83bff1!important;text-shadow:0 0 7px rgba(93,168,232,.85),0 0 15px rgba(105,182,248,.66)!important;
+}

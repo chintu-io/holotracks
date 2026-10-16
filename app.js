@@ -132,7 +132,7 @@
     'mobile-player-toggle','sidebar','player-column','player-expand','dock-controls-slot','room-controls-slot','room-title-slot','desktop-room-controls-slot','room-minimize','room-maximize','room-close','youtube-player','youtube-fallback',
     'playing-thumb','playing-art-placeholder','playing-title','playing-artist','playing-favorite',
     'player-state','watch-youtube','play-pause','previous-song','next-song','queue-shuffle',
-    'queue-repeat','player-share','volume-toggle','volume-popover','volume-control','volume-value','volume-mute','queue-count','queue-list','clear-queue','create-playlist','playlist-list',
+    'queue-repeat','player-share','player-favorite-control','player-fullscreen','player-fullscreen-exit','video-frame-wrap','volume-toggle','volume-popover','volume-control','volume-value','volume-mute','queue-count','queue-list','clear-queue','create-playlist','playlist-list',
     'playlist-select','save-queue','play-selected-playlist','playlist-dialog','playlist-form','cancel-playlist',
     'playlist-name','talent-strip','sidebar-collapse','mobile-mini-player','mobile-mini-thumb','mobile-mini-expand','mobile-mini-title','mobile-mini-artist','mobile-mini-toggle','mobile-mini-next','mobile-mini-room','hero-talent-art','hero-artist-name',
   ];
@@ -1632,6 +1632,14 @@
     el['playing-favorite'].disabled = !item;
     el['playing-favorite'].classList.toggle('is-favorite', !!item && state.favorites.has(item.id));
     el['playing-favorite'].textContent = item && state.favorites.has(item.id) ? '♥' : '♡';
+    const isFavorite = !!item && state.favorites.has(item.id);
+    const favoriteControl = el['player-favorite-control'];
+    favoriteControl.disabled = !item;
+    favoriteControl.classList.toggle('is-favorite', isFavorite);
+    favoriteControl.textContent = isFavorite ? '♥' : '♡';
+    favoriteControl.setAttribute('aria-pressed', String(isFavorite));
+    favoriteControl.setAttribute('aria-label', isFavorite ? 'Remove current song from favourites' : 'Add current song to favourites');
+    favoriteControl.title = isFavorite ? 'Remove current song from favourites' : 'Add current song to favourites';
     el['mobile-mini-player'].hidden = !item;
     document.body.classList.toggle('has-mobile-player', !!item);
     document.body.classList.toggle('has-current-track', !!item);
@@ -1657,6 +1665,8 @@
     el['previous-song'].disabled = !hasCurrent;
     el['next-song'].disabled = !hasCurrent;
     el['player-share'].disabled = !hasCurrent;
+    el['player-favorite-control'].disabled = !hasCurrent;
+    el['player-fullscreen'].disabled = !hasCurrent;
     el['queue-shuffle'].classList.toggle('active', state.shuffle);
     el['queue-repeat'].classList.toggle('active', state.repeat);
     if (state.playerReady && state.player) {
@@ -1778,6 +1788,67 @@
     if (!state.playerReady || !state.player) return;
     const playing = state.player.getPlayerState() === window.YT.PlayerState.PLAYING;
     playing ? state.player.pauseVideo() : state.player.playVideo();
+  }
+
+
+  function isVideoFullscreenActive() {
+    const frame = el['video-frame-wrap'];
+    return !!frame && (document.fullscreenElement === frame ||
+      document.webkitFullscreenElement === frame ||
+      document.body.classList.contains('video-fullscreen-fallback'));
+  }
+  function updateVideoFullscreenControls() {
+    const active = isVideoFullscreenActive();
+    const button = el['player-fullscreen'];
+    if (button) {
+      button.setAttribute('aria-pressed', String(active));
+      button.setAttribute('aria-label', active ? 'Exit video fullscreen' : 'Expand video to fullscreen');
+      button.title = active ? 'Exit fullscreen' : 'Fullscreen video';
+    }
+    if (el['player-fullscreen-exit']) el['player-fullscreen-exit'].hidden = !active;
+  }
+  async function exitVideoFullscreen() {
+    const frame = el['video-frame-wrap'];
+    document.body.classList.remove('video-fullscreen-fallback');
+    if (frame) frame.classList.remove('video-rotate-fallback');
+    const exitFullscreen = document.exitFullscreen || document.webkitExitFullscreen;
+    try {
+      if (exitFullscreen && (document.fullscreenElement || document.webkitFullscreenElement)) {
+        await exitFullscreen.call(document);
+      }
+    } catch {}
+    try { if (screen.orientation && typeof screen.orientation.unlock === 'function') screen.orientation.unlock(); } catch {}
+    updateVideoFullscreenControls();
+  }
+  async function toggleVideoFullscreen() {
+    const frame = el['video-frame-wrap'];
+    if (!frame) return;
+    if (isVideoFullscreenActive()) { await exitVideoFullscreen(); return; }
+    const mobile = !!(window.matchMedia &&
+      (window.matchMedia('(max-width: 680px)').matches || window.matchMedia('(pointer: coarse)').matches));
+    const enterFullscreen = frame.requestFullscreen || frame.webkitRequestFullscreen;
+    if (typeof enterFullscreen === 'function') {
+      try {
+        await enterFullscreen.call(frame, { navigationUI: 'hide' });
+        if (mobile && screen.orientation && typeof screen.orientation.lock === 'function') {
+          try {
+            await screen.orientation.lock('landscape');
+            frame.classList.remove('video-rotate-fallback');
+          } catch {
+            if (window.innerHeight > window.innerWidth) frame.classList.add('video-rotate-fallback');
+          }
+        } else if (mobile && window.innerHeight > window.innerWidth) {
+          frame.classList.add('video-rotate-fallback');
+        }
+        updateVideoFullscreenControls();
+        return;
+      } catch {
+        // Some mobile browsers do not permit fullscreen on a wrapper element.
+      }
+    }
+    document.body.classList.add('video-fullscreen-fallback');
+    if (mobile && window.innerHeight > window.innerWidth) frame.classList.add('video-rotate-fallback');
+    updateVideoFullscreenControls();
   }
 
   function toggleMobilePlayerPanel(force) {
@@ -2138,6 +2209,9 @@
     el['playing-favorite'].addEventListener('click', () => {
       if (state.currentId) toggleFavorite(state.currentId);
     });
+    el['player-favorite-control'].addEventListener('click', () => {
+      if (state.currentId) toggleFavorite(state.currentId);
+    });
     el['clear-queue'].addEventListener('click', () => {
       state.queue = [];
       state.currentId = null;
@@ -2207,6 +2281,15 @@
     el['player-share'].addEventListener('click', () => {
       if (state.currentId) shareSong(state.currentId);
     });
+    el['player-fullscreen'].addEventListener('click', toggleVideoFullscreen);
+    el['player-fullscreen-exit'].addEventListener('click', exitVideoFullscreen);
+    document.addEventListener('fullscreenchange', updateVideoFullscreenControls);
+    document.addEventListener('webkitfullscreenchange', updateVideoFullscreenControls);
+    window.addEventListener('orientationchange', updateVideoFullscreenControls, { passive: true });
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && document.body.classList.contains('video-fullscreen-fallback')) void exitVideoFullscreen();
+    });
+    updateVideoFullscreenControls();
     el['create-playlist'].addEventListener('click', () => {
       el['playlist-name'].value = '';
       el['playlist-dialog'].showModal();
