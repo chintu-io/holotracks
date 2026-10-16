@@ -34,6 +34,34 @@ export function isNonArtistLabel(value) {
     /^(?:hololive|holostars|covercorp|covercorporation)(?:official|production|english|indonesia|regloss|flowglow|channel|ch)?$/.test(key);
 }
 
+const COMBINED_OFFICIAL_CREDITS = new Map([
+  ['fuwawamococoabyssgard', ['Fuwawa Abyssgard', 'Mococo Abyssgard']],
+  ['fuwawaandmococoabyssgard', ['Fuwawa Abyssgard', 'Mococo Abyssgard']],
+  ['fuwawamococo', ['Fuwawa Abyssgard', 'Mococo Abyssgard']],
+  ['fuwawaandmococo', ['Fuwawa Abyssgard', 'Mococo Abyssgard']],
+  ['fuwamoco', ['Fuwawa Abyssgard', 'Mococo Abyssgard']],
+]);
+
+/**
+ * Expand the known FUWAMOCO duo credit only when both members are present in
+ * the official roster; otherwise preserve the source text unchanged.
+ */
+export function expandKnownArtistCredits(value, talents = []) {
+  const raw = String(value || '').trim();
+  if (!raw) return [];
+  const pair = COMBINED_OFFICIAL_CREDITS.get(normalizeArtistKey(raw));
+  if (!pair) return [raw];
+
+  const byKey = new Map((Array.isArray(talents) ? talents : [])
+    .map(talent => {
+      const name = typeof talent === 'string' ? talent : talent?.name;
+      return [normalizeArtistKey(name), name];
+    })
+    .filter(([key, name]) => key && typeof name === 'string' && name.trim()));
+  const resolved = pair.map(name => byKey.get(normalizeArtistKey(name)));
+  return resolved.every(Boolean) ? [...new Set(resolved)] : [raw];
+}
+
 export function validYoutubeChannelId(value) {
   return typeof value === 'string' && /^UC[A-Za-z0-9_-]{22}$/.test(value);
 }
@@ -61,11 +89,16 @@ export function collectArtistDirectory(songs, talents = []) {
 
   const catalogueSongs = Array.isArray(songs) ? songs : [];
   for (const song of catalogueSongs) {
-    for (const name of creditsFor(song)) {
-      if (isNonArtistLabel(name)) continue;
-      counts.set(name, (counts.get(name) || 0) + 1);
-      const key = normalizeArtistKey(name);
-      if (key && !namesByKey.has(key)) namesByKey.set(key, name);
+    const seenInSong = new Set();
+    for (const rawName of creditsFor(song)) {
+      for (const name of expandKnownArtistCredits(rawName, talents)) {
+        if (isNonArtistLabel(name)) continue;
+        const key = normalizeArtistKey(name);
+        if (!key || seenInSong.has(key)) continue;
+        seenInSong.add(key);
+        counts.set(name, (counts.get(name) || 0) + 1);
+        if (!namesByKey.has(key)) namesByKey.set(key, name);
+      }
     }
   }
 
