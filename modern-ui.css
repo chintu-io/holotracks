@@ -1283,3 +1283,35 @@ body.theme-light #selected-artist-filters .selected-artist-clear:hover { border-
     display:none!important;
   }
 }
+
+/* Light-theme song-card actions: prevent dark hover treatments from leaking into white mode. */
+body.theme-light .song-card-actions > .mini-action[data-action="play"],
+body.theme-light .song-card-actions > .mini-action[data-action="play"]:hover,
+body.theme-light .song-card-actions > .mini-action[data-action="play"]:focus-visible {
+  border-color:#e2c4d8!important;
+  background:linear-gradient(135deg,#f8edf4,#f0ebfa)!important;
+  color:#865174!important;
+  box-shadow:0 2px 8px rgba(137,82,119,.10)!important;
+}
+body.theme-light .song-card-actions > .mini-action[data-action="play"]:hover,
+body.theme-light .song-card-actions > .mini-action[data-action="play"]:focus-visible {
+  border-color:#d7adc9!important;
+  background:linear-gradient(135deg,#f1dfe9,#eae5f8)!important;
+  color:#713d62!important;
+  box-shadow:0 4px 12px rgba(137,82,119,.16)!important;
+}
+body.theme-light .song-card-actions > .mini-action.share-action,
+body.theme-light .song-card-actions > .mini-action.share-action:hover,
+body.theme-light .song-card-actions > .mini-action.share-action:focus-visible {
+  border-color:#dfe3eb!important;
+  background:#f7f8fb!important;
+  color:#59667b!important;
+  box-shadow:none!important;
+}
+body.theme-light .song-card-actions > .mini-action.share-action:hover,
+body.theme-light .song-card-actions > .mini-action.share-action:focus-visible {
+  border-color:#e2c5d7!important;
+  background:#fbf1f7!important;
+  color:#814d6d!important;
+  box-shadow:0 3px 9px rgba(137,82,119,.09)!important;
+}
