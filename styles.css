@@ -7340,3 +7340,11 @@ body:not(.theme-light) .queue-empty small {
     transform-origin:center bottom!important;
   }
 }
+
+/* Desktop hero: subtly enlarge the featured talent, anchored at the feet. */
+@media (min-width:681px) {
+  .stage-talent.stage-featured.is-visible {
+    transform:scale(1.07)!important;
+    transform-origin:center bottom!important;
+  }
+}
