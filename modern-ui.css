@@ -1508,3 +1508,28 @@ body.theme-light #player-column .control-favorite.is-favorite:focus-visible {
   background:rgba(48,37,68,.92)!important;
   border-color:#d2b2ed!important;
 }
+
+/* Keep the volume toggle inside its grid cell on narrow mobile screens. */
+@media (max-width:680px) {
+  #player-column.queue-expanded .room-controls-slot .player-controls > .volume-control > #volume-toggle {
+    width:100%!important;
+    min-width:0!important;
+    max-width:32px!important;
+    height:32px!important;
+    min-height:32px!important;
+    padding:0!important;
+  }
+}
+/* Modern viewport units keep the fullscreen player fitted on mobile browser chrome. */
+.video-frame-wrap:fullscreen,
+.video-frame-wrap:-webkit-full-screen {
+  height:100vh!important;
+  height:100dvh!important;
+}
+.video-frame-wrap:fullscreen > #youtube-player,
+.video-frame-wrap:-webkit-full-screen > #youtube-player {
+  width:min(100vw,177.7778vh)!important;
+  width:min(100vw,177.7778dvh)!important;
+  height:min(100vh,56.25vw)!important;
+  height:min(100dvh,56.25vw)!important;
+}
