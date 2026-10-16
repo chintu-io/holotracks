@@ -129,7 +129,7 @@
     'type-all-count','type-original-count','type-cover-count','nav-original-total','nav-cover-total',
     'song-list','selected-artist-filters','pagination','empty-state','empty-title','empty-copy','empty-reset','notice',
     'play-all','play-random','favorites-shortcut','mobile-filter-toggle','theme-toggle',
-    'mobile-player-toggle','sidebar','player-column','player-expand','dock-controls-slot','room-controls-slot','room-minimize','room-maximize','room-close','youtube-player','youtube-fallback',
+    'mobile-player-toggle','sidebar','player-column','player-expand','dock-controls-slot','room-controls-slot','room-title-slot','desktop-room-controls-slot','room-minimize','room-maximize','room-close','youtube-player','youtube-fallback',
     'playing-thumb','playing-art-placeholder','playing-title','playing-artist','playing-favorite',
     'player-state','watch-youtube','play-pause','previous-song','next-song','queue-shuffle',
     'queue-repeat','player-share','volume-toggle','volume-popover','volume-control','volume-value','volume-mute','queue-count','queue-list','clear-queue','create-playlist','playlist-list',
@@ -1308,10 +1308,29 @@
     playerColumn.classList.toggle('queue-expanded', isOpen);
     document.body.classList.toggle('listening-room-open', isOpen);
 
-    // Move the same controls between dock and side panel; listeners and playback state remain intact.
+    // Reuse the same controls so playback state and event listeners stay intact.
+    // Desktop gets a footer row beneath the video; mobile keeps its established queue slot.
     const controls = playerColumn.querySelector('.player-controls');
-    const targetSlot = isOpen ? el['room-controls-slot'] : el['dock-controls-slot'];
-    if (controls && targetSlot && controls.parentElement !== targetSlot) targetSlot.appendChild(controls);
+    const titleRow = playerColumn.querySelector('.playing-title-row');
+    const isDesktopRoom = !!(window.matchMedia && window.matchMedia('(min-width: 681px)').matches);
+
+    if (isOpen && isDesktopRoom) {
+      const titleSlot = el['room-title-slot'];
+      const controlsSlot = el['desktop-room-controls-slot'];
+      if (titleRow && titleSlot && titleRow.parentElement !== titleSlot) titleSlot.appendChild(titleRow);
+      if (controls && controlsSlot && controls.parentElement !== controlsSlot) controlsSlot.appendChild(controls);
+    } else if (isOpen) {
+      const controlsSlot = el['room-controls-slot'];
+      if (controls && controlsSlot && controls.parentElement !== controlsSlot) controlsSlot.appendChild(controls);
+    } else {
+      const meta = playerColumn.querySelector('.now-playing-meta');
+      const dockActionRow = playerColumn.querySelector('.dock-action-row');
+      if (titleRow && meta && titleRow.parentElement !== meta) {
+        meta.insertBefore(titleRow, dockActionRow || meta.firstChild);
+      }
+      const dockSlot = el['dock-controls-slot'];
+      if (controls && dockSlot && controls.parentElement !== dockSlot) dockSlot.appendChild(controls);
+    }
 
     if (!isOpen) {
       playerColumn.classList.remove('room-maximized');
