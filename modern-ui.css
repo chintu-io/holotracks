@@ -1083,3 +1083,61 @@ body.theme-light #selected-artist-filters .selected-artist-clear:hover { border-
     display:none!important;
   }
 }
+
+/* Mobile polish: keep the animated equalizer in the minimized mini-player only.
+   When the full mobile player opens, hide the dock metadata meter beside the favourite button. */
+@media (max-width:680px) {
+  body.mobile-player-open #player-column .playing-title-row .dock-equalizer-meta,
+  #player-column.mobile-open .playing-title-row .dock-equalizer-meta,
+  #player-column.queue-expanded .playing-title-row .dock-equalizer-meta {
+    display:none!important;
+    animation:none!important;
+  }
+
+  /* Comfortable touch targets for small mobile headers (tested against narrow phone widths). */
+  .topbar>.top-actions {
+    display:flex!important;
+    align-items:center!important;
+    justify-content:flex-end!important;
+    gap:8px!important;
+  }
+  .topbar .top-actions .favorite-shortcut,
+  .topbar .top-actions .theme-toggle {
+    box-sizing:border-box!important;
+    display:grid!important;
+    place-items:center!important;
+    flex:0 0 44px!important;
+    width:44px!important;
+    min-width:44px!important;
+    max-width:44px!important;
+    height:44px!important;
+    min-height:44px!important;
+    max-height:44px!important;
+    margin:0!important;
+    padding:0!important;
+    border:1px solid #343744!important;
+    border-radius:12px!important;
+    background:#181b25!important;
+    line-height:1!important;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .topbar .top-actions .favorite-shortcut span {
+    display:block!important;
+    font-size:23px!important;
+    line-height:1!important;
+  }
+  .topbar .top-actions .theme-toggle span {
+    display:block!important;
+    font-size:21px!important;
+    line-height:1!important;
+  }
+  .topbar .top-actions .favorite-shortcut b,
+  .topbar .top-actions .theme-toggle b {
+    display:none!important;
+  }
+  body.theme-light .topbar .top-actions .favorite-shortcut,
+  body.theme-light .topbar .top-actions .theme-toggle {
+    border-color:#dce1e9!important;
+    background:#fff!important;
+  }
+}
