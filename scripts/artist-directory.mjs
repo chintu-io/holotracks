@@ -5,6 +5,10 @@
  */
 const CHANNEL_LABEL_ALIASES = new Map([
   ['asobimawaritai', 'asobimawari'],
+  // These catalogue credits use a shortened display name from the channel name.
+  ['peanutskun', 'peanuts'],
+  ['seitenchannel', 'seiten'],
+  ['unitbpredebut', 'unitbpre'],
 ]);
 
 const NON_ARTIST_LABELS = new Set([
