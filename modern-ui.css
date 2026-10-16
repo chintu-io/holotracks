@@ -1315,3 +1315,196 @@ body.theme-light .song-card-actions > .mini-action.share-action:focus-visible {
   color:#814d6d!important;
   box-shadow:0 3px 9px rgba(137,82,119,.09)!important;
 }
+
+/* Final control polish: consistent song-card hover, centered transport, and video fullscreen. */
+/* All four library actions should visibly respond to hover in either theme. */
+body:not(.theme-light) .song-card-actions > .mini-action:hover:not(.is-favorite),
+body:not(.theme-light) .song-card-actions > .mini-action:focus-visible:not(.is-favorite) {
+  border-color:#7666ad!important;
+  background:#27213f!important;
+  color:#fff!important;
+  box-shadow:0 3px 10px rgba(7,7,20,.22)!important;
+}
+body.theme-light .song-card-actions > .mini-action:hover:not(.is-favorite),
+body.theme-light .song-card-actions > .mini-action:focus-visible:not(.is-favorite) {
+  border-color:#e2c5d7!important;
+  background:#fbf1f7!important;
+  color:#814d6d!important;
+  box-shadow:0 3px 10px rgba(137,82,119,.10)!important;
+}
+
+/* Light-theme now-playing favourite must never inherit the dark hover surface. */
+body.theme-light #player-column .player-heart {
+  border:1px solid #e2d8e4!important;
+  border-radius:9px!important;
+  background:#f7f8fb!important;
+  color:#8a647f!important;
+  box-shadow:none!important;
+}
+body.theme-light #player-column .player-heart:hover,
+body.theme-light #player-column .player-heart:focus-visible {
+  border-color:#e2c5d7!important;
+  background:#fbf1f7!important;
+  color:#814d6d!important;
+  box-shadow:0 3px 10px rgba(137,82,119,.10)!important;
+}
+#player-column .control-favorite.is-favorite { color:#ff91d0!important; }
+body.theme-light #player-column .control-favorite.is-favorite {
+  border-color:#e6c0d7!important;
+  background:#f9eaf3!important;
+  color:#b34f83!important;
+}
+body.theme-light #player-column .control-favorite.is-favorite:hover,
+body.theme-light #player-column .control-favorite.is-favorite:focus-visible {
+  border-color:#d9a5c5!important;
+  background:#f4dfec!important;
+  color:#963b6f!important;
+}
+
+/* In the listening room, four controls flank the central Play/Pause button. */
+@media (min-width:681px) {
+  #player-column.queue-expanded .desktop-room-controls-slot .player-controls {
+    display:grid!important;
+    grid-template-columns:repeat(4,34px) 42px repeat(4,34px)!important;
+    gap:7px!important;
+    align-items:center!important;
+    justify-content:center!important;
+    width:max-content!important;
+    max-width:100%!important;
+  }
+  #player-column.queue-expanded .desktop-room-controls-slot .player-controls > .volume-control {
+    display:flex!important;
+    grid-column:auto!important;
+    width:34px!important;
+    min-width:34px!important;
+    flex:none!important;
+    justify-content:center!important;
+  }
+  #player-column.queue-expanded .desktop-room-controls-slot .player-controls > .control-button:not(.play-toggle) {
+    width:34px!important;
+    min-width:34px!important;
+    max-width:34px!important;
+    height:34px!important;
+    min-height:34px!important;
+    padding:0!important;
+    justify-self:center!important;
+  }
+  #player-column.queue-expanded .desktop-room-controls-slot .player-controls > .play-toggle {
+    grid-column:5!important;
+    width:42px!important;
+    min-width:42px!important;
+    max-width:42px!important;
+    height:42px!important;
+    min-height:42px!important;
+    padding:0!important;
+    justify-self:center!important;
+  }
+}
+@media (max-width:680px) {
+  #player-column.queue-expanded .room-controls-slot .player-controls {
+    display:grid!important;
+    grid-template-columns:repeat(4,minmax(0,1fr)) minmax(36px,40px) repeat(4,minmax(0,1fr))!important;
+    gap:3px!important;
+    align-items:center!important;
+    justify-content:stretch!important;
+    width:100%!important;
+    min-width:0!important;
+    margin:10px 0 5px!important;
+  }
+  #player-column.queue-expanded .room-controls-slot .player-controls > .volume-control {
+    display:flex!important;
+    grid-column:auto!important;
+    width:100%!important;
+    min-width:0!important;
+    flex:none!important;
+    justify-content:center!important;
+  }
+  #player-column.queue-expanded .room-controls-slot .player-controls > .control-button:not(.play-toggle) {
+    width:100%!important;
+    min-width:0!important;
+    max-width:32px!important;
+    height:32px!important;
+    min-height:32px!important;
+    padding:0!important;
+    justify-self:center!important;
+  }
+  #player-column.queue-expanded .room-controls-slot .player-controls > .play-toggle {
+    grid-column:5!important;
+    width:38px!important;
+    min-width:38px!important;
+    max-width:38px!important;
+    height:38px!important;
+    min-height:38px!important;
+    padding:0!important;
+    justify-self:center!important;
+  }
+}
+
+/* Fullscreen keeps the video in its native 16:9 shape, with letterboxing on ultrawide/portrait displays. */
+.video-frame-wrap:fullscreen,
+.video-frame-wrap:-webkit-full-screen {
+  position:fixed!important;
+  inset:0!important;
+  z-index:2147483000!important;
+  display:grid!important;
+  place-items:center!important;
+  width:100vw!important;
+  height:100dvh!important;
+  min-width:0!important;
+  min-height:0!important;
+  max-width:none!important;
+  max-height:none!important;
+  aspect-ratio:auto!important;
+  margin:0!important;
+  padding:0!important;
+  overflow:hidden!important;
+  border:0!important;
+  border-radius:0!important;
+  background:#000!important;
+  box-shadow:none!important;
+}
+.video-frame-wrap:fullscreen > #youtube-player,
+.video-frame-wrap:-webkit-full-screen > #youtube-player {
+  display:block!important;
+  width:min(100vw,177.7778dvh)!important;
+  height:min(100dvh,56.25vw)!important;
+  max-width:none!important;
+  max-height:none!important;
+  min-width:0!important;
+  min-height:0!important;
+  aspect-ratio:16/9!important;
+  justify-self:center!important;
+  align-self:center!important;
+  border:0!important;
+  border-radius:0!important;
+}
+.video-frame-wrap:fullscreen > #youtube-player iframe,
+.video-frame-wrap:-webkit-full-screen > #youtube-player iframe {
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  border:0!important;
+}
+.video-fullscreen-exit {
+  position:absolute!important;
+  z-index:2147483001!important;
+  top:max(12px,env(safe-area-inset-top))!important;
+  right:max(12px,env(safe-area-inset-right))!important;
+  display:grid!important;
+  place-items:center!important;
+  width:42px!important;
+  height:42px!important;
+  border:1px solid rgba(255,255,255,.38)!important;
+  border-radius:12px!important;
+  background:rgba(16,18,32,.78)!important;
+  color:#fff!important;
+  font-size:28px!important;
+  line-height:1!important;
+  backdrop-filter:blur(10px);
+  cursor:pointer;
+}
+.video-fullscreen-exit:hover,
+.video-fullscreen-exit:focus-visible {
+  background:rgba(48,37,68,.92)!important;
+  border-color:#d2b2ed!important;
+}
