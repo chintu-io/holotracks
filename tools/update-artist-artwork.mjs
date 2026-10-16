@@ -172,6 +172,8 @@ for (const artist of directory) {
   if (filename) images[artist.name] = 'assets/artist-avatars/' + filename;
 }
 
+const missingPortraits = directory.filter(artist => !artist.official && !images[artist.name]);
+
 await writeFile(OUTPUT_PATH, JSON.stringify({
   schemaVersion: 1,
   generatedAt: new Date().toISOString(),
@@ -183,3 +185,16 @@ await writeFile(OUTPUT_PATH, JSON.stringify({
 
 console.log('[Artist artwork] Wrote ' + Object.keys(images).length + ' cached avatar mappings for ' +
   directory.length + ' catalogue artists.');
+if (missingPortraits.length) {
+  console.log('[Artist artwork] Guest/collaborator credits without a portrait (' + missingPortraits.length + '):');
+  for (const artist of missingPortraits) {
+    const reason = !artist.channelId
+      ? 'no matching YouTube channel ID found in catalogue metadata'
+      : !cached.has(artist.channelId)
+        ? 'channel avatar was not downloaded or cached'
+        : 'channel avatar exists but no name mapping was generated';
+    console.log('[Artist artwork] MISSING: ' + artist.name + ' — ' + reason);
+  }
+} else {
+  console.log('[Artist artwork] All non-official artist credits have a portrait mapping.');
+}
