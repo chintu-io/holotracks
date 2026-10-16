@@ -344,7 +344,7 @@
 
     const accent = BANNER_ACCENT_COLORS[talent.slug] || '#d2b6ff';
     const nameLength = Array.from(talent.name).length;
-    const fontSize = Math.round(Math.max(14, Math.min(24, 330 / Math.max(1, nameLength))));
+    const fontSize = Math.round(Math.max(16, Math.min(30, 390 / Math.max(1, nameLength))));
 
     label.classList.remove('is-visible');
     label.textContent = talent.name;
@@ -659,10 +659,12 @@
       const talent = resolveRosterTalent(name);
       return artistKey(talent?.name || name);
     }));
-    for (const credit of artistsOf(song)) {
-      if (selectedKeys.has(artistKey(credit))) return true;
-      const talent = resolveRosterTalent(credit);
-      if (talent && selectedKeys.has(artistKey(talent.name))) return true;
+    for (const sourceCredit of artistsOf(song)) {
+      for (const credit of expandRosterArtistCredit(sourceCredit)) {
+        if (selectedKeys.has(artistKey(credit))) return true;
+        const talent = resolveRosterTalent(credit);
+        if (talent && selectedKeys.has(artistKey(talent.name))) return true;
+      }
     }
     return false;
   }
@@ -694,6 +696,23 @@
       /^(?:hololive|holostars|covercorp|covercorporation)(?:official|production|english|indonesia|regloss|flowglow|channel|ch)?$/.test(key);
   }
 
+  function expandRosterArtistCredit(value) {
+    const key = artistKey(value);
+    const pairAliases = new Set([
+      'fuwawamococoabyssgard',
+      'fuwawaandmococoabyssgard',
+      'fuwawamococo',
+      'fuwawaandmococo',
+      'fuwamoco',
+    ]);
+    if (!pairAliases.has(key)) return [value];
+    const canonicalNames = ['Fuwawa Abyssgard', 'Mococo Abyssgard'];
+    const matched = canonicalNames.map(name =>
+      state.talents.find(talent => artistKey(talent.name) === artistKey(name))
+    );
+    return matched.every(Boolean) ? matched.map(talent => talent.name) : [value];
+  }
+
   function renderArtists() {
     // Include every current official talent, even with zero catalogue songs,
     // then add every distinct non-roster artist credit.
@@ -708,19 +727,22 @@
 
     for (const song of state.songs) {
       const creditedThisSong = new Set();
-      for (const credit of new Set(artistsOf(song))) {
-        if (isGenericArtistCredit(credit)) continue;
-        const talent = resolveRosterTalent(credit);
-        const name = talent?.name || credit;
-        const key = artistKey(name);
-        if (!key || creditedThisSong.has(key)) continue;
-        creditedThisSong.add(key);
-        let item = directory.get(key);
-        if (!item) {
-          item = { name, count: 0, category: 'other' };
-          directory.set(key, item);
+      for (const sourceCredit of new Set(artistsOf(song))) {
+        if (isGenericArtistCredit(sourceCredit)) continue;
+        for (const credit of expandRosterArtistCredit(sourceCredit)) {
+          if (isGenericArtistCredit(credit)) continue;
+          const talent = resolveRosterTalent(credit);
+          const name = talent?.name || credit;
+          const key = artistKey(name);
+          if (!key || creditedThisSong.has(key)) continue;
+          creditedThisSong.add(key);
+          let item = directory.get(key);
+          if (!item) {
+            item = { name, count: 0, category: 'other' };
+            directory.set(key, item);
+          }
+          item.count += 1;
         }
-        item.count += 1;
       }
     }
 
@@ -1022,6 +1044,7 @@
   }
 
   function encodePlaylistShare(playlist) {
+    if (playlist?.smartType === LATEST_MIX_PLAYLIST_KIND) return 'latest50';
     const payload = { name: playlist.name, ids: (playlist.songIds || []).filter(id => typeof id === 'string') };
     const bytes = new TextEncoder().encode(JSON.stringify(payload));
     let binary = '';
@@ -1078,6 +1101,17 @@
     const code = url.searchParams.get('mix');
     if (!code) return false;
     try {
+      if (code === 'latest50') {
+        const playlist = refreshLatest50Playlist();
+        state.activePlaylist = playlist.id;
+        state.view = 'all';
+        state.songType = 'all';
+        state.query = '';
+        state.selectedArtists.clear();
+        el['search-input'].value = '';
+        showNotice('Opened the live Latest 50 Originals & Covers mix. Its contents update as the catalogue changes.');
+        return true;
+      }
       const normalized = code.replace(/-/g, '+').replace(/_/g, '/');
       const padded = normalized + '='.repeat((4 - normalized.length % 4) % 4);
       const bytes = Uint8Array.from(atob(padded), character => character.charCodeAt(0));
