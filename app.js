@@ -356,10 +356,47 @@
     });
   }
 
+  // A throttled background tab can delay image loads, animation frames, and cleanup timers.
+  // Keep one authoritative render so delayed callbacks cannot leave two talents on the stage.
+  let heroRenderSequence = 0;
+
+  function settleHeroTalentArt() {
+    const stage = el['hero-talent-art'];
+    if (!stage) return;
+
+    // Invalidate pending image-load/animation callbacks and settle any in-progress crossfade.
+    heroRenderSequence += 1;
+    const images = [...stage.querySelectorAll('.stage-featured')];
+    const visible = images.filter(image =>
+      image.classList.contains('is-visible') && !image.classList.contains('is-exiting')
+    );
+    const keep = visible[visible.length - 1] || images[images.length - 1] || null;
+
+    images.forEach(image => {
+      if (image !== keep) image.remove();
+    });
+    if (keep) keep.className = 'stage-talent stage-featured is-visible';
+  }
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') settleHeroTalentArt();
+  });
+
   function renderHeroTalentArt({ transition = false } = {}) {
     const stage = el['hero-talent-art'];
     if (!stage) return;
-    const previous = stage.querySelector('.stage-featured:not(.is-exiting)');
+    const renderId = ++heroRenderSequence;
+    const existing = [...stage.querySelectorAll('.stage-featured')];
+    const visible = existing.filter(image =>
+      image.classList.contains('is-visible') && !image.classList.contains('is-exiting')
+    );
+    const previous = visible[visible.length - 1] || null;
+
+    // Drop stale exiting or still-loading images before starting a new transition.
+    existing.forEach(image => {
+      if (image !== previous) image.remove();
+    });
+
     const talent = pickBannerTalent();
     if (!talent) return;
 
@@ -371,22 +408,49 @@
     image.draggable = false;
 
     image.onerror = () => {
-      image.remove();
-      if (previous) previous.classList.remove('is-exiting');
-    };
-    image.onload = () => {
-      revealBannerArtistName(talent);
-      if (!transition || !previous) {
-        image.classList.remove('is-entering');
-        image.classList.add('is-visible');
-        if (previous) previous.remove();
+      if (renderId !== heroRenderSequence) {
+        image.remove();
         return;
       }
+      image.remove();
+      if (previous && stage.contains(previous)) {
+        previous.className = 'stage-talent stage-featured is-visible';
+      }
+    };
+
+    image.onload = () => {
+      if (renderId !== heroRenderSequence || !stage.contains(image)) {
+        image.remove();
+        return;
+      }
+
+      revealBannerArtistName(talent);
+      if (!transition || !previous || !stage.contains(previous)) {
+        image.className = 'stage-talent stage-featured is-visible';
+        stage.querySelectorAll('.stage-featured').forEach(other => {
+          if (other !== image) other.remove();
+        });
+        return;
+      }
+
       window.requestAnimationFrame(() => {
-        image.classList.remove('is-entering');
-        image.classList.add('is-visible');
-        previous.classList.add('is-exiting');
-        window.setTimeout(() => previous.remove(), 720);
+        if (renderId !== heroRenderSequence || !stage.contains(image)) {
+          image.remove();
+          return;
+        }
+
+        // Resolve the outgoing image again in case the page was backgrounded mid-transition.
+        const active = [...stage.querySelectorAll('.stage-featured.is-visible:not(.is-exiting)')];
+        const outgoing = active[active.length - 1] || previous;
+        stage.querySelectorAll('.stage-featured').forEach(other => {
+          if (other !== image && other !== outgoing) other.remove();
+        });
+
+        image.className = 'stage-talent stage-featured is-visible';
+        if (outgoing && stage.contains(outgoing)) {
+          outgoing.classList.add('is-exiting');
+          window.setTimeout(() => outgoing.remove(), 720);
+        }
       });
     };
 
@@ -396,6 +460,7 @@
     stage.appendChild(image);
     image.src = imageSource;
   }
+
   let heroRotationTimer = null;
   function startHeroRotation() {
     if (heroRotationTimer !== null) window.clearInterval(heroRotationTimer);
