@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-18T06:40:12.434Z",
+  "generatedAt": "2026-10-18T11:47:51.714Z",
   "lastFullReconciledAt": "2026-10-16T09:20:43.877Z",
   "lastMode": "incremental",
   "source": "Holodex API v2",
@@ -14,14 +14,50 @@
       "stream"
     ]
   },
-  "total": 6310,
-  "sourceTotal": 6569,
+  "total": 6312,
+  "sourceTotal": 6570,
   "sourceTotalByTopic": {
-    "Original_Song": 3939,
+    "Original_Song": 3940,
     "Music_Cover": 2630
   },
   "pagesFetched": 132,
   "songs": [
+    {
+      "id": "ylpBsZ0jHZc",
+      "title": "【ホロドリ】『Shallow Shadow』常闇トワ (Official Music Video)",
+      "artist": "Tokoyami Towa",
+      "artists": [
+        "Tokoyami Towa"
+      ],
+      "channelName": "hololive Dreams",
+      "channelId": "UCawGfU44CZxd2ZVf_VGijbA",
+      "releaseDate": "2026-10-18T11:00:11.000Z",
+      "publishedAt": "2026-10-18T11:00:11.000Z",
+      "viewCount": 5084,
+      "likeCount": 1421,
+      "duration": 124,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-10-18T11:48:07.491Z"
+    },
+    {
+      "id": "kZlHh0uCdtg",
+      "title": "【cover】ファイアダンス【歌ってみた/ときのそら/町田ちま/夢追翔/春希】",
+      "artist": "Tokino Sora",
+      "artists": [
+        "Tokino Sora"
+      ],
+      "channelName": "Tokino Sora",
+      "channelId": "UCp6993wxpyDPHUpavwDFqgg",
+      "releaseDate": "2026-10-18T09:00:09.000Z",
+      "publishedAt": "2026-10-18T09:00:09.000Z",
+      "viewCount": 53901,
+      "likeCount": 9237,
+      "duration": 195,
+      "songType": "cover",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-10-18T11:48:07.491Z"
+    },
     {
       "id": "FLuj-J_8OrQ",
       "title": "【MV】La Mascarade【hololive Promise Original Song】",
