@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-16T15:40:58.119Z",
+  "generatedAt": "2026-10-18T06:40:12.434Z",
   "lastFullReconciledAt": "2026-10-16T09:20:43.877Z",
   "lastMode": "incremental",
   "source": "Holodex API v2",
@@ -14,14 +14,32 @@
       "stream"
     ]
   },
-  "total": 6309,
-  "sourceTotal": 6568,
+  "total": 6310,
+  "sourceTotal": 6569,
   "sourceTotalByTopic": {
-    "Original_Song": 3938,
+    "Original_Song": 3939,
     "Music_Cover": 2630
   },
   "pagesFetched": 132,
   "songs": [
+    {
+      "id": "FLuj-J_8OrQ",
+      "title": "【MV】La Mascarade【hololive Promise Original Song】",
+      "artist": "Hololive Official",
+      "artists": [
+        "Hololive Official"
+      ],
+      "channelName": "hololive English",
+      "channelId": "UCotXwY6s8pWmuWd_snKYjhg",
+      "releaseDate": "2026-10-18T03:29:07.000Z",
+      "publishedAt": "2026-10-18T03:29:07.000Z",
+      "viewCount": 47727,
+      "likeCount": 8405,
+      "duration": 175,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-10-18T06:40:28.098Z"
+    },
     {
       "id": "X8ZP3g9_MZ0",
       "title": "HIMEHINA×Mori Calliope×Tokoyami Towa『ファイアダンス』Cover",
