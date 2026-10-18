@@ -1315,3 +1315,157 @@ body.theme-light .song-card-actions > .mini-action.share-action:focus-visible {
   color:#814d6d!important;
   box-shadow:0 3px 9px rgba(137,82,119,.09)!important;
 }
+
+
+/* Match hover feedback across every song action in both themes. */
+#song-list .song-card-actions .mini-action:hover:not(:disabled),
+#song-list .song-card-actions .mini-action:focus-visible {
+  border-color:#72dfff!important;
+  background:#24254a!important;
+  color:#f5f4ff!important;
+  box-shadow:0 0 0 2px #72dfff24!important;
+}
+body.theme-light #song-list .song-card-actions .mini-action:hover:not(:disabled),
+body.theme-light #song-list .song-card-actions .mini-action:focus-visible {
+  border-color:#9bbce9!important;
+  background:#edf5ff!important;
+  color:#365d91!important;
+  box-shadow:0 0 0 2px #6da9ee24!important;
+}
+
+/* Keep all nine transport controls in one balanced row, with the favourite on the far left. */
+#player-column .player-controls .player-heart {
+  display:grid!important;
+  flex:0 0 32px!important;
+  width:32px!important;
+  min-width:32px!important;
+  height:32px!important;
+  margin:0!important;
+  padding:0!important;
+  border:1px solid #353950!important;
+  border-radius:9px!important;
+  background:#1b1e31!important;
+  color:#a6adc4!important;
+  font-size:21px!important;
+}
+#player-column .player-controls .player-heart:hover:not(:disabled),
+#player-column .player-controls .player-heart.is-favorite {
+  border-color:#765276!important;
+  background:#30243d!important;
+  color:#ff86c8!important;
+}
+#player-column .player-controls .player-expand {
+  display:grid!important;
+  flex:0 0 32px!important;
+  place-items:center!important;
+  width:32px!important;
+  min-width:32px!important;
+  height:32px!important;
+  min-height:32px!important;
+  margin:0!important;
+  padding:0!important;
+  border:1px solid #353950!important;
+  border-radius:9px!important;
+  background:#1b1e31!important;
+  color:#a6adc4!important;
+}
+#player-column .player-controls .player-expand:hover:not(:disabled),
+#player-column .player-controls .player-expand[aria-pressed="true"] {
+  border-color:#657db8!important;
+  background:#242b46!important;
+  color:#a9cbff!important;
+}
+body.theme-light #player-column .player-controls .player-heart {
+  border-color:#d9dee7!important;
+  background:#f5f6f9!important;
+  color:#718094!important;
+}
+body.theme-light #player-column .player-controls .player-heart:hover:not(:disabled),
+body.theme-light #player-column .player-controls .player-heart.is-favorite {
+  border-color:#e5c5d8!important;
+  background:#fbf0f6!important;
+  color:#ba4f83!important;
+}
+body.theme-light #player-column .player-controls .player-expand {
+  border-color:#d9dee7!important;
+  background:#f5f6f9!important;
+  color:#5c6678!important;
+}
+body.theme-light #player-column .player-controls .player-expand:hover:not(:disabled),
+body.theme-light #player-column .player-controls .player-expand[aria-pressed="true"] {
+  border-color:#b8d1f1!important;
+  background:#edf5ff!important;
+  color:#426b9e!important;
+}
+
+/* Light banner artwork uses a cool white and blue highlight, including the artist signature. */
+body.theme-light .hero-stage {
+  background:
+    radial-gradient(ellipse at 70% 58%,#6d8cff30 0%,transparent 52%),
+    radial-gradient(ellipse at 77% 82%,#42a9ed35 0%,transparent 43%),
+    #f5f7fa!important;
+}
+body.theme-light .hero-stage:after {
+  background:radial-gradient(ellipse at 68% 60%,#74baff35 0%,transparent 60%)!important;
+}
+body.theme-light .hero-stage .stage-featured {
+  filter:drop-shadow(0 14px 24px #28354b40) drop-shadow(0 0 28px #79bdff65)!important;
+}
+body.theme-light .hero-artist-name {
+  --artist-accent:#5da7e2!important;
+  color:#fff!important;
+  text-shadow:0 0 1px #fff,0 0 5px #76bdff,0 0 12px #5ca9ee,0 0 24px #76bdffb8!important;
+  filter:drop-shadow(0 2px 3px #314f7166)!important;
+}
+
+/* Video focus fills a landscape screen and leaves a floating exit control available. */
+body.video-theater #player-column .video-frame-wrap {
+  position:fixed!important;
+  z-index:2147483000!important;
+  inset:0!important;
+  width:100vw!important;
+  height:100dvh!important;
+  max-height:none!important;
+  margin:0!important;
+  padding:0!important;
+  aspect-ratio:auto!important;
+  border:0!important;
+  border-radius:0!important;
+  background:#000!important;
+  overflow:hidden!important;
+}
+body.video-theater #player-column #youtube-player,
+body.video-theater #player-column #youtube-player iframe {
+  width:100%!important;
+  height:100%!important;
+  max-width:none!important;
+  max-height:none!important;
+  aspect-ratio:auto!important;
+}
+body.video-theater #player-column .player-controls .player-expand {
+  position:fixed!important;
+  z-index:2147483001!important;
+  top:12px!important;
+  right:12px!important;
+  width:42px!important;
+  height:42px!important;
+  min-width:42px!important;
+  min-height:42px!important;
+  border-color:#ffffff66!important;
+  background:#101522d9!important;
+  color:#fff!important;
+  box-shadow:0 2px 14px #0008!important;
+}
+@media (max-width:680px) and (orientation:portrait) {
+  body.video-theater #player-column .video-frame-wrap {
+    inset:auto!important;
+    top:50%!important;
+    left:50%!important;
+    right:auto!important;
+    bottom:auto!important;
+    width:100dvh!important;
+    height:100vw!important;
+    transform:translate(-50%,-50%) rotate(90deg)!important;
+    transform-origin:center!important;
+  }
+}
