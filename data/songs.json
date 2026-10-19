@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-18T11:47:51.714Z",
+  "generatedAt": "2026-10-19T14:47:36.200Z",
   "lastFullReconciledAt": "2026-10-16T09:20:43.877Z",
   "lastMode": "incremental",
   "source": "Holodex API v2",
@@ -14,14 +14,68 @@
       "stream"
     ]
   },
-  "total": 6312,
-  "sourceTotal": 6572,
+  "total": 6315,
+  "sourceTotal": 6575,
   "sourceTotalByTopic": {
-    "Original_Song": 3940,
-    "Music_Cover": 2632
+    "Original_Song": 3941,
+    "Music_Cover": 2634
   },
   "pagesFetched": 132,
   "songs": [
+    {
+      "id": "kZFBXpftD6k",
+      "title": "竹取オーバーナイトセンセーション (Cover) - Unnämed × Banzoin Hakka feat. If, Yusuke, nano, Neko",
+      "artist": "Unnamed",
+      "artists": [
+        "Unnamed"
+      ],
+      "channelName": "Unnamed",
+      "channelId": "UCrIs26bEKOvA_lRnO2Hgscw",
+      "releaseDate": "2026-10-19T13:00:09.000Z",
+      "publishedAt": "2026-10-19T13:00:09.000Z",
+      "viewCount": 2474,
+      "likeCount": 1126,
+      "duration": 269,
+      "songType": "cover",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-10-19T14:47:57.042Z"
+    },
+    {
+      "id": "vShW-eC3M4I",
+      "title": "チェリーポップ - 尾丸ポルカ/姫森ルーナ(cover)",
+      "artist": "Omaru Polka",
+      "artists": [
+        "Omaru Polka"
+      ],
+      "channelName": "Omaru Polka",
+      "channelId": "UCK9V2B22uJYu3N7eR_BT9QA",
+      "releaseDate": "2026-10-19T13:00:08.000Z",
+      "publishedAt": "2026-10-19T13:00:08.000Z",
+      "viewCount": 11930,
+      "likeCount": 4708,
+      "duration": 145,
+      "songType": "cover",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-10-19T14:47:57.042Z"
+    },
+    {
+      "id": "HADLHRboKJY",
+      "title": "【ホロドリ】『Shallow Shadow』常闇トワ (Full ver.)",
+      "artist": "Tokoyami Towa",
+      "artists": [
+        "Tokoyami Towa"
+      ],
+      "channelName": "hololive Dreams",
+      "channelId": "UCawGfU44CZxd2ZVf_VGijbA",
+      "releaseDate": "2026-10-19T12:00:29.000Z",
+      "publishedAt": "2026-10-19T12:00:29.000Z",
+      "viewCount": 4215,
+      "likeCount": 735,
+      "duration": 163,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-10-19T14:47:57.042Z"
+    },
     {
       "id": "ylpBsZ0jHZc",
       "title": "【ホロドリ】『Shallow Shadow』常闇トワ (Official Music Video)",
