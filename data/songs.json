@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-20T18:01:51.541Z",
+  "generatedAt": "2026-10-20T21:44:42.105Z",
   "lastFullReconciledAt": "2026-10-16T09:20:43.877Z",
   "lastMode": "incremental",
   "source": "Holodex API v2",
@@ -14,10 +14,10 @@
       "stream"
     ]
   },
-  "total": 6325,
-  "sourceTotal": 6585,
+  "total": 6327,
+  "sourceTotal": 6587,
   "sourceTotalByTopic": {
-    "Original_Song": 3951,
+    "Original_Song": 3953,
     "Music_Cover": 2634
   },
   "pagesFetched": 132,
@@ -255,6 +255,42 @@
       "songType": "original",
       "source": "Holodex",
       "statisticsCheckedAt": "2026-10-19T14:47:57.042Z"
+    },
+    {
+      "id": "2ikG_rA2eBw",
+      "title": "La Mascarade (Instrumental)",
+      "artist": "Hololive Official",
+      "artists": [
+        "Hololive Official"
+      ],
+      "channelName": "hololive English",
+      "channelId": "UCotXwY6s8pWmuWd_snKYjhg",
+      "releaseDate": "2026-10-18T15:05:14.000Z",
+      "publishedAt": "2026-10-18T15:05:14.000Z",
+      "viewCount": 125,
+      "likeCount": 9,
+      "duration": 177,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-10-20T21:44:54.998Z"
+    },
+    {
+      "id": "ZRl5CvMveWI",
+      "title": "La Mascarade",
+      "artist": "Hololive Official",
+      "artists": [
+        "Hololive Official"
+      ],
+      "channelName": "hololive English",
+      "channelId": "UCotXwY6s8pWmuWd_snKYjhg",
+      "releaseDate": "2026-10-18T15:01:27.000Z",
+      "publishedAt": "2026-10-18T15:01:27.000Z",
+      "viewCount": 2714,
+      "likeCount": 125,
+      "duration": 177,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-10-20T21:44:54.998Z"
     },
     {
       "id": "ylpBsZ0jHZc",
