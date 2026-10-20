@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-20T13:04:21.894Z",
+  "generatedAt": "2026-10-20T18:01:51.541Z",
   "lastFullReconciledAt": "2026-10-16T09:20:43.877Z",
   "lastMode": "incremental",
   "source": "Holodex API v2",
@@ -14,14 +14,176 @@
       "stream"
     ]
   },
-  "total": 6316,
-  "sourceTotal": 6576,
+  "total": 6325,
+  "sourceTotal": 6585,
   "sourceTotalByTopic": {
-    "Original_Song": 3942,
+    "Original_Song": 3951,
     "Music_Cover": 2634
   },
   "pagesFetched": 132,
   "songs": [
+    {
+      "id": "d0C4OS-Rsec",
+      "title": "drop candy",
+      "artist": "La+ Darknesss",
+      "artists": [
+        "La+ Darknesss"
+      ],
+      "channelName": "La+ Darknesss",
+      "channelId": "UCENwRMx5Yh42zWpzURebzTw",
+      "releaseDate": "2026-10-20T15:00:39.000Z",
+      "publishedAt": "2026-10-20T15:00:39.000Z",
+      "viewCount": 72,
+      "likeCount": 24,
+      "duration": 143,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-10-20T18:01:58.287Z"
+    },
+    {
+      "id": "HVffaWstKbY",
+      "title": "喰ライ",
+      "artist": "La+ Darknesss",
+      "artists": [
+        "La+ Darknesss"
+      ],
+      "channelName": "La+ Darknesss",
+      "channelId": "UCENwRMx5Yh42zWpzURebzTw",
+      "releaseDate": "2026-10-20T15:00:38.000Z",
+      "publishedAt": "2026-10-20T15:00:38.000Z",
+      "viewCount": 93,
+      "likeCount": 27,
+      "duration": 176,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-10-20T18:01:58.287Z"
+    },
+    {
+      "id": "mIxdik5YxQU",
+      "title": "BLOCK YOU",
+      "artist": "La+ Darknesss",
+      "artists": [
+        "La+ Darknesss"
+      ],
+      "channelName": "La+ Darknesss",
+      "channelId": "UCENwRMx5Yh42zWpzURebzTw",
+      "releaseDate": "2026-10-20T15:00:37.000Z",
+      "publishedAt": "2026-10-20T15:00:37.000Z",
+      "viewCount": 190,
+      "likeCount": 35,
+      "duration": 165,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-10-20T18:01:58.287Z"
+    },
+    {
+      "id": "vCdbSuABnrA",
+      "title": "合縁事変",
+      "artist": "La+ Darknesss",
+      "artists": [
+        "La+ Darknesss"
+      ],
+      "channelName": "La+ Darknesss",
+      "channelId": "UCENwRMx5Yh42zWpzURebzTw",
+      "releaseDate": "2026-10-20T15:00:32.000Z",
+      "publishedAt": "2026-10-20T15:00:32.000Z",
+      "viewCount": 138,
+      "likeCount": 29,
+      "duration": 220,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-10-20T18:01:58.287Z"
+    },
+    {
+      "id": "5UJOIEdWxPM",
+      "title": "Jumping in the Time",
+      "artist": "La+ Darknesss",
+      "artists": [
+        "La+ Darknesss"
+      ],
+      "channelName": "La+ Darknesss",
+      "channelId": "UCENwRMx5Yh42zWpzURebzTw",
+      "releaseDate": "2026-10-20T15:00:27.000Z",
+      "publishedAt": "2026-10-20T15:00:27.000Z",
+      "viewCount": 57,
+      "likeCount": 21,
+      "duration": 191,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-10-20T18:01:58.287Z"
+    },
+    {
+      "id": "_SPZljrdBJM",
+      "title": "興味ないよ",
+      "artist": "La+ Darknesss",
+      "artists": [
+        "La+ Darknesss"
+      ],
+      "channelName": "La+ Darknesss",
+      "channelId": "UCENwRMx5Yh42zWpzURebzTw",
+      "releaseDate": "2026-10-20T15:00:20.000Z",
+      "publishedAt": "2026-10-20T15:00:20.000Z",
+      "viewCount": 44,
+      "likeCount": 21,
+      "duration": 181,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-10-20T18:01:58.287Z"
+    },
+    {
+      "id": "lk2LwlBpP8Q",
+      "title": "お姉さま♡ラヴコール",
+      "artist": "La+ Darknesss",
+      "artists": [
+        "La+ Darknesss"
+      ],
+      "channelName": "La+ Darknesss",
+      "channelId": "UCENwRMx5Yh42zWpzURebzTw",
+      "releaseDate": "2026-10-20T15:00:18.000Z",
+      "publishedAt": "2026-10-20T15:00:18.000Z",
+      "viewCount": 58,
+      "likeCount": 22,
+      "duration": 235,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-10-20T18:01:58.287Z"
+    },
+    {
+      "id": "29oV0QRu9gU",
+      "title": "バグラブ",
+      "artist": "La+ Darknesss",
+      "artists": [
+        "La+ Darknesss"
+      ],
+      "channelName": "La+ Darknesss",
+      "channelId": "UCENwRMx5Yh42zWpzURebzTw",
+      "releaseDate": "2026-10-20T15:00:12.000Z",
+      "publishedAt": "2026-10-20T15:00:12.000Z",
+      "viewCount": 55,
+      "likeCount": 23,
+      "duration": 173,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-10-20T18:01:58.287Z"
+    },
+    {
+      "id": "ahwfxPrNxfE",
+      "title": "Dark Breath",
+      "artist": "La+ Darknesss",
+      "artists": [
+        "La+ Darknesss"
+      ],
+      "channelName": "La+ Darknesss",
+      "channelId": "UCENwRMx5Yh42zWpzURebzTw",
+      "releaseDate": "2026-10-20T15:00:03.000Z",
+      "publishedAt": "2026-10-20T15:00:03.000Z",
+      "viewCount": 85,
+      "likeCount": 20,
+      "duration": 227,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-10-20T18:01:58.287Z"
+    },
     {
       "id": "8On-I5qQeLw",
       "title": "【ホロドリ】『Forge My Soul』Kaela Kovalskia (Official Music Video)",
