@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-19T14:47:36.200Z",
+  "generatedAt": "2026-10-20T13:04:21.894Z",
   "lastFullReconciledAt": "2026-10-16T09:20:43.877Z",
   "lastMode": "incremental",
   "source": "Holodex API v2",
@@ -14,14 +14,32 @@
       "stream"
     ]
   },
-  "total": 6315,
-  "sourceTotal": 6575,
+  "total": 6316,
+  "sourceTotal": 6576,
   "sourceTotalByTopic": {
-    "Original_Song": 3941,
+    "Original_Song": 3942,
     "Music_Cover": 2634
   },
   "pagesFetched": 132,
   "songs": [
+    {
+      "id": "8On-I5qQeLw",
+      "title": "【ホロドリ】『Forge My Soul』Kaela Kovalskia (Official Music Video)",
+      "artist": "Hololive Official",
+      "artists": [
+        "Hololive Official"
+      ],
+      "channelName": "hololive Dreams",
+      "channelId": "UCawGfU44CZxd2ZVf_VGijbA",
+      "releaseDate": "2026-10-20T11:00:25.000Z",
+      "publishedAt": "2026-10-20T11:00:25.000Z",
+      "viewCount": 4418,
+      "likeCount": 1521,
+      "duration": 105,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-10-20T13:04:37.762Z"
+    },
     {
       "id": "kZFBXpftD6k",
       "title": "竹取オーバーナイトセンセーション (Cover) - Unnämed × Banzoin Hakka feat. If, Yusuke, nano, Neko",
