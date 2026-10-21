@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-21T05:02:46.635Z",
+  "generatedAt": "2026-10-21T15:24:13.496Z",
   "lastFullReconciledAt": "2026-10-16T09:20:43.877Z",
   "lastMode": "incremental",
   "source": "Holodex API v2",
@@ -14,14 +14,68 @@
       "stream"
     ]
   },
-  "total": 6328,
-  "sourceTotal": 6589,
+  "total": 6331,
+  "sourceTotal": 6592,
   "sourceTotalByTopic": {
-    "Original_Song": 3954,
+    "Original_Song": 3957,
     "Music_Cover": 2635
   },
   "pagesFetched": 132,
   "songs": [
+    {
+      "id": "aWJO567YPc4",
+      "title": "S.O.R.e : Song of Reality",
+      "artist": "Ayunda Risu",
+      "artists": [
+        "Ayunda Risu"
+      ],
+      "channelName": "Ayunda Risu",
+      "channelId": "UCOyYb1c43VlX9rc_lT6NKQw",
+      "releaseDate": "2026-10-21T15:03:49.000Z",
+      "publishedAt": "2026-10-21T15:03:49.000Z",
+      "viewCount": 116,
+      "likeCount": 32,
+      "duration": 144,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-10-21T15:24:25.621Z"
+    },
+    {
+      "id": "H4tl6Mb6uls",
+      "title": "S.O.R.e : Song of Reality (Instrumental)",
+      "artist": "Ayunda Risu",
+      "artists": [
+        "Ayunda Risu"
+      ],
+      "channelName": "Ayunda Risu",
+      "channelId": "UCOyYb1c43VlX9rc_lT6NKQw",
+      "releaseDate": "2026-10-21T15:03:10.000Z",
+      "publishedAt": "2026-10-21T15:03:10.000Z",
+      "viewCount": 26,
+      "likeCount": 6,
+      "duration": 144,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-10-21T15:24:25.621Z"
+    },
+    {
+      "id": "0qlSLsga2r4",
+      "title": "【ホロドリ】『Forge My Soul』Kaela Kovalskia (Full ver.)",
+      "artist": "Hololive Official",
+      "artists": [
+        "Hololive Official"
+      ],
+      "channelName": "hololive Dreams",
+      "channelId": "UCawGfU44CZxd2ZVf_VGijbA",
+      "releaseDate": "2026-10-21T12:00:13.000Z",
+      "publishedAt": "2026-10-21T12:00:13.000Z",
+      "viewCount": 4336,
+      "likeCount": 984,
+      "duration": 207,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-10-21T15:24:25.621Z"
+    },
     {
       "id": "IRC89HA9pz8",
       "title": "Loveit? Cover by @Octavio_en @ShioriNovella @MachinaXFlayon",
