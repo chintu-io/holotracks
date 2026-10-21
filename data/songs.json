@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-21T15:24:13.496Z",
+  "generatedAt": "2026-10-21T19:23:38.830Z",
   "lastFullReconciledAt": "2026-10-16T09:20:43.877Z",
   "lastMode": "incremental",
   "source": "Holodex API v2",
@@ -14,7 +14,7 @@
       "stream"
     ]
   },
-  "total": 6331,
+  "total": 6332,
   "sourceTotal": 6592,
   "sourceTotalByTopic": {
     "Original_Song": 3957,
@@ -22,6 +22,24 @@
   },
   "pagesFetched": 132,
   "songs": [
+    {
+      "id": "ZngEAESMgyI",
+      "title": "【Ayunda Risu】S.O.Re : Song Of Reality 【Original Song MV】",
+      "artist": "Ayunda Risu",
+      "artists": [
+        "Ayunda Risu"
+      ],
+      "channelName": "Ayunda Risu",
+      "channelId": "UCOyYb1c43VlX9rc_lT6NKQw",
+      "releaseDate": "2026-10-21T17:00:08.000Z",
+      "publishedAt": "2026-10-21T17:00:08.000Z",
+      "viewCount": 7611,
+      "likeCount": 2877,
+      "duration": 142,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-10-21T19:23:46.615Z"
+    },
     {
       "id": "aWJO567YPc4",
       "title": "S.O.R.e : Song of Reality",
