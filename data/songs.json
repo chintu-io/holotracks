@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-20T21:44:42.105Z",
+  "generatedAt": "2026-10-21T05:02:46.635Z",
   "lastFullReconciledAt": "2026-10-16T09:20:43.877Z",
   "lastMode": "incremental",
   "source": "Holodex API v2",
@@ -14,14 +14,32 @@
       "stream"
     ]
   },
-  "total": 6327,
-  "sourceTotal": 6587,
+  "total": 6328,
+  "sourceTotal": 6588,
   "sourceTotalByTopic": {
     "Original_Song": 3953,
-    "Music_Cover": 2634
+    "Music_Cover": 2635
   },
   "pagesFetched": 132,
   "songs": [
+    {
+      "id": "IRC89HA9pz8",
+      "title": "Loveit? Cover by @Octavio_en @ShioriNovella @MachinaXFlayon",
+      "artist": "Octavio",
+      "artists": [
+        "Octavio"
+      ],
+      "channelName": "Octavio",
+      "channelId": "UCLk1hcmxg8rJ3Nm1_GvxTRA",
+      "releaseDate": "2026-10-21T03:00:07.000Z",
+      "publishedAt": "2026-10-21T03:00:07.000Z",
+      "viewCount": 5079,
+      "likeCount": 2652,
+      "duration": 155,
+      "songType": "cover",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-10-21T05:02:58.746Z"
+    },
     {
       "id": "d0C4OS-Rsec",
       "title": "drop candy",
