@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-22T12:08:04.342Z",
+  "generatedAt": "2026-10-22T17:22:10.849Z",
   "lastFullReconciledAt": "2026-10-16T09:20:43.877Z",
   "lastMode": "incremental",
   "source": "Holodex API v2",
@@ -17,8 +17,8 @@
   "total": 6334,
   "sourceTotal": 6594,
   "sourceTotalByTopic": {
-    "Original_Song": 3959,
-    "Music_Cover": 2635
+    "Original_Song": 3958,
+    "Music_Cover": 2636
   },
   "pagesFetched": 132,
   "songs": [
@@ -54,7 +54,7 @@
       "viewCount": 0,
       "likeCount": 0,
       "duration": 274,
-      "songType": "original",
+      "songType": "cover",
       "source": "Holodex",
       "statisticsCheckedAt": "2026-10-22T12:08:14.053Z"
     },
