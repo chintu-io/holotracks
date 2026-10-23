@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-23T12:53:26.037Z",
+  "generatedAt": "2026-10-23T17:31:40.648Z",
   "lastFullReconciledAt": "2026-10-16T09:20:43.877Z",
   "lastMode": "incremental",
   "source": "Holodex API v2",
@@ -14,14 +14,50 @@
       "stream"
     ]
   },
-  "total": 6335,
-  "sourceTotal": 6594,
+  "total": 6337,
+  "sourceTotal": 6596,
   "sourceTotalByTopic": {
-    "Original_Song": 3959,
+    "Original_Song": 3961,
     "Music_Cover": 2635
   },
   "pagesFetched": 132,
   "songs": [
+    {
+      "id": "AZvVbDcSaEY",
+      "title": "ゾンビゾンビゾンビ",
+      "artist": "Hoshimachi Suisei",
+      "artists": [
+        "Hoshimachi Suisei"
+      ],
+      "channelName": "Hoshimachi Suisei",
+      "channelId": "UC5CwaMl1eIgY8h02uZw7u8A",
+      "releaseDate": "2026-10-23T15:00:21.000Z",
+      "publishedAt": "2026-10-23T15:00:21.000Z",
+      "viewCount": 3899,
+      "likeCount": 939,
+      "duration": 192,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-10-23T17:31:54.282Z"
+    },
+    {
+      "id": "3BEzO_E1aMo",
+      "title": "【ホロドリ】『アマリリス』獅白ぼたん (Full ver.)",
+      "artist": "Hololive Official",
+      "artists": [
+        "Hololive Official"
+      ],
+      "channelName": "hololive Dreams",
+      "channelId": "UCawGfU44CZxd2ZVf_VGijbA",
+      "releaseDate": "2026-10-23T12:00:18.000Z",
+      "publishedAt": "2026-10-23T12:00:18.000Z",
+      "viewCount": 5814,
+      "likeCount": 745,
+      "duration": 243,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-10-23T17:31:54.282Z"
+    },
     {
       "id": "wAJGtuDybGs",
       "title": "Zombie Zombie Zombie",
