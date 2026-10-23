@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-22T17:22:10.849Z",
+  "generatedAt": "2026-10-23T12:53:26.037Z",
   "lastFullReconciledAt": "2026-10-16T09:20:43.877Z",
   "lastMode": "incremental",
   "source": "Holodex API v2",
@@ -14,14 +14,32 @@
       "stream"
     ]
   },
-  "total": 6334,
-  "sourceTotal": 6593,
+  "total": 6335,
+  "sourceTotal": 6594,
   "sourceTotalByTopic": {
-    "Original_Song": 3958,
+    "Original_Song": 3959,
     "Music_Cover": 2635
   },
   "pagesFetched": 132,
   "songs": [
+    {
+      "id": "wAJGtuDybGs",
+      "title": "Zombie Zombie Zombie",
+      "artist": "Hoshimachi Suisei",
+      "artists": [
+        "Hoshimachi Suisei"
+      ],
+      "channelName": "Hoshimachi Suisei",
+      "channelId": "UC5CwaMl1eIgY8h02uZw7u8A",
+      "releaseDate": "2026-10-23T10:03:53.000Z",
+      "publishedAt": "2026-10-23T10:03:53.000Z",
+      "viewCount": 0,
+      "likeCount": 4,
+      "duration": 192,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-10-23T12:53:36.801Z"
+    },
     {
       "id": "BtpR74RBESc",
       "title": "【ホロドリ】『アマリリス』獅白ぼたん (Official Music Video)",
