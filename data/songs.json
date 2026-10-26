@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-24T12:06:56.580Z",
+  "generatedAt": "2026-10-26T01:22:41.613Z",
   "lastFullReconciledAt": "2026-10-16T09:20:43.877Z",
   "lastMode": "incremental",
   "source": "Holodex API v2",
@@ -14,14 +14,32 @@
       "stream"
     ]
   },
-  "total": 6339,
-  "sourceTotal": 6598,
+  "total": 6340,
+  "sourceTotal": 6599,
   "sourceTotalByTopic": {
-    "Original_Song": 3963,
+    "Original_Song": 3964,
     "Music_Cover": 2635
   },
   "pagesFetched": 132,
   "songs": [
+    {
+      "id": "cm-pPP1WeiU",
+      "title": "【ホロドリ】『CORE//UNBREAKABLE』Koseki Bijou (Full ver.)",
+      "artist": "Hololive Official",
+      "artists": [
+        "Hololive Official"
+      ],
+      "channelName": "hololive Dreams",
+      "channelId": "UCawGfU44CZxd2ZVf_VGijbA",
+      "releaseDate": "2026-10-25T12:00:31.000Z",
+      "publishedAt": "2026-10-25T12:00:31.000Z",
+      "viewCount": 36746,
+      "likeCount": 4110,
+      "duration": 234,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-10-26T01:22:47.274Z"
+    },
     {
       "id": "7CM4ZbyrafQ",
       "title": "【ホロドリ】『CORE//UNBREAKABLE』Koseki Bijou (Official Music Video)",
