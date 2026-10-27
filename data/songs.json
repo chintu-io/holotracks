@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-26T01:22:41.613Z",
+  "generatedAt": "2026-10-27T14:41:50.672Z",
   "lastFullReconciledAt": "2026-10-16T09:20:43.877Z",
   "lastMode": "incremental",
   "source": "Holodex API v2",
@@ -14,14 +14,104 @@
       "stream"
     ]
   },
-  "total": 6340,
-  "sourceTotal": 6599,
+  "total": 6345,
+  "sourceTotal": 6604,
   "sourceTotalByTopic": {
-    "Original_Song": 3964,
+    "Original_Song": 3969,
     "Music_Cover": 2635
   },
   "pagesFetched": 132,
   "songs": [
+    {
+      "id": "kpMgniQvIEM",
+      "title": "マルゴトミライ",
+      "artist": "Tokino Sora",
+      "artists": [
+        "Tokino Sora"
+      ],
+      "channelName": "Tokino Sora",
+      "channelId": "UCp6993wxpyDPHUpavwDFqgg",
+      "releaseDate": "2026-10-27T10:00:29.000Z",
+      "publishedAt": "2026-10-27T10:00:29.000Z",
+      "viewCount": 0,
+      "likeCount": 1,
+      "duration": 209,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-10-27T14:42:01.000Z"
+    },
+    {
+      "id": "sr5nJSExxrk",
+      "title": "スキ⇄スキ☆うろぼろす",
+      "artist": "Tokino Sora",
+      "artists": [
+        "Tokino Sora"
+      ],
+      "channelName": "Tokino Sora",
+      "channelId": "UCp6993wxpyDPHUpavwDFqgg",
+      "releaseDate": "2026-10-27T10:00:25.000Z",
+      "publishedAt": "2026-10-27T10:00:25.000Z",
+      "viewCount": 0,
+      "likeCount": 1,
+      "duration": 173,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-10-27T14:42:01.000Z"
+    },
+    {
+      "id": "mMO8VSZrZWI",
+      "title": "キラメキMODE! feat. 響咲リオナ",
+      "artist": "Tokino Sora",
+      "artists": [
+        "Tokino Sora"
+      ],
+      "channelName": "Tokino Sora",
+      "channelId": "UCp6993wxpyDPHUpavwDFqgg",
+      "releaseDate": "2026-10-27T10:00:10.000Z",
+      "publishedAt": "2026-10-27T10:00:10.000Z",
+      "viewCount": 0,
+      "likeCount": 1,
+      "duration": 192,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-10-27T14:42:01.000Z"
+    },
+    {
+      "id": "KDfB6ag_h6c",
+      "title": "決意のソラへ",
+      "artist": "Tokino Sora",
+      "artists": [
+        "Tokino Sora"
+      ],
+      "channelName": "Tokino Sora",
+      "channelId": "UCp6993wxpyDPHUpavwDFqgg",
+      "releaseDate": "2026-10-27T10:00:06.000Z",
+      "publishedAt": "2026-10-27T10:00:06.000Z",
+      "viewCount": 0,
+      "likeCount": 1,
+      "duration": 257,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-10-27T14:42:01.000Z"
+    },
+    {
+      "id": "BUGV22uYc9Y",
+      "title": "ハイパーチャッチャカチャージ",
+      "artist": "Tokino Sora",
+      "artists": [
+        "Tokino Sora"
+      ],
+      "channelName": "Tokino Sora",
+      "channelId": "UCp6993wxpyDPHUpavwDFqgg",
+      "releaseDate": "2026-10-27T10:00:00.000Z",
+      "publishedAt": "2026-10-27T10:00:00.000Z",
+      "viewCount": 0,
+      "likeCount": 1,
+      "duration": 185,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-10-27T14:42:01.000Z"
+    },
     {
       "id": "cm-pPP1WeiU",
       "title": "【ホロドリ】『CORE//UNBREAKABLE』Koseki Bijou (Full ver.)",
