@@ -1957,6 +1957,32 @@
     window.addEventListener('resize', updateDockMode, { passive: true });
     updateDockMode();
   }
+  async function setVideoTheater(open) {
+    const button = el['player-expand'];
+    const isMobile = window.matchMedia && window.matchMedia('(max-width: 680px)').matches;
+    document.body.classList.toggle('video-theater', open);
+    button.setAttribute('aria-pressed', String(open));
+    button.setAttribute('aria-label', open ? 'Exit video focus' : 'Expand video to 16:9');
+    button.title = open ? 'Exit video focus' : 'Expand video to 16:9';
+
+    if (open) {
+      // Fullscreen the page so the video can use a true landscape viewport on mobile.
+      // The CSS theater remains available when the browser rejects fullscreen.
+      if (!document.fullscreenElement && document.documentElement.requestFullscreen) {
+        try { await document.documentElement.requestFullscreen(); } catch {}
+      }
+      if (isMobile) {
+        try { await screen.orientation?.lock?.('landscape'); } catch {}
+      }
+      return;
+    }
+
+    try { screen.orientation?.unlock?.(); } catch {}
+    if (document.fullscreenElement) {
+      try { await document.exitFullscreen(); } catch {}
+    }
+  }
+
   function initEvents() {
     el['theme-toggle'].addEventListener('click', () => {
       const theme = document.body.classList.contains('theme-light') ? 'dark' : 'light';
@@ -2357,14 +2383,22 @@
       setSidebarCollapsed(document.body.classList.contains('sidebar-open'));
     });
     el['player-expand'].addEventListener('click', () => {
-      if (window.matchMedia && window.matchMedia('(max-width: 680px)').matches) {
-        toggleMobilePlayerPanel(true);
-        return;
-      }
-      setListeningRoomOpen(true);
+      setVideoTheater(!document.body.classList.contains('video-theater'));
+    });
+    document.addEventListener('fullscreenchange', () => {
+      if (document.fullscreenElement) return;
+      document.body.classList.remove('video-theater');
+      el['player-expand'].setAttribute('aria-pressed', 'false');
+      el['player-expand'].setAttribute('aria-label', 'Expand video to 16:9');
+      el['player-expand'].title = 'Expand video to 16:9';
+      try { screen.orientation?.unlock?.(); } catch {}
     });
 
     document.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && document.body.classList.contains('video-theater')) {
+        setVideoTheater(false);
+        return;
+      }
       if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') {
         event.preventDefault();
         el['search-input'].focus();
