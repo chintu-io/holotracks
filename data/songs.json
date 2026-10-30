@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-29T13:23:06.001Z",
+  "generatedAt": "2026-10-30T09:06:50.170Z",
   "lastFullReconciledAt": "2026-10-16T09:20:43.877Z",
   "lastMode": "incremental",
   "source": "Holodex API v2",
@@ -14,14 +14,68 @@
       "stream"
     ]
   },
-  "total": 6347,
-  "sourceTotal": 6614,
+  "total": 6350,
+  "sourceTotal": 6616,
   "sourceTotalByTopic": {
-    "Original_Song": 3971,
+    "Original_Song": 3973,
     "Music_Cover": 2643
   },
   "pagesFetched": 132,
   "songs": [
+    {
+      "id": "UVc8OHeq6Fs",
+      "title": "【MV】祝福のメシアとアイの塔『Blessed Messiah and the Tower of AI』【HoloPro EN/ID】",
+      "artist": "Axel Syrios",
+      "artists": [
+        "Axel Syrios"
+      ],
+      "channelName": "Axel Syrios",
+      "channelId": "UC2hx0xVkMoHGWijwr_lA01w",
+      "releaseDate": "2026-10-30T03:00:08.000Z",
+      "publishedAt": "2026-10-30T03:00:08.000Z",
+      "viewCount": 54034,
+      "likeCount": 9977,
+      "duration": 312,
+      "songType": "cover",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-10-30T09:07:05.630Z"
+    },
+    {
+      "id": "3f0PTj1xrvw",
+      "title": "IRISÉ (아이리제) ‘TRAUMA (Feat. Takanashi Kiara)' Official MV",
+      "artist": "IRISE",
+      "artists": [
+        "IRISE"
+      ],
+      "channelName": "IRISE",
+      "channelId": "UCMmcz1ybSoAD-GUlDx_7H2A",
+      "releaseDate": "2026-10-30T03:00:07.000Z",
+      "publishedAt": "2026-10-30T03:00:07.000Z",
+      "viewCount": 76872,
+      "likeCount": 8192,
+      "duration": 172,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-10-30T09:07:05.630Z"
+    },
+    {
+      "id": "CeTdduq4KbI",
+      "title": "IRISÉ (아이리제) ‘TRAUMA (Feat. Takanashi Kiara)' (Official Audio)",
+      "artist": "IRISE",
+      "artists": [
+        "IRISE"
+      ],
+      "channelName": "IRISE",
+      "channelId": "UCMmcz1ybSoAD-GUlDx_7H2A",
+      "releaseDate": "2026-10-30T03:00:02.000Z",
+      "publishedAt": "2026-10-30T03:00:02.000Z",
+      "viewCount": 4276,
+      "likeCount": 432,
+      "duration": 157,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-10-30T09:07:05.630Z"
+    },
     {
       "id": "CAuo9Nrfor4",
       "title": "果てない旅 / 輪堂千速(official)",
