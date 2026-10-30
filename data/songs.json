@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-30T09:06:50.170Z",
+  "generatedAt": "2026-10-30T16:03:13.895Z",
   "lastFullReconciledAt": "2026-10-16T09:20:43.877Z",
   "lastMode": "incremental",
   "source": "Holodex API v2",
@@ -14,14 +14,90 @@
       "stream"
     ]
   },
-  "total": 6350,
-  "sourceTotal": 6616,
+  "total": 6354,
+  "sourceTotal": 6618,
   "sourceTotalByTopic": {
-    "Original_Song": 3973,
-    "Music_Cover": 2643
+    "Original_Song": 3974,
+    "Music_Cover": 2644
   },
   "pagesFetched": 132,
   "songs": [
+    {
+      "id": "_ypWJ0IitYA",
+      "title": "クリームで会いにいけますか / 水宮枢×綺々羅々ヴィヴィ(cover)【ずっと真夜中でいいのに。/歌ってみた】",
+      "artist": "Kikirara Vivi",
+      "artists": [
+        "Kikirara Vivi",
+        "Mizumiya Su"
+      ],
+      "channelName": "hololive FLOW GLOW",
+      "channelId": "UCu2n3qHuOuQIygREMnWeQWg",
+      "releaseDate": "2026-10-30T11:30:08.000Z",
+      "publishedAt": "2026-10-30T11:30:08.000Z",
+      "viewCount": 28342,
+      "likeCount": 3524,
+      "duration": 237,
+      "songType": "cover",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-10-30T16:03:27.193Z"
+    },
+    {
+      "id": "We0W8ZoqCp4",
+      "title": "オリオンをなぞる / アソビ★まわり隊!(cover) 【歌ってみた/ホロライブ 】",
+      "artist": "Achichi Mela",
+      "artists": [
+        "Achichi Mela",
+        "ASOBI★MAWARI",
+        "Sorashina Sopia",
+        "Suzuna Tsuzuri"
+      ],
+      "channelName": "ASOBI★MAWARI-TAI!",
+      "channelId": "UCAHwWUotyS3l2qBetFDsjgQ",
+      "releaseDate": "2026-10-30T10:30:08.000Z",
+      "publishedAt": "2026-10-30T10:30:08.000Z",
+      "viewCount": 157793,
+      "likeCount": 13377,
+      "duration": 264,
+      "songType": "cover",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-10-30T16:03:27.193Z"
+    },
+    {
+      "id": "xZVjjUTFgj0",
+      "title": "IRIS OUT - 米津玄師 / AZKi (Cover)",
+      "artist": "AZKi",
+      "artists": [
+        "AZKi"
+      ],
+      "channelName": "AZKi",
+      "channelId": "UC0TXe_LYZ4scaW2XMyi5_kw",
+      "releaseDate": "2026-10-30T10:00:08.000Z",
+      "publishedAt": "2026-10-30T10:00:08.000Z",
+      "viewCount": 132276,
+      "likeCount": 12980,
+      "duration": 150,
+      "songType": "cover",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-10-30T16:03:27.193Z"
+    },
+    {
+      "id": "c2l-3G2UnVc",
+      "title": "TRAUMA",
+      "artist": "IRISE",
+      "artists": [
+        "IRISE"
+      ],
+      "channelName": "IRISE",
+      "channelId": "UCMmcz1ybSoAD-GUlDx_7H2A",
+      "releaseDate": "2026-10-30T03:00:30.000Z",
+      "publishedAt": "2026-10-30T03:00:30.000Z",
+      "viewCount": 5763,
+      "likeCount": 244,
+      "duration": 157,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-10-30T16:03:27.193Z"
+    },
     {
       "id": "UVc8OHeq6Fs",
       "title": "【MV】祝福のメシアとアイの塔『Blessed Messiah and the Tower of AI』【HoloPro EN/ID】",
