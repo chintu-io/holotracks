@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-31T05:58:33.768Z",
+  "generatedAt": "2026-10-31T11:37:26.320Z",
   "lastFullReconciledAt": "2026-10-16T09:20:43.877Z",
   "lastMode": "incremental",
   "source": "Holodex API v2",
@@ -14,14 +14,68 @@
       "stream"
     ]
   },
-  "total": 6356,
-  "sourceTotal": 6618,
+  "total": 6359,
+  "sourceTotal": 6621,
   "sourceTotalByTopic": {
     "Original_Song": 3974,
-    "Music_Cover": 2644
+    "Music_Cover": 2647
   },
   "pagesFetched": 132,
   "songs": [
+    {
+      "id": "RSX-jUjc9Hw",
+      "title": "【3D LIVE】らぶりー属性♡/テロップ・歌詞無しver【ホロライブ/白上フブキ】",
+      "artist": "Shirakami Fubuki",
+      "artists": [
+        "Shirakami Fubuki"
+      ],
+      "channelName": "Shirakami Fubuki",
+      "channelId": "UCdn5BQ06XqgXoAxIhbqw5Rg",
+      "releaseDate": "2026-10-31T10:00:31.000Z",
+      "publishedAt": "2026-10-31T10:00:31.000Z",
+      "viewCount": 6171,
+      "likeCount": 2637,
+      "duration": 232,
+      "songType": "cover",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-10-31T11:37:45.816Z"
+    },
+    {
+      "id": "pm4Vck0LCqE",
+      "title": "UNDEAD covered by 熱千めら",
+      "artist": "Achichi Mela",
+      "artists": [
+        "Achichi Mela"
+      ],
+      "channelName": "Achichi Mela",
+      "channelId": "UC8eitCE9Z6EwUCs-VUi1blg",
+      "releaseDate": "2026-10-31T10:00:08.000Z",
+      "publishedAt": "2026-10-31T10:00:08.000Z",
+      "viewCount": 43421,
+      "likeCount": 14889,
+      "duration": 185,
+      "songType": "cover",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-10-31T11:37:45.816Z"
+    },
+    {
+      "id": "Go7vY-ZdJGA",
+      "title": "??? covered by 鈴鳴つづり ホロライブ",
+      "artist": "Suzuna Tsuzuri",
+      "artists": [
+        "Suzuna Tsuzuri"
+      ],
+      "channelName": "Suzuna Tsuzuri",
+      "channelId": "UCy9mgxB8pn2C4aNK_MPthDQ",
+      "releaseDate": "2026-10-31T09:00:09.000Z",
+      "publishedAt": "2026-10-31T09:00:09.000Z",
+      "viewCount": 68825,
+      "likeCount": 13574,
+      "duration": 192,
+      "songType": "cover",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-10-31T11:37:45.816Z"
+    },
     {
       "id": "zHorAsW9mPQ",
       "title": "洗脳 (Brainwashed) - Mori Calliope (cover)",
