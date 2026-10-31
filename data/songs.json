@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-31T11:37:26.320Z",
+  "generatedAt": "2026-10-31T16:20:54.621Z",
   "lastFullReconciledAt": "2026-10-16T09:20:43.877Z",
   "lastMode": "incremental",
   "source": "Holodex API v2",
@@ -14,14 +14,122 @@
       "stream"
     ]
   },
-  "total": 6359,
-  "sourceTotal": 6621,
+  "total": 6365,
+  "sourceTotal": 6629,
   "sourceTotalByTopic": {
-    "Original_Song": 3974,
+    "Original_Song": 3982,
     "Music_Cover": 2647
   },
   "pagesFetched": 132,
   "songs": [
+    {
+      "id": "H2ZY7Tav_V8",
+      "title": "推したら引けない恋でした (Instrumental)",
+      "artist": "Hakui Koyori",
+      "artists": [
+        "Hakui Koyori"
+      ],
+      "channelName": "Hakui Koyori",
+      "channelId": "UC6eWCld0KwmyHFbAqK3V-Rw",
+      "releaseDate": "2026-10-31T15:00:08.000Z",
+      "publishedAt": "2026-10-31T15:00:08.000Z",
+      "viewCount": 14,
+      "likeCount": 5,
+      "duration": 176,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-10-31T16:21:10.302Z"
+    },
+    {
+      "id": "WQddgm8A1R8",
+      "title": "推したら引けない恋でした",
+      "artist": "Hakui Koyori",
+      "artists": [
+        "Hakui Koyori"
+      ],
+      "channelName": "Hakui Koyori",
+      "channelId": "UC6eWCld0KwmyHFbAqK3V-Rw",
+      "releaseDate": "2026-10-31T15:00:02.000Z",
+      "publishedAt": "2026-10-31T15:00:02.000Z",
+      "viewCount": 124,
+      "likeCount": 35,
+      "duration": 177,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-10-31T16:21:10.302Z"
+    },
+    {
+      "id": "pyjKpx844Ws",
+      "title": "Bad ∞ End ∞ Night/ひとしずく×やま△【歌ってみた】",
+      "artist": "Zakuro Shiro",
+      "artists": [
+        "Zakuro Shiro"
+      ],
+      "channelName": "Zakuro Shiro",
+      "channelId": "UCPmcUzR-kh8hGVbNdYU84EA",
+      "releaseDate": "2026-10-31T12:00:10.000Z",
+      "publishedAt": "2026-10-31T12:00:10.000Z",
+      "viewCount": 23575,
+      "likeCount": 2363,
+      "duration": 251,
+      "songType": "cover",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-10-31T16:21:10.302Z"
+    },
+    {
+      "id": "cQbWSAbnduc",
+      "title": "Loveit? / biz×ZERA【Cover】(Vestia Zeta/夏色まつり)",
+      "artist": "Vestia Zeta",
+      "artists": [
+        "Vestia Zeta"
+      ],
+      "channelName": "Vestia Zeta",
+      "channelId": "UCTvHWSfBZgtxE4sILOaurIQ",
+      "releaseDate": "2026-10-31T12:00:10.000Z",
+      "publishedAt": "2026-10-31T12:00:10.000Z",
+      "viewCount": 15595,
+      "likeCount": 2965,
+      "duration": 149,
+      "songType": "cover",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-10-31T16:21:10.302Z"
+    },
+    {
+      "id": "Cl3LkvJkQzQ",
+      "title": "推したら引けない恋でした / KoZMy(AZKi・雪花ラミィ・博衣こより (Official)",
+      "artist": "Hakui Koyori",
+      "artists": [
+        "Hakui Koyori"
+      ],
+      "channelName": "Hakui Koyori",
+      "channelId": "UC6eWCld0KwmyHFbAqK3V-Rw",
+      "releaseDate": "2026-10-31T12:00:10.000Z",
+      "publishedAt": "2026-10-31T12:00:10.000Z",
+      "viewCount": 52745,
+      "likeCount": 6460,
+      "duration": 176,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-10-31T16:21:10.302Z"
+    },
+    {
+      "id": "c9yFK-ytqPg",
+      "title": "Goblok Tenan | OST Troublemaker 2 Beyond Dream by AREA15 hololive",
+      "artist": "Airani Iofifteen",
+      "artists": [
+        "Airani Iofifteen"
+      ],
+      "channelName": "Airani Iofifteen",
+      "channelId": "UCAoy6rzhSf4ydcYjJw3WoVg",
+      "releaseDate": "2026-10-31T12:00:09.000Z",
+      "publishedAt": "2026-10-31T12:00:09.000Z",
+      "viewCount": 22194,
+      "likeCount": 4381,
+      "duration": 199,
+      "songType": "cover",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-10-31T16:21:10.302Z"
+    },
     {
       "id": "RSX-jUjc9Hw",
       "title": "【3D LIVE】らぶりー属性♡/テロップ・歌詞無しver【ホロライブ/白上フブキ】",
