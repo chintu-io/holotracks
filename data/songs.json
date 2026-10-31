@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-31T00:11:04.070Z",
+  "generatedAt": "2026-10-31T05:58:33.768Z",
   "lastFullReconciledAt": "2026-10-16T09:20:43.877Z",
   "lastMode": "incremental",
   "source": "Holodex API v2",
@@ -14,14 +14,32 @@
       "stream"
     ]
   },
-  "total": 6355,
-  "sourceTotal": 6619,
+  "total": 6356,
+  "sourceTotal": 6618,
   "sourceTotalByTopic": {
-    "Original_Song": 3975,
+    "Original_Song": 3974,
     "Music_Cover": 2644
   },
   "pagesFetched": 132,
   "songs": [
+    {
+      "id": "zHorAsW9mPQ",
+      "title": "洗脳 (Brainwashed) - Mori Calliope (cover)",
+      "artist": "Mori Calliope",
+      "artists": [
+        "Mori Calliope"
+      ],
+      "channelName": "Mori Calliope",
+      "channelId": "UCL_qhgtOy0dy1Agp8vkySQg",
+      "releaseDate": "2026-10-31T03:00:09.000Z",
+      "publishedAt": "2026-10-31T03:00:09.000Z",
+      "viewCount": 39267,
+      "likeCount": 5859,
+      "duration": 173,
+      "songType": "cover",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-10-31T05:58:39.934Z"
+    },
     {
       "id": "LYb4A_Syxbg",
       "title": "Takanashi Kiara reacts to IRISÉ (아이리제) ‘TRAUMA (Feat. Takanashi Kiara)' Official MV",
