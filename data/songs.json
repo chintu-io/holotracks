@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-01T09:26:47.370Z",
+  "generatedAt": "2026-11-01T16:11:04.903Z",
   "lastFullReconciledAt": "2026-10-16T09:20:43.877Z",
   "lastMode": "incremental",
   "source": "Holodex API v2",
@@ -14,14 +14,212 @@
       "stream"
     ]
   },
-  "total": 6367,
-  "sourceTotal": 6629,
+  "total": 6378,
+  "sourceTotal": 6640,
   "sourceTotalByTopic": {
-    "Original_Song": 3982,
+    "Original_Song": 3993,
     "Music_Cover": 2647
   },
   "pagesFetched": 132,
   "songs": [
+    {
+      "id": "myEcAxoC8Ks",
+      "title": "せんしゅセンセーション",
+      "artist": "Natsuiro Matsuri",
+      "artists": [
+        "Natsuiro Matsuri"
+      ],
+      "channelName": "Natsuiro Matsuri",
+      "channelId": "UCQ0UDLQCjY0rmuxCDE38FGg",
+      "releaseDate": "2026-11-01T15:04:59.000Z",
+      "publishedAt": "2026-11-01T15:04:59.000Z",
+      "viewCount": 25,
+      "likeCount": 9,
+      "duration": 225,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-01T16:11:14.349Z"
+    },
+    {
+      "id": "wPjIB5hNttM",
+      "title": "せんしゅセンセーション (Instrumental)",
+      "artist": "Natsuiro Matsuri",
+      "artists": [
+        "Natsuiro Matsuri"
+      ],
+      "channelName": "Natsuiro Matsuri",
+      "channelId": "UCQ0UDLQCjY0rmuxCDE38FGg",
+      "releaseDate": "2026-11-01T15:03:55.000Z",
+      "publishedAt": "2026-11-01T15:03:55.000Z",
+      "viewCount": 12,
+      "likeCount": 3,
+      "duration": 225,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-01T16:11:14.349Z"
+    },
+    {
+      "id": "bnLtvNBx7CA",
+      "title": "Diamond Spark!",
+      "artist": "Hakos Baelz",
+      "artists": [
+        "Hakos Baelz"
+      ],
+      "channelName": "Hakos Baelz",
+      "channelId": "UCgmPnx-EEeOrZSg5Tiw7ZRQ",
+      "releaseDate": "2026-11-01T15:00:48.000Z",
+      "publishedAt": "2026-11-01T15:00:48.000Z",
+      "viewCount": 343,
+      "likeCount": 121,
+      "duration": 237,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-01T16:11:14.349Z"
+    },
+    {
+      "id": "G1rZbBCrOCo",
+      "title": "Our Tomorrow",
+      "artist": "Hakos Baelz",
+      "artists": [
+        "Hakos Baelz"
+      ],
+      "channelName": "Hakos Baelz",
+      "channelId": "UCgmPnx-EEeOrZSg5Tiw7ZRQ",
+      "releaseDate": "2026-11-01T15:00:32.000Z",
+      "publishedAt": "2026-11-01T15:00:32.000Z",
+      "viewCount": 211,
+      "likeCount": 103,
+      "duration": 214,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-01T16:11:14.349Z"
+    },
+    {
+      "id": "dTPWd-vSIIU",
+      "title": "villain era",
+      "artist": "Hakos Baelz",
+      "artists": [
+        "Hakos Baelz"
+      ],
+      "channelName": "Hakos Baelz",
+      "channelId": "UCgmPnx-EEeOrZSg5Tiw7ZRQ",
+      "releaseDate": "2026-11-01T15:00:26.000Z",
+      "publishedAt": "2026-11-01T15:00:26.000Z",
+      "viewCount": 180,
+      "likeCount": 85,
+      "duration": 203,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-01T16:11:14.349Z"
+    },
+    {
+      "id": "wfZvANELAqo",
+      "title": "I found me",
+      "artist": "Hakos Baelz",
+      "artists": [
+        "Hakos Baelz"
+      ],
+      "channelName": "Hakos Baelz",
+      "channelId": "UCgmPnx-EEeOrZSg5Tiw7ZRQ",
+      "releaseDate": "2026-11-01T15:00:21.000Z",
+      "publishedAt": "2026-11-01T15:00:21.000Z",
+      "viewCount": 50,
+      "likeCount": 41,
+      "duration": 264,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-01T16:11:14.349Z"
+    },
+    {
+      "id": "vJvorHyzFL8",
+      "title": "HEADSHOT",
+      "artist": "Hakos Baelz",
+      "artists": [
+        "Hakos Baelz"
+      ],
+      "channelName": "Hakos Baelz",
+      "channelId": "UCgmPnx-EEeOrZSg5Tiw7ZRQ",
+      "releaseDate": "2026-11-01T15:00:15.000Z",
+      "publishedAt": "2026-11-01T15:00:15.000Z",
+      "viewCount": 731,
+      "likeCount": 140,
+      "duration": 173,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-01T16:11:14.349Z"
+    },
+    {
+      "id": "O09vMSn_LsM",
+      "title": "My Horizon",
+      "artist": "Hakos Baelz",
+      "artists": [
+        "Hakos Baelz"
+      ],
+      "channelName": "Hakos Baelz",
+      "channelId": "UCgmPnx-EEeOrZSg5Tiw7ZRQ",
+      "releaseDate": "2026-11-01T15:00:15.000Z",
+      "publishedAt": "2026-11-01T15:00:15.000Z",
+      "viewCount": 139,
+      "likeCount": 77,
+      "duration": 224,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-01T16:11:14.349Z"
+    },
+    {
+      "id": "24Yb37wigU8",
+      "title": "SNAKE EYES",
+      "artist": "Hakos Baelz",
+      "artists": [
+        "Hakos Baelz"
+      ],
+      "channelName": "Hakos Baelz",
+      "channelId": "UCgmPnx-EEeOrZSg5Tiw7ZRQ",
+      "releaseDate": "2026-11-01T15:00:13.000Z",
+      "publishedAt": "2026-11-01T15:00:13.000Z",
+      "viewCount": 60,
+      "likeCount": 50,
+      "duration": 185,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-01T16:11:14.349Z"
+    },
+    {
+      "id": "U1EyLzKxtR4",
+      "title": "For you",
+      "artist": "Hakos Baelz",
+      "artists": [
+        "Hakos Baelz"
+      ],
+      "channelName": "Hakos Baelz",
+      "channelId": "UCgmPnx-EEeOrZSg5Tiw7ZRQ",
+      "releaseDate": "2026-11-01T15:00:10.000Z",
+      "publishedAt": "2026-11-01T15:00:10.000Z",
+      "viewCount": 146,
+      "likeCount": 76,
+      "duration": 273,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-01T16:11:14.349Z"
+    },
+    {
+      "id": "LCCe_mqLNH8",
+      "title": "【オリジナル曲】せんしゅセンセーション【ホロライブ/夏色まつり/Medansy(TRIFRONTIER)】",
+      "artist": "Natsuiro Matsuri",
+      "artists": [
+        "Natsuiro Matsuri"
+      ],
+      "channelName": "Natsuiro Matsuri",
+      "channelId": "UCQ0UDLQCjY0rmuxCDE38FGg",
+      "releaseDate": "2026-11-01T12:05:07.000Z",
+      "publishedAt": "2026-11-01T12:05:07.000Z",
+      "viewCount": 41207,
+      "likeCount": 5168,
+      "duration": 230,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-01T16:11:14.349Z"
+    },
     {
       "id": "gcw3FDCFWi8",
       "title": "【ORIGINAL 3D MV】 HEADSHOT || HAKOS BAELZ (Prod. TeddyLoid x MATZ)",
