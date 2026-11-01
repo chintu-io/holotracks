@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-01T02:26:04.860Z",
+  "generatedAt": "2026-11-01T09:26:47.370Z",
   "lastFullReconciledAt": "2026-10-16T09:20:43.877Z",
   "lastMode": "incremental",
   "source": "Holodex API v2",
@@ -14,7 +14,7 @@
       "stream"
     ]
   },
-  "total": 6366,
+  "total": 6367,
   "sourceTotal": 6629,
   "sourceTotalByTopic": {
     "Original_Song": 3982,
@@ -22,6 +22,24 @@
   },
   "pagesFetched": 132,
   "songs": [
+    {
+      "id": "gcw3FDCFWi8",
+      "title": "【ORIGINAL 3D MV】 HEADSHOT || HAKOS BAELZ (Prod. TeddyLoid x MATZ)",
+      "artist": "Hakos Baelz",
+      "artists": [
+        "Hakos Baelz"
+      ],
+      "channelName": "Hakos Baelz",
+      "channelId": "UCgmPnx-EEeOrZSg5Tiw7ZRQ",
+      "releaseDate": "2026-11-01T04:15:06.000Z",
+      "publishedAt": "2026-11-01T04:15:06.000Z",
+      "viewCount": 220039,
+      "likeCount": 23495,
+      "duration": 173,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-01T09:27:01.998Z"
+    },
     {
       "id": "f60Z3Ql7Kkc",
       "title": "【MV】 ?????【Eru Erudite x Josuiji Shinri cover】",
