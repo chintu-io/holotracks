@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-01T16:11:04.903Z",
+  "generatedAt": "2026-11-02T21:58:02.686Z",
   "lastFullReconciledAt": "2026-10-16T09:20:43.877Z",
   "lastMode": "incremental",
   "source": "Holodex API v2",
@@ -14,14 +14,50 @@
       "stream"
     ]
   },
-  "total": 6378,
-  "sourceTotal": 6641,
+  "total": 6380,
+  "sourceTotal": 6643,
   "sourceTotalByTopic": {
-    "Original_Song": 3994,
+    "Original_Song": 3996,
     "Music_Cover": 2647
   },
   "pagesFetched": 132,
   "songs": [
+    {
+      "id": "KY-PByYGuck",
+      "title": "Pong de Ding",
+      "artist": "Robocosan",
+      "artists": [
+        "Robocosan"
+      ],
+      "channelName": "Robocosan",
+      "channelId": "UCDqI2jOz0weumE8s7paEk6g",
+      "releaseDate": "2026-11-02T15:02:15.000Z",
+      "publishedAt": "2026-11-02T15:02:15.000Z",
+      "viewCount": 979,
+      "likeCount": 181,
+      "duration": 207,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-02T21:58:12.855Z"
+    },
+    {
+      "id": "0p0iWVgBiJ4",
+      "title": "Pong de Ding (Instrumental)",
+      "artist": "Robocosan",
+      "artists": [
+        "Robocosan"
+      ],
+      "channelName": "Robocosan",
+      "channelId": "UCDqI2jOz0weumE8s7paEk6g",
+      "releaseDate": "2026-11-02T15:01:59.000Z",
+      "publishedAt": "2026-11-02T15:01:59.000Z",
+      "viewCount": 165,
+      "likeCount": 17,
+      "duration": 207,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-02T21:58:12.855Z"
+    },
     {
       "id": "myEcAxoC8Ks",
       "title": "せんしゅセンセーション",
