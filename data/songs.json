@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-02T21:58:02.686Z",
+  "generatedAt": "2026-11-03T18:29:42.184Z",
   "lastFullReconciledAt": "2026-10-16T09:20:43.877Z",
   "lastMode": "incremental",
   "source": "Holodex API v2",
@@ -14,14 +14,51 @@
       "stream"
     ]
   },
-  "total": 6380,
-  "sourceTotal": 6643,
+  "total": 6382,
+  "sourceTotal": 6644,
   "sourceTotalByTopic": {
-    "Original_Song": 3996,
+    "Original_Song": 3997,
     "Music_Cover": 2647
   },
   "pagesFetched": 132,
   "songs": [
+    {
+      "id": "4lga0I_b6fc",
+      "title": "【3D LIVE】グリズリーに襲われたら・歌詞無しver【ホロライブ/白上フブキ/風真いろは】",
+      "artist": "Kazama Iroha",
+      "artists": [
+        "Kazama Iroha",
+        "Shirakami Fubuki"
+      ],
+      "channelName": "Shirakami Fubuki",
+      "channelId": "UCdn5BQ06XqgXoAxIhbqw5Rg",
+      "releaseDate": "2026-11-03T09:00:35.000Z",
+      "publishedAt": "2026-11-03T09:00:35.000Z",
+      "viewCount": 41550,
+      "likeCount": 3115,
+      "duration": 255,
+      "songType": "cover",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-03T18:29:55.124Z"
+    },
+    {
+      "id": "Q_y5KOEl1dk",
+      "title": "【メイドインアビス】劇場シリーズ第一部「目覚める神秘」/主題歌「Chain of the Abyss」Kevin Penkin feat. Mori Calliope(シリーズ振り返りリリックビデオ)",
+      "artist": "Mori Calliope",
+      "artists": [
+        "Mori Calliope"
+      ],
+      "channelName": "Mori Calliope",
+      "channelId": "UCL_qhgtOy0dy1Agp8vkySQg",
+      "releaseDate": "2026-11-03T03:00:00.000Z",
+      "publishedAt": "2026-11-03T03:00:00.000Z",
+      "viewCount": 111673,
+      "likeCount": 7274,
+      "duration": 250,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-03T18:29:55.124Z"
+    },
     {
       "id": "KY-PByYGuck",
       "title": "Pong de Ding",
