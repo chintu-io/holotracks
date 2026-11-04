@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-04T11:19:20.516Z",
+  "generatedAt": "2026-11-04T18:44:02.004Z",
   "lastFullReconciledAt": "2026-10-16T09:20:43.877Z",
   "lastMode": "incremental",
   "source": "Holodex API v2",
@@ -14,14 +14,140 @@
       "stream"
     ]
   },
-  "total": 6383,
-  "sourceTotal": 6646,
+  "total": 6390,
+  "sourceTotal": 6653,
   "sourceTotalByTopic": {
-    "Original_Song": 3999,
+    "Original_Song": 4006,
     "Music_Cover": 2647
   },
   "pagesFetched": 132,
   "songs": [
+    {
+      "id": "q4P_cEApp44",
+      "title": "神ツモ☆ドラドラ伝説 (宝鐘マリン SOLO ver.)",
+      "artist": "Houshou Marine",
+      "artists": [
+        "Houshou Marine"
+      ],
+      "channelName": "Houshou Marine",
+      "channelId": "UCCzUftO8KOVkV4wQG1vkUvg",
+      "releaseDate": "2026-11-04T15:04:37.000Z",
+      "publishedAt": "2026-11-04T15:04:37.000Z",
+      "viewCount": 190,
+      "likeCount": 37,
+      "duration": 200,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-04T18:44:10.082Z"
+    },
+    {
+      "id": "YwH7pW1k2yc",
+      "title": "神ツモ☆ドラドラ伝説 (一条莉々華 SOLO ver.)",
+      "artist": "Ichijou Ririka",
+      "artists": [
+        "Ichijou Ririka"
+      ],
+      "channelName": "Ichijou Ririka",
+      "channelId": "UCtyWhCj3AqKh2dXctLkDtng",
+      "releaseDate": "2026-11-04T15:04:05.000Z",
+      "publishedAt": "2026-11-04T15:04:05.000Z",
+      "viewCount": 88,
+      "likeCount": 23,
+      "duration": 200,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-04T18:44:10.082Z"
+    },
+    {
+      "id": "3EAD0xdl9Qg",
+      "title": "神ツモ☆ドラドラ伝説 (Instrumental)",
+      "artist": "Aki Rosenthal",
+      "artists": [
+        "Aki Rosenthal"
+      ],
+      "channelName": "Aki Rosenthal",
+      "channelId": "UCFTLzh12_nrtzqBPsTCqenA",
+      "releaseDate": "2026-11-04T15:03:39.000Z",
+      "publishedAt": "2026-11-04T15:03:39.000Z",
+      "viewCount": 19,
+      "likeCount": 9,
+      "duration": 200,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-04T18:44:10.082Z"
+    },
+    {
+      "id": "BNz8E49HkkI",
+      "title": "神ツモ☆ドラドラ伝説",
+      "artist": "Aki Rosenthal",
+      "artists": [
+        "Aki Rosenthal"
+      ],
+      "channelName": "Aki Rosenthal",
+      "channelId": "UCFTLzh12_nrtzqBPsTCqenA",
+      "releaseDate": "2026-11-04T15:03:25.000Z",
+      "publishedAt": "2026-11-04T15:03:25.000Z",
+      "viewCount": 406,
+      "likeCount": 71,
+      "duration": 200,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-04T18:44:10.082Z"
+    },
+    {
+      "id": "Nfbr10KhVWs",
+      "title": "神ツモ☆ドラドラ伝説 (白上フブキ SOLO ver.)",
+      "artist": "Shirakami Fubuki",
+      "artists": [
+        "Shirakami Fubuki"
+      ],
+      "channelName": "Shirakami Fubuki",
+      "channelId": "UCdn5BQ06XqgXoAxIhbqw5Rg",
+      "releaseDate": "2026-11-04T15:03:23.000Z",
+      "publishedAt": "2026-11-04T15:03:23.000Z",
+      "viewCount": 100,
+      "likeCount": 18,
+      "duration": 200,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-04T18:44:10.082Z"
+    },
+    {
+      "id": "zlIbXAyUdgA",
+      "title": "神ツモ☆ドラドラ伝説 (アキ・ローゼンタール SOLO ver.)",
+      "artist": "Aki Rosenthal",
+      "artists": [
+        "Aki Rosenthal"
+      ],
+      "channelName": "Aki Rosenthal",
+      "channelId": "UCFTLzh12_nrtzqBPsTCqenA",
+      "releaseDate": "2026-11-04T15:02:52.000Z",
+      "publishedAt": "2026-11-04T15:02:52.000Z",
+      "viewCount": 288,
+      "likeCount": 28,
+      "duration": 200,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-04T18:44:10.082Z"
+    },
+    {
+      "id": "-4Pkc4dNIL0",
+      "title": "【ホロドリ】『怪宴スペクタクル』夏色まつり/Vestia Zeta/Nerissa Ravencroft/儒烏風亭らでん/轟はじめ (Full ver.)",
+      "artist": "Natsuiro Matsuri",
+      "artists": [
+        "Natsuiro Matsuri"
+      ],
+      "channelName": "hololive Dreams",
+      "channelId": "UCawGfU44CZxd2ZVf_VGijbA",
+      "releaseDate": "2026-11-04T11:00:18.000Z",
+      "publishedAt": "2026-11-04T11:00:18.000Z",
+      "viewCount": 9468,
+      "likeCount": 963,
+      "duration": 231,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-04T18:44:10.082Z"
+    },
     {
       "id": "GKUUf0fs_So",
       "title": "ときのそら「マルゴトミライ」【Official Music Video】",
