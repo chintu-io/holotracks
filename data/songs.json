@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-05T04:56:54.310Z",
+  "generatedAt": "2026-11-05T12:51:23.226Z",
   "lastFullReconciledAt": "2026-10-16T09:20:43.877Z",
   "lastMode": "incremental",
   "source": "Holodex API v2",
@@ -14,14 +14,51 @@
       "stream"
     ]
   },
-  "total": 6391,
-  "sourceTotal": 6654,
+  "total": 6393,
+  "sourceTotal": 6655,
   "sourceTotalByTopic": {
     "Original_Song": 4007,
-    "Music_Cover": 2647
+    "Music_Cover": 2648
   },
   "pagesFetched": 132,
   "songs": [
+    {
+      "id": "eaPEREHrA5w",
+      "title": "ときのそら「ハイパーチャッチャカチャージ」【Official Music Video】",
+      "artist": "Tokino Sora",
+      "artists": [
+        "Tokino Sora"
+      ],
+      "channelName": "Tokino Sora",
+      "channelId": "UCp6993wxpyDPHUpavwDFqgg",
+      "releaseDate": "2026-11-05T11:00:09.000Z",
+      "publishedAt": "2026-11-05T11:00:09.000Z",
+      "viewCount": 4542,
+      "likeCount": 2439,
+      "duration": 185,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-05T12:51:36.442Z"
+    },
+    {
+      "id": "02OOQBuTODA",
+      "title": "【3D LIVE】Special♡Spell・歌詞無しver【ホロライブ/白上フブキ/風真いろは】",
+      "artist": "Kazama Iroha",
+      "artists": [
+        "Kazama Iroha",
+        "Shirakami Fubuki"
+      ],
+      "channelName": "Shirakami Fubuki",
+      "channelId": "UCdn5BQ06XqgXoAxIhbqw5Rg",
+      "releaseDate": "2026-11-05T09:00:14.000Z",
+      "publishedAt": "2026-11-05T09:00:14.000Z",
+      "viewCount": 21664,
+      "likeCount": 2061,
+      "duration": 192,
+      "songType": "cover",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-05T12:51:36.442Z"
+    },
     {
       "id": "q4P_cEApp44",
       "title": "神ツモ☆ドラドラ伝説 (宝鐘マリン SOLO ver.)",
