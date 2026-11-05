@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-04T18:44:02.004Z",
+  "generatedAt": "2026-11-05T04:56:54.310Z",
   "lastFullReconciledAt": "2026-10-16T09:20:43.877Z",
   "lastMode": "incremental",
   "source": "Holodex API v2",
@@ -14,10 +14,10 @@
       "stream"
     ]
   },
-  "total": 6390,
-  "sourceTotal": 6653,
+  "total": 6391,
+  "sourceTotal": 6654,
   "sourceTotalByTopic": {
-    "Original_Song": 4006,
+    "Original_Song": 4007,
     "Music_Cover": 2647
   },
   "pagesFetched": 132,
@@ -165,6 +165,24 @@
       "songType": "original",
       "source": "Holodex",
       "statisticsCheckedAt": "2026-11-04T11:19:36.115Z"
+    },
+    {
+      "id": "pYB-xfIcd9c",
+      "title": "[PLAY COLOR | 4K] 아이리제 (IRISÉ) - TRAUMA (Feat. Takanashi Kiara)",
+      "artist": "IRISE",
+      "artists": [
+        "IRISE"
+      ],
+      "channelName": "IRISE",
+      "channelId": "UCMmcz1ybSoAD-GUlDx_7H2A",
+      "releaseDate": "2026-11-03T10:00:26.000Z",
+      "publishedAt": "2026-11-03T10:00:26.000Z",
+      "viewCount": 158864,
+      "likeCount": 3209,
+      "duration": 182,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-05T04:57:05.857Z"
     },
     {
       "id": "4lga0I_b6fc",
