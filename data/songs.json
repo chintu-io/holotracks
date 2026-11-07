@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-06T15:25:56.168Z",
+  "generatedAt": "2026-11-07T13:37:14.643Z",
   "lastFullReconciledAt": "2026-10-16T09:20:43.877Z",
   "lastMode": "incremental",
   "source": "Holodex API v2",
@@ -14,14 +14,88 @@
       "stream"
     ]
   },
-  "total": 6395,
-  "sourceTotal": 6659,
+  "total": 6399,
+  "sourceTotal": 6661,
   "sourceTotalByTopic": {
     "Original_Song": 4010,
-    "Music_Cover": 2649
+    "Music_Cover": 2651
   },
   "pagesFetched": 132,
   "songs": [
+    {
+      "id": "epIHShVWmOY",
+      "title": "Ex-Otogibanashi – ryo (supercell) / 町田ちま & 虎金妃笑虎(Cover)",
+      "artist": "Koganei Niko",
+      "artists": [
+        "Koganei Niko",
+        "Machita Chima"
+      ],
+      "channelName": "Machita Chima",
+      "channelId": "UCo7TRj3cS-f_1D9ZDmuTsjw",
+      "releaseDate": "2026-11-07T12:15:07.000Z",
+      "publishedAt": "2026-11-07T12:15:07.000Z",
+      "viewCount": 12028,
+      "likeCount": 2642,
+      "duration": 222,
+      "songType": "cover",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-07T13:37:33.180Z"
+    },
+    {
+      "id": "AJRfDbuDne4",
+      "title": "おどりゃんせ/町田ちま×虎金妃笑虎(cover)",
+      "artist": "Koganei Niko",
+      "artists": [
+        "Koganei Niko",
+        "Machita Chima"
+      ],
+      "channelName": "Koganei Niko",
+      "channelId": "UCuI_opAVX6qbxZY-a-AxFuQ",
+      "releaseDate": "2026-11-07T12:00:11.000Z",
+      "publishedAt": "2026-11-07T12:00:11.000Z",
+      "viewCount": 9358,
+      "likeCount": 3483,
+      "duration": 201,
+      "songType": "cover",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-07T13:37:33.180Z"
+    },
+    {
+      "id": "nxx0SVGp5yQ",
+      "title": "【Original Song MV】オーガンジー (Organdy)【Anya Melfissa】",
+      "artist": "Anya Melfissa",
+      "artists": [
+        "Anya Melfissa"
+      ],
+      "channelName": "Anya Melfissa",
+      "channelId": "UC727SQYUvx5pDDGQpTICNWg",
+      "releaseDate": "2026-11-07T12:00:08.000Z",
+      "publishedAt": "2026-11-07T12:00:08.000Z",
+      "viewCount": 4584,
+      "likeCount": 3165,
+      "duration": 138,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-07T13:37:33.180Z"
+    },
+    {
+      "id": "5Fg6ldWqESI",
+      "title": "エジソン coverd by ロボ子さん ⚙ Cecilia Immergreen",
+      "artist": "Robocosan",
+      "artists": [
+        "Robocosan"
+      ],
+      "channelName": "Robocosan",
+      "channelId": "UCDqI2jOz0weumE8s7paEk6g",
+      "releaseDate": "2026-11-07T10:00:08.000Z",
+      "publishedAt": "2026-11-07T10:00:08.000Z",
+      "viewCount": 28569,
+      "likeCount": 5671,
+      "duration": 195,
+      "songType": "cover",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-07T13:37:33.180Z"
+    },
     {
       "id": "3d1AbOhFUxE",
       "title": "IRISÉ (아이리제) ‘TRAUMA (Feat. Takanashi Kiara)' Performance Video",
