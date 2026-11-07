@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-07T13:37:14.643Z",
+  "generatedAt": "2026-11-07T18:22:18.218Z",
   "lastFullReconciledAt": "2026-10-16T09:20:43.877Z",
   "lastMode": "incremental",
   "source": "Holodex API v2",
@@ -14,14 +14,158 @@
       "stream"
     ]
   },
-  "total": 6399,
-  "sourceTotal": 6661,
+  "total": 6407,
+  "sourceTotal": 6669,
   "sourceTotalByTopic": {
-    "Original_Song": 4010,
-    "Music_Cover": 2651
+    "Original_Song": 4017,
+    "Music_Cover": 2652
   },
   "pagesFetched": 132,
   "songs": [
+    {
+      "id": "uZ4PYIbkQ5o",
+      "title": "【3D LIVE】愛猫 by bizxZERA 【Cover/Vestia Zeta】",
+      "artist": "Vestia Zeta",
+      "artists": [
+        "Vestia Zeta"
+      ],
+      "channelName": "Vestia Zeta",
+      "channelId": "UCTvHWSfBZgtxE4sILOaurIQ",
+      "releaseDate": "2026-11-07T18:11:20.000Z",
+      "publishedAt": "2026-11-07T18:11:20.000Z",
+      "viewCount": 1077,
+      "likeCount": 461,
+      "duration": 133,
+      "songType": "cover",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-07T18:22:36.445Z"
+    },
+    {
+      "id": "hLtDOk1E44c",
+      "title": "Break It Down",
+      "artist": "Vestia Zeta",
+      "artists": [
+        "Vestia Zeta"
+      ],
+      "channelName": "Vestia Zeta",
+      "channelId": "UCTvHWSfBZgtxE4sILOaurIQ",
+      "releaseDate": "2026-11-07T15:00:47.000Z",
+      "publishedAt": "2026-11-07T15:00:47.000Z",
+      "viewCount": 126,
+      "likeCount": 43,
+      "duration": 177,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-07T18:22:36.445Z"
+    },
+    {
+      "id": "8UvL8U8KV0g",
+      "title": "You're Mine",
+      "artist": "Vestia Zeta",
+      "artists": [
+        "Vestia Zeta"
+      ],
+      "channelName": "Vestia Zeta",
+      "channelId": "UCTvHWSfBZgtxE4sILOaurIQ",
+      "releaseDate": "2026-11-07T15:00:32.000Z",
+      "publishedAt": "2026-11-07T15:00:32.000Z",
+      "viewCount": 116,
+      "likeCount": 43,
+      "duration": 229,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-07T18:22:36.445Z"
+    },
+    {
+      "id": "iyIoat8Xubg",
+      "title": "Zero Gravity",
+      "artist": "Vestia Zeta",
+      "artists": [
+        "Vestia Zeta"
+      ],
+      "channelName": "Vestia Zeta",
+      "channelId": "UCTvHWSfBZgtxE4sILOaurIQ",
+      "releaseDate": "2026-11-07T15:00:27.000Z",
+      "publishedAt": "2026-11-07T15:00:27.000Z",
+      "viewCount": 869,
+      "likeCount": 362,
+      "duration": 239,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-07T18:22:36.445Z"
+    },
+    {
+      "id": "NvEhPpzE5R4",
+      "title": "RADIO:ON",
+      "artist": "Vestia Zeta",
+      "artists": [
+        "Vestia Zeta"
+      ],
+      "channelName": "Vestia Zeta",
+      "channelId": "UCTvHWSfBZgtxE4sILOaurIQ",
+      "releaseDate": "2026-11-07T15:00:25.000Z",
+      "publishedAt": "2026-11-07T15:00:25.000Z",
+      "viewCount": 775,
+      "likeCount": 246,
+      "duration": 207,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-07T18:22:36.445Z"
+    },
+    {
+      "id": "kiacUsb09VA",
+      "title": "LOVE MISSION♡",
+      "artist": "Vestia Zeta",
+      "artists": [
+        "Vestia Zeta"
+      ],
+      "channelName": "Vestia Zeta",
+      "channelId": "UCTvHWSfBZgtxE4sILOaurIQ",
+      "releaseDate": "2026-11-07T15:00:22.000Z",
+      "publishedAt": "2026-11-07T15:00:22.000Z",
+      "viewCount": 145,
+      "likeCount": 48,
+      "duration": 174,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-07T18:22:36.445Z"
+    },
+    {
+      "id": "hGfUKSk4CCw",
+      "title": "CLOSE(R) Indonesian ver.",
+      "artist": "Vestia Zeta",
+      "artists": [
+        "Vestia Zeta"
+      ],
+      "channelName": "Vestia Zeta",
+      "channelId": "UCTvHWSfBZgtxE4sILOaurIQ",
+      "releaseDate": "2026-11-07T15:00:19.000Z",
+      "publishedAt": "2026-11-07T15:00:19.000Z",
+      "viewCount": 334,
+      "likeCount": 106,
+      "duration": 167,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-07T18:22:36.445Z"
+    },
+    {
+      "id": "vWMty0ZvyaM",
+      "title": "CLOSE(R)",
+      "artist": "Vestia Zeta",
+      "artists": [
+        "Vestia Zeta"
+      ],
+      "channelName": "Vestia Zeta",
+      "channelId": "UCTvHWSfBZgtxE4sILOaurIQ",
+      "releaseDate": "2026-11-07T15:00:06.000Z",
+      "publishedAt": "2026-11-07T15:00:06.000Z",
+      "viewCount": 136,
+      "likeCount": 43,
+      "duration": 167,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-07T18:22:36.445Z"
+    },
     {
       "id": "epIHShVWmOY",
       "title": "Ex-Otogibanashi – ryo (supercell) / 町田ちま & 虎金妃笑虎(Cover)",
