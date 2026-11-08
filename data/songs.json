@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-08T08:07:41.376Z",
+  "generatedAt": "2026-11-08T15:24:10.156Z",
   "lastFullReconciledAt": "2026-10-16T09:20:43.877Z",
   "lastMode": "incremental",
   "source": "Holodex API v2",
@@ -14,14 +14,33 @@
       "stream"
     ]
   },
-  "total": 6408,
-  "sourceTotal": 6670,
+  "total": 6409,
+  "sourceTotal": 6671,
   "sourceTotalByTopic": {
     "Original_Song": 4018,
-    "Music_Cover": 2652
+    "Music_Cover": 2653
   },
   "pagesFetched": 132,
   "songs": [
+    {
+      "id": "jVR6XxAJjRw",
+      "title": "【3D LIVE】くりてぃかる♡ぷりちー/歌詞無しver【ホロライブ/白上フブキ/百鬼あやめ/白銀ノエル/Vestia Zeta】",
+      "artist": "Shirakami Fubuki",
+      "artists": [
+        "Shirakami Fubuki",
+        "Vestia Zeta"
+      ],
+      "channelName": "Shirakami Fubuki",
+      "channelId": "UCdn5BQ06XqgXoAxIhbqw5Rg",
+      "releaseDate": "2026-11-08T09:00:02.000Z",
+      "publishedAt": "2026-11-08T09:00:02.000Z",
+      "viewCount": 19750,
+      "likeCount": 1725,
+      "duration": 225,
+      "songType": "cover",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-08T15:24:26.457Z"
+    },
     {
       "id": "Kkcm0vflYD8",
       "title": "【3D LIVE】Zero Gravity【Vestia Zeta】",
