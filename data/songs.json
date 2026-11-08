@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-07T18:22:18.218Z",
+  "generatedAt": "2026-11-08T08:07:41.376Z",
   "lastFullReconciledAt": "2026-10-16T09:20:43.877Z",
   "lastMode": "incremental",
   "source": "Holodex API v2",
@@ -14,14 +14,32 @@
       "stream"
     ]
   },
-  "total": 6407,
-  "sourceTotal": 6669,
+  "total": 6408,
+  "sourceTotal": 6670,
   "sourceTotalByTopic": {
-    "Original_Song": 4017,
+    "Original_Song": 4018,
     "Music_Cover": 2652
   },
   "pagesFetched": 132,
   "songs": [
+    {
+      "id": "Kkcm0vflYD8",
+      "title": "【3D LIVE】Zero Gravity【Vestia Zeta】",
+      "artist": "Vestia Zeta",
+      "artists": [
+        "Vestia Zeta"
+      ],
+      "channelName": "Vestia Zeta",
+      "channelId": "UCTvHWSfBZgtxE4sILOaurIQ",
+      "releaseDate": "2026-11-08T05:20:05.000Z",
+      "publishedAt": "2026-11-08T05:20:05.000Z",
+      "viewCount": 9088,
+      "likeCount": 1283,
+      "duration": 259,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-08T08:07:52.629Z"
+    },
     {
       "id": "uZ4PYIbkQ5o",
       "title": "【3D LIVE】愛猫 by bizxZERA 【Cover/Vestia Zeta】",
