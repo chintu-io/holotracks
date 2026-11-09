@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-08T15:24:10.156Z",
+  "generatedAt": "2026-11-09T10:27:50.031Z",
   "lastFullReconciledAt": "2026-10-16T09:20:43.877Z",
   "lastMode": "incremental",
   "source": "Holodex API v2",
@@ -14,14 +14,50 @@
       "stream"
     ]
   },
-  "total": 6409,
-  "sourceTotal": 6666,
+  "total": 6411,
+  "sourceTotal": 6667,
   "sourceTotalByTopic": {
     "Original_Song": 4011,
-    "Music_Cover": 2655
+    "Music_Cover": 2656
   },
   "pagesFetched": 132,
   "songs": [
+    {
+      "id": "IHm3yvo50Dw",
+      "title": "🐯",
+      "artist": "Koganei Niko",
+      "artists": [
+        "Koganei Niko"
+      ],
+      "channelName": "Koganei Niko",
+      "channelId": "UCuI_opAVX6qbxZY-a-AxFuQ",
+      "releaseDate": "2026-11-09T10:05:06.000Z",
+      "publishedAt": "2026-11-09T10:05:06.000Z",
+      "viewCount": 6596,
+      "likeCount": 2586,
+      "duration": 304,
+      "songType": "cover",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-09T10:27:59.551Z"
+    },
+    {
+      "id": "BUt6If2a6ic",
+      "title": "God knows... / 姫森ルーナ (cover)【#姫森ルーナ生誕ロックLIVE】",
+      "artist": "Himemori Luna",
+      "artists": [
+        "Himemori Luna"
+      ],
+      "channelName": "Himemori Luna",
+      "channelId": "UCa9Y57gfeY0Zro_noHRVrnw",
+      "releaseDate": "2026-11-09T09:00:09.000Z",
+      "publishedAt": "2026-11-09T09:00:09.000Z",
+      "viewCount": 6172,
+      "likeCount": 2588,
+      "duration": 279,
+      "songType": "cover",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-09T10:27:59.551Z"
+    },
     {
       "id": "jVR6XxAJjRw",
       "title": "【3D LIVE】くりてぃかる♡ぷりちー/歌詞無しver【ホロライブ/白上フブキ/百鬼あやめ/白銀ノエル/Vestia Zeta】",
