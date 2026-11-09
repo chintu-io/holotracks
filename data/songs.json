@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-09T10:27:50.031Z",
+  "generatedAt": "2026-11-09T20:54:42.782Z",
   "lastFullReconciledAt": "2026-10-16T09:20:43.877Z",
   "lastMode": "incremental",
   "source": "Holodex API v2",
@@ -14,14 +14,68 @@
       "stream"
     ]
   },
-  "total": 6411,
-  "sourceTotal": 6667,
+  "total": 6414,
+  "sourceTotal": 6656,
   "sourceTotalByTopic": {
-    "Original_Song": 4011,
-    "Music_Cover": 2656
+    "Original_Song": 3999,
+    "Music_Cover": 2657
   },
   "pagesFetched": 132,
   "songs": [
+    {
+      "id": "16ntsLkkcQ4",
+      "title": "BOUNCE BACK! (Instrumental)",
+      "artist": "Hololive Official",
+      "artists": [
+        "Hololive Official"
+      ],
+      "channelName": "hololive FLOW GLOW",
+      "channelId": "UCu2n3qHuOuQIygREMnWeQWg",
+      "releaseDate": "2026-11-09T15:00:27.000Z",
+      "publishedAt": "2026-11-09T15:00:27.000Z",
+      "viewCount": 81,
+      "likeCount": 10,
+      "duration": 222,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-09T20:54:51.338Z"
+    },
+    {
+      "id": "Fv8ijeYqTS8",
+      "title": "BOUNCE BACK!",
+      "artist": "Hololive Official",
+      "artists": [
+        "Hololive Official"
+      ],
+      "channelName": "hololive FLOW GLOW",
+      "channelId": "UCu2n3qHuOuQIygREMnWeQWg",
+      "releaseDate": "2026-11-09T15:00:00.000Z",
+      "publishedAt": "2026-11-09T15:00:00.000Z",
+      "viewCount": 985,
+      "likeCount": 123,
+      "duration": 222,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-09T20:54:51.338Z"
+    },
+    {
+      "id": "Mfcj1AdnzhQ",
+      "title": "FLOW GLOW / BOUNCE BACK!【Official Music Video】",
+      "artist": "Hololive Official",
+      "artists": [
+        "Hololive Official"
+      ],
+      "channelName": "hololive FLOW GLOW",
+      "channelId": "UCu2n3qHuOuQIygREMnWeQWg",
+      "releaseDate": "2026-11-09T12:11:23.000Z",
+      "publishedAt": "2026-11-09T12:11:23.000Z",
+      "viewCount": 187138,
+      "likeCount": 12440,
+      "duration": 241,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-09T20:54:51.338Z"
+    },
     {
       "id": "IHm3yvo50Dw",
       "title": "🐯",
