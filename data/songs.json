@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-10T18:43:32.013Z",
+  "generatedAt": "2026-11-11T18:46:51.680Z",
   "lastFullReconciledAt": "2026-10-16T09:20:43.877Z",
   "lastMode": "incremental",
   "source": "Holodex API v2",
@@ -14,14 +14,68 @@
       "stream"
     ]
   },
-  "total": 6417,
-  "sourceTotal": 6661,
+  "total": 6420,
+  "sourceTotal": 6665,
   "sourceTotalByTopic": {
-    "Original_Song": 4003,
-    "Music_Cover": 2658
+    "Original_Song": 4006,
+    "Music_Cover": 2659
   },
   "pagesFetched": 132,
   "songs": [
+    {
+      "id": "EjO5EDkvExc",
+      "title": "Still Here (Instrumental)",
+      "artist": "Octavio",
+      "artists": [
+        "Octavio"
+      ],
+      "channelName": "Octavio",
+      "channelId": "UCLk1hcmxg8rJ3Nm1_GvxTRA",
+      "releaseDate": "2026-11-11T15:03:21.000Z",
+      "publishedAt": "2026-11-11T15:03:21.000Z",
+      "viewCount": 65,
+      "likeCount": 21,
+      "duration": 191,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-11T18:47:09.382Z"
+    },
+    {
+      "id": "6CZpMG0wUkE",
+      "title": "Still Here",
+      "artist": "Octavio",
+      "artists": [
+        "Octavio"
+      ],
+      "channelName": "Octavio",
+      "channelId": "UCLk1hcmxg8rJ3Nm1_GvxTRA",
+      "releaseDate": "2026-11-11T15:03:20.000Z",
+      "publishedAt": "2026-11-11T15:03:20.000Z",
+      "viewCount": 612,
+      "likeCount": 265,
+      "duration": 191,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-11T18:47:09.382Z"
+    },
+    {
+      "id": "xQNgjQG3m9I",
+      "title": "【3D LIVE】Radio: ON【Vestia Zeta】",
+      "artist": "Vestia Zeta",
+      "artists": [
+        "Vestia Zeta"
+      ],
+      "channelName": "Vestia Zeta",
+      "channelId": "UCTvHWSfBZgtxE4sILOaurIQ",
+      "releaseDate": "2026-11-11T11:00:11.000Z",
+      "publishedAt": "2026-11-11T11:00:11.000Z",
+      "viewCount": 26733,
+      "likeCount": 2703,
+      "duration": 205,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-11T18:47:09.382Z"
+    },
     {
       "id": "vpZl40urveo",
       "title": "Midnight Grand Orchestra『Blackhole Dancehall』 Live Video",
