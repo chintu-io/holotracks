@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-11T18:46:51.680Z",
+  "generatedAt": "2026-11-12T08:27:18.527Z",
   "lastFullReconciledAt": "2026-10-16T09:20:43.877Z",
   "lastMode": "incremental",
   "source": "Holodex API v2",
@@ -14,7 +14,7 @@
       "stream"
     ]
   },
-  "total": 6420,
+  "total": 6421,
   "sourceTotal": 6665,
   "sourceTotalByTopic": {
     "Original_Song": 4006,
@@ -22,6 +22,24 @@
   },
   "pagesFetched": 132,
   "songs": [
+    {
+      "id": "6Tv_afF1zO4",
+      "title": "Still Here - Octavio, Banzoin Hakka, Crimzon Ruze 【OFFICIAL MV】",
+      "artist": "Octavio",
+      "artists": [
+        "Octavio"
+      ],
+      "channelName": "Octavio",
+      "channelId": "UCLk1hcmxg8rJ3Nm1_GvxTRA",
+      "releaseDate": "2026-11-12T04:00:07.000Z",
+      "publishedAt": "2026-11-12T04:00:07.000Z",
+      "viewCount": 3759,
+      "likeCount": 1832,
+      "duration": 190,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-12T08:27:30.218Z"
+    },
     {
       "id": "EjO5EDkvExc",
       "title": "Still Here (Instrumental)",
