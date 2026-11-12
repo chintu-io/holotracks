@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-12T08:27:18.527Z",
+  "generatedAt": "2026-11-12T16:56:42.698Z",
   "lastFullReconciledAt": "2026-10-16T09:20:43.877Z",
   "lastMode": "incremental",
   "source": "Holodex API v2",
@@ -14,14 +14,50 @@
       "stream"
     ]
   },
-  "total": 6421,
-  "sourceTotal": 6665,
+  "total": 6423,
+  "sourceTotal": 6666,
   "sourceTotalByTopic": {
     "Original_Song": 4006,
-    "Music_Cover": 2659
+    "Music_Cover": 2660
   },
   "pagesFetched": 132,
   "songs": [
+    {
+      "id": "yVyjAo6j43U",
+      "title": "【Lyric MV】Switch It Up - Kobo Kanaeru",
+      "artist": "Kobo Kanaeru",
+      "artists": [
+        "Kobo Kanaeru"
+      ],
+      "channelName": "Kobo Kanaeru",
+      "channelId": "UCjLEmnpCNeisMxy134KPwWw",
+      "releaseDate": "2026-11-12T13:00:10.000Z",
+      "publishedAt": "2026-11-12T13:00:10.000Z",
+      "viewCount": 23941,
+      "likeCount": 5094,
+      "duration": 173,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-12T16:57:00.466Z"
+    },
+    {
+      "id": "cNoh00Q44b8",
+      "title": "【3D LIVE】冠菊/歌詞無しver【ホロライブ/白上フブキ/百鬼あやめ/大神ミオ】",
+      "artist": "Shirakami Fubuki",
+      "artists": [
+        "Shirakami Fubuki"
+      ],
+      "channelName": "Shirakami Fubuki",
+      "channelId": "UCdn5BQ06XqgXoAxIhbqw5Rg",
+      "releaseDate": "2026-11-12T09:00:10.000Z",
+      "publishedAt": "2026-11-12T09:00:10.000Z",
+      "viewCount": 49223,
+      "likeCount": 3011,
+      "duration": 242,
+      "songType": "cover",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-12T16:57:00.466Z"
+    },
     {
       "id": "6Tv_afF1zO4",
       "title": "Still Here - Octavio, Banzoin Hakka, Crimzon Ruze 【OFFICIAL MV】",
