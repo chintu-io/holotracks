@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-13T17:54:37.563Z",
+  "generatedAt": "2026-11-14T09:32:40.901Z",
   "lastFullReconciledAt": "2026-10-16T09:20:43.877Z",
   "lastMode": "incremental",
   "source": "Holodex API v2",
@@ -14,14 +14,32 @@
       "stream"
     ]
   },
-  "total": 6432,
-  "sourceTotal": 6672,
+  "total": 6433,
+  "sourceTotal": 6673,
   "sourceTotalByTopic": {
     "Original_Song": 4012,
-    "Music_Cover": 2660
+    "Music_Cover": 2661
   },
   "pagesFetched": 132,
   "songs": [
+    {
+      "id": "Rflc3TWfLFI",
+      "title": "【3D LIVE】ray/歌詞無しver【ホロライブ/白上フブキ/大神ミオ/さくらみこ/大空スバル】",
+      "artist": "Shirakami Fubuki",
+      "artists": [
+        "Shirakami Fubuki"
+      ],
+      "channelName": "Shirakami Fubuki",
+      "channelId": "UCdn5BQ06XqgXoAxIhbqw5Rg",
+      "releaseDate": "2026-11-14T09:00:05.000Z",
+      "publishedAt": "2026-11-14T09:00:05.000Z",
+      "viewCount": 3135,
+      "likeCount": 1183,
+      "duration": 302,
+      "songType": "cover",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-14T09:33:00.355Z"
+    },
     {
       "id": "K8bLq2XDevc",
       "title": "極楽ごきげん縁日和 (Instrumental)",
