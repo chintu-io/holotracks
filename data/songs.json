@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-14T09:32:40.901Z",
+  "generatedAt": "2026-11-14T16:11:15.674Z",
   "lastFullReconciledAt": "2026-10-16T09:20:43.877Z",
   "lastMode": "incremental",
   "source": "Holodex API v2",
@@ -14,14 +14,86 @@
       "stream"
     ]
   },
-  "total": 6433,
-  "sourceTotal": 6673,
+  "total": 6437,
+  "sourceTotal": 6676,
   "sourceTotalByTopic": {
-    "Original_Song": 4012,
+    "Original_Song": 4015,
     "Music_Cover": 2661
   },
   "pagesFetched": 132,
   "songs": [
+    {
+      "id": "zFwndEDAjkI",
+      "title": "サウダーデ",
+      "artist": "Yuzuki Choco",
+      "artists": [
+        "Yuzuki Choco"
+      ],
+      "channelName": "Yuzuki Choco",
+      "channelId": "UC1suqwovbL1kzsoaZgFZLKg",
+      "releaseDate": "2026-11-14T15:03:04.000Z",
+      "publishedAt": "2026-11-14T15:03:04.000Z",
+      "viewCount": 39,
+      "likeCount": 9,
+      "duration": 226,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-14T16:11:25.862Z"
+    },
+    {
+      "id": "BbbRxAE6K4Y",
+      "title": "サウダーデ (Instrumental)",
+      "artist": "Yuzuki Choco",
+      "artists": [
+        "Yuzuki Choco"
+      ],
+      "channelName": "Yuzuki Choco",
+      "channelId": "UC1suqwovbL1kzsoaZgFZLKg",
+      "releaseDate": "2026-11-14T15:02:14.000Z",
+      "publishedAt": "2026-11-14T15:02:14.000Z",
+      "viewCount": 5,
+      "likeCount": 2,
+      "duration": 226,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-14T16:11:25.862Z"
+    },
+    {
+      "id": "GImIw_LzGx0",
+      "title": "【original】サウダーデ/癒月ちょこ【ホロライブ】",
+      "artist": "Yuzuki Choco",
+      "artists": [
+        "Yuzuki Choco"
+      ],
+      "channelName": "Yuzuki Choco",
+      "channelId": "UC1suqwovbL1kzsoaZgFZLKg",
+      "releaseDate": "2026-11-14T12:00:10.000Z",
+      "publishedAt": "2026-11-14T12:00:10.000Z",
+      "viewCount": 15518,
+      "likeCount": 3214,
+      "duration": 226,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-14T16:11:25.862Z"
+    },
+    {
+      "id": "5srOdWoNvK4",
+      "title": "【ホロドリ】『微熱』ロボ子さん (Full ver.)",
+      "artist": "Robocosan",
+      "artists": [
+        "Robocosan"
+      ],
+      "channelName": "hololive Dreams",
+      "channelId": "UCawGfU44CZxd2ZVf_VGijbA",
+      "releaseDate": "2026-11-14T12:00:05.000Z",
+      "publishedAt": "2026-11-14T12:00:05.000Z",
+      "viewCount": 4093,
+      "likeCount": 833,
+      "duration": 188,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-14T16:11:25.862Z"
+    },
     {
       "id": "Rflc3TWfLFI",
       "title": "【3D LIVE】ray/歌詞無しver【ホロライブ/白上フブキ/大神ミオ/さくらみこ/大空スバル】",
