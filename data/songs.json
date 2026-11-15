@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-14T16:11:15.674Z",
+  "generatedAt": "2026-11-15T14:22:55.567Z",
   "lastFullReconciledAt": "2026-10-16T09:20:43.877Z",
   "lastMode": "incremental",
   "source": "Holodex API v2",
@@ -14,14 +14,68 @@
       "stream"
     ]
   },
-  "total": 6437,
-  "sourceTotal": 6678,
+  "total": 6440,
+  "sourceTotal": 6682,
   "sourceTotalByTopic": {
-    "Original_Song": 4017,
-    "Music_Cover": 2661
+    "Original_Song": 4020,
+    "Music_Cover": 2662
   },
   "pagesFetched": 132,
   "songs": [
+    {
+      "id": "WUgMWQvCzig",
+      "title": "【original MV】Braver【雪花ラミィ /ホロライブ】",
+      "artist": "Yukihana Lamy",
+      "artists": [
+        "Yukihana Lamy"
+      ],
+      "channelName": "Yukihana Lamy",
+      "channelId": "UCFKOVgVbGmX65RxO3EtH3iw",
+      "releaseDate": "2026-11-15T13:00:07.000Z",
+      "publishedAt": "2026-11-15T13:00:07.000Z",
+      "viewCount": 14277,
+      "likeCount": 9462,
+      "duration": 217,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-15T14:23:09.754Z"
+    },
+    {
+      "id": "ozuDe2Wn8Hc",
+      "title": "【ホロドリ】『ぺこらいざー』兎田ぺこら (Official Music Video)",
+      "artist": "Hololive Official",
+      "artists": [
+        "Hololive Official"
+      ],
+      "channelName": "hololive Dreams",
+      "channelId": "UCawGfU44CZxd2ZVf_VGijbA",
+      "releaseDate": "2026-11-15T11:00:30.000Z",
+      "publishedAt": "2026-11-15T11:00:30.000Z",
+      "viewCount": 20617,
+      "likeCount": 3248,
+      "duration": 139,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-15T14:23:09.754Z"
+    },
+    {
+      "id": "upCeR4qUPyo",
+      "title": "【3D LIVE】88888888/歌詞無しver【ホロライブ/白上フブキ】",
+      "artist": "Shirakami Fubuki",
+      "artists": [
+        "Shirakami Fubuki"
+      ],
+      "channelName": "Shirakami Fubuki",
+      "channelId": "UCdn5BQ06XqgXoAxIhbqw5Rg",
+      "releaseDate": "2026-11-15T09:00:26.000Z",
+      "publishedAt": "2026-11-15T09:00:26.000Z",
+      "viewCount": 29417,
+      "likeCount": 2356,
+      "duration": 146,
+      "songType": "cover",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-15T14:23:09.754Z"
+    },
     {
       "id": "zFwndEDAjkI",
       "title": "サウダーデ",
