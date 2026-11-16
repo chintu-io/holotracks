@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-16T11:48:25.020Z",
+  "generatedAt": "2026-11-16T21:17:14.938Z",
   "lastFullReconciledAt": "2026-10-16T09:20:43.877Z",
   "lastMode": "incremental",
   "source": "Holodex API v2",
@@ -14,14 +14,230 @@
       "stream"
     ]
   },
-  "total": 6445,
-  "sourceTotal": 6687,
+  "total": 6457,
+  "sourceTotal": 6698,
   "sourceTotalByTopic": {
-    "Original_Song": 4024,
+    "Original_Song": 4035,
     "Music_Cover": 2663
   },
   "pagesFetched": 132,
   "songs": [
+    {
+      "id": "4WEKgYar25g",
+      "title": "Forge My Soul (Instrumental)",
+      "artist": "Kaela Kovalskia",
+      "artists": [
+        "Kaela Kovalskia"
+      ],
+      "channelName": "Kaela Kovalskia",
+      "channelId": "UCZLZ8Jjx_RN2CXloOmgTHVg",
+      "releaseDate": "2026-11-16T15:05:00.000Z",
+      "publishedAt": "2026-11-16T15:05:00.000Z",
+      "viewCount": 19,
+      "likeCount": 4,
+      "duration": 207,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-16T21:17:27.482Z"
+    },
+    {
+      "id": "L2n0z4Y7sFU",
+      "title": "アマリリス",
+      "artist": "Shishiro Botan",
+      "artists": [
+        "Shishiro Botan"
+      ],
+      "channelName": "Shishiro Botan",
+      "channelId": "UCUKD-uaobj9jiqB-VXt71mA",
+      "releaseDate": "2026-11-16T15:04:47.000Z",
+      "publishedAt": "2026-11-16T15:04:47.000Z",
+      "viewCount": 78,
+      "likeCount": 26,
+      "duration": 242,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-16T21:17:27.482Z"
+    },
+    {
+      "id": "Y85TxWZp87s",
+      "title": "怪宴スペクタクル",
+      "artist": "Natsuiro Matsuri",
+      "artists": [
+        "Natsuiro Matsuri"
+      ],
+      "channelName": "Natsuiro Matsuri",
+      "channelId": "UCQ0UDLQCjY0rmuxCDE38FGg",
+      "releaseDate": "2026-11-16T15:04:05.000Z",
+      "publishedAt": "2026-11-16T15:04:05.000Z",
+      "viewCount": 44,
+      "likeCount": 6,
+      "duration": 230,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-16T21:17:27.482Z"
+    },
+    {
+      "id": "klkl5Bbi12I",
+      "title": "怪宴スペクタクル (Instrumental)",
+      "artist": "Natsuiro Matsuri",
+      "artists": [
+        "Natsuiro Matsuri"
+      ],
+      "channelName": "Natsuiro Matsuri",
+      "channelId": "UCQ0UDLQCjY0rmuxCDE38FGg",
+      "releaseDate": "2026-11-16T15:03:32.000Z",
+      "publishedAt": "2026-11-16T15:03:32.000Z",
+      "viewCount": 8,
+      "likeCount": 3,
+      "duration": 230,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-16T21:17:27.482Z"
+    },
+    {
+      "id": "z0Cu74ugxkM",
+      "title": "アマリリス (Instrumental)",
+      "artist": "Shishiro Botan",
+      "artists": [
+        "Shishiro Botan"
+      ],
+      "channelName": "Shishiro Botan",
+      "channelId": "UCUKD-uaobj9jiqB-VXt71mA",
+      "releaseDate": "2026-11-16T15:03:11.000Z",
+      "publishedAt": "2026-11-16T15:03:11.000Z",
+      "viewCount": 16,
+      "likeCount": 6,
+      "duration": 242,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-16T21:17:27.482Z"
+    },
+    {
+      "id": "zvy16ucrCGY",
+      "title": "Forge My Soul",
+      "artist": "Kaela Kovalskia",
+      "artists": [
+        "Kaela Kovalskia"
+      ],
+      "channelName": "Kaela Kovalskia",
+      "channelId": "UCZLZ8Jjx_RN2CXloOmgTHVg",
+      "releaseDate": "2026-11-16T15:02:17.000Z",
+      "publishedAt": "2026-11-16T15:02:17.000Z",
+      "viewCount": 116,
+      "likeCount": 24,
+      "duration": 207,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-16T21:17:27.482Z"
+    },
+    {
+      "id": "CuPh6p99Ic0",
+      "title": "Shallow Shadow (Instrumental)",
+      "artist": "Tokoyami Towa",
+      "artists": [
+        "Tokoyami Towa"
+      ],
+      "channelName": "Tokoyami Towa",
+      "channelId": "UC1uv2Oq6kNxgATlCiez59hw",
+      "releaseDate": "2026-11-16T15:00:32.000Z",
+      "publishedAt": "2026-11-16T15:00:32.000Z",
+      "viewCount": 126,
+      "likeCount": 10,
+      "duration": 161,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-16T21:17:27.482Z"
+    },
+    {
+      "id": "HjeI9eR847w",
+      "title": "CORE//UNBREAKABLE (Instrumental)",
+      "artist": "Koseki Bijou",
+      "artists": [
+        "Koseki Bijou"
+      ],
+      "channelName": "Koseki Bijou",
+      "channelId": "UC9p_lqQ0FEDz327Vgf5JwqA",
+      "releaseDate": "2026-11-16T15:00:21.000Z",
+      "publishedAt": "2026-11-16T15:00:21.000Z",
+      "viewCount": 44,
+      "likeCount": 11,
+      "duration": 233,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-16T21:17:27.482Z"
+    },
+    {
+      "id": "Fb3ILr-aEdM",
+      "title": "CORE//UNBREAKABLE",
+      "artist": "Koseki Bijou",
+      "artists": [
+        "Koseki Bijou"
+      ],
+      "channelName": "Koseki Bijou",
+      "channelId": "UC9p_lqQ0FEDz327Vgf5JwqA",
+      "releaseDate": "2026-11-16T15:00:03.000Z",
+      "publishedAt": "2026-11-16T15:00:03.000Z",
+      "viewCount": 383,
+      "likeCount": 90,
+      "duration": 233,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-16T21:17:27.482Z"
+    },
+    {
+      "id": "i2VXRmZ63g0",
+      "title": "Shallow Shadow",
+      "artist": "Tokoyami Towa",
+      "artists": [
+        "Tokoyami Towa"
+      ],
+      "channelName": "Tokoyami Towa",
+      "channelId": "UC1uv2Oq6kNxgATlCiez59hw",
+      "releaseDate": "2026-11-16T15:00:03.000Z",
+      "publishedAt": "2026-11-16T15:00:03.000Z",
+      "viewCount": 633,
+      "likeCount": 110,
+      "duration": 161,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-16T21:17:27.482Z"
+    },
+    {
+      "id": "ifJl7HArfro",
+      "title": "祭囃子/ 不知火フレア(Cover)",
+      "artist": "Shiranui Flare",
+      "artists": [
+        "Shiranui Flare"
+      ],
+      "channelName": "Shiranui Flare",
+      "channelId": "UCvInZx9h3jC2JzsIzoOebWg",
+      "releaseDate": "2026-11-16T13:00:11.000Z",
+      "publishedAt": "2026-11-16T13:00:11.000Z",
+      "viewCount": 38197,
+      "likeCount": 4884,
+      "duration": 123,
+      "songType": "cover",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-16T21:17:27.482Z"
+    },
+    {
+      "id": "8Zu3l_esbz8",
+      "title": "【ホロドリ】『ぺこらいざー』兎田ぺこら (Full ver.)",
+      "artist": "Hololive Official",
+      "artists": [
+        "Hololive Official"
+      ],
+      "channelName": "hololive Dreams",
+      "channelId": "UCawGfU44CZxd2ZVf_VGijbA",
+      "releaseDate": "2026-11-16T12:00:16.000Z",
+      "publishedAt": "2026-11-16T12:00:16.000Z",
+      "viewCount": 14134,
+      "likeCount": 1344,
+      "duration": 225,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-16T21:17:27.482Z"
+    },
     {
       "id": "IqN0XeMdGU4",
       "title": "画面の中と向こうの君へ / AZKi (official)",
