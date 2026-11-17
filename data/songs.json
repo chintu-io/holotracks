@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-16T21:17:14.938Z",
+  "generatedAt": "2026-11-17T13:39:55.306Z",
   "lastFullReconciledAt": "2026-10-16T09:20:43.877Z",
   "lastMode": "incremental",
   "source": "Holodex API v2",
@@ -14,14 +14,32 @@
       "stream"
     ]
   },
-  "total": 6457,
-  "sourceTotal": 6698,
+  "total": 6458,
+  "sourceTotal": 6701,
   "sourceTotalByTopic": {
-    "Original_Song": 4035,
-    "Music_Cover": 2663
+    "Original_Song": 4037,
+    "Music_Cover": 2664
   },
   "pagesFetched": 132,
   "songs": [
+    {
+      "id": "bgwcVkAMV8w",
+      "title": "【ホロドリ】『Burning hope』IRyS (Official Music Video)",
+      "artist": "Hololive Official",
+      "artists": [
+        "Hololive Official"
+      ],
+      "channelName": "hololive Dreams",
+      "channelId": "UCawGfU44CZxd2ZVf_VGijbA",
+      "releaseDate": "2026-11-17T11:00:02.000Z",
+      "publishedAt": "2026-11-17T11:00:02.000Z",
+      "viewCount": 8711,
+      "likeCount": 1532,
+      "duration": 131,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-17T13:40:08.170Z"
+    },
     {
       "id": "4WEKgYar25g",
       "title": "Forge My Soul (Instrumental)",
