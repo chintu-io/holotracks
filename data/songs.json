@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-17T13:39:55.306Z",
+  "generatedAt": "2026-11-17T21:56:12.014Z",
   "lastFullReconciledAt": "2026-10-16T09:20:43.877Z",
   "lastMode": "incremental",
   "source": "Holodex API v2",
@@ -14,14 +14,32 @@
       "stream"
     ]
   },
-  "total": 6458,
-  "sourceTotal": 6701,
+  "total": 6459,
+  "sourceTotal": 6704,
   "sourceTotalByTopic": {
     "Original_Song": 4037,
-    "Music_Cover": 2664
+    "Music_Cover": 2667
   },
   "pagesFetched": 132,
   "songs": [
+    {
+      "id": "xg0RcT8l9GU",
+      "title": "拝啓ドッペルゲンガー || HAKOS BAELZ COVER 【#CHU2BAE】",
+      "artist": "Hakos Baelz",
+      "artists": [
+        "Hakos Baelz"
+      ],
+      "channelName": "Hakos Baelz",
+      "channelId": "UCgmPnx-EEeOrZSg5Tiw7ZRQ",
+      "releaseDate": "2026-11-17T15:00:14.000Z",
+      "publishedAt": "2026-11-17T15:00:14.000Z",
+      "viewCount": 48991,
+      "likeCount": 3017,
+      "duration": 260,
+      "songType": "cover",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-17T21:56:29.413Z"
+    },
     {
       "id": "bgwcVkAMV8w",
       "title": "【ホロドリ】『Burning hope』IRyS (Official Music Video)",
