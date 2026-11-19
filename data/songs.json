@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-18T19:51:26.795Z",
+  "generatedAt": "2026-11-19T09:33:20.828Z",
   "lastFullReconciledAt": "2026-10-16T09:20:43.877Z",
   "lastMode": "incremental",
   "source": "Holodex API v2",
@@ -14,7 +14,7 @@
       "stream"
     ]
   },
-  "total": 6462,
+  "total": 6464,
   "sourceTotal": 6705,
   "sourceTotalByTopic": {
     "Original_Song": 4038,
@@ -22,6 +22,42 @@
   },
   "pagesFetched": 132,
   "songs": [
+    {
+      "id": "dNI9zh3zq_Q",
+      "title": "アンノウン・マザーグース / 獅白ぼたん(cover)",
+      "artist": "Shishiro Botan",
+      "artists": [
+        "Shishiro Botan"
+      ],
+      "channelName": "Shishiro Botan",
+      "channelId": "UCUKD-uaobj9jiqB-VXt71mA",
+      "releaseDate": "2026-11-19T09:00:07.000Z",
+      "publishedAt": "2026-11-19T09:00:07.000Z",
+      "viewCount": 3941,
+      "likeCount": 2173,
+      "duration": 279,
+      "songType": "cover",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-19T09:33:30.901Z"
+    },
+    {
+      "id": "iurSfnAepfo",
+      "title": "AIZO - Jurard T Rexford ft. ARMIS | King Gnu【歌ってみた】",
+      "artist": "Jurard T Rexford",
+      "artists": [
+        "Jurard T Rexford"
+      ],
+      "channelName": "Jurard T Rexford",
+      "channelId": "UCTVSOgYuSWmNAt-lnJPkEEw",
+      "releaseDate": "2026-11-19T03:00:07.000Z",
+      "publishedAt": "2026-11-19T03:00:07.000Z",
+      "viewCount": 12754,
+      "likeCount": 2297,
+      "duration": 214,
+      "songType": "cover",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-19T09:33:30.901Z"
+    },
     {
       "id": "5hEsLbUM9hc",
       "title": "【ホロドリ】『Burning hope』IRyS (Full ver.)",
