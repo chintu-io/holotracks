@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-19T18:42:12.825Z",
+  "generatedAt": "2026-11-20T16:28:19.788Z",
   "lastFullReconciledAt": "2026-10-16T09:20:43.877Z",
   "lastMode": "incremental",
   "source": "Holodex API v2",
@@ -14,14 +14,104 @@
       "stream"
     ]
   },
-  "total": 6465,
-  "sourceTotal": 6706,
+  "total": 6470,
+  "sourceTotal": 6711,
   "sourceTotalByTopic": {
-    "Original_Song": 4039,
-    "Music_Cover": 2667
+    "Original_Song": 4043,
+    "Music_Cover": 2668
   },
   "pagesFetched": 132,
   "songs": [
+    {
+      "id": "YbnjAuxgUcE",
+      "title": "泥中に咲く || HAKOS BAELZ X TOKOYAMI TOWA 3D COVER 【#BaeDay2024】",
+      "artist": "Hakos Baelz",
+      "artists": [
+        "Hakos Baelz"
+      ],
+      "channelName": "Hakos Baelz",
+      "channelId": "UCgmPnx-EEeOrZSg5Tiw7ZRQ",
+      "releaseDate": "2026-11-20T15:00:39.000Z",
+      "publishedAt": "2026-11-20T15:00:39.000Z",
+      "viewCount": 5135,
+      "likeCount": 1731,
+      "duration": 299,
+      "songType": "cover",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-20T16:28:41.616Z"
+    },
+    {
+      "id": "jWbSIu5namo",
+      "title": "ビギナーズ・ハイ",
+      "artist": "Ookami Mio",
+      "artists": [
+        "Ookami Mio"
+      ],
+      "channelName": "Ookami Mio",
+      "channelId": "UCp-5t9SrOQwXMU7iIjQfARg",
+      "releaseDate": "2026-11-20T15:00:31.000Z",
+      "publishedAt": "2026-11-20T15:00:31.000Z",
+      "viewCount": 894,
+      "likeCount": 289,
+      "duration": 186,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-20T16:28:41.616Z"
+    },
+    {
+      "id": "gaqyav5q0l0",
+      "title": "ビギナーズ・ハイ (Instrumental)",
+      "artist": "Ookami Mio",
+      "artists": [
+        "Ookami Mio"
+      ],
+      "channelName": "Ookami Mio",
+      "channelId": "UCp-5t9SrOQwXMU7iIjQfARg",
+      "releaseDate": "2026-11-20T15:00:11.000Z",
+      "publishedAt": "2026-11-20T15:00:11.000Z",
+      "viewCount": 65,
+      "likeCount": 11,
+      "duration": 186,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-20T16:28:41.616Z"
+    },
+    {
+      "id": "f-Cero3U-5g",
+      "title": "【ホロドリ】『前略、君に捧げるらびゅそんぐ!』桃鈴ねね (Full ver.)",
+      "artist": "Hololive Official",
+      "artists": [
+        "Hololive Official"
+      ],
+      "channelName": "hololive Dreams",
+      "channelId": "UCawGfU44CZxd2ZVf_VGijbA",
+      "releaseDate": "2026-11-20T12:00:04.000Z",
+      "publishedAt": "2026-11-20T12:00:04.000Z",
+      "viewCount": 3665,
+      "likeCount": 543,
+      "duration": 220,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-20T16:28:41.616Z"
+    },
+    {
+      "id": "wqCcCrb75ew",
+      "title": "【#ホロじゃん】アニメーションMV【神ツモ☆ドラドラ伝説】",
+      "artist": "Hololive Official",
+      "artists": [
+        "Hololive Official"
+      ],
+      "channelName": "hololive Majong -holojan-",
+      "channelId": "UCIvJ2ws0x3ulxR5EZ8ZzA2A",
+      "releaseDate": "2026-11-20T10:09:50.000Z",
+      "publishedAt": "2026-11-20T10:09:50.000Z",
+      "viewCount": 36332,
+      "likeCount": 2452,
+      "duration": 88,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-20T16:28:41.616Z"
+    },
     {
       "id": "_dpOzpLoIoA",
       "title": "【ホロドリ】『前略、君に捧げるらびゅそんぐ!』桃鈴ねね (Official Music Video)",
