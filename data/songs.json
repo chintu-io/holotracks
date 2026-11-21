@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-20T16:28:19.788Z",
+  "generatedAt": "2026-11-21T11:50:49.757Z",
   "lastFullReconciledAt": "2026-10-16T09:20:43.877Z",
   "lastMode": "incremental",
   "source": "Holodex API v2",
@@ -14,14 +14,68 @@
       "stream"
     ]
   },
-  "total": 6470,
-  "sourceTotal": 6712,
+  "total": 6473,
+  "sourceTotal": 6714,
   "sourceTotalByTopic": {
-    "Original_Song": 4044,
+    "Original_Song": 4046,
     "Music_Cover": 2668
   },
   "pagesFetched": 132,
   "songs": [
+    {
+      "id": "pzUoVO4Lf6o",
+      "title": "【ホロドリ】『Halulu』Pavolia Reine (Official Music Video)",
+      "artist": "Hololive Official",
+      "artists": [
+        "Hololive Official"
+      ],
+      "channelName": "hololive Dreams",
+      "channelId": "UCawGfU44CZxd2ZVf_VGijbA",
+      "releaseDate": "2026-11-21T11:00:12.000Z",
+      "publishedAt": "2026-11-21T11:00:12.000Z",
+      "viewCount": 1599,
+      "likeCount": 536,
+      "duration": 124,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-21T11:51:03.919Z"
+    },
+    {
+      "id": "TZmaUP8ktzM",
+      "title": "ビギナーズハイ / 大神ミオ【Official MV】",
+      "artist": "Ookami Mio",
+      "artists": [
+        "Ookami Mio"
+      ],
+      "channelName": "Ookami Mio",
+      "channelId": "UCp-5t9SrOQwXMU7iIjQfARg",
+      "releaseDate": "2026-11-21T10:00:08.000Z",
+      "publishedAt": "2026-11-21T10:00:08.000Z",
+      "viewCount": 12940,
+      "likeCount": 4868,
+      "duration": 186,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-21T11:51:03.919Z"
+    },
+    {
+      "id": "6nBnZCicBLk",
+      "title": "ドリームキャッチピュアいろは! - アニメ尺ver/ 風真いろは(official)",
+      "artist": "Kazama Iroha",
+      "artists": [
+        "Kazama Iroha"
+      ],
+      "channelName": "Kazama Iroha",
+      "channelId": "UC_vMYWcDjmfdpH6r4TTn1MQ",
+      "releaseDate": "2026-11-21T09:00:08.000Z",
+      "publishedAt": "2026-11-21T09:00:08.000Z",
+      "viewCount": 16580,
+      "likeCount": 3518,
+      "duration": 98,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-21T11:51:03.919Z"
+    },
     {
       "id": "YbnjAuxgUcE",
       "title": "泥中に咲く || HAKOS BAELZ X TOKOYAMI TOWA 3D COVER 【#BaeDay2024】",
