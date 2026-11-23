@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-22T18:42:59.154Z",
+  "generatedAt": "2026-11-23T15:01:24.658Z",
   "lastFullReconciledAt": "2026-10-16T09:20:43.877Z",
   "lastMode": "incremental",
   "source": "Holodex API v2",
@@ -14,14 +14,32 @@
       "stream"
     ]
   },
-  "total": 6474,
-  "sourceTotal": 6715,
+  "total": 6475,
+  "sourceTotal": 6716,
   "sourceTotalByTopic": {
-    "Original_Song": 4047,
+    "Original_Song": 4048,
     "Music_Cover": 2668
   },
   "pagesFetched": 132,
   "songs": [
+    {
+      "id": "YnvABKEizsE",
+      "title": "【Original】Reverberate / 響咲リオナ【Official MV】",
+      "artist": "Isaki Riona",
+      "artists": [
+        "Isaki Riona"
+      ],
+      "channelName": "Isaki Riona",
+      "channelId": "UC9LSiN9hXI55svYEBrrK-tw",
+      "releaseDate": "2026-11-23T09:30:06.000Z",
+      "publishedAt": "2026-11-23T09:30:06.000Z",
+      "viewCount": 122583,
+      "likeCount": 14194,
+      "duration": 210,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-23T15:01:37.393Z"
+    },
     {
       "id": "9l8Sz2j_aA8",
       "title": "【ホロドリ】『Halulu』Pavolia Reine (Full ver.)",
