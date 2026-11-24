@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-24T12:41:42.151Z",
+  "generatedAt": "2026-11-24T22:48:42.286Z",
   "lastFullReconciledAt": "2026-10-16T09:20:43.877Z",
   "lastMode": "incremental",
   "source": "Holodex API v2",
@@ -14,14 +14,68 @@
       "stream"
     ]
   },
-  "total": 6477,
-  "sourceTotal": 6719,
+  "total": 6480,
+  "sourceTotal": 6723,
   "sourceTotalByTopic": {
-    "Original_Song": 4049,
-    "Music_Cover": 2670
+    "Original_Song": 4052,
+    "Music_Cover": 2671
   },
   "pagesFetched": 132,
   "songs": [
+    {
+      "id": "-84iwDaYsv4",
+      "title": "ヒカリノ海ヘ",
+      "artist": "Shirogane Noel",
+      "artists": [
+        "Shirogane Noel"
+      ],
+      "channelName": "Shirogane Noel",
+      "channelId": "UCdyqAaZDKHXg4Ahi7VENThQ",
+      "releaseDate": "2026-11-24T15:04:48.000Z",
+      "publishedAt": "2026-11-24T15:04:48.000Z",
+      "viewCount": 196,
+      "likeCount": 64,
+      "duration": 286,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-24T22:48:59.412Z"
+    },
+    {
+      "id": "uoSi26fQxe4",
+      "title": "ヒカリノ海ヘ (Instrumental)",
+      "artist": "Shirogane Noel",
+      "artists": [
+        "Shirogane Noel"
+      ],
+      "channelName": "Shirogane Noel",
+      "channelId": "UCdyqAaZDKHXg4Ahi7VENThQ",
+      "releaseDate": "2026-11-24T15:01:53.000Z",
+      "publishedAt": "2026-11-24T15:01:53.000Z",
+      "viewCount": 38,
+      "likeCount": 10,
+      "duration": 286,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-24T22:48:59.412Z"
+    },
+    {
+      "id": "8sf1VGjvILg",
+      "title": "ロキ || preYdator COVER 【#BaeDay2024】",
+      "artist": "Hakos Baelz",
+      "artists": [
+        "Hakos Baelz"
+      ],
+      "channelName": "Hakos Baelz",
+      "channelId": "UCgmPnx-EEeOrZSg5Tiw7ZRQ",
+      "releaseDate": "2026-11-24T15:00:27.000Z",
+      "publishedAt": "2026-11-24T15:00:27.000Z",
+      "viewCount": 66231,
+      "likeCount": 5510,
+      "duration": 236,
+      "songType": "cover",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-24T22:48:59.412Z"
+    },
     {
       "id": "mXZ0xmZ1f74",
       "title": "【新曲MV】【白銀ノエル/ホロライブ】",
