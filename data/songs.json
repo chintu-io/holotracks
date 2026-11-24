@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-23T15:01:24.658Z",
+  "generatedAt": "2026-11-24T02:24:25.271Z",
   "lastFullReconciledAt": "2026-10-16T09:20:43.877Z",
   "lastMode": "incremental",
   "source": "Holodex API v2",
@@ -14,14 +14,32 @@
       "stream"
     ]
   },
-  "total": 6475,
-  "sourceTotal": 6716,
+  "total": 6476,
+  "sourceTotal": 6718,
   "sourceTotalByTopic": {
     "Original_Song": 4048,
-    "Music_Cover": 2668
+    "Music_Cover": 2670
   },
   "pagesFetched": 132,
   "songs": [
+    {
+      "id": "zpJYUtGliv0",
+      "title": "Blumenkranz - Cecilia Immergreen x Takanashi Kiara // Kill la Kill (Cover)",
+      "artist": "Cecilia Immergreen",
+      "artists": [
+        "Cecilia Immergreen"
+      ],
+      "channelName": "Cecilia Immergreen",
+      "channelId": "UCvN5h1ShZtc7nly3pezRayg",
+      "releaseDate": "2026-11-23T22:20:08.000Z",
+      "publishedAt": "2026-11-23T22:20:08.000Z",
+      "viewCount": 51662,
+      "likeCount": 10022,
+      "duration": 259,
+      "songType": "cover",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-24T02:24:35.347Z"
+    },
     {
       "id": "YnvABKEizsE",
       "title": "【Original】Reverberate / 響咲リオナ【Official MV】",
