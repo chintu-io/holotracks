@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-24T02:24:25.271Z",
+  "generatedAt": "2026-11-24T12:41:42.151Z",
   "lastFullReconciledAt": "2026-10-16T09:20:43.877Z",
   "lastMode": "incremental",
   "source": "Holodex API v2",
@@ -14,14 +14,32 @@
       "stream"
     ]
   },
-  "total": 6476,
-  "sourceTotal": 6718,
+  "total": 6477,
+  "sourceTotal": 6719,
   "sourceTotalByTopic": {
-    "Original_Song": 4048,
+    "Original_Song": 4049,
     "Music_Cover": 2670
   },
   "pagesFetched": 132,
   "songs": [
+    {
+      "id": "mXZ0xmZ1f74",
+      "title": "【新曲MV】【白銀ノエル/ホロライブ】",
+      "artist": "Shirogane Noel",
+      "artists": [
+        "Shirogane Noel"
+      ],
+      "channelName": "Shirogane Noel",
+      "channelId": "UCdyqAaZDKHXg4Ahi7VENThQ",
+      "releaseDate": "2026-11-24T12:00:07.000Z",
+      "publishedAt": "2026-11-24T12:00:07.000Z",
+      "viewCount": 22018,
+      "likeCount": 5649,
+      "duration": 287,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-24T12:41:50.499Z"
+    },
     {
       "id": "zpJYUtGliv0",
       "title": "Blumenkranz - Cecilia Immergreen x Takanashi Kiara // Kill la Kill (Cover)",
