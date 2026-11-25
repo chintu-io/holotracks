@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-25T15:49:53.361Z",
+  "generatedAt": "2026-11-25T23:49:44.932Z",
   "lastFullReconciledAt": "2026-10-16T09:20:43.877Z",
   "lastMode": "incremental",
   "source": "Holodex API v2",
@@ -14,10 +14,10 @@
       "stream"
     ]
   },
-  "total": 6482,
-  "sourceTotal": 6728,
+  "total": 6485,
+  "sourceTotal": 6734,
   "sourceTotalByTopic": {
-    "Original_Song": 4056,
+    "Original_Song": 4062,
     "Music_Cover": 2672
   },
   "pagesFetched": 132,
@@ -147,6 +147,42 @@
       "songType": "cover",
       "source": "Holodex",
       "statisticsCheckedAt": "2026-11-24T02:24:35.347Z"
+    },
+    {
+      "id": "HkthHEzDHB4",
+      "title": "Reverberate (Instrumental)",
+      "artist": "Isaki Riona",
+      "artists": [
+        "Isaki Riona"
+      ],
+      "channelName": "Isaki Riona",
+      "channelId": "UC9LSiN9hXI55svYEBrrK-tw",
+      "releaseDate": "2026-11-23T15:03:56.000Z",
+      "publishedAt": "2026-11-23T15:03:56.000Z",
+      "viewCount": 809,
+      "likeCount": 32,
+      "duration": 208,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-25T23:49:57.652Z"
+    },
+    {
+      "id": "d0BQcf-XG0Y",
+      "title": "Reverberate",
+      "artist": "Isaki Riona",
+      "artists": [
+        "Isaki Riona"
+      ],
+      "channelName": "Isaki Riona",
+      "channelId": "UC9LSiN9hXI55svYEBrrK-tw",
+      "releaseDate": "2026-11-23T15:03:14.000Z",
+      "publishedAt": "2026-11-23T15:03:14.000Z",
+      "viewCount": 14214,
+      "likeCount": 739,
+      "duration": 208,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-25T23:49:57.652Z"
     },
     {
       "id": "YnvABKEizsE",
@@ -2443,6 +2479,24 @@
       "songType": "original",
       "source": "Holodex",
       "statisticsCheckedAt": "2026-10-30T09:07:05.630Z"
+    },
+    {
+      "id": "UhkP0_YpLbM",
+      "title": "果てない旅 (Instrumental)",
+      "artist": "Rindo Chihaya",
+      "artists": [
+        "Rindo Chihaya"
+      ],
+      "channelName": "Rindo Chihaya",
+      "channelId": "UCKMWFR6lAstLa7Vbf5dH7ig",
+      "releaseDate": "2026-10-29T15:04:37.000Z",
+      "publishedAt": "2026-10-29T15:04:37.000Z",
+      "viewCount": 1620,
+      "likeCount": 27,
+      "duration": 250,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-25T23:49:57.652Z"
     },
     {
       "id": "CAuo9Nrfor4",
