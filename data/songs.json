@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-24T22:48:42.286Z",
+  "generatedAt": "2026-11-25T15:49:53.361Z",
   "lastFullReconciledAt": "2026-10-16T09:20:43.877Z",
   "lastMode": "incremental",
   "source": "Holodex API v2",
@@ -14,14 +14,50 @@
       "stream"
     ]
   },
-  "total": 6480,
-  "sourceTotal": 6727,
+  "total": 6482,
+  "sourceTotal": 6728,
   "sourceTotalByTopic": {
     "Original_Song": 4056,
-    "Music_Cover": 2671
+    "Music_Cover": 2672
   },
   "pagesFetched": 132,
   "songs": [
+    {
+      "id": "K18AokpGnBs",
+      "title": "【ホロドリ】『Holiday Dream』さくらみこ/姫森ルーナ/Ninomae Ina'nis/Shiori Novella (Official Music Video)",
+      "artist": "Hololive Official",
+      "artists": [
+        "Hololive Official"
+      ],
+      "channelName": "hololive Dreams",
+      "channelId": "UCawGfU44CZxd2ZVf_VGijbA",
+      "releaseDate": "2026-11-25T11:00:07.000Z",
+      "publishedAt": "2026-11-25T11:00:07.000Z",
+      "viewCount": 19870,
+      "likeCount": 2469,
+      "duration": 137,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-25T15:50:09.056Z"
+    },
+    {
+      "id": "SwiGYlXsFt8",
+      "title": "衝動 / 姫森ルーナ (cover)【#姫森ルーナ生誕ロックLIVE】",
+      "artist": "Himemori Luna",
+      "artists": [
+        "Himemori Luna"
+      ],
+      "channelName": "Himemori Luna",
+      "channelId": "UCa9Y57gfeY0Zro_noHRVrnw",
+      "releaseDate": "2026-11-25T09:00:10.000Z",
+      "publishedAt": "2026-11-25T09:00:10.000Z",
+      "viewCount": 46505,
+      "likeCount": 3609,
+      "duration": 196,
+      "songType": "cover",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-25T15:50:09.056Z"
+    },
     {
       "id": "-84iwDaYsv4",
       "title": "ヒカリノ海ヘ",
