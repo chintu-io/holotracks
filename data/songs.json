@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-25T23:49:44.932Z",
+  "generatedAt": "2026-11-26T15:51:45.785Z",
   "lastFullReconciledAt": "2026-10-16T09:20:43.877Z",
   "lastMode": "incremental",
   "source": "Holodex API v2",
@@ -14,14 +14,87 @@
       "stream"
     ]
   },
-  "total": 6485,
-  "sourceTotal": 6736,
+  "total": 6489,
+  "sourceTotal": 6740,
   "sourceTotalByTopic": {
-    "Original_Song": 4062,
-    "Music_Cover": 2674
+    "Original_Song": 4064,
+    "Music_Cover": 2676
   },
   "pagesFetched": 132,
   "songs": [
+    {
+      "id": "Gw-O3y8lbZA",
+      "title": "残念上等ラプソディ",
+      "artist": "La+ Darknesss",
+      "artists": [
+        "La+ Darknesss"
+      ],
+      "channelName": "La+ Darknesss",
+      "channelId": "UCENwRMx5Yh42zWpzURebzTw",
+      "releaseDate": "2026-11-26T15:00:33.000Z",
+      "publishedAt": "2026-11-26T15:00:33.000Z",
+      "viewCount": 156,
+      "likeCount": 35,
+      "duration": 216,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-26T15:52:01.456Z"
+    },
+    {
+      "id": "B48pdLfyiJw",
+      "title": "残念上等ラプソディ (Instrumental)",
+      "artist": "La+ Darknesss",
+      "artists": [
+        "La+ Darknesss"
+      ],
+      "channelName": "La+ Darknesss",
+      "channelId": "UCENwRMx5Yh42zWpzURebzTw",
+      "releaseDate": "2026-11-26T15:00:30.000Z",
+      "publishedAt": "2026-11-26T15:00:30.000Z",
+      "viewCount": 12,
+      "likeCount": 1,
+      "duration": 216,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-26T15:52:01.456Z"
+    },
+    {
+      "id": "-Z0Yc55osqY",
+      "title": "2026/11/26 UP",
+      "artist": "La+ Darknesss",
+      "artists": [
+        "La+ Darknesss"
+      ],
+      "channelName": "La+ Darknesss",
+      "channelId": "UCENwRMx5Yh42zWpzURebzTw",
+      "releaseDate": "2026-11-26T11:00:11.000Z",
+      "publishedAt": "2026-11-26T11:00:11.000Z",
+      "viewCount": 41006,
+      "likeCount": 6410,
+      "duration": 165,
+      "songType": "cover",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-26T15:52:01.456Z"
+    },
+    {
+      "id": "bppAo0LFRNQ",
+      "title": "【3D LIVE】キャットラビング coverd by ラプラス・ダークネス&鷹嶺ルイ【ホロライブ】",
+      "artist": "La+ Darknesss",
+      "artists": [
+        "La+ Darknesss",
+        "Takane Lui"
+      ],
+      "channelName": "Takane Lui",
+      "channelId": "UCs9_O1tRPMQTHQ-N_L6FU2g",
+      "releaseDate": "2026-11-26T08:00:08.000Z",
+      "publishedAt": "2026-11-26T08:00:08.000Z",
+      "viewCount": 32342,
+      "likeCount": 2325,
+      "duration": 121,
+      "songType": "cover",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-26T15:52:01.456Z"
+    },
     {
       "id": "K18AokpGnBs",
       "title": "【ホロドリ】『Holiday Dream』さくらみこ/姫森ルーナ/Ninomae Ina'nis/Shiori Novella (Official Music Video)",
