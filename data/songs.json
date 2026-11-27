@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-26T15:51:45.785Z",
+  "generatedAt": "2026-11-27T18:30:22.894Z",
   "lastFullReconciledAt": "2026-10-16T09:20:43.877Z",
   "lastMode": "incremental",
   "source": "Holodex API v2",
@@ -14,14 +14,125 @@
       "stream"
     ]
   },
-  "total": 6489,
-  "sourceTotal": 6741,
+  "total": 6495,
+  "sourceTotal": 6747,
   "sourceTotalByTopic": {
-    "Original_Song": 4065,
-    "Music_Cover": 2676
+    "Original_Song": 4069,
+    "Music_Cover": 2678
   },
   "pagesFetched": 132,
   "songs": [
+    {
+      "id": "rrKYQl7of7Y",
+      "title": "幽かに歌は聴こえていた",
+      "artist": "Takane Lui",
+      "artists": [
+        "Takane Lui"
+      ],
+      "channelName": "Takane Lui",
+      "channelId": "UCs9_O1tRPMQTHQ-N_L6FU2g",
+      "releaseDate": "2026-11-27T15:00:38.000Z",
+      "publishedAt": "2026-11-27T15:00:38.000Z",
+      "viewCount": 364,
+      "likeCount": 108,
+      "duration": 246,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-27T18:30:35.478Z"
+    },
+    {
+      "id": "c0toLQTi4Bg",
+      "title": "ハートにピース",
+      "artist": "Takane Lui",
+      "artists": [
+        "Takane Lui"
+      ],
+      "channelName": "Takane Lui",
+      "channelId": "UCs9_O1tRPMQTHQ-N_L6FU2g",
+      "releaseDate": "2026-11-27T15:00:23.000Z",
+      "publishedAt": "2026-11-27T15:00:23.000Z",
+      "viewCount": 123,
+      "likeCount": 36,
+      "duration": 173,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-27T18:30:35.478Z"
+    },
+    {
+      "id": "Ugtm316q1Ug",
+      "title": "かくれんぼ || HAKOS BAELZ COVER 【#BaeDay2024】",
+      "artist": "Hakos Baelz",
+      "artists": [
+        "Hakos Baelz"
+      ],
+      "channelName": "Hakos Baelz",
+      "channelId": "UCgmPnx-EEeOrZSg5Tiw7ZRQ",
+      "releaseDate": "2026-11-27T15:00:19.000Z",
+      "publishedAt": "2026-11-27T15:00:19.000Z",
+      "viewCount": 21356,
+      "likeCount": 2381,
+      "duration": 307,
+      "songType": "cover",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-27T18:30:35.478Z"
+    },
+    {
+      "id": "tyXVsn-ZP_8",
+      "title": "FAKE SHOW",
+      "artist": "Takane Lui",
+      "artists": [
+        "Takane Lui"
+      ],
+      "channelName": "Takane Lui",
+      "channelId": "UCs9_O1tRPMQTHQ-N_L6FU2g",
+      "releaseDate": "2026-11-27T15:00:13.000Z",
+      "publishedAt": "2026-11-27T15:00:13.000Z",
+      "viewCount": 521,
+      "likeCount": 170,
+      "duration": 276,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-27T18:30:35.478Z"
+    },
+    {
+      "id": "o5ZMTL5zeA0",
+      "title": "Soar",
+      "artist": "Takane Lui",
+      "artists": [
+        "Takane Lui"
+      ],
+      "channelName": "Takane Lui",
+      "channelId": "UCs9_O1tRPMQTHQ-N_L6FU2g",
+      "releaseDate": "2026-11-27T15:00:04.000Z",
+      "publishedAt": "2026-11-27T15:00:04.000Z",
+      "viewCount": 259,
+      "likeCount": 35,
+      "duration": 212,
+      "songType": "original",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-27T18:30:35.478Z"
+    },
+    {
+      "id": "iuxkrntoBVg",
+      "title": "千本桜/アソビ★まわり隊!(cover) 【歌ってみた/ホロライブ 】",
+      "artist": "Achichi Mela",
+      "artists": [
+        "Achichi Mela",
+        "ASOBI★MAWARI",
+        "Sorashina Sopia",
+        "Suzuna Tsuzuri"
+      ],
+      "channelName": "ASOBI★MAWARI-TAI!",
+      "channelId": "UCAHwWUotyS3l2qBetFDsjgQ",
+      "releaseDate": "2026-11-27T10:30:08.000Z",
+      "publishedAt": "2026-11-27T10:30:08.000Z",
+      "viewCount": 239394,
+      "likeCount": 18493,
+      "duration": 243,
+      "songType": "cover",
+      "source": "Holodex",
+      "statisticsCheckedAt": "2026-11-27T18:30:35.478Z"
+    },
     {
       "id": "Gw-O3y8lbZA",
       "title": "残念上等ラプソディ",
